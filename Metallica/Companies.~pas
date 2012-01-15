@@ -1,0 +1,300 @@
+unit Companies;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset,
+  ZDataset, Grids, DBGrids, DBGridEh;
+
+type
+  TFormCompanies = class(TForm)
+    CBActive: TCheckBox;
+    BitBtnInsert: TBitBtn;
+    BitBtnUpdate: TBitBtn;
+    BitBtnDelete: TBitBtn;
+    BitBtnClose: TBitBtn;
+    QCompanies: TZQuery;
+    DSCompanies: TDataSource;
+    QCompaniesSISCLOSED: TStringField;
+    QPhones: TZQuery;
+    DSPhones: TDataSource;
+    QPhonesPH_COMMENT: TStringField;
+    QPhonesPH_DATEBEGIN: TDateField;
+    QPhonesUSERNAME: TStringField;
+    QPhonesPH_ID: TLargeintField;
+    QPhonesPH_STR: TStringField;
+    QPhonesWHO_WHERE: TStringField;
+    DBGridCompanies: TDBGridEh;
+    DBGridPhones: TDBGridEh;
+    QPhonesPH_ISCLOSED: TSmallintField;
+    QPhonesSISCLOSED: TStringField;
+    QCompaniesCM_TRUNC_COMMENT: TStringField;
+    BitBtnNewPhone: TBitBtn;
+    BitBtnClosePhone: TBitBtn;
+    QCompaniesCOMPANYID: TIntegerField;
+    QCompaniesCM_NAME: TStringField;
+    QCompaniesCM_COMMENT: TStringField;
+    QCompaniesCM_ISCLOSED: TIntegerField;
+    QCompaniesCM_OWNER: TIntegerField;
+    QCompaniesCM_CITY: TStringField;
+    QCompaniesTL_LEVEL: TIntegerField;
+    QCompaniesTL_COLOR: TIntegerField;
+    QCompaniesTL_NAME: TStringField;
+    procedure QCompaniesCalcFields(DataSet: TDataSet);
+    procedure QPhonesCalcFields(DataSet: TDataSet);
+    procedure BitBtnInsertClick(Sender: TObject);
+    procedure BitBtnDeleteClick(Sender: TObject);
+    procedure CBActiveClick(Sender: TObject);
+    procedure BitBtnUpdateClick(Sender: TObject);
+    procedure DBUsersDblClick(Sender: TObject);
+    procedure DBGridCompaniesDblClick(Sender: TObject);
+    procedure QCompaniesAfterScroll(DataSet: TDataSet);
+    procedure DBGridCompaniesTitleClick(Column: TColumnEh);
+    procedure FormKeyUp(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure BitBtnNewPhoneClick(Sender: TObject);
+    procedure BitBtnClosePhoneClick(Sender: TObject);
+    procedure DBGridCompaniesDrawColumnCell(Sender: TObject;
+      const Rect: TRect; DataCol: Integer; Column: TColumnEh;
+      State: TGridDrawState);
+  private
+  F_LastSorted:string;
+    procedure RefreshPhones;
+    procedure RefreshCompanies;
+  public
+    procedure SetPosition(L, T: integer);
+    procedure SetCompanies;
+  end;
+
+var
+  FormCompanies: TFormCompanies;
+
+implementation
+
+uses MainForm, NewCompany, DataModule, UpdateCompany, CommonUnit, NewPhone;
+
+{$R *.dfm}
+
+{ TFormCompanies }
+
+procedure TFormCompanies.SetPosition(L,T:integer);
+begin
+Left:=L+ShiftLeft;
+Top:=T+ShiftTop;
+end;
+
+procedure TFormCompanies.SetCompanies;
+begin
+RefreshCompanies;
+RefreshPhones;
+{ TODO :
+Проверка для demo - версии, ограничение в количестве
+компаний до 50 или 100 для эксренного выхода}
+//if DM.CompanyMaxID>50 then FormMain.IsDemoLimit:=true;
+//if DM.CompanyMaxID>100 then FormMain.IsBigDemoLimit:=true;
+end;
+
+procedure TFormCompanies.QCompaniesCalcFields(DataSet: TDataSet);
+begin
+if VarIsNull(QCompanies['COMPANYID']) then exit;
+if QCompanies['CM_ISCLOSED']=1  then QCompanies['SISCLOSED']:='ДА';
+if QCompanies['CM_ISCLOSED']=0  then QCompanies['SISCLOSED']:='НЕТ';
+QCompanies['CM_TRUNC_COMMENT']:=DeleteReturns(QCompanies['CM_COMMENT']);
+end;
+
+procedure TFormCompanies.QPhonesCalcFields(DataSet: TDataSet);
+begin
+if not VarIsNull(QPhones['PH_DATEBEGIN'])
+ then QPhones['WHO_WHERE']:=DateToStr(QPhones['PH_DATEBEGIN']);
+if not VarIsNull(QPhones['USERNAME'])
+ then QPhones['WHO_WHERE']:=QPhones['WHO_WHERE']+' '+QPhones['USERNAME'];
+if VarIsNull(QPhones['PH_ID']) then QPhones['PH_STR']:=''
+else
+  begin
+  QPhones['PH_STR']:=ParsePhoneByNumber(QPhones['PH_ID']);
+  //Добавление к телефону скобок и рисочек для удобства чтения
+  end;
+if not VarIsNull(QPhones['PH_ISCLOSED'])
+then
+  begin
+  if QPhones['PH_ISCLOSED']= 0  then QPhones['SISCLOSED']:='НЕТ';
+  if QPhones['PH_ISCLOSED']= 1  then QPhones['SISCLOSED']:='ДА';
+  end;
+
+end;
+
+procedure TFormCompanies.RefreshPhones;
+var CompanyID:integer;
+begin
+if VarIsNull(QCompanies['COMPANYID'])
+then CompanyID:=0
+else CompanyID:=QCompanies['COMPANYID'];
+QPhones.Close;
+QPhones.ParamByName('COMPANYID').AsInteger:=CompanyID;
+QPhones.Open;
+end;
+
+procedure TFormCompanies.BitBtnInsertClick(Sender: TObject);
+var IsChangeOwner:boolean;
+begin
+isChangeOwner:=FormMain.ReadEnteredUserISBOSS;
+if FormMain.ReadEnteredUserID=FormMain.CommonOwnerID then isChangeOwner:=true;
+if FormNewCompany=nil then Application.CreateForm(TFormNewCompany, FormNewCompany);
+FormNewCompany.SetPosition(Self.Left,Self.Top);
+FormNewCompany.SetNewCompany(isChangeOwner);
+FormNewCompany.ShowModal;
+RefreshCompanies;
+end;
+
+procedure TFormCompanies.BitBtnDeleteClick(Sender: TObject);
+//var isMustClose:boolean;
+begin
+if VarIsNull(QCompanies['COMPANYID']) then
+  begin
+  MessageDlg('Укажите компанию',mtWarning,[mbOK],0);
+	exit;
+	end;
+{Запрос на удаление джобов и конактов. Помечаем компанию как неактивную}
+if QCompanies['CM_ISCLOSED']=1 then
+	begin
+	MessageDlg('Компания уже помечена как закрытая',mtInformation,[mbOK],0);
+	exit;
+	end;
+try
+if MessageDlg('Пометить компанию "'+QCompanies['CM_NAME']+'" как закрытую? С ней не связаны открытые задания или контакты',mtConfirmation,[mbYes,mbNo],0)=mrYes
+  then DM.CompanyCloseByID(QCompanies['COMPANYID']);
+except on E:Exception do
+	begin
+  MessageDlg(DM.GetErrorByCode(1011),mtError,[mbOK],0);
+  //Error 1011:CompanyClose
+	end;
+end;//except
+RefreshCompanies;
+RefreshPhones;
+end;
+
+procedure TFormCompanies.RefreshCompanies;
+var B:TBookmark;
+begin
+B:=QCompanies.GetBookmark;
+QCompanies.Close;
+if CBActive.Checked
+then QCompanies.ParamByName('ISCLOSED').AsInteger:=0
+else QCompanies.ParamByName('ISCLOSED').AsInteger:=-1;
+QCompanies.ParamByName('COMPANYID').AsInteger:=-1;
+QCompanies.Open;
+if QCompanies.BookmarkValid(B) then QCompanies.GotoBookmark(B);
+QCompanies.FreeBookmark(B);
+end;
+
+procedure TFormCompanies.CBActiveClick(Sender: TObject);
+begin
+RefreshCompanies;
+RefreshPhones;
+end;
+
+procedure TFormCompanies.BitBtnUpdateClick(Sender: TObject);
+var JustView:boolean;
+begin
+if VarIsNull(QCompanies['COMPANYID']) then
+  begin
+  MessageDlg('Укажите компанию',mtWarning,[mbOK],0);
+  exit;
+  end;
+if FormUpdateCompany=nil then Application.CreateForm(TFormUpdateCompany, FormUpdateCompany);
+FormUpdateCompany.SetPosition(Self.Left,Self.Top);
+//JustView:=not FormMain.ReadEnteredUserISBOSS;
+//if QCompanies['CM_OWNER']=FormMain.ReadEnteredUserID then JustView:=false;
+JustView:=false;
+//Эта строка обозначает что владелец компании может редактировать всё, в т.ч. и указать нового владельца
+FormUpdateCompany.SetCompany(QCompanies['COMPANYID']);
+FormUpdateCompany.ShowModal;
+RefreshCompanies;
+end;
+
+procedure TFormCompanies.DBUsersDblClick(Sender: TObject);
+begin
+BitBtnUpdate.Click;
+end;
+
+procedure TFormCompanies.DBGridCompaniesDblClick(Sender: TObject);
+begin
+BitBtnUpdate.Click;
+end;
+
+procedure TFormCompanies.QCompaniesAfterScroll(DataSet: TDataSet);
+begin
+RefreshPhones;
+end;
+
+procedure TFormCompanies.DBGridCompaniesTitleClick(Column: TColumnEh);
+begin
+if F_LastSorted=Column.FieldName then
+  begin
+  QCompanies.SortedFields:=Column.FieldName;
+  QCompanies.SortType:=stDescending;
+  end
+else
+  begin
+  QCompanies.SortedFields:=Column.FieldName;
+  QCompanies.SortType:=stAscending;
+  end;
+F_LastSorted:=Column.FieldName;
+end;
+
+procedure TFormCompanies.FormKeyUp(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+case Key of    //
+	VK_F3: BitBtnInsert.Click;
+	VK_F4: BitBtnUpdate.Click;
+	VK_F5: BitBtnNewPhone.Click;
+end;    // case
+end;
+
+procedure TFormCompanies.BitBtnNewPhoneClick(Sender: TObject);
+begin
+if VarIsNull(QCompanies['COMPANYID']) then
+  begin
+  MessageDlg('Укажите компанию',mtWarning,[mbOK],0);
+  exit;
+  end;
+if FormNewPhone=nil then Application.CreateForm(TFormNewPhone, FormNewPhone);
+FormNewPhone.SetPosition(Self.Left,Self.Top);
+FormNewPhone.SetNewPhone(QCompanies['COMPANYID'],QCompanies['CM_NAME'],'');
+FormNewPhone.ShowModal;
+RefreshPhones;
+end;
+
+procedure TFormCompanies.BitBtnClosePhoneClick(Sender: TObject);
+begin
+if VarIsNull(QPhones['PH_ID']) then
+	begin
+	MessageDlg('Выберите телефон из списка, чтобы его удалить (пометить как неактивный)',mtWarning,[mbOK],0);
+	exit;
+	end;
+if DM.PhoneDelete(QPhones['PH_ID'],DateToStr(Now()), FormMain.ReadEnteredUserID)
+then MessageDlg('Телефон '+QPhones['PH_STR']+' помечен как удаленный',mtInformation,[mbOK],0)
+else MessageDlg(DM.GetErrorByCode(1017),mtError,[mbOK],0);
+RefreshPhones;
+end;
+
+procedure TFormCompanies.DBGridCompaniesDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumnEh;
+  State: TGridDrawState);
+begin
+	if (Column.FieldName='TL_LEVEL')
+	then  TDBGridEh(Sender).Canvas.Brush.Color:=qCompanies['TL_Color'];
+	// Восстанавливаем выделение текущей позиции курсора
+	IF  gdSelected   IN State Then
+  Begin
+		TDBGridEh(Sender).Canvas.Brush.Color:= clHighLight;
+		TDBGridEh(Sender).Canvas.Font.Color := clHighLightText;
+	End;
+	// Просим GRID перерисоваться самому
+	TDBGridEh(Sender).DefaultDrawColumnCell(Rect,DataCol,Column,State);
+
+end;
+
+end.
