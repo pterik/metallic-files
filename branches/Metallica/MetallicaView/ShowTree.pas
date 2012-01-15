@@ -152,6 +152,7 @@ procedure TFormTree.GridDblClick(Sender: TObject);
 var
   LCompanyShow: TFormCompaniesShow;
   LFormPriceShow: TFormPriceShow;
+  link:string;
 begin
   if (F_FieldName1 = 'CM_NAME') and (F_FieldName2 = 'CM_NAME') then
     begin
@@ -160,14 +161,25 @@ begin
     LCompanyShow:= TFormCompaniesShow.Create(Application);
     LCompanyShow.SetCompany(qData['CM_ID']);
     LCompanyShow.Caption:= 'Компания ' + qData['CM_NAME'];
+    Exit;
     end
   else
+    if (F_FieldName1='CM_HYPERLINK') and (F_FieldName2='CM_HYPERLINK') then
     begin
-    if varIsNull(qData['CM_ID']) then Exit;
-    LFormPriceShow:= TFormPriceShow.Create(Application);
-    LFormPriceShow.SetTree(qData['PL_TREEID']);
-    LFormPriceShow.Caption:= 'Рубрика ' + MyNode.Value;
-    end;
+      if not VarIsNull(QData['CM_HYPERLINK']) then
+      begin
+        link:= QData.Fields.FieldByName('CM_HYPERLINK').AsString;
+        ShellOpen(Application.Handle, link);
+      end;
+      Exit;
+    end
+    else
+      begin
+      if varIsNull(qData['CM_ID']) then Exit;
+      LFormPriceShow:= TFormPriceShow.Create(Application);
+      LFormPriceShow.SetTree(qData['PL_TREEID']);
+      LFormPriceShow.Caption:= 'Рубрика ' + MyNode.Value;
+      end;
 end;
 
 procedure TFormTree.GridEnter(Sender: TObject);
