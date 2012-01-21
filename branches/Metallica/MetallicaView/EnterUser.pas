@@ -28,7 +28,6 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
 	private
     F_ValidUser:boolean;
-//		function LoadRegister:boolean;
 	public
 		procedure ConnectToDatabase;
 	end;
