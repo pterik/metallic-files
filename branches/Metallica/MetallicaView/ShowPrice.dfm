@@ -1,7 +1,7 @@
 object FormPriceShow: TFormPriceShow
-  Left = 284
-  Top = 117
-  Width = 1041
+  Left = 285
+  Top = 168
+  Width = 1003
   Height = 590
   Caption = #1055#1086#1079#1080#1094#1080#1080' '#1087#1088#1072#1081#1089'-'#1083#1080#1089#1090#1072
   Color = clBtnFace
@@ -22,9 +22,9 @@ object FormPriceShow: TFormPriceShow
   TextHeight = 13
   object Grid: TDBGridEh
     Left = 0
-    Top = 81
-    Width = 1025
-    Height = 471
+    Top = 65
+    Width = 987
+    Height = 487
     Align = alClient
     AutoFitColWidths = True
     DataSource = DSData
@@ -47,6 +47,8 @@ object FormPriceShow: TFormPriceShow
     TitleFont.Style = []
     UseMultiTitle = True
     VertScrollBar.VisibleMode = sbAlwaysShowEh
+    OnCellClick = GridCellClick
+    OnDblClick = GridDblClick
     OnDrawColumnCell = GridDrawColumnCell
     OnTitleClick = GridTitleClick
     Columns = <
@@ -126,8 +128,8 @@ object FormPriceShow: TFormPriceShow
   object pnlTop: TPanel
     Left = 0
     Top = 0
-    Width = 1025
-    Height = 81
+    Width = 987
+    Height = 65
     Align = alTop
     TabOrder = 1
     OnResize = pnlTopResize
@@ -135,7 +137,7 @@ object FormPriceShow: TFormPriceShow
       Left = 8
       Top = 8
       Width = 257
-      Height = 65
+      Height = 50
       TabOrder = 0
       object Label1: TLabel
         Left = 8
@@ -164,12 +166,12 @@ object FormPriceShow: TFormPriceShow
           '11111')
       end
       object BitBtnInsert: TBitBtn
-        Left = 168
-        Top = 0
+        Left = 160
+        Top = 4
         Width = 81
         Height = 17
         Caption = #1044#1086#1073#1072#1074#1080#1090#1100' (F2)'
-        TabOrder = 1
+        TabOrder = 2
         OnClick = BitBtnInsertClick
       end
       object CBFilter: TComboBox
@@ -178,35 +180,91 @@ object FormPriceShow: TFormPriceShow
         Width = 105
         Height = 21
         ItemHeight = 13
-        TabOrder = 2
+        TabOrder = 1
         Text = 'CBFilter'
       end
       object ButtonFilterClear: TButton
-        Left = 166
-        Top = 22
+        Left = 158
+        Top = 24
         Width = 83
         Height = 17
         Caption = #1054#1095#1080#1089#1090#1080#1090#1100' (F3)'
         TabOrder = 3
         OnClick = ButtonFilterClearClick
       end
-      object btnPrevFilter: TButton
-        Left = 152
-        Top = 44
-        Width = 97
-        Height = 17
-        Caption = #1055#1088#1077#1076#1099#1076#1091#1097#1080#1081' (F4)'
-        TabOrder = 4
-        OnClick = btnPrevFilterClick
-      end
     end
     object Panel1: TPanel
       Left = 272
       Top = 8
-      Width = 617
-      Height = 65
+      Width = 705
+      Height = 50
       Alignment = taLeftJustify
       TabOrder = 1
+      object chk1: TCheckBox
+        Left = 0
+        Top = 4
+        Width = 97
+        Height = 45
+        Alignment = taLeftJustify
+        Caption = 'chk1'
+        Checked = True
+        State = cbChecked
+        TabOrder = 0
+        WordWrap = True
+        OnClick = chk1Click
+      end
+      object chk2: TCheckBox
+        Left = 140
+        Top = 4
+        Width = 97
+        Height = 45
+        Alignment = taLeftJustify
+        Caption = 'chk2'
+        Checked = True
+        State = cbChecked
+        TabOrder = 1
+        WordWrap = True
+        OnClick = chk2Click
+      end
+      object chk3: TCheckBox
+        Left = 280
+        Top = 4
+        Width = 97
+        Height = 45
+        Alignment = taLeftJustify
+        Caption = 'chk3'
+        Checked = True
+        State = cbChecked
+        TabOrder = 2
+        WordWrap = True
+        OnClick = chk3Click
+      end
+      object chk4: TCheckBox
+        Left = 420
+        Top = 4
+        Width = 97
+        Height = 45
+        Alignment = taLeftJustify
+        Caption = 'chk4'
+        Checked = True
+        State = cbChecked
+        TabOrder = 3
+        WordWrap = True
+        OnClick = chk4Click
+      end
+      object chk5: TCheckBox
+        Left = 560
+        Top = 4
+        Width = 97
+        Height = 45
+        Alignment = taLeftJustify
+        Caption = 'chk5'
+        Checked = True
+        State = cbChecked
+        TabOrder = 4
+        WordWrap = True
+        OnClick = chk5Click
+      end
     end
   end
   object qData: TZReadOnlyQuery
@@ -218,8 +276,8 @@ object FormPriceShow: TFormPriceShow
       '  where pt.pt_id = pl.pl_treeid'
       '  and pt_isclosed =0) pt_value,'
       
-        'cm.cm_name, cm.cm_id, cm_city,  cm_business, cm_hyperlink, tl_co' +
-        'lor,'
+        'cm.cm_name, cm.cm_id, cm_city,  cm_business, cm_hyperlink,  tl_c' +
+        'olor,'
       'pl_value1, pl_value2, pl_value3,'
       'pl_value4, pl_value5, pl_value6,'
       'pl_value7, pl_value8, pl_value9,'
@@ -242,6 +300,8 @@ object FormPriceShow: TFormPriceShow
         'and (upper(cm_business) like '#39'%'#39'||:business||'#39'%'#39' or (cast(:busin' +
         'ess as varchar(100)) ='#39#39') )'
       'ORDER BY ph.ph_date_insert, pl_orderby'
+      ' '
+      ' '
       ' ')
     Params = <
       item

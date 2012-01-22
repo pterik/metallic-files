@@ -5,7 +5,7 @@ interface
 uses
   Windows, Classes, Graphics, Forms, Controls, Grids, DBGridEh, ComCtrls,
   DB, ZAbstractRODataset, ZDataset, DataModule, StdCtrls, MDIChild, Buttons,
-  Mask, DBCtrlsEh, ExtCtrls;
+  Mask, DBCtrlsEh, ExtCtrls, CommonUnit;
 
 type
   TFormTree = class(TFormMDIChild)
@@ -46,9 +46,13 @@ type
     qDataTL_COLOR: TIntegerField;
     pnlRight: TPanel;
     pnlTop: TPanel;
-    btnPrevFilter: TButton;
     qDataCM_BUSINESS: TStringField;
     strngfldDataCM_HYPERLINK: TStringField;
+    chk1: TCheckBox;
+    chk2: TCheckBox;
+    chk3: TCheckBox;
+    chk4: TCheckBox;
+    chk5: TCheckBox;
     procedure TreeChange(Sender: TObject; Node: TTreeNode);
     procedure TreeExpanding(Sender: TObject; Node: TTreeNode;
       var AllowExpansion: Boolean);
@@ -65,47 +69,25 @@ type
       Shift: TShiftState);
     procedure GridDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
-    procedure btnPrevFilterClick(Sender: TObject);
+    procedure chk1Click(Sender: TObject);
+    procedure chk2Click(Sender: TObject);
+    procedure chk3Click(Sender: TObject);
+    procedure chk4Click(Sender: TObject);
+    procedure chk5Click(Sender: TObject);
   private
+    F_CBFieldsName, F_CBFieldsTitle:string;
+    F_LastSorted: string;
+
     F_FieldName1, F_FieldName2: string;
     F_Column1Name, F_Column1Title: string;
-    F_CBFieldsName, F_CBFieldsTitle, F_FieldToqDataFL: string;
-    F_FilterToQDataFL, F_Prev_FilterToQDataFL:string;
-    F_QDataPrevFilter:string;
-    F_LastSorted: string;
-    F_CompanyLike, F_Prev_CompanyLike, F_Business, F_Prev_Business: string;
-    F_Panel1PrevCaption:string;
-    procedure RefreshPrices;
-    procedure AddFieldToqDataFL(const SField: string);
+    procedure RefreshQData;
     procedure RefreshQDataFL;
-    procedure ClearFilters;
     procedure RefreshCBFields;
-    procedure ClearCBFilter;
-    procedure RollbackCompanyLike;
-    procedure ClearCompanyLike;
-    procedure RollbackBusiness;
-    procedure ClearBusiness;
-    procedure RollbackCaption;
-    procedure ClearCaption;
-    procedure SetCompanyLike(Value:string);
-    function  GetCompanyLike:string;
-    procedure SetBusiness(Value:string);
-    function  GetBusiness:string;
-    procedure AddCaption(Value:string);
-    procedure AddFilter(Value:string);
-    procedure RollbackFilter;
-    procedure ClearFilter;
-    procedure AddFilterFL(Value:string);
-    procedure RollbackFilterFL;
-    procedure ClearFilterFL;
+    procedure RefreshCaptions;
   public
     MyNode: TNodeValue;
     F_ColumnName, F_ColumnTitle: string;
-    property CompanyLike:string read GetCompanyLike write SetCompanyLike;
-    property Business:string read GetBusiness write SetBusiness;
-    property Caption:string write AddCaption;
-    property Filter:string write AddFilter;
-    property FilterFL:string write AddFilterFL;
+    Filter:TFilter;
     procedure SetTree;
   end;
 
@@ -129,9 +111,8 @@ begin
     end
   else
     begin
-    RefreshPrices;
+    RefreshQData;
     RefreshCBFields;
-    ClearCBFilter;
     end;
 end;
 
@@ -139,7 +120,7 @@ procedure TFormTree.TreeExpanding(Sender: TObject; Node: TTreeNode;
   var AllowExpansion: Boolean);
 begin
   MyNode.Id:= Integer(Node.Data);
-  RefreshPrices;
+  RefreshQData;
 end;
 
 procedure TFormTree.GridCellClick(Column: TColumnEh);
@@ -154,54 +135,28 @@ var
   LFormPriceShow: TFormPriceShow;
   link:string;
 begin
-  if (F_FieldName1 = 'CM_NAME') and (F_FieldName2 = 'CM_NAME') then
+if varIsNull(qData['CM_ID']) then Exit;
+if (F_FieldName1 = 'CM_NAME') then
     begin
-    if varIsNull(qData['CM_ID']) then
-      Exit;
     LCompanyShow:= TFormCompaniesShow.Create(Application);
     LCompanyShow.SetCompany(qData['CM_ID']);
     LCompanyShow.Caption:= 'Компания ' + qData['CM_NAME'];
     Exit;
-    end
-  else
-    if (F_FieldName1='CM_HYPERLINK') and (F_FieldName2='CM_HYPERLINK') then
-    begin
-      if not VarIsNull(QData['CM_HYPERLINK']) then
-      begin
-        link:= QData.Fields.FieldByName('CM_HYPERLINK').AsString;
-        ShellOpen(Application.Handle, link);
-      end;
-      Exit;
-    end
-    else
-      begin
-      if varIsNull(qData['CM_ID']) then Exit;
-      LFormPriceShow:= TFormPriceShow.Create(Application);
-      LFormPriceShow.SetTree(qData['PL_TREEID']);
-      LFormPriceShow.Caption:= 'Рубрика ' + MyNode.Value;
-      end;
+    end;
+if (F_FieldName1 = 'CM_HYPERLINK') and not VarIsNull(QData['CM_HYPERLINK']) then
+  begin
+    link:= QData.Fields.FieldByName('CM_HYPERLINK').AsString;
+    ShellOpen(Application.Handle, link);
+    Exit;
+  end;
+LFormPriceShow:= TFormPriceShow.Create(Application);
+LFormPriceShow.SetTree(qData['PL_TREEID']);
+LFormPriceShow.Caption:= 'Рубрика ' + MyNode.Value;
 end;
 
 procedure TFormTree.GridEnter(Sender: TObject);
 begin
   F_FieldName1:= 'CM_NAME';
-end;
-
-procedure TFormTree.RefreshPrices;
-begin
-  qData.Close;
-  qData.ParamByName('Company').AsString:= CompanyLike;
-  qData.ParamByName('TREEID').AsInteger:= MyNode.Id;
-  qData.ParamByName('Business').AsString:= AnsiUppercase(Business);
-  if MyNode.ParentID = 0 then
-    qData.ParamByName('NODE').Value:= MyNode.Value
-  else
-    qData.ParamByName('NODE').Value:= MyNode.ParentValue;
-  qData.Open;
-  if MyNode.ParentID <> 0 then
-    DM.RepaintGrid(Grid, MyNode.ParentID)
-  else
-    DM.RepaintGrid(Grid, MyNode.Id)
 end;
 
 procedure TFormTree.FormCreate(Sender: TObject);
@@ -220,15 +175,11 @@ begin
   F_FieldName2:= '';
   F_Column1Name:= '';
   F_Column1Title:= '';
-  ClearCompanyLike;
-  ClearBusiness;
-  ClearFilter;
-  ClearCaption;
   DM.TreeFulFill(Tree, True, 0);
-  ClearFilterFL;
-  RefreshPrices;
+  Filter.ClearAll;
+  RefreshQData;
   RefreshCBFields;
-  ClearCBFilter;
+  CBFilter.Clear;
 end;
 
 procedure TFormTree.GridTitleClick(Column: TColumnEh);
@@ -254,35 +205,19 @@ end;
 
 procedure TFormTree.ButtonFilterClearClick(Sender: TObject);
 begin
-  ClearCompanyLike;
-  ClearBusiness;
-  ClearFilter;
-  ClearFilterFL;
-  RefreshPrices;
+  Filter.ClearAll;
+  RefreshQData;
   RefreshCBFields;
-  ClearCBFilter;
-  ClearCaption;
-  BtnPrevFilter.Enabled:=true;
-end;
-
-procedure TFormTree.ClearFilterFL;
-begin
-  F_FilterToQDataFL:= 'and 1=1';
-  F_Prev_FilterToQDataFL:=F_FilterToQDataFL;
-end;
-
-procedure TFormTree.AddFieldToqDataFL(const SField: string);
-begin
-  F_FieldToqDataFL:= SField;
+  CBFilter.Clear;
 end;
 
 procedure TFormTree.RefreshCBFields;
 var
   I: Integer;
 begin
-  CBFields.Clear;
-  CBFields.Text:= Grid.Columns[0].Title.Caption;
-  for I:= 0 to Grid.Columns.Count - 1 do
+CBFields.Clear;
+CBFields.Text:= Grid.Columns[0].Title.Caption;
+for I:= 0 to Grid.Columns.Count - 1 do
   begin
     if Grid.Columns[I].Title.Caption = 'Раздел' then
       Continue;
@@ -290,36 +225,44 @@ begin
       Continue;
     CBFields.Items.Add(Grid.Columns[I].Title.Caption);
   end;
-  CBFields.Text:= '';
-  F_FieldToqDataFL:= '1';
+CBFields.Text:= '';
+CBFilter.Clear;
 end;
 
+
+
+
 procedure TFormTree.RefreshQDataFL;
+var FieldsName:string;
 begin
-  qDataFl.Close;
-  qDataFl.SQL.Text:= 'select distinct ' +
-    F_FieldToqDataFL + ' as res from (' +
-    ' SELECT pl_id, pl_headerid, pl.pl_treeid, pl_price, ' +
-    ' cast(:node as varchar(200)) as pl_parent, ' +
-    ' (select pt_value from prices_tree pt where pt.pt_id = pl.pl_treeid) pt_value, ' +
-    ' cm.cm_name, cm.cm_id, cm_city, cm_business, cm_hyperlink,  pl_value1, pl_value2, pl_value3, ' +
-    ' pl_value4, pl_value5, pl_value6, pl_value7, pl_value8, pl_value9, ' +
-    ' pl_orderby, pl_date_update, pl_isclosed ' +
-    ' FROM price_lines pl, price_headers ph , company cm ' +
-    ' WHERE ((pl.pl_treeid = :treeid) ' +
-    ' OR (pl.pl_treeid IN ( SELECT pt_id FROM prices_tree ' +
-    '    WHERE pt_parentid =:treeid and pt_isclosed =0)))' +
-    ' AND ph.ph_id = pl.pl_headerid AND cm.cm_id = ph.ph_companyid ' +
-    ' AND cm.cm_isclosed = 0 AND ph.ph_isclosed = 0 AND pl.pl_isclosed = 0 '
-    + F_FilterToQDataFL + ' ) ';
-  qDataFl.ParamByName('TREEID').AsInteger:= MyNode.Id;
-  if MyNode.ParentID = 0 then
-    qDataFl.ParamByName('NODE').Value:= MyNode.Value
-  else
-    qDataFl.ParamByName('NODE').Value:= MyNode.ParentValue;
-  qDataFL.Open;
-  qDataFL.First;
-  CBFilter.Clear;
+if F_CBFieldsName='' then FieldsName:= '1' else FieldsName:=F_CBFieldsName;
+qDataFl.Close;
+qDataFl.SQL.Text:= 'select distinct ' +
+  FieldsName + ' as res from (' +
+  ' SELECT pl_id, pl_headerid, pl.pl_treeid, pl_price, ' +
+  ' cast(:node as varchar(200)) as pl_parent, ' +
+  ' (select pt_value from prices_tree pt where pt.pt_id = pl.pl_treeid) pt_value, ' +
+  ' cm.cm_name, cm.cm_id, cm_city, cm_business, cm_hyperlink, pl_value1, pl_value2, pl_value3, ' +
+  ' pl_value4, pl_value5, pl_value6, pl_value7, pl_value8, pl_value9, ' +
+  ' pl_orderby, pl_date_update, pl_isclosed ' +
+  ' FROM price_lines pl, price_headers ph , company cm ' +
+  ' WHERE ((pl.pl_treeid = :treeid) ' +
+  ' OR (pl.pl_treeid IN ( SELECT pt_id FROM prices_tree ' +
+  '    WHERE pt_parentid =:treeid and pt_isclosed =0)))' +
+  ' AND ph.ph_id = pl.pl_headerid AND cm.cm_id = ph.ph_companyid ' +
+  ' AND cm.cm_isclosed = 0 AND ph.ph_isclosed = 0 AND pl.pl_isclosed = 0 '+
+  ' and upper(cm_name) like ''%''||:company||''%'' '+
+  ' and (upper(cm_business) like ''%''||:business||''%'' or (cast(:business as varchar(100)) ='''') ) ';
+qDataFl.SQL.Add(Filter.Query);
+qDataFl.SQL.Add(')');
+qDataFL.ParamByName('Company').AsString:= AnsiUpperCase(Filter.CompanyLike);
+qDataFL.ParamByName('Business').AsString:= AnsiUppercase(Filter.Business);
+qDataFL.ParamByName('TREEID').AsInteger:= MyNode.Id;
+if MyNode.ParentID = 0 then  qDataFL.ParamByName('NODE').Value:= MyNode.Value
+else  qDataFL.ParamByName('NODE').Value:= MyNode.ParentValue;
+qDataFL.Open;
+qDataFL.First;
+CBFilter.Clear;
   while not QDataFL.EOF do
   begin
     if not VarIsNull(qDataFL['RES']) then
@@ -328,17 +271,6 @@ begin
     end;
     qDataFL.Next;
   end;
-end;
-
-procedure TFormTree.AddFilterFL(Value: string);
-begin
-  F_Prev_FilterToQDataFL:=F_FilterToqDataFL;
-  F_FilterToqDataFL:= Value;
-end;
-
-procedure TFormTree.RollbackFilterFL;
-begin
-  F_FilterToqDataFL:= F_Prev_FilterToQDataFL;
 end;
 
 procedure TFormTree.CBFieldsSelect(Sender: TObject);
@@ -354,40 +286,37 @@ begin
       Break;
     end;
   end;
-  AddFieldToqDataFL(F_CBFieldsName);
   RefreshQDataFL;
 end;
 
 procedure TFormTree.BitBtnInsertClick(Sender: TObject);
 begin
+if Filter.Counter=5 then
+  begin
+  MessageDlg('Количество фильтров ограничено пятью',mtWarning, [mbOK],0);
+  Exit;
+  end;
   if (CBFilter.Text <> '') and (F_CBFieldsName <> '') then
   begin
-    BtnPrevFilter.Enabled:=True;
-    if CBFields.Text='Поставщик' then
+  if CBFields.Text='Поставщик' then
       begin
-      AddCaption(F_CBFieldsTitle + ' like ' + CBFilter.Text + ', ');
-      CompanyLike:=AnsiUpperCase(CBFilter.Text);
-      AddFilter('');
-      AddFilterFL(' and upper(' + F_CBFieldsName + ') like upper(''%' + CompanyLike + '%'')');
+      Filter.CompanyLike:=AnsiUpperCase(CBFilter.Text);
+      Filter.AddFilter(F_CBFieldsName, CBFields.Text,CBFilter.Text);
       end
-    else
-    if CBFields.Text='Вид деятельности' then
+  else
+  if CBFields.Text='Вид деятельности' then
       begin
-      Business:=AnsiUpperCase(CBFilter.Text);
-      AddCaption(F_CBFieldsTitle + ' like ' + Business + ', ');
-      AddFilter('');
-      AddFilterFL(' and (upper(cm_business) like ''%''||:business||''%'' or (cast(:business as varchar(100)) ='''') )');
+      Filter.Business:=AnsiUpperCase(CBFilter.Text);
+      Filter.AddFilter(F_CBFieldsName, CBFields.Text,CBFilter.Text);
       end
-    else
+  else
       begin
-      AddCaption(F_CBFieldsTitle + ' = ' + CBFilter.Text + ', ');
-      AddFilter(' and ' + F_CBFieldsName + ' = ''' + CBFilter.Text + '''');
-      AddFilterFL(' and ' + F_CBFieldsName + ' = ' + '''' + CBFilter.Text + '''');
+      Filter.AddFilter(F_CBFieldsName, CBFields.Text,CBFilter.Text);
       end;
-    RefreshPrices;
-    RefreshCBFields;
-    ClearCBFilter;
-  end;
+  RefreshQData;
+  RefreshCBFields;
+  CBFilter.Clear;
+  end; 
 end;
 
 procedure TFormTree.FormKeyUp(Sender: TObject; var Key: Word;
@@ -396,22 +325,8 @@ begin
   case Key of
     VK_F2: BitBtnInsert.Click;
     VK_F3: ButtonFilterClear.Click;
-    VK_F4: If BtnPrevFilter.Enabled then BtnPrevFilter.Click;
   end;
 
-end;
-
-procedure TFormTree.ClearFilters;
-begin
-  CBFields.Clear;
-  CBFilter.Clear;
-  CBFields.Visible:= True;
-  CBFilter.Visible:= True;
-end;
-
-procedure TFormTree.ClearCBFilter;
-begin
-  CBFilter.Clear;
 end;
 
 procedure TFormTree.GridDrawColumnCell(Sender: TObject; const Rect: TRect;
@@ -432,100 +347,96 @@ begin
   TDBGridEh(Sender).DefaultDrawColumnCell(Rect, DataCol, Column, State);
 end;
 
-procedure TFormTree.BtnPrevFilterClick(Sender: TObject);
+procedure TFormTree.RefreshCaptions;
 begin
-inherited;
-BtnPrevFilter.Enabled:=False;
-RollbackCompanyLike;
-RollbackBusiness;
-RollbackCaption;
-RollbackFilter;
-RollbackFilterFL;
-RefreshPrices;
-RefreshCBFields;
-ClearCBFilter;
+Chk1.Caption:=Filter.Caption(1);
+Chk1.Visible:=(Chk1.Caption<>'');
+Chk2.Caption:=Filter.Caption(2);
+Chk2.Visible:=(Chk2.Caption<>'');
+Chk3.Caption:=Filter.Caption(3);
+Chk3.Visible:=(Chk3.Caption<>'');
+Chk4.Caption:=Filter.Caption(4);
+Chk4.Visible:=(Chk4.Caption<>'');
+Chk5.Caption:=Filter.Caption(5);
+Chk5.Visible:=(Chk5.Caption<>'');
 end;
 
-procedure TFormTree.ClearCompanyLike;
+procedure TFormTree.RefreshQData;
 begin
-F_CompanyLike:='';
-F_Prev_CompanyLike:='';
+RefreshCaptions;
+qData.Close;
+qData.SQL.Text:='SELECT pl_id, pl_headerid, pl.pl_treeid, pl_price, '+
+' cast(:node as varchar(200)) as pl_parent, '+
+' (select pt_value from prices_tree pt '+
+'  where pt.pt_id = pl.pl_treeid '+
+'  and pt_isclosed =0) pt_value, '+
+' cm.cm_name, cm.cm_id, cm_city,  cm_business, cm_hyperlink,  tl_color, '+
+' pl_value1, pl_value2, pl_value3, pl_value4, pl_value5, pl_value6, '+
+' pl_value7, pl_value8, pl_value9, pl_orderby, pl_date_update, pl_isclosed '+
+' FROM price_lines pl, price_headers ph , company cm '+
+' left join TRUSTLEVEL tl on tl.tl_id = cm.cm_trust '+
+' WHERE ((pl.pl_treeid = :treeid) '+
+' OR (pl.pl_treeid IN '+
+'    (SELECT pt_id FROM prices_tree WHERE pt_parentid =:treeid and pt_isclosed =0) '+
+'     )) '+
+' AND ph.ph_id = pl.pl_headerid AND cm.cm_id = ph.ph_companyid '+
+' AND cm.cm_isclosed = 0 AND ph.ph_isclosed = 0 AND pl.pl_isclosed = 0 '+
+' AND upper(cm_name) like ''%''||:company||''%'' '+
+' AND (upper(cm_business) like ''%''||:business||''%'' or (cast(:business as varchar(100)) ='''') )';
+qData.SQL.Add(Filter.Query);
+qData.ParamByName('Company').AsString:= AnsiUpperCase(Filter.CompanyLike);
+qData.ParamByName('Business').AsString:= AnsiUppercase(Filter.Business);
+qData.ParamByName('TREEID').AsInteger:= MyNode.Id;
+if MyNode.ParentID = 0 then  qData.ParamByName('NODE').Value:= MyNode.Value
+else  qData.ParamByName('NODE').Value:= MyNode.ParentValue;
+qData.Open;
+if MyNode.ParentID <> 0 then DM.RepaintGrid(Grid, MyNode.ParentID)
+else DM.RepaintGrid(Grid, MyNode.Id);
 end;
 
-procedure TFormTree.RollbackCompanyLike;
+procedure TFormTree.chk1Click(Sender: TObject);
 begin
-F_CompanyLike:=F_Prev_CompanyLike;
+  inherited;
+  Filter.RemoveFilter(1);
+  RefreshQData;
+  RefreshCBFields;
+  CBFilter.Clear;
 end;
 
-procedure TFormTree.SetCompanyLike(value: string);
+procedure TFormTree.chk2Click(Sender: TObject);
 begin
-F_Prev_CompanyLike:=F_CompanyLike;
-F_CompanyLike:=AnsiUpperCase(Value);
+  inherited;
+  Filter.RemoveFilter(2);
+  RefreshQData;
+  RefreshCBFields;
+  CBFilter.Clear;
 end;
 
-procedure TFormTree.ClearCaption;
+procedure TFormTree.chk3Click(Sender: TObject);
 begin
-Panel1.Caption:='';
+  inherited;
+  Filter.RemoveFilter(3);
+  RefreshQData;
+  RefreshCBFields;
+  CBFilter.Clear;
 end;
 
-procedure TFormTree.RollbackCaption;
+procedure TFormTree.chk4Click(Sender: TObject);
 begin
-Panel1.Caption:=F_Panel1PrevCaption;
+  inherited;
+  Filter.RemoveFilter(4);
+  RefreshQData;
+  RefreshCBFields;
+  CBFilter.Clear;
 end;
 
-procedure TFormTree.AddCaption(Value: string);
+procedure TFormTree.chk5Click(Sender: TObject);
 begin
-F_Panel1PrevCaption:=Panel1.Caption;
-Panel1.Caption:=Panel1.Caption+Value;
-end;
-
-function TFormTree.GetCompanyLike: string;
-begin
-Result:=F_CompanyLike;
-end;
-
-function TFormTree.GetBusiness: string;
-begin
-Result:=F_Business;
-end;
-
-procedure TFormTree.SetBusiness(Value: string);
-begin
-F_Prev_Business:=F_Business;
-F_Business:=Value;
-end;
-
-procedure TFormTree.RollbackBusiness;
-begin
-F_Business:=F_Prev_Business;
-end;
-
-procedure TFormTree.ClearBusiness;
-begin
-F_Business:='';
-F_Prev_Business:='';
-end;
-
-procedure TFormTree.ClearFilter;
-begin
-qData.Filtered:= False;
-qData.Filter:= '1=1';
-qData.Filtered:= True;
-end;
-
-procedure TFormTree.RollbackFilter;
-begin
-qData.Filtered:= False;
-qData.Filter:= F_qDataPrevFilter;
-qData.Filtered:= True;
-end;
-
-procedure TFormTree.AddFilter(Value: string);
-begin
-F_qDataPrevFilter:=qData.Filter;
-qData.Filtered:= False;
-qData.Filter:= qData.Filter + ' ' + Value;
-qData.Filtered:= True;
+  inherited;
+  Filter.RemoveFilter(5);
+  RefreshQData;
+  RefreshCBFields;
+  CBFilter.Clear;
 end;
 
 end.
