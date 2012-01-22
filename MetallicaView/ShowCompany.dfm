@@ -173,6 +173,8 @@ object FormCompaniesShow: TFormCompaniesShow
       TitleFont.Name = 'MS Sans Serif'
       TitleFont.Style = []
       TitleLines = 2
+      OnCellClick = DBGridCompaniesCellClick
+      OnDblClick = DBGridCompaniesDblClick
       OnDrawColumnCell = DBGridCompaniesDrawColumnCell
       OnTitleClick = DBGridCompaniesTitleClick
       Columns = <

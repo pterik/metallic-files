@@ -31,9 +31,9 @@ object FormTree: TFormTree
     TabOrder = 0
     object Grid: TDBGridEh
       Left = 1
-      Top = 81
+      Top = 73
       Width = 1315
-      Height = 699
+      Height = 707
       Align = alClient
       DataSource = DSData
       Font.Charset = RUSSIAN_CHARSET
@@ -148,17 +148,17 @@ object FormTree: TFormTree
       Left = 1
       Top = 1
       Width = 1315
-      Height = 80
+      Height = 72
       Align = alTop
       TabOrder = 1
       DesignSize = (
         1315
-        80)
+        72)
       object Panel2: TPanel
         Left = 8
         Top = 8
         Width = 241
-        Height = 73
+        Height = 57
         TabOrder = 0
         object Label1: TLabel
           Left = 8
@@ -211,25 +211,80 @@ object FormTree: TFormTree
           TabOrder = 3
           OnClick = ButtonFilterClearClick
         end
-        object btnPrevFilter: TButton
-          Left = 136
-          Top = 48
-          Width = 97
-          Height = 17
-          Caption = #1055#1088#1077#1076#1099#1076#1091#1097#1080#1081' (F4)'
-          TabOrder = 4
-          OnClick = btnPrevFilterClick
-        end
       end
       object Panel1: TPanel
         Left = 256
         Top = 8
         Width = 1059
-        Height = 65
+        Height = 57
         Alignment = taLeftJustify
         Anchors = [akLeft, akTop, akRight]
-        Caption = 'Panel1'
         TabOrder = 1
+        object chk1: TCheckBox
+          Left = 0
+          Top = 4
+          Width = 97
+          Height = 45
+          Alignment = taLeftJustify
+          Caption = 'chk1'
+          Checked = True
+          State = cbChecked
+          TabOrder = 0
+          WordWrap = True
+          OnClick = chk1Click
+        end
+        object chk2: TCheckBox
+          Left = 140
+          Top = 4
+          Width = 97
+          Height = 45
+          Alignment = taLeftJustify
+          Caption = 'chk2'
+          Checked = True
+          State = cbChecked
+          TabOrder = 1
+          WordWrap = True
+          OnClick = chk2Click
+        end
+        object chk3: TCheckBox
+          Left = 280
+          Top = 4
+          Width = 97
+          Height = 45
+          Alignment = taLeftJustify
+          Caption = 'chk3'
+          Checked = True
+          State = cbChecked
+          TabOrder = 2
+          WordWrap = True
+          OnClick = chk3Click
+        end
+        object chk4: TCheckBox
+          Left = 420
+          Top = 4
+          Width = 97
+          Height = 45
+          Alignment = taLeftJustify
+          Caption = 'chk4'
+          Checked = True
+          State = cbChecked
+          TabOrder = 3
+          WordWrap = True
+          OnClick = chk4Click
+        end
+        object chk5: TCheckBox
+          Left = 560
+          Top = 4
+          Width = 97
+          Height = 45
+          Alignment = taLeftJustify
+          Caption = 'chk5'
+          Checked = True
+          State = cbChecked
+          TabOrder = 4
+          WordWrap = True
+          OnClick = chk5Click
+        end
       end
     end
   end
@@ -270,7 +325,7 @@ object FormTree: TFormTree
       
         '(select pt_value from prices_tree pt where pt.pt_id = pl.pl_tree' +
         'id) pt_value,'
-      'cm.cm_name, cm.cm_id, cm_city, cm_business,  cm_hyperlink,  '
+      'cm.cm_name, cm.cm_id, cm_city, cm_business,  cm_hyperlink, '
       'pl_value1, pl_value2, pl_value3,'
       'pl_value4, pl_value5, pl_value6,'
       'pl_value7, pl_value8, pl_value9,'
@@ -295,7 +350,6 @@ object FormTree: TFormTree
       'ORDER BY ph.ph_date_insert, pl_orderby'
       ''
       ''
-      ' '
       ' '
       ' ')
     Params = <

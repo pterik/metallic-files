@@ -64,8 +64,11 @@ type
     procedure btnFilterAddClick(Sender: TObject);
     procedure btnFilterClearClick(Sender: TObject);
     procedure cbxFilterFieldSelect(Sender: TObject);
+    procedure DBGridCompaniesDblClick(Sender: TObject);
+    procedure DBGridCompaniesCellClick(Column: TColumnEh);
   private
     F_CompanyID: Integer;
+    F_FieldName:string;
     F_LastSorted: string;
     FFilter: TStringList;
     procedure RefreshPhones;
@@ -360,6 +363,28 @@ begin
     link := QCompany.Fields.FieldByName('CM_HYPERLINK').AsString;
     ShellOpen(Application.Handle, link);
   end;
+end;
+
+procedure TFormCompaniesShow.DBGridCompaniesDblClick(Sender: TObject);
+var link:string;
+begin
+if VarIsNull(QCompany['COMPANYID']) then
+  begin
+    MessageDlg('”кажите компанию', mtWarning, [mbOK], 0);
+    Exit;
+  end;
+if (F_FieldName = 'CM_HYPERLINK') and not VarIsNull(QCompany['CM_HYPERLINK']) then
+  begin
+    link:= QCompany.Fields.FieldByName('CM_HYPERLINK').AsString;
+    ShellOpen(Application.Handle, link);
+    Exit;
+  end;
+end;
+
+procedure TFormCompaniesShow.DBGridCompaniesCellClick(Column: TColumnEh);
+begin
+  inherited;
+F_FieldName:=Column.FieldName;
 end;
 
 end.
