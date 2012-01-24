@@ -11,7 +11,8 @@ uses
   DataModule in 'DataModule.pas' {DM: TDataModule},
   Splash in 'Splash.pas' {SplashForm},
   MdiChild in 'MdiChild.pas' {FormMDIChild},
-  ShowPrice in 'ShowPrice.pas' {FormPriceShow};
+  ShowPrice in 'ShowPrice.pas' {FormPriceShow},
+  ChangePrice in 'ChangePrice.pas' {FormChangePrice};
 
 {$R *.RES}
 
@@ -24,6 +25,7 @@ begin
   Application.CreateForm(TFormMain, FormMain);
   Application.CreateForm(TFormEnterUser, FormEnterUser);
   Application.CreateForm(TDM, DM);
+  Application.CreateForm(TFormChangePrice, FormChangePrice);
   SplashForm.Hide;
   FormEnterUser.ConnectToDatabase;
   SplashForm.Close;
