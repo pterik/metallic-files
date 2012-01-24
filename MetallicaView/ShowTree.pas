@@ -74,6 +74,8 @@ type
     procedure chk3Click(Sender: TObject);
     procedure chk4Click(Sender: TObject);
     procedure chk5Click(Sender: TObject);
+    procedure GridKeyUp(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     F_CBFieldsName, F_CBFieldsTitle:string;
     F_LastSorted: string;
@@ -148,6 +150,11 @@ if (F_FieldName1 = 'CM_HYPERLINK') and not VarIsNull(QData['CM_HYPERLINK']) then
     link:= QData.Fields.FieldByName('CM_HYPERLINK').AsString;
     ShellOpen(Application.Handle, link);
     Exit;
+  end;
+if (F_FieldName1 = 'PL_PRICE') and not VarIsNull(QData['PL_ID']) then
+  begin
+  ShowMessage(qData['PL_ID']);
+  Exit;
   end;
 LFormPriceShow:= TFormPriceShow.Create(Application);
 LFormPriceShow.SetTree(qData['PL_TREEID']);
@@ -437,6 +444,18 @@ begin
   RefreshQData;
   RefreshCBFields;
   CBFilter.Clear;
+end;
+
+procedure TFormTree.GridKeyUp(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  inherited;
+  case Key of
+  VK_Insert: if not VarIsNull(QData['PL_ID']) then
+    begin
+    ShowMessage(qData['PL_ID']);
+    end;
+  end;
 end;
 
 end.
