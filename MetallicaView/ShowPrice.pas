@@ -8,7 +8,7 @@ uses
   ZDataset, Grids, DBGrids, DBGridEh, DataModule, MdiChild, ExtCtrls, CommonUnit;
 
 type
-  TFormPriceShow = class(TFormMdiChild)
+  TFormPriceShow = class(TFormMDIChild)
     Grid: TDBGridEh;
     qData: TZReadOnlyQuery;
     qDataPL_ID: TIntegerField;
