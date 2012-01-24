@@ -69,6 +69,7 @@ object FormTree: TFormTree
       OnDblClick = GridDblClick
       OnDrawColumnCell = GridDrawColumnCell
       OnEnter = GridEnter
+      OnKeyUp = GridKeyUp
       OnTitleClick = GridTitleClick
       Columns = <
         item
