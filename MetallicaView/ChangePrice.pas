@@ -22,34 +22,20 @@ type
     edtRest: TEdit;
     edtNewRest: TEdit;
     QPrice: TZReadOnlyQuery;
+    QUpdatePrice: TZQuery;
     intgrfldQPricePL_ID: TIntegerField;
     fltfldQPricePL_PRICE: TFloatField;
-    intgrfldQPricePL_ID_1: TIntegerField;
-    intgrfldQPricePL_HEADERID: TIntegerField;
-    intgrfldQPricePL_TREEID: TIntegerField;
-    fltfldQPricePL_PRICE_1: TFloatField;
-    strngfldQPricePL_VALUE1: TStringField;
-    strngfldQPricePL_VALUE2: TStringField;
-    strngfldQPricePL_VALUE3: TStringField;
-    strngfldQPricePL_VALUE4: TStringField;
-    strngfldQPricePL_VALUE5: TStringField;
-    strngfldQPricePL_VALUE6: TStringField;
-    strngfldQPricePL_VALUE7: TStringField;
-    strngfldQPricePL_VALUE8: TStringField;
-    strngfldQPricePL_VALUE9: TStringField;
-    intgrfldQPricePL_ORDERBY: TIntegerField;
-    dtmfldQPricePL_DATE_UPDATE: TDateTimeField;
-    smlntfldQPricePL_ISCLOSED: TSmallintField;
-    QUpdatePrice: TZQuery;
+    fltfldQPriceREST: TFloatField;
     procedure BitBtnCancelClick(Sender: TObject);
     procedure FormKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure BitBtnSaveClick(Sender: TObject);
   private
     F_ID:Integer;
+    F_RestName:string;
   public
     procedure SetPosition(L, T: Integer);
-    procedure SetNewPrice(PL_ID:integer; RestField_Name:string);
+    procedure SetNewPrice(PL_ID:integer; RestName:string);
   end;
 
 var
@@ -88,19 +74,21 @@ begin
   end; // case
 end;
 
-procedure TFormPriceChange.SetNewPrice(PL_ID:Integer; RestField_Name:string);
+procedure TFormPriceChange.SetNewPrice(PL_ID:Integer; RestName:string);
 begin
 F_ID:=PL_ID;
+if RestName ='' then F_RestName:='0' else F_RestName:=RestName;
 EdtPrice.Clear;
 EdtNewPrice.Clear;
 EdtRest.Clear;
 EdtNewRest.Clear;
 QPrice.Close;
+QPrice.SQL.Text:='select PL_ID, PL_PRICE, cast('+F_RestName+' as float) REST from price_lines pl where pl_id = :id';
 QPrice.ParamByName('ID').AsInteger:= F_ID;
 QPrice.Open;
 EdtPrice.Text:=FloatToStr(0.01*Round(100*QPrice['PL_PRICE']));
 EdtNewPrice.Text:=FloatToStr(0.01*Round(100*QPrice['PL_PRICE']));
-EdtRest.Text:=QPrice.FieldByName(RestField_Name).Value;
+EdtRest.Text:=FloatToStr(QPrice['REST']);
 end;
 
 procedure TFormPriceChange.BitBtnSaveClick(Sender: TObject);
@@ -109,8 +97,17 @@ if edtNewPrice.Text<>edtPrice.Text then
   begin
   if Pos(',',edtNewPrice.Text)>0 then edtNewPrice.Text:=AnsiReplaceStr(edtNewPrice.Text,',',SysUtils.DecimalSeparator);
   if Pos('.',edtNewPrice.Text)>0 then edtNewPrice.Text:=AnsiReplaceStr(edtNewPrice.Text,'.',SysUtils.DecimalSeparator);
+  if Pos(',',edtNewrest.Text)>0 then edtNewrest.Text:=AnsiReplaceStr(edtNewRest.Text,',',SysUtils.DecimalSeparator);
+  if Pos('.',edtNewRest.Text)>0 then edtNewRest.Text:=AnsiReplaceStr(edtNewRest.Text,'.',SysUtils.DecimalSeparator);
   QUpdatePrice.Close;
   QUpdatePrice.ParamByName('ID').AsInteger:=F_ID;
+  if F_RestName='0'
+    then QUpdatePrice.SQL.Text:='UPDATE PRICE_LINES SET PL_PRICE=:PRICE WHERE PL_ID=:ID'
+    else
+      begin
+      QUpdatePrice.SQL.Text:='UPDATE PRICE_LINES SET PL_PRICE=:PRICE, '+F_Restname+'=:RESTVALUE WHERE PL_ID=:ID';
+      QUpdatePrice.ParamByName('PRICE').AsFloat:=StrToFloat(edtNewrest.Text);
+      end;
   QUpdatePrice.ParamByName('PRICE').AsFloat:=StrToFloat(edtNewPrice.Text);
   QUpdatePrice.ExecSQL;
   end;
