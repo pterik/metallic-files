@@ -9,29 +9,29 @@ File_6=SourceModule,'C:\Projects\Metallica\Metallica\DataModule.pas',0,1,113,22,
 File_7=SourceModule,'C:\Projects\Metallica\Metallica\ShowPrice.pas',0,1,1,1,1,1,0
 
 [Modules]
-Module0=C:\Projects\Metallica\MetallicaView\ChangePrice.pas
-Module1=C:\Projects\Metallica\MetallicaView\ShowPrice.pas
-Module2=C:\Projects\Metallica\MetallicaView\ShowTree.pas
-Module3=C:\Projects\Metallica\MetallicaView\MainForm.pas
+Module0=C:\Projects\Metallica\MetallicaView\ShowTree.pas
+Module1=C:\Projects\Metallica\MetallicaView\ChangePrice.pas
+Module2=C:\Projects\Metallica\MetallicaView\MainForm.pas
+Module3=C:\Projects\Metallica\MetallicaView\ShowPrice.pas
 Count=4
 EditWindowCount=1
-
-[C:\Projects\Metallica\MetallicaView\ChangePrice.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=0
-
-[C:\Projects\Metallica\MetallicaView\ShowPrice.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=0
 
 [C:\Projects\Metallica\MetallicaView\ShowTree.pas]
 ModuleType=SourceModule
 FormState=1
 FormOnTop=0
 
+[C:\Projects\Metallica\MetallicaView\ChangePrice.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
 [C:\Projects\Metallica\MetallicaView\MainForm.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=0
+
+[C:\Projects\Metallica\MetallicaView\ShowPrice.pas]
 ModuleType=SourceModule
 FormState=1
 FormOnTop=0
@@ -62,7 +62,7 @@ FormOnTop=0
 
 [EditWindow0]
 ViewCount=4
-CurrentView=2
+CurrentView=1
 View0=0
 View1=1
 View2=2
@@ -90,30 +90,30 @@ BottomPanelData=0000040000000000040600000000000002550000000000000001000000000000
 
 [View0]
 Module=C:\Projects\Metallica\MetallicaView\MainForm.pas
-CursorX=26
-CursorY=157
-TopLine=136
+CursorX=103
+CursorY=264
+TopLine=251
 LeftCol=1
 
 [View1]
 Module=C:\Projects\Metallica\MetallicaView\ShowTree.pas
-CursorX=21
-CursorY=445
-TopLine=437
+CursorX=60
+CursorY=158
+TopLine=141
 LeftCol=1
 
 [View2]
 Module=C:\Projects\Metallica\MetallicaView\ChangePrice.pas
-CursorX=43
-CursorY=52
-TopLine=40
+CursorX=55
+CursorY=103
+TopLine=84
 LeftCol=1
 
 [View3]
 Module=C:\Projects\Metallica\MetallicaView\ShowPrice.pas
-CursorX=15
-CursorY=83
-TopLine=83
+CursorX=39
+CursorY=142
+TopLine=119
 LeftCol=1
 
 [Watches]
@@ -236,7 +236,7 @@ LRDockWidth=190
 Dockable=1
 SplitPos=85
 ArrangeBy=Name
-SelectedItem=Caption
+SelectedItem=Name
 ExpandedItems=Anchors,Constraints,STFilter,Title,Value
 HiddenCategories=
 

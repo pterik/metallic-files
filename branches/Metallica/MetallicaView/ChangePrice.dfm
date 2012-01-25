@@ -1,12 +1,12 @@
-object FormChangePrice: TFormChangePrice
+object FormPriceChange: TFormPriceChange
   Left = 469
   Top = 172
-  Width = 315
-  Height = 375
-  Caption = #1053#1086#1074#1072#1103' '#1082#1086#1084#1087#1072#1085#1080#1103
+  Width = 218
+  Height = 181
+  Caption = #1048#1079#1084#1077#1085#1077#1085#1080#1077' '#1094#1077#1085#1099' '#1080' '#1082#1086#1083#1080#1095#1077#1089#1090#1074#1072
   Color = clBtnFace
-  Constraints.MinHeight = 375
-  Constraints.MinWidth = 315
+  Constraints.MinHeight = 100
+  Constraints.MinWidth = 60
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -16,8 +16,8 @@ object FormChangePrice: TFormChangePrice
   OldCreateOrder = False
   OnKeyUp = FormKeyUp
   DesignSize = (
-    299
-    337)
+    202
+    143)
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
@@ -34,11 +34,11 @@ object FormChangePrice: TFormChangePrice
     ParentFont = False
   end
   object Label4: TLabel
-    Left = 8
-    Top = 52
-    Width = 105
+    Left = 112
+    Top = 8
+    Width = 59
     Height = 13
-    Caption = #1059#1082#1072#1078#1080#1090#1077' '#1085#1086#1074#1091#1102' '#1094#1077#1085#1091
+    Caption = #1053#1086#1074#1072#1103' '#1094#1077#1085#1072
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
@@ -47,8 +47,8 @@ object FormChangePrice: TFormChangePrice
     ParentFont = False
   end
   object Label2: TLabel
-    Left = 16
-    Top = 96
+    Left = 8
+    Top = 56
     Width = 88
     Height = 13
     Caption = #1058#1077#1082#1091#1097#1080#1081' '#1086#1089#1090#1072#1090#1086#1082
@@ -60,11 +60,11 @@ object FormChangePrice: TFormChangePrice
     ParentFont = False
   end
   object Label3: TLabel
-    Left = 16
-    Top = 140
-    Width = 88
+    Left = 120
+    Top = 56
+    Width = 77
     Height = 13
-    Caption = #1059#1082#1072#1078#1080#1090#1077' '#1086#1089#1090#1072#1090#1086#1082
+    Caption = #1053#1086#1074#1099#1081' '#1086#1089#1090#1072#1090#1086#1082
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
@@ -73,16 +73,15 @@ object FormChangePrice: TFormChangePrice
     ParentFont = False
   end
   object BitBtnCancel: TBitBtn
-    Left = 24
-    Top = 309
+    Left = 8
+    Top = 115
     Width = 75
     Height = 25
     Anchors = [akLeft, akBottom]
     Cancel = True
     Caption = #1054#1090#1084#1077#1085#1072
-    Default = True
     ModalResult = 2
-    TabOrder = 0
+    TabOrder = 3
     OnClick = BitBtnCancelClick
     Glyph.Data = {
       DE010000424DDE01000000000000760000002800000024000000120000000100
@@ -104,14 +103,15 @@ object FormChangePrice: TFormChangePrice
     NumGlyphs = 2
   end
   object BitBtnSave: TBitBtn
-    Left = 186
-    Top = 309
+    Left = 89
+    Top = 115
     Width = 105
     Height = 25
     Anchors = [akRight, akBottom]
     Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' (F2)'
+    Default = True
     ModalResult = 1
-    TabOrder = 1
+    TabOrder = 2
     OnClick = BitBtnSaveClick
     Glyph.Data = {
       76010000424D7601000000000000760000002800000020000000100000000100
@@ -128,27 +128,170 @@ object FormChangePrice: TFormChangePrice
       0003737FFFFFFFFF7F7330099999999900333777777777777733}
     NumGlyphs = 2
   end
-  object zQPrice: TZReadOnlyQuery
-    Connection = FormMain.ZC
-    SQL.Strings = (
-      'select CNT_ID, CNT_NAME from companynametypes'
-      'order by CNT_CNTR')
-    Params = <>
-    Left = 144
-    Top = 48
-    object intgrfldQPriceCNT_ID: TIntegerField
-      FieldName = 'CNT_ID'
-      Required = True
-    end
-    object strngfldQPriceCNT_NAME: TStringField
-      FieldName = 'CNT_NAME'
-      Required = True
-      Size = 50
-    end
+  object edtPrice: TEdit
+    Left = 8
+    Top = 24
+    Width = 73
+    Height = 21
+    TabStop = False
+    ReadOnly = True
+    TabOrder = 4
+    Text = 'edtPrice'
+  end
+  object edtNewPrice: TEdit
+    Left = 104
+    Top = 24
+    Width = 73
+    Height = 21
+    TabOrder = 0
+    Text = 'edtNewPrice'
+  end
+  object edtRest: TEdit
+    Left = 8
+    Top = 80
+    Width = 73
+    Height = 21
+    TabStop = False
+    ReadOnly = True
+    TabOrder = 5
+    Text = 'edtRest'
+  end
+  object edtNewRest: TEdit
+    Left = 104
+    Top = 80
+    Width = 73
+    Height = 21
+    TabOrder = 1
+    Text = 'edtNewRest'
   end
   object DSPrice: TDataSource
-    DataSet = zQPrice
-    Left = 200
-    Top = 120
+    DataSet = QPrice
+    Left = 80
+    Top = 24
+  end
+  object QPrice: TZReadOnlyQuery
+    Connection = FormMain.ZC
+    SQL.Strings = (
+      'select PL_ID, PL_PRICE, pl.* from price_lines pl'
+      'where pl_id = :id')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id'
+        ParamType = ptUnknown
+      end>
+    Left = 32
+    Top = 24
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id'
+        ParamType = ptUnknown
+      end>
+    object intgrfldQPricePL_ID: TIntegerField
+      FieldName = 'PL_ID'
+      Required = True
+    end
+    object fltfldQPricePL_PRICE: TFloatField
+      DisplayWidth = 10
+      FieldName = 'PL_PRICE'
+      Required = True
+      DisplayFormat = '#.00'
+      currency = True
+      Precision = 2
+    end
+    object intgrfldQPricePL_ID_1: TIntegerField
+      FieldName = 'PL_ID_1'
+      Required = True
+    end
+    object intgrfldQPricePL_HEADERID: TIntegerField
+      FieldName = 'PL_HEADERID'
+      Required = True
+    end
+    object intgrfldQPricePL_TREEID: TIntegerField
+      FieldName = 'PL_TREEID'
+    end
+    object fltfldQPricePL_PRICE_1: TFloatField
+      FieldName = 'PL_PRICE_1'
+      Required = True
+    end
+    object strngfldQPricePL_VALUE1: TStringField
+      FieldName = 'PL_VALUE1'
+      Size = 200
+    end
+    object strngfldQPricePL_VALUE2: TStringField
+      FieldName = 'PL_VALUE2'
+      Size = 200
+    end
+    object strngfldQPricePL_VALUE3: TStringField
+      FieldName = 'PL_VALUE3'
+      Size = 200
+    end
+    object strngfldQPricePL_VALUE4: TStringField
+      FieldName = 'PL_VALUE4'
+      Size = 200
+    end
+    object strngfldQPricePL_VALUE5: TStringField
+      FieldName = 'PL_VALUE5'
+      Size = 200
+    end
+    object strngfldQPricePL_VALUE6: TStringField
+      FieldName = 'PL_VALUE6'
+      Size = 200
+    end
+    object strngfldQPricePL_VALUE7: TStringField
+      FieldName = 'PL_VALUE7'
+      Size = 200
+    end
+    object strngfldQPricePL_VALUE8: TStringField
+      FieldName = 'PL_VALUE8'
+      Size = 200
+    end
+    object strngfldQPricePL_VALUE9: TStringField
+      FieldName = 'PL_VALUE9'
+      Size = 200
+    end
+    object intgrfldQPricePL_ORDERBY: TIntegerField
+      FieldName = 'PL_ORDERBY'
+      Required = True
+    end
+    object dtmfldQPricePL_DATE_UPDATE: TDateTimeField
+      FieldName = 'PL_DATE_UPDATE'
+    end
+    object smlntfldQPricePL_ISCLOSED: TSmallintField
+      FieldName = 'PL_ISCLOSED'
+      Required = True
+    end
+  end
+  object QUpdatePrice: TZQuery
+    Connection = FormMain.ZC
+    SQL.Strings = (
+      'UPDATE PRICE_LINES'
+      'SET PL_PRICE=:PRICE'
+      'WHERE PL_ID=:ID')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'PRICE'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'ID'
+        ParamType = ptUnknown
+      end>
+    Left = 144
+    Top = 24
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'PRICE'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'ID'
+        ParamType = ptUnknown
+      end>
   end
 end

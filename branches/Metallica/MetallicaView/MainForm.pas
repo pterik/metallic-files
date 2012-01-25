@@ -159,11 +159,11 @@ procedure TFormMain.FormDestroy(Sender: TObject);
 var
   I: Integer;
 begin
-  for I:= 0 to ZC.ComponentCount - 1 do {// Iterate} begin
+  for I:= 0 to ZC.ComponentCount - 1 do
+  begin
     ZC.Components[I].Free;
-  end; // for
-  if FormMain.ZC.Connected then
-    FormMain.ZC.Disconnect;
+  end; 
+if FormMain.ZC.Connected then FormMain.ZC.Disconnect;
 end;
 
 procedure TFormMain.mmiNewTreeClick(Sender: TObject);
@@ -171,7 +171,6 @@ var
   TreeShow: TFormTree;
 begin
   TreeShow:= TFormTree.Create(Application);
-  //AddToolBttn(TreeShow.Caption);
   TreeShow.Caption:= 'Все рубрики';
   TreeShow.SetTree;
 end;

@@ -12,7 +12,7 @@ uses
   Splash in 'Splash.pas' {SplashForm},
   MdiChild in 'MdiChild.pas' {FormMDIChild},
   ShowPrice in 'ShowPrice.pas' {FormPriceShow},
-  ChangePrice in 'ChangePrice.pas' {FormChangePrice};
+  ChangePrice in 'ChangePrice.pas' {FormPriceChange};
 
 {$R *.RES}
 
@@ -25,7 +25,7 @@ begin
   Application.CreateForm(TFormMain, FormMain);
   Application.CreateForm(TFormEnterUser, FormEnterUser);
   Application.CreateForm(TDM, DM);
-  Application.CreateForm(TFormChangePrice, FormChangePrice);
+  Application.CreateForm(TFormPriceChange, FormPriceChange);
   SplashForm.Hide;
   FormEnterUser.ConnectToDatabase;
   SplashForm.Close;
