@@ -172,8 +172,10 @@ object FormPriceChange: TFormPriceChange
   object QPrice: TZReadOnlyQuery
     Connection = FormMain.ZC
     SQL.Strings = (
-      'select PL_ID, PL_PRICE, pl.* from price_lines pl'
-      'where pl_id = :id')
+      
+        'select PL_ID, PL_PRICE, CAST(PL_VALUE5 AS FLOAT) REST from price' +
+        '_lines pl where pl_id = :id'
+      ' ')
     Params = <
       item
         DataType = ftUnknown
@@ -193,74 +195,12 @@ object FormPriceChange: TFormPriceChange
       Required = True
     end
     object fltfldQPricePL_PRICE: TFloatField
-      DisplayWidth = 10
       FieldName = 'PL_PRICE'
       Required = True
-      DisplayFormat = '#.00'
-      currency = True
-      Precision = 2
     end
-    object intgrfldQPricePL_ID_1: TIntegerField
-      FieldName = 'PL_ID_1'
-      Required = True
-    end
-    object intgrfldQPricePL_HEADERID: TIntegerField
-      FieldName = 'PL_HEADERID'
-      Required = True
-    end
-    object intgrfldQPricePL_TREEID: TIntegerField
-      FieldName = 'PL_TREEID'
-    end
-    object fltfldQPricePL_PRICE_1: TFloatField
-      FieldName = 'PL_PRICE_1'
-      Required = True
-    end
-    object strngfldQPricePL_VALUE1: TStringField
-      FieldName = 'PL_VALUE1'
-      Size = 200
-    end
-    object strngfldQPricePL_VALUE2: TStringField
-      FieldName = 'PL_VALUE2'
-      Size = 200
-    end
-    object strngfldQPricePL_VALUE3: TStringField
-      FieldName = 'PL_VALUE3'
-      Size = 200
-    end
-    object strngfldQPricePL_VALUE4: TStringField
-      FieldName = 'PL_VALUE4'
-      Size = 200
-    end
-    object strngfldQPricePL_VALUE5: TStringField
-      FieldName = 'PL_VALUE5'
-      Size = 200
-    end
-    object strngfldQPricePL_VALUE6: TStringField
-      FieldName = 'PL_VALUE6'
-      Size = 200
-    end
-    object strngfldQPricePL_VALUE7: TStringField
-      FieldName = 'PL_VALUE7'
-      Size = 200
-    end
-    object strngfldQPricePL_VALUE8: TStringField
-      FieldName = 'PL_VALUE8'
-      Size = 200
-    end
-    object strngfldQPricePL_VALUE9: TStringField
-      FieldName = 'PL_VALUE9'
-      Size = 200
-    end
-    object intgrfldQPricePL_ORDERBY: TIntegerField
-      FieldName = 'PL_ORDERBY'
-      Required = True
-    end
-    object dtmfldQPricePL_DATE_UPDATE: TDateTimeField
-      FieldName = 'PL_DATE_UPDATE'
-    end
-    object smlntfldQPricePL_ISCLOSED: TSmallintField
-      FieldName = 'PL_ISCLOSED'
-      Required = True
+    object fltfldQPriceREST: TFloatField
+      FieldName = 'REST'
+      ReadOnly = True
     end
   end
   object QUpdatePrice: TZQuery
