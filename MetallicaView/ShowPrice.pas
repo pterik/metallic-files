@@ -69,6 +69,8 @@ type
     procedure chk3Click(Sender: TObject);
     procedure chk2Click(Sender: TObject);
     procedure chk1Click(Sender: TObject);
+    procedure GridKeyUp(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     MyNode: TNodeValue;
     F_CBFieldsName, F_CBFieldsTitle:string;
@@ -91,7 +93,7 @@ implementation
 {$R *.dfm}
 
 uses
-  MainForm, ShowCompany;
+  MainForm, ShowCompany, ChangePrice;
 
 { TFormPriceShow }
 
@@ -315,7 +317,9 @@ end;
 procedure TFormPriceShow.GridDblClick(Sender: TObject);
 var
   LCompanyShow: TFormCompaniesShow;
+  LFormPriceChange:TFormPriceChange;
   link:string;
+  BK:TbookmarkStr;
 begin
 if varIsNull(qData['CM_ID']) then Exit;
 if (F_FieldName = 'CM_NAME') then
@@ -329,6 +333,16 @@ if (F_FieldName = 'CM_HYPERLINK') and not VarIsNull(QData['CM_HYPERLINK']) then
   begin
     link:= QData.Fields.FieldByName('CM_HYPERLINK').AsString;
     ShellOpen(Application.Handle, link);
+    Exit;
+  end;
+if (F_FieldName = 'PL_PRICE') and not VarIsNull(QData['PL_ID']) then
+  begin
+    LFormPriceChange:= TFormPriceChange.Create(Application);
+    LFormPriceChange.SetNewPrice(qData['PL_ID'], qData['PL_TREEID']);
+    LFormPriceChange.ShowModal;
+    BK:=QData.BookMark;
+    RefreshQData;
+    qData.Bookmark:=BK;
     Exit;
   end;
 end;
@@ -396,6 +410,26 @@ Chk4.Caption:=Filter.Caption(4);
 Chk4.Visible:=(Chk4.Caption<>'');
 Chk5.Caption:=Filter.Caption(5);
 Chk5.Visible:=(Chk5.Caption<>'');
+end;
+
+procedure TFormPriceShow.GridKeyUp(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+var
+  LFormPriceChange:TFormPriceChange;
+  BK:TbookmarkStr;
+begin
+  inherited;
+  case Key of
+  VK_Insert: if not VarIsNull(QData['PL_ID']) then
+    begin
+    LFormPriceChange:= TFormPriceChange.Create(Application);
+    LFormPriceChange.SetNewPrice(QData['PL_ID'], QData['PL_TREEID']);
+    LFormPriceChange.ShowModal;
+    BK:=QData.BookMark;
+    RefreshQData;
+    qData.Bookmark:=BK;
+    end;
+  end;
 end;
 
 end.

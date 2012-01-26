@@ -1,8 +1,8 @@
 object FormPriceChange: TFormPriceChange
   Left = 469
   Top = 172
-  Width = 218
-  Height = 181
+  Width = 227
+  Height = 179
   Caption = #1048#1079#1084#1077#1085#1077#1085#1080#1077' '#1094#1077#1085#1099' '#1080' '#1082#1086#1083#1080#1095#1077#1089#1090#1074#1072
   Color = clBtnFace
   Constraints.MinHeight = 100
@@ -16,8 +16,8 @@ object FormPriceChange: TFormPriceChange
   OldCreateOrder = False
   OnKeyUp = FormKeyUp
   DesignSize = (
-    202
-    143)
+    211
+    141)
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
@@ -74,7 +74,7 @@ object FormPriceChange: TFormPriceChange
   end
   object BitBtnCancel: TBitBtn
     Left = 8
-    Top = 115
+    Top = 113
     Width = 75
     Height = 25
     Anchors = [akLeft, akBottom]
@@ -103,8 +103,8 @@ object FormPriceChange: TFormPriceChange
     NumGlyphs = 2
   end
   object BitBtnSave: TBitBtn
-    Left = 89
-    Top = 115
+    Left = 98
+    Top = 113
     Width = 105
     Height = 25
     Anchors = [akRight, akBottom]
@@ -134,6 +134,7 @@ object FormPriceChange: TFormPriceChange
     Width = 73
     Height = 21
     TabStop = False
+    Enabled = False
     ReadOnly = True
     TabOrder = 4
     Text = 'edtPrice'
@@ -152,6 +153,7 @@ object FormPriceChange: TFormPriceChange
     Width = 73
     Height = 21
     TabStop = False
+    Enabled = False
     ReadOnly = True
     TabOrder = 5
     Text = 'edtRest'
@@ -166,15 +168,15 @@ object FormPriceChange: TFormPriceChange
   end
   object DSPrice: TDataSource
     DataSet = QPrice
-    Left = 80
+    Left = 96
     Top = 24
   end
   object QPrice: TZReadOnlyQuery
     Connection = FormMain.ZC
     SQL.Strings = (
       
-        'select PL_ID, PL_PRICE, CAST(PL_VALUE5 AS FLOAT) REST from price' +
-        '_lines pl where pl_id = :id'
+        'select PL_ID, PL_PRICE,  PL_VALUE5 REST from price_lines pl wher' +
+        'e pl_id = :id'
       ' ')
     Params = <
       item
@@ -182,7 +184,7 @@ object FormPriceChange: TFormPriceChange
         Name = 'id'
         ParamType = ptUnknown
       end>
-    Left = 32
+    Left = 56
     Top = 24
     ParamData = <
       item
@@ -198,9 +200,9 @@ object FormPriceChange: TFormPriceChange
       FieldName = 'PL_PRICE'
       Required = True
     end
-    object fltfldQPriceREST: TFloatField
+    object strngfldQPriceREST: TStringField
       FieldName = 'REST'
-      ReadOnly = True
+      Size = 200
     end
   end
   object QUpdatePrice: TZQuery
@@ -233,5 +235,47 @@ object FormPriceChange: TFormPriceChange
         Name = 'ID'
         ParamType = ptUnknown
       end>
+  end
+  object QRestField: TZReadOnlyQuery
+    Connection = FormMain.ZC
+    SQL.Strings = (
+      'select gs_field, gs_orderby from ('
+      'SELECT gs_field,'
+      'gs_orderby FROM grid_show'
+      'WHERE gs_treeid IS NULL'
+      'AND gs_field NOT IN'
+      '    (SELECT gs_field FROM grid_show'
+      '    WHERE gs_treeid = :treeid)'
+      'and (upper(gs_header) = '#39#1054#1057#1058#1040#1058#1054#1050#39')'
+      'and gs_show = 1'
+      'UNION ALL'
+      'SELECT gs_field, gs_orderby FROM grid_show'
+      'WHERE gs_treeid = :treeid'
+      'and (upper(gs_header) = '#39#1054#1057#1058#1040#1058#1054#1050#39')'
+      'and gs_show = 1)'
+      'where gs_field is not null'
+      'order by gs_orderby desc')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'treeid'
+        ParamType = ptUnknown
+      end>
+    Left = 144
+    Top = 72
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'treeid'
+        ParamType = ptUnknown
+      end>
+    object strngfldQRestFieldGS_FIELD: TStringField
+      FieldName = 'GS_FIELD'
+      Size = 50
+    end
+    object intgrfldQRestFieldGS_ORDERBY: TIntegerField
+      FieldName = 'GS_ORDERBY'
+      ReadOnly = True
+    end
   end
 end

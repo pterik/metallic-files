@@ -326,12 +326,6 @@ object FormTree: TFormTree
       
         '(select pt_value from prices_tree pt where pt.pt_id = pl.pl_tree' +
         'id) pt_value,'
-      
-        '(select max(gs_field) from grid_show gs where upper(gs_header) =' +
-        ' '#39#1054#1057#1058#1040#1058#1054#1050#39' and (gs.gs_treeid = pl_treeid'
-      
-        'OR (gs.gs_treeid IN (SELECT pt_id FROM prices_tree WHERE pt_pare' +
-        'ntid =pl_treeid )))) rest_name,'
       'cm.cm_name, cm.cm_id, cm_city, cm_business,  cm_hyperlink,'
       'pl_value1, pl_value2, pl_value3,'
       'pl_value4, pl_value5, pl_value6,'
@@ -505,11 +499,6 @@ object FormTree: TFormTree
     object strngfldDataCM_HYPERLINK: TStringField
       FieldName = 'CM_HYPERLINK'
       Size = 1000
-    end
-    object strngfldDataREST_NAME: TStringField
-      FieldName = 'REST_NAME'
-      ReadOnly = True
-      Size = 50
     end
   end
   object qDataFl: TZReadOnlyQuery
