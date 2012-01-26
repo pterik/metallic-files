@@ -50,6 +50,7 @@ object FormPriceShow: TFormPriceShow
     OnCellClick = GridCellClick
     OnDblClick = GridDblClick
     OnDrawColumnCell = GridDrawColumnCell
+    OnKeyUp = GridKeyUp
     OnTitleClick = GridTitleClick
     Columns = <
       item

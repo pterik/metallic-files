@@ -181,7 +181,6 @@ var
 begin
   CompanyShow:= TFormCompaniesShow.Create(Application);
   CompanyShow.SetCompany(-1);
-  //AddToolBttn(CompanyShow.Caption);
   CompanyShow.Caption:= 'Все поставщики';
 end;
 
@@ -253,8 +252,7 @@ end;
 
 procedure TFormMain.N3Click(Sender: TObject);
 begin
-  if FormAbout = nil then
-    Application.CreateForm(TFormAbout, FormAbout);
+  Application.CreateForm(TFormAbout, FormAbout);
   FormAbout.SetPosition(Self.Left, Self.Top);
   FormAbout.SetAbout;
   FormAbout.Show;

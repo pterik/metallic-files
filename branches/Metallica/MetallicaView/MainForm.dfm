@@ -33,7 +33,6 @@ object FormMain: TFormMain
     User = 'SYSDBA'
     Password = 'masterkey'
     TransactIsolationLevel = tiReadCommitted
-    Connected = True
     Left = 56
     Top = 176
   end

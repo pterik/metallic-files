@@ -53,7 +53,6 @@ type
     chk3: TCheckBox;
     chk4: TCheckBox;
     chk5: TCheckBox;
-    strngfldDataREST_NAME: TStringField;
     procedure TreeChange(Sender: TObject; Node: TTreeNode);
     procedure TreeExpanding(Sender: TObject; Node: TTreeNode;
       var AllowExpansion: Boolean);
@@ -137,9 +136,8 @@ var
   LCompanyShow: TFormCompaniesShow;
   LFormPriceShow: TFormPriceShow;
   LFormPriceChange: TFormPriceChange;
-  link, RestName:string;
+  link:string;
   BK:TBookmarkStr;
-  ID:Integer;
 begin
 if varIsNull(qData['CM_ID']) then Exit;
 if (F_FieldName1 = 'CM_NAME') then
@@ -157,10 +155,8 @@ if (F_FieldName1 = 'CM_HYPERLINK') and not VarIsNull(QData['CM_HYPERLINK']) then
   end;
 if (F_FieldName1 = 'PL_PRICE') and not VarIsNull(QData['PL_ID']) then
   begin
-   ID:=qData['PL_ID'];
-    if VarIsNull(qData['REST_NAME']) then RestName:='' else RestName:=qData['REST_NAME'];
     LFormPriceChange:= TFormPriceChange.Create(Application);
-    LFormPriceChange.SetNewPrice(ID, RestName);
+    LFormPriceChange.SetNewPrice(qData['PL_ID'], qData['PL_TREEID']);
     LFormPriceChange.ShowModal;
     BK:=QData.BookMark;
     RefreshQData;
@@ -386,8 +382,6 @@ qData.SQL.Text:='SELECT pl_id, pl_headerid, pl.pl_treeid, pl_price, '+
 ' (select pt_value from prices_tree pt '+
 '  where pt.pt_id = pl.pl_treeid '+
 '  and pt_isclosed =0) pt_value, '+
-'(select max(gs_field) from grid_show gs where upper(gs_header) = ''Œ—“¿“Œ '' and (gs.gs_treeid = pl_treeid '+
-' OR (gs.gs_treeid IN (SELECT pt_id FROM prices_tree WHERE pt_parentid =pl_treeid )))) rest_name, '+
 ' cm.cm_name, cm.cm_id, cm_city,  cm_business, cm_hyperlink,  tl_color, '+
 ' pl_value1, pl_value2, pl_value3, pl_value4, pl_value5, pl_value6, '+
 ' pl_value7, pl_value8, pl_value9, pl_orderby, pl_date_update, pl_isclosed '+
@@ -461,17 +455,13 @@ procedure TFormTree.GridKeyUp(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 var  LFormPriceChange: TFormPriceChange;
   BK:TBookmarkStr;
-  RestName:string;
-  ID:Integer;
 begin
   inherited;
   case Key of
   VK_Insert: if not VarIsNull(QData['PL_ID']) then
     begin
     LFormPriceChange:= TFormPriceChange.Create(Application);
-    if VarIsNull(qData['REST_NAME']) then RestName:='' else RestName:=qData['REST_NAME'];
-    ID:=qData['PL_ID'];
-    LFormPriceChange.SetNewPrice(ID, RestName);
+    LFormPriceChange.SetNewPrice(QData['PL_ID'], QData['PL_TREEID']);
     LFormPriceChange.ShowModal;
     BK:=QData.BookMark;
     RefreshQData;
