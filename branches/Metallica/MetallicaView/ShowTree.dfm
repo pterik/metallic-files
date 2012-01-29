@@ -224,9 +224,8 @@ object FormTree: TFormTree
         object chk1: TCheckBox
           Left = 0
           Top = 4
-          Width = 97
+          Width = 140
           Height = 45
-          Alignment = taLeftJustify
           Caption = 'chk1'
           Checked = True
           State = cbChecked
@@ -237,9 +236,8 @@ object FormTree: TFormTree
         object chk2: TCheckBox
           Left = 140
           Top = 4
-          Width = 97
+          Width = 140
           Height = 45
-          Alignment = taLeftJustify
           Caption = 'chk2'
           Checked = True
           State = cbChecked
@@ -250,9 +248,8 @@ object FormTree: TFormTree
         object chk3: TCheckBox
           Left = 280
           Top = 4
-          Width = 97
+          Width = 140
           Height = 45
-          Alignment = taLeftJustify
           Caption = 'chk3'
           Checked = True
           State = cbChecked
@@ -263,9 +260,8 @@ object FormTree: TFormTree
         object chk4: TCheckBox
           Left = 420
           Top = 4
-          Width = 97
+          Width = 140
           Height = 45
-          Alignment = taLeftJustify
           Caption = 'chk4'
           Checked = True
           State = cbChecked
@@ -276,9 +272,8 @@ object FormTree: TFormTree
         object chk5: TCheckBox
           Left = 560
           Top = 4
-          Width = 97
+          Width = 140
           Height = 45
-          Alignment = taLeftJustify
           Caption = 'chk5'
           Checked = True
           State = cbChecked
@@ -351,6 +346,7 @@ object FormTree: TFormTree
       'ORDER BY ph.ph_date_insert, pl_orderby'
       ''
       ''
+      ' '
       ' '
       ' '
       ' '
@@ -525,7 +521,16 @@ object FormTree: TFormTree
       'AND cm.cm_isclosed = 0'
       'AND ph.ph_isclosed = 0'
       'AND pl.pl_isclosed = 0'
-      'ORDER BY ph.ph_date_insert, pl_orderby')
+      'and upper(cm_name) like '#39'%'#39'||:company||'#39'%'#39
+      
+        'and (upper(cm_city) like upper('#39'%'#39'||:CITY||'#39'%'#39') or (cast(:CITY a' +
+        's varchar(100))  = '#39#39'))'
+      
+        'and (upper(cm_business) like '#39'%'#39'||:business||'#39'%'#39' or (cast(:busin' +
+        'ess as varchar(100)) ='#39#39') )'
+      ''
+      'ORDER BY ph.ph_date_insert, pl_orderby'
+      ' ')
     Params = <
       item
         DataType = ftUnknown
@@ -537,6 +542,21 @@ object FormTree: TFormTree
         Name = 'treeid'
         ParamType = ptUnknown
         Value = '8'
+      end
+      item
+        DataType = ftUnknown
+        Name = 'company'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'CITY'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'business'
+        ParamType = ptUnknown
       end>
     Left = 256
     Top = 192
@@ -551,6 +571,21 @@ object FormTree: TFormTree
         Name = 'treeid'
         ParamType = ptUnknown
         Value = '8'
+      end
+      item
+        DataType = ftUnknown
+        Name = 'company'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'CITY'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'business'
+        ParamType = ptUnknown
       end>
   end
 end

@@ -133,8 +133,10 @@ object FormPriceShow: TFormPriceShow
     Height = 65
     Align = alTop
     TabOrder = 1
-    OnResize = pnlTopResize
-    object Panel2: TPanel
+    DesignSize = (
+      987
+      65)
+    object pnlButtons: TPanel
       Left = 8
       Top = 8
       Width = 257
@@ -194,34 +196,38 @@ object FormPriceShow: TFormPriceShow
         OnClick = ButtonFilterClearClick
       end
     end
-    object Panel1: TPanel
-      Left = 272
-      Top = 8
-      Width = 705
-      Height = 50
+    object pnlFilters: TPanel
+      Left = 273
+      Top = 0
+      Width = 712
+      Height = 63
       Alignment = taLeftJustify
+      Anchors = [akLeft, akTop, akRight]
       TabOrder = 1
+      OnResize = pnlFiltersResize
       object chk1: TCheckBox
-        Left = 0
-        Top = 4
-        Width = 97
+        Left = 1
+        Top = 9
+        Width = 140
         Height = 45
-        Alignment = taLeftJustify
+        BiDiMode = bdRightToLeftNoAlign
         Caption = 'chk1'
         Checked = True
+        ParentBiDiMode = False
         State = cbChecked
         TabOrder = 0
         WordWrap = True
         OnClick = chk1Click
       end
       object chk2: TCheckBox
-        Left = 140
-        Top = 4
-        Width = 97
+        Left = 141
+        Top = 10
+        Width = 140
         Height = 45
-        Alignment = taLeftJustify
+        BiDiMode = bdRightToLeftNoAlign
         Caption = 'chk2'
         Checked = True
+        ParentBiDiMode = False
         State = cbChecked
         TabOrder = 1
         WordWrap = True
@@ -229,38 +235,41 @@ object FormPriceShow: TFormPriceShow
       end
       object chk3: TCheckBox
         Left = 280
-        Top = 4
-        Width = 97
+        Top = 10
+        Width = 140
         Height = 45
-        Alignment = taLeftJustify
+        BiDiMode = bdRightToLeftNoAlign
         Caption = 'chk3'
         Checked = True
+        ParentBiDiMode = False
         State = cbChecked
         TabOrder = 2
         WordWrap = True
         OnClick = chk3Click
       end
       object chk4: TCheckBox
-        Left = 420
-        Top = 4
-        Width = 97
+        Left = 421
+        Top = 10
+        Width = 140
         Height = 45
-        Alignment = taLeftJustify
+        BiDiMode = bdRightToLeftNoAlign
         Caption = 'chk4'
         Checked = True
+        ParentBiDiMode = False
         State = cbChecked
         TabOrder = 3
         WordWrap = True
         OnClick = chk4Click
       end
       object chk5: TCheckBox
-        Left = 560
-        Top = 4
-        Width = 97
+        Left = 561
+        Top = 10
+        Width = 140
         Height = 45
-        Alignment = taLeftJustify
+        BiDiMode = bdRightToLeftNoAlign
         Caption = 'chk5'
         Checked = True
+        ParentBiDiMode = False
         State = cbChecked
         TabOrder = 4
         WordWrap = True
@@ -298,9 +307,13 @@ object FormPriceShow: TFormPriceShow
       'AND pl.pl_isclosed = 0'
       'and upper(cm_name) like '#39'%'#39'||:company||'#39'%'#39
       
+        'and (upper(cm_city) like upper('#39'%'#39'||:CITY||'#39'%'#39') or (cast(:CITY a' +
+        's varchar(100))  = '#39#39'))'
+      
         'and (upper(cm_business) like '#39'%'#39'||:business||'#39'%'#39' or (cast(:busin' +
         'ess as varchar(100)) ='#39#39') )'
       'ORDER BY ph.ph_date_insert, pl_orderby'
+      ' '
       ' '
       ' '
       ' ')
@@ -319,6 +332,11 @@ object FormPriceShow: TFormPriceShow
       item
         DataType = ftUnknown
         Name = 'company'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'CITY'
         ParamType = ptUnknown
       end
       item
@@ -343,6 +361,11 @@ object FormPriceShow: TFormPriceShow
       item
         DataType = ftUnknown
         Name = 'company'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'CITY'
         ParamType = ptUnknown
       end
       item
@@ -477,7 +500,15 @@ object FormPriceShow: TFormPriceShow
       'AND cm.cm_isclosed = 0'
       'AND ph.ph_isclosed = 0'
       'AND pl.pl_isclosed = 0'
-      'ORDER BY ph.ph_date_insert, pl_orderby')
+      'and upper(cm_name) like '#39'%'#39'||:company||'#39'%'#39
+      
+        'and (upper(cm_city) like upper('#39'%'#39'||:CITY||'#39'%'#39') or (cast(:CITY a' +
+        's varchar(100))  = '#39#39'))'
+      
+        'and (upper(cm_business) like '#39'%'#39'||:business||'#39'%'#39' or (cast(:busin' +
+        'ess as varchar(100)) ='#39#39'))'
+      'ORDER BY ph.ph_date_insert, pl_orderby'
+      ' ')
     Params = <
       item
         DataType = ftUnknown
@@ -489,6 +520,21 @@ object FormPriceShow: TFormPriceShow
         Name = 'treeid'
         ParamType = ptUnknown
         Value = '8'
+      end
+      item
+        DataType = ftUnknown
+        Name = 'company'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'CITY'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'business'
+        ParamType = ptUnknown
       end>
     Left = 256
     Top = 192
@@ -503,6 +549,21 @@ object FormPriceShow: TFormPriceShow
         Name = 'treeid'
         ParamType = ptUnknown
         Value = '8'
+      end
+      item
+        DataType = ftUnknown
+        Name = 'company'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'CITY'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'business'
+        ParamType = ptUnknown
       end>
   end
 end

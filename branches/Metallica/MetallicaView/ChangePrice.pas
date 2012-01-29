@@ -29,7 +29,6 @@ type
     intgrfldQPricePL_ID: TIntegerField;
     fltfldQPricePL_PRICE: TFloatField;
     strngfldQPriceREST: TStringField;
-    procedure BitBtnCancelClick(Sender: TObject);
     procedure FormKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure BitBtnSaveClick(Sender: TObject);
@@ -60,11 +59,6 @@ procedure TFormPriceChange.SetPosition(L, T: Integer);
 begin
   Left:= L + ShiftLeft;
   Top:= T + ShiftTop;
-end;
-
-procedure TFormPriceChange.BitBtnCancelClick(Sender: TObject);
-begin
-  FocusControl(EdtPrice);
 end;
 
 procedure TFormPriceChange.FormKeyUp(Sender: TObject; var Key: Word;

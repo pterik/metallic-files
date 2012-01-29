@@ -109,9 +109,10 @@ begin
     QViewUsers.ParamByName('U_ID').AsInteger:= U_ID;
     QViewUsers.Open;
     FormMain.Caption:= 'Просмотр прайсов, сотрудник ' + QViewUsers['U_FIO'];
-  except on E: Exception do begin
-      MessageDlg(DM.GetErrorByCode(1013), mtError, [mbOK], 0);
-    end;
+  except on E: Exception do
+  begin
+    MessageDlg(DM.GetErrorByCode(1013), mtError, [mbOK], 0);
+  end;
   end;
   try
     CityCode:= DM.ReadSettings('CITY_CODE', '44');

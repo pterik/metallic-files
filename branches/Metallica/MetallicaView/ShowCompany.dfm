@@ -1,8 +1,8 @@
 object FormCompaniesShow: TFormCompaniesShow
   Left = 261
   Top = 200
-  Width = 987
-  Height = 507
+  Width = 1263
+  Height = 592
   Caption = #1057#1087#1080#1089#1086#1082' '#1087#1086#1089#1090#1072#1074#1097#1080#1082#1086#1074
   Color = clBtnFace
   Constraints.MinHeight = 500
@@ -17,15 +17,13 @@ object FormCompaniesShow: TFormCompaniesShow
   OldCreateOrder = False
   Position = poDefault
   Visible = True
-  OnCreate = FormCreate
-  OnDestroy = FormDestroy
   PixelsPerInch = 96
   TextHeight = 13
   object pnlRight: TPanel
-    Left = 634
+    Left = 910
     Top = 0
     Width = 337
-    Height = 469
+    Height = 554
     Align = alRight
     TabOrder = 0
     object pnlTop: TPanel
@@ -71,17 +69,17 @@ object FormCompaniesShow: TFormCompaniesShow
       Left = 1
       Top = 49
       Width = 335
-      Height = 419
+      Height = 504
       Align = alClient
       TabOrder = 1
       DesignSize = (
         335
-        419)
+        504)
       object DBGridPhones: TDBGridEh
         Left = 9
         Top = 8
         Width = 320
-        Height = 377
+        Height = 462
         Anchors = [akLeft, akTop, akRight, akBottom]
         AutoFitColWidths = True
         DataSource = DSPhones
@@ -125,7 +123,7 @@ object FormCompaniesShow: TFormCompaniesShow
       end
       object btnShowPrice: TBitBtn
         Left = 14
-        Top = 390
+        Top = 475
         Width = 105
         Height = 25
         Anchors = [akLeft, akBottom]
@@ -147,15 +145,15 @@ object FormCompaniesShow: TFormCompaniesShow
   object pnlLeft: TPanel
     Left = 0
     Top = 0
-    Width = 634
-    Height = 469
+    Width = 910
+    Height = 554
     Align = alClient
     TabOrder = 1
-    object DBGridCompanies: TDBGridEh
+    object Grid: TDBGridEh
       Left = 1
       Top = 73
-      Width = 632
-      Height = 395
+      Width = 908
+      Height = 480
       Align = alClient
       AutoFitColWidths = True
       DataSource = DSCompanies
@@ -173,10 +171,10 @@ object FormCompaniesShow: TFormCompaniesShow
       TitleFont.Name = 'MS Sans Serif'
       TitleFont.Style = []
       TitleLines = 2
-      OnCellClick = DBGridCompaniesCellClick
-      OnDblClick = DBGridCompaniesDblClick
-      OnDrawColumnCell = DBGridCompaniesDrawColumnCell
-      OnTitleClick = DBGridCompaniesTitleClick
+      OnCellClick = GridCellClick
+      OnDblClick = GridDblClick
+      OnDrawColumnCell = GridDrawColumnCell
+      OnTitleClick = GridTitleClick
       Columns = <
         item
           EditButtons = <>
@@ -185,7 +183,14 @@ object FormCompaniesShow: TFormCompaniesShow
           MaxWidth = 400
           MinWidth = 250
           Title.Caption = #1055#1086#1089#1090#1072#1074#1097#1080#1082
-          Width = 296
+          Width = 275
+        end
+        item
+          EditButtons = <>
+          FieldName = 'CM_CITY'
+          Footers = <>
+          Title.Caption = #1043#1086#1088#1086#1076
+          Width = 140
         end
         item
           EditButtons = <>
@@ -199,7 +204,14 @@ object FormCompaniesShow: TFormCompaniesShow
           FieldName = 'TL_NAME'
           Footers = <>
           Title.Caption = #1044#1086#1074#1077#1088#1080#1077
-          Width = 111
+          Width = 98
+        end
+        item
+          EditButtons = <>
+          FieldName = 'CM_BUSINESS'
+          Footers = <>
+          Title.Caption = #1042#1080#1076' '#1076#1077#1103#1090#1077#1083#1100#1085#1086#1089#1090#1080
+          Width = 200
         end
         item
           EditButtons = <>
@@ -212,12 +224,12 @@ object FormCompaniesShow: TFormCompaniesShow
     object pnlLeftTop: TPanel
       Left = 1
       Top = 1
-      Width = 632
+      Width = 908
       Height = 72
       Align = alTop
       TabOrder = 1
       DesignSize = (
-        632
+        908
         72)
       object Panel2: TPanel
         Left = 8
@@ -239,7 +251,7 @@ object FormCompaniesShow: TFormCompaniesShow
           Height = 13
           Caption = #1088#1072#1074#1085#1086
         end
-        object cbxFilterField: TComboBox
+        object cbFields: TComboBox
           Left = 40
           Top = 4
           Width = 105
@@ -247,7 +259,7 @@ object FormCompaniesShow: TFormCompaniesShow
           Style = csDropDownList
           ItemHeight = 13
           TabOrder = 0
-          OnSelect = cbxFilterFieldSelect
+          OnSelect = cbFieldsSelect
         end
         object btnFilterAdd: TBitBtn
           Left = 152
@@ -258,7 +270,7 @@ object FormCompaniesShow: TFormCompaniesShow
           TabOrder = 1
           OnClick = btnFilterAddClick
         end
-        object cbxFilterValue: TComboBox
+        object cbFilter: TComboBox
           Left = 40
           Top = 28
           Width = 105
@@ -279,11 +291,59 @@ object FormCompaniesShow: TFormCompaniesShow
       object pnlDisplayFilter: TPanel
         Left = 256
         Top = 8
-        Width = 369
+        Width = 645
         Height = 57
         Alignment = taLeftJustify
         Anchors = [akLeft, akTop, akRight]
         TabOrder = 1
+        object chk1: TCheckBox
+          Left = 0
+          Top = 4
+          Width = 140
+          Height = 45
+          Caption = 'chk1'
+          Checked = True
+          State = cbChecked
+          TabOrder = 0
+          WordWrap = True
+          OnClick = chk1Click
+        end
+        object chk2: TCheckBox
+          Left = 140
+          Top = 4
+          Width = 140
+          Height = 45
+          Caption = 'chk2'
+          Checked = True
+          State = cbChecked
+          TabOrder = 1
+          WordWrap = True
+          OnClick = chk2Click
+        end
+        object chk3: TCheckBox
+          Left = 280
+          Top = 4
+          Width = 140
+          Height = 45
+          Caption = 'chk3'
+          Checked = True
+          State = cbChecked
+          TabOrder = 2
+          WordWrap = True
+          OnClick = chk3Click
+        end
+        object chk4: TCheckBox
+          Left = 420
+          Top = 4
+          Width = 140
+          Height = 45
+          Caption = 'chk4'
+          Checked = True
+          State = cbChecked
+          TabOrder = 3
+          WordWrap = True
+          OnClick = chk4Click
+        end
       end
     end
   end
@@ -292,19 +352,45 @@ object FormCompaniesShow: TFormCompaniesShow
     AfterScroll = QCompanyAfterScroll
     OnCalcFields = QCompanyCalcFields
     SQL.Strings = (
-      'SELECT cm_id as COMPANYID, cm_name, c.cm_comment, '
+      'SELECT cm_id as COMPANYID, cm_name, cm_comment, cm_isclosed,'
       
-        'c.cm_isclosed, c.CM_HYPERLINK, c.cm_owner, tl.tl_color, tl.tl_na' +
-        'me'
-      'FROM company c'
-      'left join TRUSTLEVEL tl on tl.tl_id = c.cm_trust'
-      'WHERE (CM_ISCLOSED = 0)'
-      'and ((cm_id = :COMPANYID) or (:COMPANYID = -1) )'
-      'order by c.cm_name')
+        ' cm_hyperlink, cm_business, cm_owner, cm_city, tl_color, tl_name' +
+        ' FROM company c'
+      ' left join TRUSTLEVEL tl on tl.tl_id = c.cm_trust'
+      
+        ' WHERE (CM_ISCLOSED = 0) and ((cm_id = :COMPANYID) or (:COMPANYI' +
+        'D=-1))'
+      ' and (upper(cm_name) like '#39'%'#39'||:COMPANY||'#39'%'#39')'
+      
+        ' and (upper(cm_city) like upper('#39'%'#39'||:CITY||'#39'%'#39') or (cast(:CITY ' +
+        'as varchar(100))  = '#39#39')) '
+      
+        ' and (upper(cm_business) like upper('#39'%'#39'||:BUSINESS||'#39'%'#39') or (cas' +
+        't(:BUSINESS as varchar(100))  = '#39#39'))'
+      'order by c.cm_name'
+      ''
+      ' '
+      ' ')
     Params = <
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'COMPANYID'
+        ParamType = ptUnknown
+        Value = '-1'
+      end
+      item
+        DataType = ftUnknown
+        Name = 'COMPANY'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'CITY'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'BUSINESS'
         ParamType = ptUnknown
       end>
     WhereMode = wmWhereAll
@@ -313,8 +399,24 @@ object FormCompaniesShow: TFormCompaniesShow
     Top = 120
     ParamData = <
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'COMPANYID'
+        ParamType = ptUnknown
+        Value = '-1'
+      end
+      item
+        DataType = ftUnknown
+        Name = 'COMPANY'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'CITY'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'BUSINESS'
         ParamType = ptUnknown
       end>
     object QCompanySISCLOSED: TStringField
@@ -337,6 +439,11 @@ object FormCompaniesShow: TFormCompaniesShow
     object QCompanyCM_OWNER: TIntegerField
       FieldName = 'CM_OWNER'
     end
+    object strngfldQCompanyCM_CITY: TStringField
+      FieldName = 'CM_CITY'
+      Required = True
+      Size = 100
+    end
     object QCompanyCM_TRUNC_COMMENT: TStringField
       FieldKind = fkCalculated
       FieldName = 'CM_TRUNC_COMMENT'
@@ -358,6 +465,11 @@ object FormCompaniesShow: TFormCompaniesShow
     object QCompanyCM_HYPERLINK: TStringField
       FieldName = 'CM_HYPERLINK'
       Size = 1000
+    end
+    object strngfldQCompanyCM_BUSINESS: TStringField
+      FieldName = 'CM_BUSINESS'
+      Required = True
+      Size = 100
     end
   end
   object DSCompanies: TDataSource
@@ -434,21 +546,44 @@ object FormCompaniesShow: TFormCompaniesShow
     Left = 624
     Top = 104
   end
-  object qFilter: TZReadOnlyQuery
+  object qCompanyFL: TZReadOnlyQuery
     Connection = FormMain.ZC
     SQL.Strings = (
-      'SELECT DISTINCT  /*FIELD*/'
-      'FROM company left join TRUSTLEVEL tl on tl.tl_id = cm_trust'
+      'select distinct res from ('
+      'SELECT cm_name as res FROM company c'
+      ' left join TRUSTLEVEL tl on tl.tl_id = c.cm_trust'
       
-        'WHERE (CM_ISCLOSED = 0) and ((cm_id = :COMPANYID) or (:COMPANYID' +
-        ' = -1) )'
-      '/*FILTER*/'
-      'order by 1'
-      '')
+        ' WHERE (CM_ISCLOSED = 0) and ((cm_id = :COMPANYID) or (:COMPANYI' +
+        'D=-1))'
+      ' and (upper(cm_name) like '#39'%'#39'||:COMPANY||'#39'%'#39')'
+      
+        ' and (upper(cm_city) like upper('#39'%'#39'||:CITY||'#39'%'#39') or (cast(:CITY ' +
+        'as varchar(100))  = '#39#39')) '
+      
+        ' and (upper(cm_business) like upper('#39'%'#39'||:BUSINESS||'#39'%'#39') or (cas' +
+        't(:BUSINESS as varchar(100))  = '#39#39'))'
+      ')'
+      ''
+      ' ')
     Params = <
       item
         DataType = ftUnknown
         Name = 'COMPANYID'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'COMPANY'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'CITY'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'BUSINESS'
         ParamType = ptUnknown
       end>
     Left = 88
@@ -457,6 +592,21 @@ object FormCompaniesShow: TFormCompaniesShow
       item
         DataType = ftUnknown
         Name = 'COMPANYID'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'COMPANY'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'CITY'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'BUSINESS'
         ParamType = ptUnknown
       end>
   end

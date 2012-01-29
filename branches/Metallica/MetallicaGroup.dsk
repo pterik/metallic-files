@@ -1,23 +1,32 @@
 [Closed Files]
-File_0=SourceModule,'C:\Projects\Metallica\MetallicaView\DataModule.pas',0,1,831,45,850,1,0
-File_1=SourceModule,'C:\Projects\Metallica\MetallicaView\EnterUser.pas',0,1,64,18,83,0,0
-File_2=SourceModule,'C:\Projects\SharedRes\CommonUnit.pas',0,1,700,88,722,0,0
-File_3=SourceModule,'C:\Projects\Metallica\Metallica\ShowCompany.pas',0,1,182,24,186,1,0
-File_4=SourceModule,'C:\Projects\Metallica\MetallicaView\About.pas',0,1,1,5,9,1,0
-File_5=SourceModule,'C:\Projects\Metallica\Metallica\Companies.pas',0,1,1,1,1,1,0
-File_6=SourceModule,'C:\Projects\Metallica\Metallica\DataModule.pas',0,1,113,22,124,1,0
-File_7=SourceModule,'C:\Projects\Metallica\Metallica\ShowPrice.pas',0,1,1,1,1,1,0
+File_0=SourceModule,'C:\Projects\SharedRes\CommonUnit.pas',0,1,700,88,722,0,0
+File_1=SourceModule,'C:\Projects\Metallica\Metallica\ShowCompany.pas',0,1,182,24,186,1,0
+File_2=SourceModule,'C:\Projects\Metallica\MetallicaView\About.pas',0,1,1,5,9,1,0
+File_3=SourceModule,'C:\Projects\Metallica\Metallica\Companies.pas',0,1,1,1,1,1,0
+File_4=SourceModule,'C:\Projects\Metallica\Metallica\DataModule.pas',0,1,113,22,124,1,0
+File_5=SourceModule,'C:\Projects\Metallica\Metallica\ShowPrice.pas',0,1,1,1,1,1,0
 
 [Modules]
-Module0=C:\Projects\Metallica\MetallicaView\MainForm.pas
-Module1=C:\Projects\Metallica\MetallicaView\ChangePrice.pas
-Module2=C:\Projects\Metallica\MetallicaView\ShowTree.pas
-Module3=C:\Projects\Metallica\MetallicaView\ShowPrice.pas
-Module4=C:\Projects\Metallica\MetallicaView\ShowCompany.pas
-Count=5
+Module0=C:\Projects\Metallica\MetallicaView\ShowTree.pas
+Module1=C:\Projects\Metallica\MetallicaView\MainForm.pas
+Module2=C:\Projects\Metallica\MetallicaView\DataModule.pas
+Module3=C:\Projects\Metallica\MetallicaView\ChangePrice.pas
+Module4=C:\Projects\Metallica\MetallicaView\ShowPrice.pas
+Module5=C:\Projects\Metallica\MetallicaView\ShowCompany.pas
+Count=6
 EditWindowCount=1
 
+[C:\Projects\Metallica\MetallicaView\ShowTree.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=1
+
 [C:\Projects\Metallica\MetallicaView\MainForm.pas]
+ModuleType=SourceModule
+FormState=1
+FormOnTop=1
+
+[C:\Projects\Metallica\MetallicaView\DataModule.pas]
 ModuleType=SourceModule
 FormState=1
 FormOnTop=1
@@ -25,26 +34,17 @@ FormOnTop=1
 [C:\Projects\Metallica\MetallicaView\ChangePrice.pas]
 ModuleType=SourceModule
 FormState=1
-FormOnTop=0
-
-[C:\Projects\Metallica\MetallicaView\ShowTree.pas]
-ModuleType=SourceModule
-FormState=1
-FormOnTop=0
+FormOnTop=1
 
 [C:\Projects\Metallica\MetallicaView\ShowPrice.pas]
 ModuleType=SourceModule
 FormState=1
-FormOnTop=0
+FormOnTop=1
 
 [C:\Projects\Metallica\MetallicaView\ShowCompany.pas]
 ModuleType=SourceModule
-FormState=0
-FormOnTop=0
-
-[C:\Projects\Metallica\MetallicaView\MetallicaView.dpr]
-FormState=0
-FormOnTop=0
+FormState=1
+FormOnTop=1
 
 [C:\Projects\Metallica\MetallicaGroup.bpg]
 FormState=0
@@ -58,7 +58,7 @@ FormOnTop=0
 FormState=0
 FormOnTop=0
 
-[C:\Projects\Metallica\Metallica\MainForm.pas]
+[C:\Projects\Metallica\MetallicaView\MetallicaView.dpr]
 FormState=0
 FormOnTop=0
 
@@ -67,13 +67,14 @@ FormState=0
 FormOnTop=0
 
 [EditWindow0]
-ViewCount=5
-CurrentView=0
+ViewCount=6
+CurrentView=4
 View0=0
 View1=1
 View2=2
 View3=3
 View4=4
+View5=5
 CodeExplorer=CodeExplorer@EditWindow0
 MessageView=MessageView@EditWindow0
 Create=1
@@ -91,43 +92,50 @@ LeftPanelSize=310
 LeftPanelClients=CodeExplorer@EditWindow0
 LeftPanelData=000004000000000000000000000000000000000000000000000100000000000000000C000000436F64654578706C6F726572FFFFFFFF
 RightPanelSize=0
-BottomPanelSize=129
+BottomPanelSize=85
 BottomPanelClients=MessageView@EditWindow0
-BottomPanelData=00000400000000000406000000000000028100000000000000010000000000000000000000000100000000D2050000000000000100000000040600000000000001000000000406000000000000010000000004060000000000000100000000040600000B0000004D65737361676556696577FFFFFFFF
+BottomPanelData=00000400000000000406000000000000025500000000000000010000000000000000000000000100000000D2050000000000000100000000040600000000000001000000000406000000000000010000000004060000000000000100000000040600000B0000004D65737361676556696577FFFFFFFF
 
 [View0]
 Module=C:\Projects\Metallica\MetallicaView\MainForm.pas
-CursorX=1
-CursorY=255
-TopLine=236
+CursorX=5
+CursorY=137
+TopLine=102
 LeftCol=1
 
 [View1]
 Module=C:\Projects\Metallica\MetallicaView\ShowTree.pas
-CursorX=29
-CursorY=160
-TopLine=140
+CursorX=51
+CursorY=134
+TopLine=79
 LeftCol=1
 
 [View2]
-Module=C:\Projects\Metallica\MetallicaView\ShowCompany.pas
-CursorX=33
-CursorY=267
-TopLine=242
+Module=C:\Projects\Metallica\MetallicaView\ShowPrice.pas
+CursorX=19
+CursorY=76
+TopLine=57
 LeftCol=1
 
 [View3]
 Module=C:\Projects\Metallica\MetallicaView\ChangePrice.pas
-CursorX=29
-CursorY=131
-TopLine=107
+CursorX=1
+CursorY=67
+TopLine=36
 LeftCol=1
 
 [View4]
-Module=C:\Projects\Metallica\MetallicaView\ShowPrice.pas
-CursorX=1
-CursorY=420
-TopLine=393
+Module=C:\Projects\Metallica\MetallicaView\ShowCompany.pas
+CursorX=27
+CursorY=72
+TopLine=64
+LeftCol=1
+
+[View5]
+Module=C:\Projects\Metallica\MetallicaView\DataModule.pas
+CursorX=51
+CursorY=998
+TopLine=970
 LeftCol=1
 
 [Watches]
@@ -173,7 +181,7 @@ ClientHeight=96
 
 [ProjectManager]
 Create=1
-Visible=0
+Visible=1
 State=0
 Left=369
 Top=372
@@ -239,18 +247,18 @@ Visible=1
 State=0
 Left=3
 Top=137
-Width=186
+Width=208
 Height=887
 MaxLeft=-1
 MaxTop=-1
-ClientWidth=170
+ClientWidth=192
 ClientHeight=853
 TBDockHeight=557
 LRDockWidth=190
 Dockable=1
 SplitPos=85
 ArrangeBy=Name
-SelectedItem=Caption
+SelectedItem=Action
 ExpandedItems=Anchors,Constraints,STFilter,Title,Value
 HiddenCategories=
 
@@ -325,11 +333,11 @@ State=0
 Left=0
 Top=12
 Width=310
-Height=709
+Height=753
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=310
-ClientHeight=709
+ClientHeight=753
 TBDockHeight=305
 LRDockWidth=310
 Dockable=1
@@ -341,12 +349,12 @@ State=0
 Left=12
 Top=0
 Width=1528
-Height=129
+Height=85
 MaxLeft=-1
 MaxTop=-1
 ClientWidth=1528
-ClientHeight=129
-TBDockHeight=129
+ClientHeight=85
+TBDockHeight=85
 LRDockWidth=443
 Dockable=1
 

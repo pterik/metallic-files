@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset,
-  ZDataset, Grids, DBGrids, DBGridEh, MdiChild, ShowTree, ExtCtrls;
+  ZDataset, Grids, DBGrids, DBGridEh, MdiChild, ShowTree, ExtCtrls, CommonUnit;
 
 type
   TFormCompaniesShow = class(TFormMdiChild)
@@ -23,7 +23,7 @@ type
     QPhonesPH_ID: TLargeintField;
     QPhonesPH_STR: TStringField;
     QPhonesWHO_WHERE: TStringField;
-    DBGridCompanies: TDBGridEh;
+    Grid: TDBGridEh;
     DBGridPhones: TDBGridEh;
     QPhonesPH_ISCLOSED: TSmallintField;
     QPhonesSISCLOSED: TStringField;
@@ -44,38 +44,48 @@ type
     Panel2: TPanel;
     Label1: TLabel;
     Label2: TLabel;
-    cbxFilterField: TComboBox;
+    cbFields: TComboBox;
     btnFilterAdd: TBitBtn;
-    cbxFilterValue: TComboBox;
+    cbFilter: TComboBox;
     btnFilterClear: TButton;
     pnlDisplayFilter: TPanel;
-    qFilter: TZReadOnlyQuery;
+    qCompanyFL: TZReadOnlyQuery;
+    strngfldQCompanyCM_BUSINESS: TStringField;
+    chk1: TCheckBox;
+    chk2: TCheckBox;
+    chk3: TCheckBox;
+    chk4: TCheckBox;
+    strngfldQCompanyCM_CITY: TStringField;
     procedure QCompanyCalcFields(DataSet: TDataSet);
     procedure QPhonesCalcFields(DataSet: TDataSet);
     procedure CBActiveClick(Sender: TObject);
     procedure QCompanyAfterScroll(DataSet: TDataSet);
-    procedure DBGridCompaniesTitleClick(Column: TColumnEh);
-    procedure DBGridCompaniesDrawColumnCell(Sender: TObject;
+    procedure GridTitleClick(Column: TColumnEh);
+    procedure GridDrawColumnCell(Sender: TObject;
       const Rect: TRect; DataCol: Integer; Column: TColumnEh;
       State: TGridDrawState);
-    procedure FormCreate(Sender: TObject);
-    procedure FormDestroy(Sender: TObject);
     procedure btnShowPriceClick(Sender: TObject);
     procedure btnFilterAddClick(Sender: TObject);
     procedure btnFilterClearClick(Sender: TObject);
-    procedure cbxFilterFieldSelect(Sender: TObject);
-    procedure DBGridCompaniesDblClick(Sender: TObject);
-    procedure DBGridCompaniesCellClick(Column: TColumnEh);
+    procedure cbFieldsSelect(Sender: TObject);
+    procedure GridDblClick(Sender: TObject);
+    procedure GridCellClick(Column: TColumnEh);
+    procedure chk1Click(Sender: TObject);
+    procedure chk2Click(Sender: TObject);
+    procedure chk3Click(Sender: TObject);
+    procedure chk4Click(Sender: TObject);
   private
     F_CompanyID: Integer;
+    F_CBFieldsName:string;
     F_FieldName:string;
     F_LastSorted: string;
-    FFilter: TStringList;
+    F_CBFieldsTitle:string;
+    Filter:TFilter;
     procedure RefreshPhones;
-    procedure RefreshCompanies;
-    procedure ApplyFilter;
-    procedure RefreshFilterFields;
-    procedure RefreshFilterValues;
+    procedure RefreshQCompany;
+    procedure RefreshQCompanyFL;
+    procedure RefreshCBFields;
+    procedure RefreshCaptions;
   public
     procedure SetCompany(CompanyID: Integer);
   end;
@@ -88,41 +98,39 @@ implementation
 {$R *.dfm}
 
 uses
-  MainForm, DataModule, CommonUnit;
+  MainForm, DataModule;
 
 { TFormCompanies }
 
 procedure TFormCompaniesShow.SetCompany(CompanyID: Integer);
 begin
   F_CompanyID := CompanyID;
-  CBActive.Checked := True;
-  RefreshCompanies;
+  Filter.ClearAll;
+//  if F_CompanyID <>-1 then CBActive.Checked := True else CBActive.Checked:=False;
+  RefreshQCompany;
   RefreshPhones;
-  RefreshFilterFields;
+  RefreshCBFields;
+  CBFilter.Clear;
 end;
 
 procedure TFormCompaniesShow.QCompanyCalcFields(DataSet: TDataSet);
 begin
-  if QCompany['CM_ISCLOSED'] = 1 then
-    QCompany['SISCLOSED'] := 'НЕТ';
-  if QCompany['CM_ISCLOSED'] = 0 then
-    QCompany['SISCLOSED'] := 'ДА';
+  if QCompany['CM_ISCLOSED'] = 1 then QCompany['SISCLOSED'] := 'НЕТ';
+  if QCompany['CM_ISCLOSED'] = 0 then QCompany['SISCLOSED'] := 'ДА';
   QCompany['CM_TRUNC_COMMENT'] := DeleteReturns(QCompany['CM_COMMENT']);
 end;
 
 procedure TFormCompaniesShow.QPhonesCalcFields(DataSet: TDataSet);
 begin
-  if not VarIsNull(QPhones['PH_DATEBEGIN']) then
-    QPhones['WHO_WHERE'] := DateToStr(QPhones['PH_DATEBEGIN']);
-  if not VarIsNull(QPhones['USERNAME']) then
-    QPhones['WHO_WHERE'] := QPhones['WHO_WHERE'] + ' ' + QPhones['USERNAME'];
-  if VarIsNull(QPhones['PH_ID']) then
-    QPhones['PH_STR'] := ''
+  if not VarIsNull(QPhones['PH_DATEBEGIN']) then  QPhones['WHO_WHERE'] := DateToStr(QPhones['PH_DATEBEGIN']);
+  if not VarIsNull(QPhones['USERNAME']) then QPhones['WHO_WHERE'] := QPhones['WHO_WHERE'] + ' ' + QPhones['USERNAME'];
+  if VarIsNull(QPhones['PH_ID'])
+    then QPhones['PH_STR'] := ''
   else
-  begin
+    begin
     QPhones['PH_STR'] := ParsePhoneByNumber(QPhones['PH_ID']);
     //Добавление к телефону скобок и рисочек для удобства чтения
-  end;
+    end;
   if not VarIsNull(QPhones['PH_ISCLOSED']) then
   begin
     if QPhones['PH_ISCLOSED'] = 0 then
@@ -133,37 +141,17 @@ begin
 end;
 
 procedure TFormCompaniesShow.RefreshPhones;
-var
-  CompanyID: Integer;
 begin
-  if VarIsNull(QCompany['COMPANYID']) then
-    CompanyID := -1
-  else
-    CompanyID := QCompany['COMPANYID'];
-  QPhones.Close;
-  QPhones.ParamByName('COMPANYID').AsInteger := CompanyID;
-  QPhones.Open;
-end;
-
-procedure TFormCompaniesShow.RefreshCompanies;
-var
-  B: TBookmark;
-begin
-  B := QCompany.GetBookmark;
-  QCompany.Close;
-  if CBActive.Checked then
-    QCompany.ParamByName('COMPANYID').AsInteger := F_CompanyID
-  else
-    QCompany.ParamByName('COMPANYID').AsInteger := -1;
-  QCompany.Open;
-  if QCompany.BookmarkValid(B) then
-    QCompany.GotoBookmark(B);
-  QCompany.FreeBookmark(B);
+QPhones.Close;
+if VarIsNull(QCompany['COMPANYID'])
+  then QPhones.ParamByName('COMPANYID').AsInteger := -1
+  else QPhones.ParamByName('COMPANYID').AsInteger := QCompany['COMPANYID'];
+QPhones.Open;
 end;
 
 procedure TFormCompaniesShow.CBActiveClick(Sender: TObject);
 begin
-  RefreshCompanies;
+  RefreshQCompany;
   RefreshPhones;
 end;
 
@@ -172,7 +160,7 @@ begin
   RefreshPhones;
 end;
 
-procedure TFormCompaniesShow.DBGridCompaniesTitleClick(Column: TColumnEh);
+procedure TFormCompaniesShow.GridTitleClick(Column: TColumnEh);
 begin
   if F_LastSorted = Column.FieldName then
   begin
@@ -187,12 +175,12 @@ begin
   F_LastSorted := Column.FieldName;
 end;
 
-procedure TFormCompaniesShow.DBGridCompaniesDrawColumnCell(Sender: TObject;
+procedure TFormCompaniesShow.GridDrawColumnCell(Sender: TObject;
   const Rect: TRect; DataCol: Integer; Column: TColumnEh;
   State: TGridDrawState);
 begin
   inherited;
-  if (Column.FieldName = 'TL_NAME') then
+  if (Column.FieldName = 'TL_NAME') and not VarIsNull(qCompany['TL_Color']) then
     TDBGridEh(Sender).Canvas.Brush.Color := qCompany['TL_Color'];
   // Восстанавливаем выделение текущей позиции курсора
   if gdSelected in State then
@@ -204,149 +192,57 @@ begin
   TDBGridEh(Sender).DefaultDrawColumnCell(Rect, DataCol, Column, State);
 end;
 
-procedure TFormCompaniesShow.FormCreate(Sender: TObject);
+procedure TFormCompaniesShow.cbFieldsSelect(Sender: TObject);
+var I: Integer;
 begin
-  FFilter := TStringList.Create;
-end;
-
-procedure TFormCompaniesShow.FormDestroy(Sender: TObject);
-begin
-  FFilter.Free;
-end;
-
-procedure TFormCompaniesShow.RefreshFilterFields;
-var
-  I: Integer;
-begin
-  FFilter.Clear;
-  cbxFilterField.Clear;
-  with DBGridCompanies do
+  F_CBFieldsTitle:= CBFields.Text;
+  for I:= 0 to Grid.Columns.Count - 1 do
   begin
-    for I := 0 to Columns.Count - 1 do
+    if F_CBFieldsTitle = Grid.Columns[I].Title.Caption then
     begin
-      if Columns[I].Field.FieldKind <> fkData then
-        Continue;
-      if Columns[I].FieldName = 'CM_HYPERLINK' then
-        Continue;
-      cbxFilterField.Items.AddObject(Columns[I].Title.Caption, Columns[I]);
+      F_CBFieldsName:= Grid.Columns[I].FieldName;
+      Break;
     end;
   end;
-  cbxFilterField.Text := '';
-end;
-
-procedure TFormCompaniesShow.RefreshFilterValues;
-var
-  Save, FieldName, AFilter: string;
-begin
-  cbxFilterValue.Clear;
-  with qFilter, cbxFilterField do
-  begin
-    if ItemIndex < 0 then
-      Exit;
-
-    FieldName := TDBGridColumnEh(Items.Objects[ItemIndex]).FieldName;
-    Save := SQL.Text;
-    try
-      SQL.Text := StringReplace(SQL.Text, '/*FIELD*/', FieldName, []);
-
-      AFilter := QCompany.Filter;
-      if AFilter <> '' then
-        AFilter := 'AND ' + AFilter;
-      SQL.Text := StringReplace(SQL.Text, '/*FILTER*/', AFilter, []);
-
-      Params.Assign(QCompany.Params);
-      Open;
-      try
-        First;
-        while not Eof do
-        begin
-          if not VarIsNull(FieldValues[FieldName]) then
-            cbxFilterValue.AddItem(FieldValues[FieldName], nil);
-          Next;
-        end;
-      finally
-        Close;
-      end;
-    finally
-      SQL.Text := Save;
-    end;
-  end;
-end;
-
-procedure TFormCompaniesShow.cbxFilterFieldSelect(Sender: TObject);
-begin
-  RefreshFilterValues;
+  RefreshQCompanyFL;
 end;
 
 procedure TFormCompaniesShow.btnFilterAddClick(Sender: TObject);
 begin
-  if (cbxFilterField.ItemIndex >= 0) and (cbxFilterValue.Text <> '') then
-    with cbxFilterField do
-    begin
-      FFilter.AddObject(cbxFilterValue.Text, Items.Objects[ItemIndex]);
-      Items.Delete(ItemIndex);
-      Refresh;
-      ApplyFilter;
-      RefreshFilterValues;
-    end;
+if Filter.Counter>4 then
+  begin
+  MessageDlg('Количество фильтров ограничено четырьмя',mtWarning, [mbOK],0);
+  Exit;
+  end;
+  if (CBFilter.Text <> '') and (F_CBFieldsName <> '') then
+  begin
+  if CBFields.Text='Поставщик' then
+      begin
+      Filter.CompanyLike:=AnsiUpperCase(CBFilter.Text);
+      Filter.AddFilter(F_CBFieldsName, CBFields.Text,CBFilter.Text);
+      end
+  else
+  if CBFields.Text='Вид деятельности' then
+      begin
+      Filter.Business:=AnsiUpperCase(CBFilter.Text);
+      Filter.AddFilter(F_CBFieldsName, CBFields.Text,CBFilter.Text);
+      end
+  else
+      begin
+      Filter.AddFilter(F_CBFieldsName, CBFields.Text,CBFilter.Text);
+      end;
+  RefreshQCompany;
+  RefreshCBFields;
+  CBFilter.Clear;
+  end;
 end;
 
 procedure TFormCompaniesShow.btnFilterClearClick(Sender: TObject);
-
-  procedure OrderedInsertField(Column: TDBGridColumnEh);
-  var
-    LIndex: Integer;
-  begin
-    LIndex := 0;
-    with cbxFilterField.Items do
-    begin
-      while LIndex < Count - 1 do
-      begin
-        if Column.Index < TDBGridColumnEh(Objects[LIndex]).Index then
-          Break;
-        Inc(LIndex);
-      end;
-      InsertObject(LIndex, Column.Title.Caption, Column);
-    end;
-  end;
-
-var
-  I: Integer;
 begin
-  if FFilter.Count > 0 then
-  begin
-    for I := 0 to FFilter.Count - 1 do
-      OrderedInsertField(TDBGridColumnEh(FFilter.Objects[I]));
-    FFilter.Clear;
-    ApplyFilter;
-    RefreshFilterValues;
-  end;
-end;
-
-procedure TFormCompaniesShow.ApplyFilter;
-var
-  I: Integer;
-  Filter, Display: string;
-begin
-  Filter := '';
-  Display := '';
-  with FFilter do
-    for I := 0 to Count - 1 do
-    begin
-      if I > 0 then
-      begin
-        Filter := Filter + ' AND ';
-        Display := Display + ', ';
-      end;
-      with TDBGridColumnEh(Objects[I]) do
-      begin
-        Filter := Filter + ' (' + FieldName + '=''' + Strings[I] + ''')';
-        Display := Display + Title.Caption + '=' + Strings[I];
-      end;
-    end;
-  pnlDisplayFilter.Caption := Display;
-  QCompany.Filter := Filter;
-  QCompany.Filtered := True;
+  Filter.ClearAll;
+  RefreshQCompany;
+  RefreshCBFields;
+  CBFilter.Clear;
 end;
 
 procedure TFormCompaniesShow.btnShowPriceClick(Sender: TObject);
@@ -365,14 +261,9 @@ begin
   end;
 end;
 
-procedure TFormCompaniesShow.DBGridCompaniesDblClick(Sender: TObject);
+procedure TFormCompaniesShow.GridDblClick(Sender: TObject);
 var link:string;
 begin
-if VarIsNull(QCompany['COMPANYID']) then
-  begin
-    MessageDlg('Укажите компанию', mtWarning, [mbOK], 0);
-    Exit;
-  end;
 if (F_FieldName = 'CM_HYPERLINK') and not VarIsNull(QCompany['CM_HYPERLINK']) then
   begin
     link:= QCompany.Fields.FieldByName('CM_HYPERLINK').AsString;
@@ -381,11 +272,135 @@ if (F_FieldName = 'CM_HYPERLINK') and not VarIsNull(QCompany['CM_HYPERLINK']) th
   end;
 end;
 
-procedure TFormCompaniesShow.DBGridCompaniesCellClick(Column: TColumnEh);
+procedure TFormCompaniesShow.GridCellClick(Column: TColumnEh);
 begin
   inherited;
 F_FieldName:=Column.FieldName;
 end;
+
+procedure TFormCompaniesShow.RefreshCBFields;
+var  I: Integer;
+begin
+CBFields.Clear;
+CBFields.Text:= Grid.Columns[0].Title.Caption;
+for I:= 0 to Grid.Columns.Count - 1 do
+  begin
+  if Grid.Columns[I].Title.Caption = 'Адрес'
+    then Continue;
+  CBFields.Items.Add(Grid.Columns[I].Title.Caption);
+  end;
+CBFields.Text:= '';
+CBFilter.Clear;
+
+end;
+
+procedure TFormCompaniesShow.RefreshQCompany;
+var B: TBookmark;
+begin
+RefreshCaptions;
+B := QCompany.GetBookmark;
+qCompany.Close;
+qCompany.SQL.Text:='SELECT cm_id as COMPANYID, cm_name, cm_comment, cm_isclosed, '+
+' cm_hyperlink, cm_business, cm_owner, cm_city, tl_color, tl_name FROM company c '+
+' left join TRUSTLEVEL tl on tl.tl_id = c.cm_trust ' +
+' WHERE (CM_ISCLOSED = 0) and ((cm_id = :COMPANYID) or (:COMPANYID=-1)) '+
+' and upper(cm_name) like ''%''||:company||''%'' '+
+' and (upper(cm_city) like upper(''%''||:CITY||''%'') or (cast(:CITY as varchar(100))  = '''')) '+
+' and (upper(cm_business) like upper(''%''||:BUSINESS||''%'') or (cast(:BUSINESS as varchar(100))  = '''')) ';
+qCompany.SQL.Add(Filter.Query);
+if CBActive.Checked
+  then  qCompany.ParamByName('COMPANYID').Value:= F_CompanyID
+  else  qCompany.ParamByName('COMPANYID').Value:= -1;
+qCompany.ParamByName('CITY').AsString:= AnsiUpperCase(Filter.City);
+qCompany.ParamByName('COMPANY').AsString:= AnsiUpperCase(Filter.CompanyLike);
+qCompany.ParamByName('BUSINESS').AsString:= AnsiUppercase(Filter.Business);
+qCompany.Open;
+if QCompany.BookmarkValid(B) then  QCompany.GotoBookmark(B);
+QCompany.FreeBookmark(B);
+end;
+
+procedure TFormCompaniesShow.RefreshQCompanyFL;
+var FieldsName:string;
+begin
+if F_CBFieldsName='' then FieldsName:= '1' else FieldsName:=F_CBFieldsName;
+qCompanyFl.Close;
+qCompanyFL.SQL.Text:='select distinct ' + FieldsName + ' as res from (' +
+'SELECT cm_id as COMPANYID, cm_name, cm_comment, cm_isclosed, '+
+' cm_hyperlink, cm_business, cm_city, tl_color, tl_name FROM company c '+
+' left join TRUSTLEVEL tl on tl.tl_id = c.cm_trust ' +
+' WHERE (CM_ISCLOSED = 0) and ((cm_id = :COMPANYID) or (:COMPANYID=-1)) '+
+' and upper(cm_name) like ''%''||:company||''%'' '+
+' and (upper(cm_city) like upper(''%''||:CITY||''%'') or (cast(:CITY as varchar(100))  = '''')) '+
+' and (upper(cm_business) like upper(''%''||:BUSINESS||''%'') or (cast(:BUSINESS as varchar(100))  = '''')) ';
+qCompanyFL.SQL.Add(Filter.Query);
+qCompanyFL.SQL.Add(')');
+if CBActive.Checked then  qCompanyFL.ParamByName('COMPANYID').Value:= F_CompanyID
+else  qCompanyFL.ParamByName('COMPANYID').Value:= -1;
+qCompanyFL.ParamByName('CITY').AsString:= AnsiUpperCase(Filter.City);
+qCompanyFL.ParamByName('COMPANY').AsString:= AnsiUpperCase(Filter.CompanyLike);
+qCompanyFL.ParamByName('BUSINESS').AsString:= AnsiUppercase(Filter.Business);
+qCompanyFL.Open;
+qCompanyFL.First;
+CBFilter.Clear;
+  while not QCompanyFL.EOF do
+  begin
+    if not VarIsNull(qCompanyFL['RES']) then
+    begin
+      CBFilter.Items.Add(qCompanyFL['RES']);
+    end;
+    qCompanyFL.Next;
+  end;
+
+end;
+
+procedure TFormCompaniesShow.chk1Click(Sender: TObject);
+begin
+  inherited;
+  Filter.RemoveFilter(1);
+  RefreshQCompany;
+  RefreshCBFields;
+  CBFilter.Clear;
+end;
+
+procedure TFormCompaniesShow.chk2Click(Sender: TObject);
+begin
+  inherited;
+  Filter.RemoveFilter(2);
+  RefreshQCompany;
+  RefreshCBFields;
+  CBFilter.Clear;
+end;
+
+procedure TFormCompaniesShow.chk3Click(Sender: TObject);
+begin
+  inherited;
+  Filter.RemoveFilter(3);
+  RefreshQCompany;
+  RefreshCBFields;
+  CBFilter.Clear;
+end;
+
+procedure TFormCompaniesShow.chk4Click(Sender: TObject);
+begin
+  inherited;
+  Filter.RemoveFilter(4);
+  RefreshQCompany;
+  RefreshCBFields;
+  CBFilter.Clear;
+end;
+
+procedure TFormCompaniesShow.RefreshCaptions;
+begin
+Chk1.Caption:=Filter.Caption(1);
+Chk1.Visible:=(Chk1.Caption<>'');
+Chk2.Caption:=Filter.Caption(2);
+Chk2.Visible:=(Chk2.Caption<>'');
+Chk3.Caption:=Filter.Caption(3);
+Chk3.Visible:=(Chk3.Caption<>'');
+Chk4.Caption:=Filter.Caption(4);
+Chk4.Visible:=(Chk4.Caption<>'');
+end;
+
 
 end.
 

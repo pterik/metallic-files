@@ -16,8 +16,8 @@ object FormAbout: TFormAbout
   Font.Style = []
   OldCreateOrder = False
   DesignSize = (
-    392
-    213)
+    384
+    202)
   PixelsPerInch = 96
   TextHeight = 13
   object Memo1: TMemo
@@ -33,7 +33,7 @@ object FormAbout: TFormAbout
     Font.Name = 'Tahoma'
     Font.Style = []
     Lines.Strings = (
-      #1055#1088#1086#1075#1088#1072#1084#1084#1072' Calendar Version 2.10')
+      #1055#1088#1086#1075#1088#1072#1084#1084#1072' Metallica Version 2.10')
     ParentFont = False
     ReadOnly = True
     ScrollBars = ssVertical
