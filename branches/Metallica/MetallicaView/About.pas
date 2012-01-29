@@ -33,7 +33,7 @@ end;
 procedure TFormAbout.SetAbout;
 var Stext:string;
 begin
-Stext:='Программа MetallicaView Version 2.1'+chr(13)+chr(10);
+Stext:='Программа MetallicaView Version 2.2'+chr(13)+chr(10);
 Stext:=Stext+'Есть вопросы по программе?'+chr(13)+chr(10);
 Stext:=Stext+'Звоните по тел. +38(044)383-67-22'+chr(13)+chr(10);
 Stext:=Stext+'Электронная почта vitaly.makhaev@gmail.com'+chr(13)+chr(10);
