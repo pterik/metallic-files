@@ -145,6 +145,7 @@ if (F_FieldName1 = 'CM_NAME') then
     LCompanyShow:= TFormCompaniesShow.Create(Application);
     LCompanyShow.SetCompany(qData['CM_ID']);
     LCompanyShow.Caption:= 'Компания ' + qData['CM_NAME'];
+    LCompanyShow.Show;
     Exit;
     end;
 if (F_FieldName1 = 'CM_HYPERLINK') and not VarIsNull(QData['CM_HYPERLINK']) then
@@ -241,9 +242,6 @@ CBFields.Text:= '';
 CBFilter.Clear;
 end;
 
-
-
-
 procedure TFormTree.RefreshQDataFL;
 var FieldsName:string;
 begin
@@ -264,10 +262,12 @@ qDataFl.SQL.Text:= 'select distinct ' +
   ' AND ph.ph_id = pl.pl_headerid AND cm.cm_id = ph.ph_companyid ' +
   ' AND cm.cm_isclosed = 0 AND ph.ph_isclosed = 0 AND pl.pl_isclosed = 0 '+
   ' and upper(cm_name) like ''%''||:company||''%'' '+
+  ' and (upper(cm_city) like upper(''%''||:CITY||''%'') or (cast(:CITY as varchar(100))  = '''')) '+
   ' and (upper(cm_business) like ''%''||:business||''%'' or (cast(:business as varchar(100)) ='''') ) ';
 qDataFl.SQL.Add(Filter.Query);
 qDataFl.SQL.Add(')');
 qDataFL.ParamByName('Company').AsString:= AnsiUpperCase(Filter.CompanyLike);
+qDataFL.ParamByName('City').AsString:= AnsiUpperCase(Filter.City);
 qDataFL.ParamByName('Business').AsString:= AnsiUppercase(Filter.Business);
 qDataFL.ParamByName('TREEID').AsInteger:= MyNode.Id;
 if MyNode.ParentID = 0 then  qDataFL.ParamByName('NODE').Value:= MyNode.Value
@@ -394,9 +394,11 @@ qData.SQL.Text:='SELECT pl_id, pl_headerid, pl.pl_treeid, pl_price, '+
 ' AND ph.ph_id = pl.pl_headerid AND cm.cm_id = ph.ph_companyid '+
 ' AND cm.cm_isclosed = 0 AND ph.ph_isclosed = 0 AND pl.pl_isclosed = 0 '+
 ' AND upper(cm_name) like ''%''||:company||''%'' '+
+' and (upper(cm_city) like upper(''%''||:CITY||''%'') or (cast(:CITY as varchar(100))  = '''')) '+
 ' AND (upper(cm_business) like ''%''||:business||''%'' or (cast(:business as varchar(100)) ='''') )';
 qData.SQL.Add(Filter.Query);
 qData.ParamByName('Company').AsString:= AnsiUpperCase(Filter.CompanyLike);
+qData.ParamByName('City').AsString:= AnsiUpperCase(Filter.City);
 qData.ParamByName('Business').AsString:= AnsiUppercase(Filter.Business);
 qData.ParamByName('TREEID').AsInteger:= MyNode.Id;
 if MyNode.ParentID = 0 then  qData.ParamByName('NODE').Value:= MyNode.Value

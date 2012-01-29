@@ -34,8 +34,8 @@ type
     qDataPT_VALUE: TStringField;
     qDataFl: TZReadOnlyQuery;
     qDataCM_CITY: TStringField;
-    Panel1: TPanel;
-    Panel2: TPanel;
+    pnlFilters: TPanel;
+    pnlButtons: TPanel;
     Label1: TLabel;
     CBFields: TComboBox;
     BitBtnInsert: TBitBtn;
@@ -61,7 +61,6 @@ type
     procedure GridTitleClick(Column: TColumnEh);
     procedure GridDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
-    procedure pnlTopResize(Sender: TObject);
     procedure GridDblClick(Sender: TObject);
     procedure GridCellClick(Column: TColumnEh);
     procedure chk5Click(Sender: TObject);
@@ -71,6 +70,7 @@ type
     procedure chk1Click(Sender: TObject);
     procedure GridKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure pnlFiltersResize(Sender: TObject);
   private
     MyNode: TNodeValue;
     F_CBFieldsName, F_CBFieldsTitle:string;
@@ -138,9 +138,11 @@ qData.SQL.Text:='SELECT pl_id, pl_headerid, pl.pl_treeid, pl_price, '+
 ' AND ph.ph_id = pl.pl_headerid AND cm.cm_id = ph.ph_companyid '+
 ' AND cm.cm_isclosed = 0 AND ph.ph_isclosed = 0 AND pl.pl_isclosed = 0 '+
 ' AND upper(cm_name) like ''%''||:company||''%'' '+
+' and (upper(cm_city) like upper(''%''||:CITY||''%'') or (cast(:CITY as varchar(100))  = '''')) '+
 ' AND (upper(cm_business) like ''%''||:business||''%'' or (cast(:business as varchar(100)) ='''') )';
 qData.SQL.Add(Filter.Query);
 qData.ParamByName('Company').AsString:= AnsiUpperCase(Filter.CompanyLike);
+qData.ParamByName('City').AsString:= AnsiUpperCase(Filter.City);
 qData.ParamByName('Business').AsString:= AnsiUppercase(Filter.Business);
 qData.ParamByName('TREEID').AsInteger:= MyNode.Id;
 if MyNode.ParentID = 0 then  qData.ParamByName('NODE').Value:= MyNode.Value
@@ -178,10 +180,12 @@ qDataFl.SQL.Text:= 'select distinct ' +
   ' AND ph.ph_id = pl.pl_headerid AND cm.cm_id = ph.ph_companyid ' +
   ' AND cm.cm_isclosed = 0 AND ph.ph_isclosed = 0 AND pl.pl_isclosed = 0 '+
   ' and upper(cm_name) like ''%''||:company||''%'' '+
+  ' and (upper(cm_city) like upper(''%''||:CITY||''%'') or (cast(:CITY as varchar(100))  = '''')) '+
   ' and (upper(cm_business) like ''%''||:business||''%'' or (cast(:business as varchar(100)) ='''') ) ';
 qDataFl.SQL.Add(Filter.Query);
 qDataFl.SQL.Add(')');
 qDataFL.ParamByName('Company').AsString:= AnsiUpperCase(Filter.CompanyLike);
+qDataFL.ParamByName('City').AsString:= AnsiUpperCase(Filter.City);
 qDataFL.ParamByName('Business').AsString:= AnsiUppercase(Filter.Business);
 qDataFL.ParamByName('TREEID').AsInteger:= MyNode.Id;
 if MyNode.ParentID = 0 then  qDataFL.ParamByName('NODE').Value:= MyNode.Value
@@ -306,14 +310,6 @@ begin
   TDBGridEh(Sender).DefaultDrawColumnCell(Rect, DataCol, Column, State);
 end;
 
-procedure TFormPriceShow.pnlTopResize(Sender: TObject);
-var
-  Spacing: Integer;
-begin
-  Spacing:= Panel2.Left;
-  Panel1.Width:= pnlTop.Width - Panel1.Left - Spacing;
-end;
-
 procedure TFormPriceShow.GridDblClick(Sender: TObject);
 var
   LCompanyShow: TFormCompaniesShow;
@@ -430,6 +426,23 @@ begin
     qData.Bookmark:=BK;
     end;
   end;
+end;
+
+procedure TFormPriceShow.pnlFiltersResize(Sender: TObject);
+var Chk_Width:Integer;
+begin
+  inherited;
+  Chk_Width:=(pnlFilters.Width-10) div 5;
+  chk1.Width:= Chk_Width -2 ;
+  chk2.Width:= Chk_Width -2 ;
+  chk3.Width:= Chk_Width -2 ;
+  chk4.Width:= Chk_Width -2 ;
+  chk5.Width:= Chk_Width -2 ;
+  chk1.Left:=2+Chk_Width*0;
+  chk2.Left:=2+Chk_width*1;
+  chk3.Left:=2+Chk_width*2;
+  chk4.Left:=2+Chk_width*3;
+  chk5.Left:=2+Chk_width*4;
 end;
 
 end.
