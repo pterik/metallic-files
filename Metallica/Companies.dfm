@@ -20,6 +20,45 @@ object FormCompanies: TFormCompanies
     459)
   PixelsPerInch = 96
   TextHeight = 13
+  object lbl1: TLabel
+    Left = 8
+    Top = 6
+    Width = 80
+    Height = 16
+    Caption = #1055#1086#1089#1090#1072#1074#1097#1080#1082#1080
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlack
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+  end
+  object lbl2: TLabel
+    Left = 248
+    Top = 6
+    Width = 119
+    Height = 16
+    Caption = #1042#1080#1076' '#1076#1077#1103#1090#1077#1083#1100#1085#1086#1089#1090#1080
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlack
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+  end
+  object lbl3: TLabel
+    Left = 488
+    Top = 6
+    Width = 39
+    Height = 16
+    Caption = #1043#1086#1088#1086#1076
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlack
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+  end
   object CBActive: TCheckBox
     Left = 703
     Top = 8
@@ -232,9 +271,9 @@ object FormCompanies: TFormCompanies
   end
   object DBGridCompanies: TDBGridEh
     Left = 8
-    Top = 8
+    Top = 40
     Width = 685
-    Height = 411
+    Height = 379
     Anchors = [akLeft, akTop, akRight, akBottom]
     DataSource = DSCompanies
     FooterColor = clWindow
@@ -503,6 +542,48 @@ object FormCompanies: TFormCompanies
       0002311101034444400230101103004000023001110300400002311111034444
       2222300000030000042033333333000042000001000000002000}
   end
+  object edtCompany: TEdit
+    Left = 88
+    Top = 4
+    Width = 153
+    Height = 24
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlack
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 10
+    OnExit = edtCompanyExit
+  end
+  object edtBusiness: TEdit
+    Left = 368
+    Top = 4
+    Width = 113
+    Height = 24
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlack
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 11
+    OnExit = edtBusinessExit
+  end
+  object edtCity: TEdit
+    Left = 536
+    Top = 4
+    Width = 137
+    Height = 24
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlack
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 12
+    OnExit = edtCityExit
+  end
   object QCompanies: TZQuery
     Connection = FormMain.ZC
     AfterScroll = QCompaniesAfterScroll
@@ -515,7 +596,19 @@ object FormCompanies: TFormCompanies
       'left join TRUSTLEVEL tl on tl.tl_id = c.cm_trust'
       'WHERE ((cm_id = :COMPANYID) or (:COMPANYID = -1) )'
       'and cm_isclosed = :ISCLOSED'
-      'order by c.cm_name')
+      
+        'and ((upper(cm_name COLLATE WIN1251) like '#39'%'#39'||upper(:company)||' +
+        #39'%'#39') or (cast(:company as varchar(100)) ='#39#39') )'
+      
+        'and (upper(cm_city) like upper('#39'%'#39'||:CITY||'#39'%'#39') or (cast(:CITY a' +
+        's varchar(100))  = '#39#39'))'
+      
+        'and ((UPPER(cm_business COLLATE WIN1251) like '#39'%'#39'||upper(:busine' +
+        'ss)||'#39'%'#39' ) or (cast(:business as varchar(100)) ='#39#39') )'
+      'order by c.cm_name'
+      ' '
+      ' '
+      ' ')
     Params = <
       item
         DataType = ftUnknown
@@ -525,6 +618,21 @@ object FormCompanies: TFormCompanies
       item
         DataType = ftUnknown
         Name = 'ISCLOSED'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'company'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'CITY'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'business'
         ParamType = ptUnknown
       end>
     WhereMode = wmWhereAll
@@ -540,6 +648,21 @@ object FormCompanies: TFormCompanies
       item
         DataType = ftUnknown
         Name = 'ISCLOSED'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'company'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'CITY'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'business'
         ParamType = ptUnknown
       end>
     object QCompaniesSISCLOSED: TStringField
@@ -669,40 +792,5 @@ object FormCompanies: TFormCompanies
     DataSet = QPhones
     Left = 624
     Top = 104
-  end
-  object qFilter: TZReadOnlyQuery
-    Connection = FormMain.ZC
-    OnCalcFields = QCompaniesCalcFields
-    SQL.Strings = (
-      'SELECT DISTINCT  CM_NAME'
-      'FROM company left join TRUSTLEVEL tl on tl.tl_id = cm_trust'
-      'WHERE ((cm_id = :COMPANYID) or (:COMPANYID = -1) )'
-      'and cm_isclosed = :ISCLOSED '
-      'order by 1'
-      '')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'COMPANYID'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'ISCLOSED'
-        ParamType = ptUnknown
-      end>
-    Left = 88
-    Top = 216
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'COMPANYID'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'ISCLOSED'
-        ParamType = ptUnknown
-      end>
   end
 end

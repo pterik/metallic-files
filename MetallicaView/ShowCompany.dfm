@@ -118,7 +118,7 @@ object FormCompaniesShow: TFormCompaniesShow
             EditButtons = <>
             FieldName = 'SISCLOSED'
             Footers = <>
-            Title.Caption = #1040#1082#1090#1091#1072#1083#1077#1085'?'
+            Title.Caption = #1059#1076#1072#1083#1077#1085'?'
           end>
       end
       object btnShowPrice: TBitBtn
@@ -363,12 +363,13 @@ object FormCompaniesShow: TFormCompaniesShow
       ' and (upper(cm_name) like '#39'%'#39'||:COMPANY||'#39'%'#39')'
       
         ' and (upper(cm_city) like upper('#39'%'#39'||:CITY||'#39'%'#39') or (cast(:CITY ' +
-        'as varchar(100))  = '#39#39')) '
+        'as varchar(100))  = '#39#39'))'
       
         ' and (upper(cm_business) like upper('#39'%'#39'||:BUSINESS||'#39'%'#39') or (cas' +
         't(:BUSINESS as varchar(100))  = '#39#39'))'
       'order by c.cm_name'
       ''
+      ' '
       ' '
       ' ')
     Params = <

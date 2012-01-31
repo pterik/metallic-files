@@ -38,6 +38,12 @@ type
     QCompanyTL_NAME: TStringField;
     QCompanyCM_HYPERLINK: TStringField;
     btnShowPrice: TBitBtn;
+    lbl1: TLabel;
+    edtCompany: TEdit;
+    lbl2: TLabel;
+    edtBusiness: TEdit;
+    lbl3: TLabel;
+    edtCity: TEdit;
     procedure QCompanyCalcFields(DataSet: TDataSet);
     procedure QPhonesCalcFields(DataSet: TDataSet);
     procedure CBActiveClick(Sender: TObject);
@@ -47,6 +53,9 @@ type
       const Rect: TRect; DataCol: Integer; Column: TColumnEh;
       State: TGridDrawState);
     procedure btnShowPriceClick(Sender: TObject);
+    procedure edtCompanyExit(Sender: TObject);
+    procedure edtBusinessExit(Sender: TObject);
+    procedure edtCityExit(Sender: TObject);
   private
     F_CompanyID: Integer;
     procedure RefreshPhones;
@@ -78,6 +87,9 @@ procedure TFormCompaniesShow.SetCompany(CompanyID: Integer);
 begin
   F_CompanyID:= CompanyID;
   CBActive.Checked:= True;
+  edtCompany.Clear;
+  edtBusiness.Clear;
+  edtCity.Clear;
   RefreshCompanies;
   RefreshPhones;
   { TODO :
@@ -136,10 +148,18 @@ var
 begin
   B:= QCompany.GetBookmark;
   QCompany.Close;
-  if CBActive.Checked then
-    QCompany.ParamByName('COMPANYID').AsInteger:= F_CompanyID
-  else
-    QCompany.ParamByName('COMPANYID').AsInteger:= -1;
+  if CBActive.Checked
+  then QCompany.ParamByName('COMPANYID').AsInteger:= F_CompanyID
+  else QCompany.ParamByName('COMPANYID').AsInteger:= -1;
+  if Trim(edtCity.Text) = ''
+  then qCompany.ParamByName('City').Value := ''
+  else qCompany.ParamByName('City').AsString := AnsiUppercase(Trim(edtCity.Text));
+  if Trim(edtCompany.Text) = ''
+  then qCompany.ParamByName('Company').Value := ''
+  else qCompany.ParamByName('Company').AsString := AnsiUppercase(Trim(edtCompany.Text));
+  if Trim(edtBusiness.Text)=''
+  then qCompany.ParamByName('Business').Value:=''
+  else qCompany.ParamByName('Business').AsString := AnsiUpperCase(Trim(edtBusiness.Text));
   QCompany.Open;
   if QCompany.BookmarkValid(B) then
     QCompany.GotoBookmark(B);
@@ -193,6 +213,24 @@ begin
     link:= QCompany.Fields.FieldByName('CM_HYPERLINK').AsString;
     ShellOpen(Application.Handle, link);
   end;
+end;
+
+procedure TFormCompaniesShow.edtCompanyExit(Sender: TObject);
+begin
+  RefreshCompanies;
+  RefreshPhones;
+end;
+
+procedure TFormCompaniesShow.edtBusinessExit(Sender: TObject);
+begin
+  RefreshCompanies;
+  RefreshPhones;
+end;
+
+procedure TFormCompaniesShow.edtCityExit(Sender: TObject);
+begin
+  RefreshCompanies;
+  RefreshPhones;
 end;
 
 end.
