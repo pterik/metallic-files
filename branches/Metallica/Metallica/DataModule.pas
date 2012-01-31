@@ -268,7 +268,7 @@ begin
     QICompany.ParamByName('CM_COMMENT').AsString:= SComment;
     QICompany.ParamByName('CM_ISCLOSED').AsInteger:= 0;
     QICompany.ParamByName('CM_HYPERLINK').AsString:= PriceLink;
-    QICompany.ParamByName('CM_Business').AsString:= Business;
+    QICompany.ParamByName('CM_BUSINESS').AsString:= Business;
     QICompany.ExecSQL;
   except
     on E: Exception do begin

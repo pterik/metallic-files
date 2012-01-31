@@ -412,6 +412,7 @@ object FormMain: TFormMain
   end
   object ZC: TZConnection
     Protocol = 'firebird-2.1'
+    Database = 'C:\Projects\Metallica\Database\DATABASE.FDB'
     User = 'SYSDBA'
     Password = 'masterkey'
     TransactIsolationLevel = tiReadCommitted
@@ -519,7 +520,8 @@ object FormMain: TFormMain
       
         'and ((UPPER(cm_business COLLATE WIN1251) like '#39'%'#39'||upper(:busine' +
         'ss)||'#39'%'#39' ) or (cast(:business as varchar(100)) ='#39#39') )'
-      'ORDER BY ph.ph_date_insert, pl_orderby ')
+      'ORDER BY ph.ph_date_insert, pl_orderby '
+      ' ')
     Params = <
       item
         DataType = ftString

@@ -43,9 +43,14 @@ type
     QCompaniesTL_LEVEL: TIntegerField;
     QCompaniesTL_COLOR: TIntegerField;
     QCompaniesTL_NAME: TStringField;
-    qFilter: TZReadOnlyQuery;
     btnShowPrice: TBitBtn;
     strngfldQCompaniesCM_BUSINESS: TStringField;
+    lbl1: TLabel;
+    edtCompany: TEdit;
+    lbl2: TLabel;
+    edtBusiness: TEdit;
+    lbl3: TLabel;
+    edtCity: TEdit;
     procedure QCompaniesCalcFields(DataSet: TDataSet);
     procedure QPhonesCalcFields(DataSet: TDataSet);
     procedure BitBtnInsertClick(Sender: TObject);
@@ -64,6 +69,9 @@ type
       const Rect: TRect; DataCol: Integer; Column: TColumnEh;
       State: TGridDrawState);
     procedure btnShowPriceClick(Sender: TObject);
+    procedure edtCompanyExit(Sender: TObject);
+    procedure edtBusinessExit(Sender: TObject);
+    procedure edtCityExit(Sender: TObject);
   private
     F_LastSorted: string;
     F_FieldName:string;
@@ -96,6 +104,9 @@ end;
 procedure TFormCompanies.SetCompanies;
 begin
   F_FieldName:='CM_NAME';
+  edtCompany.Clear;
+  edtBusiness.Clear;
+  edtCity.Clear;
   RefreshCompanies;
   RefreshPhones;
   //  RefreshFilterFields;
@@ -215,6 +226,15 @@ begin
   else
     QCompanies.ParamByName('ISCLOSED').AsInteger := -1;
   QCompanies.ParamByName('COMPANYID').AsInteger := -1;
+  if Trim(edtCompany.Text) = ''
+  then qCompanies.ParamByName('Company').Value := ''
+  else qCompanies.ParamByName('Company').AsString := AnsiUppercase(Trim(edtCompany.Text));
+  if Trim(edtCity.Text) = ''
+  then qCompanies.ParamByName('City').Value := ''
+  else qCompanies.ParamByName('City').AsString := AnsiUppercase(Trim(edtCity.Text));
+  if Trim(edtBusiness.Text)=''
+  then qCompanies.ParamByName('Business').Value:=''
+  else qCompanies.ParamByName('Business').AsString := AnsiUpperCase(Trim(edtBusiness.Text));
   QCompanies.Open;
   if QCompanies.BookmarkValid(B) then
     QCompanies.GotoBookmark(B);
@@ -355,6 +375,24 @@ begin
     link := QCompanies.Fields.FieldByName('CM_HYPERLINK').AsString;
     ShellOpen(Application.Handle, link);
   end;
+end;
+
+procedure TFormCompanies.edtCompanyExit(Sender: TObject);
+begin
+  RefreshCompanies;
+  RefreshPhones;
+end;
+
+procedure TFormCompanies.edtBusinessExit(Sender: TObject);
+begin
+  RefreshCompanies;
+  RefreshPhones;
+end;
+
+procedure TFormCompanies.edtCityExit(Sender: TObject);
+begin
+  RefreshCompanies;
+  RefreshPhones;
 end;
 
 end.

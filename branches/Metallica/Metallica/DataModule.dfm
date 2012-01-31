@@ -138,8 +138,8 @@ object DM: TDM
         'INESS)'
       'VALUES(:cm_id, :cm_name, :cm_owner, :cm_city, '
       
-        ':cm_trust, :cm_comment, :cm_isclosed, :CM_HYPERLINK, CM_BUSINESS' +
-        ')')
+        ':cm_trust, :cm_comment, :cm_isclosed, :CM_HYPERLINK, :CM_BUSINES' +
+        'S)')
     Params = <
       item
         DataType = ftUnknown
@@ -179,6 +179,11 @@ object DM: TDM
       item
         DataType = ftUnknown
         Name = 'CM_HYPERLINK'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'CM_BUSINESS'
         ParamType = ptUnknown
       end>
     Properties.Strings = (
@@ -228,6 +233,11 @@ object DM: TDM
       item
         DataType = ftUnknown
         Name = 'CM_HYPERLINK'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'CM_BUSINESS'
         ParamType = ptUnknown
       end>
   end
