@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>1899.12.30 00:00:00.000.861,C:\Users\Pterik\Documents\RAD Studio\Projects\Unit1.dfm=C:\Projects\GNAU\main.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.002,C:\Projects\Just\GNAU.dproj=C:\Projects\Just\Just.dproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.235,C:\Users\Pterik\Documents\RAD Studio\Projects\Project1.dproj=C:\Projects\GNAU\GNAU.dproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.973,C:\Projects\GNAU\GNAU.dproj=C:\Projects\GNAU\GNAU.dproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.893,=C:\Projects\Just\Unit2.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.322,=C:\Users\Pterik\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.730,=C:\Users\Pterik\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.861,C:\Users\Pterik\Documents\RAD Studio\Projects\Unit1.pas=C:\Projects\GNAU\main.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.391,=C:\Users\Pterik\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.338,=C:\Users\Pterik\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2012.03.09 18:26:24.143,C:\Projects\Just\Unit1.pas=C:\Projects\Just\main.pas</Transaction>
+    <Transaction>2012.03.09 18:26:24.143,C:\Projects\Just\Unit1.dfm=C:\Projects\Just\main.dfm</Transaction>
+    <Transaction>2012.03.09 18:37:03.770,=C:\Projects\Just\main.pas</Transaction>
+    <Transaction>2012.03.09 18:37:16.051,C:\Projects\Just\main.pas=</Transaction>
+  </Transactions>
+</BorlandProject>
