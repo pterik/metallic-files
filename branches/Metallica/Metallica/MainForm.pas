@@ -8,7 +8,8 @@ uses
   ZDbcCache, ZAbstractRODataset, ZDbcMySQL, ZDbcPostgreSQL, ZSqlUpdate,
   ComCtrls, ZAbstractDataset, ExtCtrls, AppEvnts, Mask,
   DBCtrlsEh, DBGridEh, DBLookupEh,
-  ADODB, DataModule;
+  ADODB, DataModule, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls,
+  DynVarsEh, ZAbstractConnection, EhLibVCL, GridsEh, DBAxisGridsEh;
 
 type
   TFormMain = class(TForm)

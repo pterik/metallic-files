@@ -1,9 +1,9 @@
 object FormCompanies: TFormCompanies
   Left = 297
   Top = 137
-  Width = 964
-  Height = 497
   Caption = #1057#1087#1080#1089#1086#1082' '#1074#1089#1077#1093' '#1087#1086#1089#1090#1072#1074#1097#1080#1082#1086#1074
+  ClientHeight = 458
+  ClientWidth = 948
   Color = clBtnFace
   Constraints.MinHeight = 250
   Constraints.MinWidth = 790
@@ -17,7 +17,7 @@ object FormCompanies: TFormCompanies
   OnKeyUp = FormKeyUp
   DesignSize = (
     948
-    459)
+    458)
   PixelsPerInch = 96
   TextHeight = 13
   object lbl1: TLabel
@@ -87,8 +87,6 @@ object FormCompanies: TFormCompanies
     Height = 25
     Anchors = [akLeft, akBottom]
     Caption = #1053#1086#1074#1099#1081' '#1087#1086#1089#1090#1072#1074#1097#1080#1082' (F3)'
-    TabOrder = 3
-    OnClick = BitBtnInsertClick
     Glyph.Data = {
       36050000424D3605000000000000360400002800000010000000100000000100
       0800000000000001000000000000000000000001000000010000000000003232
@@ -132,6 +130,8 @@ object FormCompanies: TFormCompanies
       100408090A0B0E110201282828030C0D0C040708090A0B0E0201282828280303
       0405060708090A0B020128282828280102020202020202020201282828282801
       0101010101010101010128282828282828282828282828282828}
+    TabOrder = 3
+    OnClick = BitBtnInsertClick
   end
   object BitBtnUpdate: TBitBtn
     Left = 168
@@ -140,8 +140,6 @@ object FormCompanies: TFormCompanies
     Height = 25
     Anchors = [akLeft, akBottom]
     Caption = #1048#1089#1087#1088#1072#1074#1080#1090#1100'(F4)'
-    TabOrder = 4
-    OnClick = BitBtnUpdateClick
     Glyph.Data = {
       36050000424D3605000000000000360400002800000010000000100000000100
       0800000000000001000000000000000000000001000000010000000000000000
@@ -185,6 +183,8 @@ object FormCompanies: TFormCompanies
       F5100CAEA3121E1EF5E5E5E5E5E5E5E5E5F511AD1D1E19191DF5E5E5E5E5E5E5
       E5E5F5A31E192A1C1DF5E5E5E5E5E5E5E5E5E5F51A181C1C1EF5E5E5E5E5E5E5
       E5E5E5E5F51D1C1EF5E5E5E5E5E5E5E5E5E5E5E5E5F5F5F5E5E5}
+    TabOrder = 4
+    OnClick = BitBtnUpdateClick
   end
   object BitBtnDelete: TBitBtn
     Left = 288
@@ -193,8 +193,6 @@ object FormCompanies: TFormCompanies
     Height = 25
     Anchors = [akLeft, akBottom]
     Caption = #1059#1076#1072#1083#1080#1090#1100' '#1087#1086#1089#1090#1072#1074#1097#1080#1082#1072
-    TabOrder = 5
-    OnClick = BitBtnDeleteClick
     Glyph.Data = {
       36050000424D3605000000000000360400002800000010000000100000000100
       0800000000000001000000000000000000000001000000010000000000003232
@@ -238,6 +236,8 @@ object FormCompanies: TFormCompanies
       1A1B0B07080C0D1502010A0E0F113B1113140B0607090C0D02013B0A0A3B3B01
       0B0B05050607080902013B3B3B3B3B01020202020202020202013B3B3B3B3B01
       010101010101010101013B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B}
+    TabOrder = 5
+    OnClick = BitBtnDeleteClick
   end
   object BitBtnClose: TBitBtn
     Left = 832
@@ -248,8 +248,6 @@ object FormCompanies: TFormCompanies
     Cancel = True
     Caption = #1047#1072#1082#1088#1099#1090#1100
     Default = True
-    ModalResult = 1
-    TabOrder = 6
     Glyph.Data = {
       DE010000424DDE01000000000000760000002800000024000000120000000100
       0400000000006801000000000000000000001000000000000000000000000000
@@ -267,7 +265,9 @@ object FormCompanies: TFormCompanies
       8888333F00003333330000003333333333333FFFFFF3333F00003333330AAAA0
       333333333333888888F3333F00003333330000003333333333338FFFF8F3333F
       0000}
+    ModalResult = 1
     NumGlyphs = 2
+    TabOrder = 6
   end
   object DBGridCompanies: TDBGridEh
     Left = 8
@@ -276,26 +276,20 @@ object FormCompanies: TFormCompanies
     Height = 379
     Anchors = [akLeft, akTop, akRight, akBottom]
     DataSource = DSCompanies
-    FooterColor = clWindow
-    FooterFont.Charset = DEFAULT_CHARSET
-    FooterFont.Color = clWindowText
-    FooterFont.Height = -11
-    FooterFont.Name = 'MS Sans Serif'
-    FooterFont.Style = []
+    DynProps = <>
+    FooterParams.Color = clWindow
+    IndicatorOptions = []
     Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgConfirmDelete, dgCancelOnExit]
     RowLines = 3
     TabOrder = 0
-    TitleFont.Charset = DEFAULT_CHARSET
-    TitleFont.Color = clWindowText
-    TitleFont.Height = -11
-    TitleFont.Name = 'MS Sans Serif'
-    TitleFont.Style = []
-    TitleLines = 2
+    TitleParams.RowLines = 2
     OnDblClick = DBGridCompaniesDblClick
     OnDrawColumnCell = DBGridCompaniesDrawColumnCell
     OnTitleClick = DBGridCompaniesTitleClick
     Columns = <
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'CM_NAME'
         Footers = <>
@@ -306,6 +300,8 @@ object FormCompanies: TFormCompanies
         Width = 140
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'CM_CITY'
         Footers = <>
@@ -315,6 +311,8 @@ object FormCompanies: TFormCompanies
         Width = 90
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'CM_TRUNC_COMMENT'
         Footers = <>
@@ -324,6 +322,8 @@ object FormCompanies: TFormCompanies
         Width = 194
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'TL_NAME'
         Footers = <>
@@ -333,6 +333,8 @@ object FormCompanies: TFormCompanies
         Width = 81
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'CM_BUSINESS'
         Footers = <>
@@ -340,6 +342,8 @@ object FormCompanies: TFormCompanies
         Width = 100
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'SISCLOSED'
         Footers = <>
@@ -350,7 +354,11 @@ object FormCompanies: TFormCompanies
       end
       item
         ButtonStyle = cbsEllipsis
+        CellButtons = <>
         Checkboxes = False
+        DynProps = <>
+        EditButton.Style = ebsEllipsisEh
+        EditButton.Visible = True
         EditButtons = <>
         FieldName = 'CM_HYPERLINK'
         Footers = <>
@@ -358,6 +366,8 @@ object FormCompanies: TFormCompanies
         Title.Caption = #1055#1088#1072#1081#1089'-'#1083#1080#1089#1090
         Width = 30
       end>
+    object RowDetailData: TRowDetailPanelControlEh
+    end
   end
   object DBGridPhones: TDBGridEh
     Left = 700
@@ -366,22 +376,16 @@ object FormCompanies: TFormCompanies
     Height = 385
     Anchors = [akTop, akRight, akBottom]
     DataSource = DSPhones
-    FooterColor = clWindow
-    FooterFont.Charset = DEFAULT_CHARSET
-    FooterFont.Color = clWindowText
-    FooterFont.Height = -11
-    FooterFont.Name = 'MS Sans Serif'
-    FooterFont.Style = []
+    DynProps = <>
+    FooterParams.Color = clWindow
+    IndicatorOptions = []
     Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgConfirmDelete, dgCancelOnExit]
     TabOrder = 2
-    TitleFont.Charset = DEFAULT_CHARSET
-    TitleFont.Color = clWindowText
-    TitleFont.Height = -11
-    TitleFont.Name = 'MS Sans Serif'
-    TitleFont.Style = []
-    TitleLines = 2
+    TitleParams.RowLines = 2
     Columns = <
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PH_STR'
         Footers = <>
@@ -389,6 +393,8 @@ object FormCompanies: TFormCompanies
         Width = 74
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PH_COMMENT'
         Footers = <>
@@ -396,12 +402,16 @@ object FormCompanies: TFormCompanies
         Width = 94
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'SISCLOSED'
         Footers = <>
         Title.Caption = #1059#1076#1072#1083#1077#1085'?'
         Width = 54
       end>
+    object RowDetailData: TRowDetailPanelControlEh
+    end
   end
   object BitBtnNewPhone: TBitBtn
     Left = 428
@@ -410,8 +420,6 @@ object FormCompanies: TFormCompanies
     Height = 25
     Anchors = [akLeft, akBottom]
     Caption = #1053#1086#1074#1099#1081' '#1090#1077#1083#1077#1092#1086#1085' (F5)'
-    TabOrder = 7
-    OnClick = BitBtnNewPhoneClick
     Glyph.Data = {
       F6060000424DF606000000000000360000002800000018000000180000000100
       180000000000C0060000C40E0000C40E00000000000000000000FFFFFFFFFFFF
@@ -469,6 +477,8 @@ object FormCompanies: TFormCompanies
       FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
       FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
       FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+    TabOrder = 7
+    OnClick = BitBtnNewPhoneClick
   end
   object BitBtnClosePhone: TBitBtn
     Left = 576
@@ -477,8 +487,6 @@ object FormCompanies: TFormCompanies
     Height = 25
     Anchors = [akLeft, akBottom]
     Caption = #1059#1076#1072#1083#1080#1090#1100' '#1090#1077#1083#1077#1092#1086#1085
-    TabOrder = 8
-    OnClick = BitBtnClosePhoneClick
     Glyph.Data = {
       36050000424D3605000000000000360400002800000010000000100000000100
       0800000000000001000000000000000000000001000000010000000000003232
@@ -522,6 +530,8 @@ object FormCompanies: TFormCompanies
       1A1B0B07080C0D1502010A0E0F113B1113140B0607090C0D02013B0A0A3B3B01
       0B0B05050607080902013B3B3B3B3B01020202020202020202013B3B3B3B3B01
       010101010101010101013B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B}
+    TabOrder = 8
+    OnClick = BitBtnClosePhoneClick
   end
   object btnShowPrice: TBitBtn
     Left = 704
@@ -530,8 +540,6 @@ object FormCompanies: TFormCompanies
     Height = 25
     Anchors = [akLeft, akBottom]
     Caption = #1055#1088#1072#1081#1089'-'#1083#1080#1089#1090
-    TabOrder = 9
-    OnClick = btnShowPriceClick
     Glyph.Data = {
       F6000000424DF600000000000000760000002800000010000000100000000100
       04000000000080000000232E0000232E00001000000000000000FFFFFF008080
@@ -541,6 +549,8 @@ object FormCompanies: TFormCompanies
       4002000104000444400200010444444040023333333300400002300011130040
       0002311101034444400230101103004000023001110300400002311111034444
       2222300000030000042033333333000042000001000000002000}
+    TabOrder = 9
+    OnClick = btnShowPriceClick
   end
   object edtCompany: TEdit
     Left = 88

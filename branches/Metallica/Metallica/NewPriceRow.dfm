@@ -1,9 +1,9 @@
 object FormNewPriceRow: TFormNewPriceRow
   Left = 215
   Top = 212
-  Width = 712
-  Height = 497
   Caption = #1053#1086#1074#1072#1103' '#1089#1090#1088#1086#1082#1072' '#1087#1088#1072#1081#1089'-'#1083#1080#1089#1090#1072
+  ClientHeight = 458
+  ClientWidth = 696
   Color = clBtnFace
   Constraints.MinHeight = 250
   Constraints.MinWidth = 400
@@ -18,8 +18,8 @@ object FormNewPriceRow: TFormNewPriceRow
   OnDestroy = FormDestroy
   OnKeyUp = FormKeyUp
   DesignSize = (
-    704
-    470)
+    696
+    458)
   PixelsPerInch = 96
   TextHeight = 13
   object LabelComp: TLabel
@@ -85,99 +85,117 @@ object FormNewPriceRow: TFormNewPriceRow
     Anchors = [akLeft, akTop, akRight]
     Color = clCream
     DataSource = DSData
+    DynProps = <>
     Enabled = False
-    FooterColor = clWindow
-    FooterFont.Charset = DEFAULT_CHARSET
-    FooterFont.Color = clWindowText
-    FooterFont.Height = -11
-    FooterFont.Name = 'MS Sans Serif'
-    FooterFont.Style = []
+    FooterParams.Color = clWindow
+    GridLineParams.VertEmptySpaceStyle = dessNonEh
     Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-    OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghDblClickOptimizeColWidth, dghDialogFind]
+    OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghDblClickOptimizeColWidth, dghDialogFind, dghColumnResize, dghColumnMove]
     ReadOnly = True
     RowLines = 3
     RowSizingAllowed = True
     TabOrder = 2
-    TitleFont.Charset = DEFAULT_CHARSET
-    TitleFont.Color = clWindowText
-    TitleFont.Height = -11
-    TitleFont.Name = 'MS Sans Serif'
-    TitleFont.Style = []
-    UseMultiTitle = True
+    TitleParams.MultiTitle = True
     VertScrollBar.VisibleMode = sbNeverShowEh
     Columns = <
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'CM_NAME'
         Footers = <>
         Width = 100
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_DATE_UPDATE'
         Footers = <>
         Width = 80
       end
       item
+        CellButtons = <>
         DisplayFormat = '#0.00'
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_PRICE'
         Footers = <>
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_VALUE1'
         Footers = <>
         Width = 100
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_VALUE2'
         Footers = <>
         Width = 100
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_VALUE3'
         Footers = <>
         Width = 100
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_VALUE4'
         Footers = <>
         Width = 100
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_VALUE5'
         Footers = <>
         Width = 100
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_VALUE6'
         Footers = <>
         Width = 100
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_VALUE7'
         Footers = <>
         Width = 100
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_VALUE8'
         Footers = <>
         Width = 100
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_VALUE9'
         Footers = <>
         Width = 100
       end>
+    object RowDetailData: TRowDetailPanelControlEh
+    end
   end
   object EditCompany: TEdit
     Left = 72
@@ -218,9 +236,6 @@ object FormNewPriceRow: TFormNewPriceRow
     Cancel = True
     Caption = #1054#1090#1084#1077#1085#1072
     Default = True
-    ModalResult = 2
-    TabOrder = 6
-    OnClick = BitBtnCancelClick
     Glyph.Data = {
       DE010000424DDE01000000000000760000002800000024000000120000000100
       0400000000006801000000000000000000001000000000000000000000000000
@@ -238,7 +253,10 @@ object FormNewPriceRow: TFormNewPriceRow
       38F338F300003333333333333919333333388333338FFF830000333333333333
       3333333333333333333888330000333333333333333333333333333333333333
       0000}
+    ModalResult = 2
     NumGlyphs = 2
+    TabOrder = 6
+    OnClick = BitBtnCancelClick
   end
   object BitBtnSave: TBitBtn
     Left = 586
@@ -247,9 +265,6 @@ object FormNewPriceRow: TFormNewPriceRow
     Height = 25
     Anchors = [akRight, akBottom]
     Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' (F9)'
-    ModalResult = 1
-    TabOrder = 1
-    OnClick = BitBtnSaveClick
     Glyph.Data = {
       76010000424D7601000000000000760000002800000020000000100000000100
       04000000000000010000120B0000120B00001000000000000000000000000000
@@ -263,7 +278,10 @@ object FormNewPriceRow: TFormNewPriceRow
       00037F7F333333337F7F000FFFFFFFFF00037F7F333333337F7F000FFFFFFFFF
       00037F7F333333337F7F000FFFFFFFFF07037F7F33333333777F000FFFFFFFFF
       0003737FFFFFFFFF7F7330099999999900333777777777777733}
+    ModalResult = 1
     NumGlyphs = 2
+    TabOrder = 1
+    OnClick = BitBtnSaveClick
   end
   object EditNodeValue: TEdit
     Left = 72
@@ -287,96 +305,114 @@ object FormNewPriceRow: TFormNewPriceRow
     Height = 153
     Anchors = [akLeft, akTop, akRight]
     DataSource = DSEdit
-    FooterColor = clWindow
-    FooterFont.Charset = DEFAULT_CHARSET
-    FooterFont.Color = clWindowText
-    FooterFont.Height = -11
-    FooterFont.Name = 'MS Sans Serif'
-    FooterFont.Style = []
-    OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghDblClickOptimizeColWidth, dghDialogFind]
+    DynProps = <>
+    FooterParams.Color = clWindow
+    GridLineParams.VertEmptySpaceStyle = dessNonEh
+    OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghDblClickOptimizeColWidth, dghDialogFind, dghColumnResize, dghColumnMove]
     RowLines = 3
     RowSizingAllowed = True
     TabOrder = 0
-    TitleFont.Charset = DEFAULT_CHARSET
-    TitleFont.Color = clWindowText
-    TitleFont.Height = -11
-    TitleFont.Name = 'MS Sans Serif'
-    TitleFont.Style = []
-    UseMultiTitle = True
+    TitleParams.MultiTitle = True
     VertScrollBar.VisibleMode = sbNeverShowEh
     Columns = <
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'CM_NAME'
         Footers = <>
         Width = 100
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_DATE_UPDATE'
         Footers = <>
         Width = 80
       end
       item
+        CellButtons = <>
         DisplayFormat = '#0.00'
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_PRICE'
         Footers = <>
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_VALUE1'
         Footers = <>
         Width = 100
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_VALUE2'
         Footers = <>
         Width = 100
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_VALUE3'
         Footers = <>
         Width = 100
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_VALUE4'
         Footers = <>
         Width = 100
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_VALUE5'
         Footers = <>
         Width = 100
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_VALUE6'
         Footers = <>
         Width = 100
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_VALUE7'
         Footers = <>
         Width = 100
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_VALUE8'
         Footers = <>
         Width = 100
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_VALUE9'
         Footers = <>
         Width = 100
       end>
+    object RowDetailData: TRowDetailPanelControlEh
+    end
   end
   object EditCity: TEdit
     Left = 328

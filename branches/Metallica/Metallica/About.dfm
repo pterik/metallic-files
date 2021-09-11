@@ -1,9 +1,9 @@
 object FormAbout: TFormAbout
   Left = 469
   Top = 347
-  Width = 400
-  Height = 240
   Caption = #1054' '#1087#1088#1086#1075#1088#1072#1084#1084#1077
+  ClientHeight = 201
+  ClientWidth = 384
   Color = clBtnFace
   Constraints.MaxHeight = 240
   Constraints.MaxWidth = 400
@@ -17,7 +17,7 @@ object FormAbout: TFormAbout
   OldCreateOrder = False
   DesignSize = (
     384
-    202)
+    201)
   PixelsPerInch = 96
   TextHeight = 13
   object Memo1: TMemo
@@ -48,8 +48,6 @@ object FormAbout: TFormAbout
     Cancel = True
     Caption = #1047#1072#1082#1088#1099#1090#1100
     Default = True
-    ModalResult = 1
-    TabOrder = 1
     Glyph.Data = {
       DE010000424DDE01000000000000760000002800000024000000120000000100
       0400000000006801000000000000000000001000000000000000000000000000
@@ -67,6 +65,8 @@ object FormAbout: TFormAbout
       8888333F00003333330000003333333333333FFFFFF3333F00003333330AAAA0
       333333333333888888F3333F00003333330000003333333333338FFFF8F3333F
       0000}
+    ModalResult = 1
     NumGlyphs = 2
+    TabOrder = 1
   end
 end

@@ -1,9 +1,9 @@
 object FormMain: TFormMain
   Left = 491
   Top = 226
-  Width = 950
-  Height = 656
   Caption = #1055#1088#1072#1081#1089'-'#1083#1080#1089#1090#1099
+  ClientHeight = 617
+  ClientWidth = 934
   Color = clBtnFace
   Constraints.MinHeight = 460
   Constraints.MinWidth = 600
@@ -33,7 +33,7 @@ object FormMain: TFormMain
   OnKeyUp = FormKeyUp
   DesignSize = (
     934
-    618)
+    617)
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
@@ -82,8 +82,6 @@ object FormMain: TFormMain
     Height = 25
     Anchors = [akRight, akBottom]
     Caption = #1047#1072#1082#1088#1099#1090#1100
-    TabOrder = 6
-    OnClick = BitBtnCloseClick
     Glyph.Data = {
       DE010000424DDE01000000000000760000002800000024000000120000000100
       0400000000006801000000000000000000001000000000000000000000000000
@@ -102,6 +100,8 @@ object FormMain: TFormMain
       333333333333888888F3333F00003333330000003333333333338FFFF8F3333F
       0000}
     NumGlyphs = 2
+    TabOrder = 6
+    OnClick = BitBtnCloseClick
   end
   object BitBtnAbout: TBitBtn
     Left = 825
@@ -110,10 +110,11 @@ object FormMain: TFormMain
     Height = 25
     Anchors = [akTop, akRight]
     Caption = #1054' '#1087#1088#1086#1075#1088#1072#1084#1084#1077
+    Kind = bkHelp
+    NumGlyphs = 2
     TabOrder = 7
     TabStop = False
     OnClick = BitBtnAboutClick
-    Kind = bkHelp
   end
   object BitBtnCompanies: TBitBtn
     Left = 564
@@ -122,8 +123,6 @@ object FormMain: TFormMain
     Height = 25
     Anchors = [akRight, akBottom]
     Caption = #1055#1086#1089#1090#1072#1074#1097#1080#1082#1080
-    TabOrder = 4
-    OnClick = BitBtnCompaniesClick
     Glyph.Data = {
       76010000424D7601000000000000760000002800000020000000100000000100
       04000000000000010000120B0000120B00001000000000000000000000000000
@@ -138,6 +137,8 @@ object FormMain: TFormMain
       3333333373FF7333333333333000333333333333377733333333333333333333
       3333333333333333333333333333333333333333333333333333}
     NumGlyphs = 2
+    TabOrder = 4
+    OnClick = BitBtnCompaniesClick
   end
   object BitBtnUsers: TBitBtn
     Left = 686
@@ -146,8 +147,6 @@ object FormMain: TFormMain
     Height = 25
     Anchors = [akRight, akBottom]
     Caption = #1055#1086#1083#1100#1079#1086#1074#1072#1090#1077#1083#1080
-    TabOrder = 5
-    OnClick = BitBtnUsersClick
     Glyph.Data = {
       F6000000424DF600000000000000760000002800000010000000100000000100
       0400000000008000000000000000000000001000000000000000000000000000
@@ -157,6 +156,8 @@ object FormMain: TFormMain
       0F080F000F0000000F080F000F0000000F080F000F0000000F080F000F000000
       0F080F000F0000000F080F7FFFFFFFFFFF080F000F0000000F080F000F000000
       0F080F00070000000F080FFFFFFFFFFFFF080000000000000008}
+    TabOrder = 5
+    OnClick = BitBtnUsersClick
   end
   object EditMyName: TEdit
     Left = 88
@@ -182,8 +183,6 @@ object FormMain: TFormMain
     Height = 25
     Anchors = [akRight, akBottom]
     Caption = #1058#1086#1083#1100#1082#1086' '#1076#1083#1103' BOSSa'
-    TabOrder = 3
-    OnClick = BitBtnForBossClick
     Glyph.Data = {
       76010000424D7601000000000000760000002800000020000000100000000100
       04000000000000010000120B0000120B00001000000000000000000000000000
@@ -198,6 +197,8 @@ object FormMain: TFormMain
       555575F7755557F5555550BB33BBB0555555575F555557F555555507BBBB0755
       55555575FFFF7755555555570000755555555557777775555555}
     NumGlyphs = 2
+    TabOrder = 3
+    OnClick = BitBtnForBossClick
   end
   object Tree: TTreeView
     Left = 8
@@ -210,12 +211,13 @@ object FormMain: TFormMain
     TabOrder = 8
     OnChange = TreeChange
     OnExpanding = TreeExpanding
-    Items.Data = {
-      020000001F0000000000000000000000FFFFFFFFFFFFFFFF0000000001000000
-      06546573746F31210000000000000000000000FFFFFFFFFFFFFFFF0000000000
-      00000008546573746F2031321D0000000000000000000000FFFFFFFFFFFFFFFF
-      000000000100000004CAF0F3E3200000000000000000000000FFFFFFFFFFFFFF
-      FF000000000000000007CAF0F3E3203130}
+    Items.NodeData = {
+      03020000002A0000000000000000000000FFFFFFFFFFFFFFFF00000000000000
+      0001000000010654006500730074006F0031002E0000000000000000000000FF
+      FFFFFFFFFFFFFF000000000000000000000000010854006500730074006F0020
+      0031003200260000000000000000000000FFFFFFFFFFFFFFFF00000000000000
+      000100000001041A044004430433042C0000000000000000000000FFFFFFFFFF
+      FFFFFF00000000000000000000000001071A04400443043304200031003000}
   end
   object Grid: TDBGridEh
     Left = 184
@@ -224,24 +226,17 @@ object FormMain: TFormMain
     Height = 548
     Anchors = [akLeft, akTop, akRight, akBottom]
     DataSource = DSData
-    FooterColor = clWindow
-    FooterFont.Charset = DEFAULT_CHARSET
-    FooterFont.Color = clBlack
-    FooterFont.Height = -11
-    FooterFont.Name = 'Default'
-    FooterFont.Style = []
+    DynProps = <>
+    FooterParams.Color = clWindow
+    GridLineParams.VertEmptySpaceStyle = dessNonEh
+    IndicatorOptions = []
     Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-    OptionsEh = [dghFixed3D, dghResizeWholeRightPart, dghHighlightFocus, dghClearSelection, dghDblClickOptimizeColWidth, dghDialogFind]
+    OptionsEh = [dghFixed3D, dghResizeWholeRightPart, dghHighlightFocus, dghClearSelection, dghDblClickOptimizeColWidth, dghDialogFind, dghColumnResize, dghColumnMove]
     ReadOnly = True
     RowSizingAllowed = True
     SortLocal = True
     TabOrder = 9
-    TitleFont.Charset = DEFAULT_CHARSET
-    TitleFont.Color = clBlack
-    TitleFont.Height = -11
-    TitleFont.Name = 'Default'
-    TitleFont.Style = []
-    UseMultiTitle = True
+    TitleParams.MultiTitle = True
     VertScrollBar.VisibleMode = sbNeverShowEh
     OnCellClick = GridCellClick
     OnDblClick = GridDblClick
@@ -250,6 +245,8 @@ object FormMain: TFormMain
     OnTitleClick = GridTitleClick
     Columns = <
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'CM_NAME'
         Footers = <>
@@ -257,77 +254,103 @@ object FormMain: TFormMain
         Width = 100
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'CM_CITY'
         Footers = <>
         Width = 100
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_DATE_UPDATE'
         Footers = <>
         Width = 80
       end
       item
+        CellButtons = <>
         DisplayFormat = '#0.00'
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_PRICE'
         Footers = <>
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_VALUE1'
         Footers = <>
         Width = 100
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_VALUE2'
         Footers = <>
         Width = 100
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_VALUE3'
         Footers = <>
         Width = 100
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_VALUE4'
         Footers = <>
         Width = 100
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_VALUE5'
         Footers = <>
         Width = 100
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_VALUE6'
         Footers = <>
         Width = 100
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_VALUE7'
         Footers = <>
         Width = 100
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_VALUE8'
         Footers = <>
         Width = 100
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_VALUE9'
         Footers = <>
         Width = 100
       end>
+    object RowDetailData: TRowDetailPanelControlEh
+    end
   end
   object BitBtnNewPrice: TBitBtn
     Left = 12
@@ -336,8 +359,6 @@ object FormMain: TFormMain
     Height = 25
     Anchors = [akLeft, akBottom]
     Caption = #1053#1086#1074#1099#1081' '#1087#1088#1072#1081#1089
-    TabOrder = 10
-    OnClick = BitBtnNewPriceClick
     Glyph.Data = {
       36050000424D3605000000000000360400002800000010000000100000000100
       0800000000000001000000000000000000000001000000010000000000003232
@@ -381,6 +402,8 @@ object FormMain: TFormMain
       100408090A0B0E110201282828030C0D0C040708090A0B0E0201282828280303
       0405060708090A0B020128282828280102020202020202020201282828282801
       0101010101010101010128282828282828282828282828282828}
+    TabOrder = 10
+    OnClick = BitBtnNewPriceClick
   end
   object edtCompany: TEdit
     Left = 352
@@ -411,11 +434,15 @@ object FormMain: TFormMain
     OnExit = edtBusinessExit
   end
   object ZC: TZConnection
-    Protocol = 'firebird-2.1'
+    ControlsCodePage = cCP_UTF16
+    Catalog = ''
+    TransactIsolationLevel = tiReadCommitted
+    HostName = ''
+    Port = 0
     Database = 'C:\Projects\Metallica\Database\DATABASE.FDB'
     User = 'SYSDBA'
     Password = 'masterkey'
-    TransactIsolationLevel = tiReadCommitted
+    Protocol = 'firebird-2.1'
     Left = 56
     Top = 176
   end

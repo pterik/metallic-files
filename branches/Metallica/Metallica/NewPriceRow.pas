@@ -6,7 +6,10 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset,
   ZDataset, Grids, DBGrids, DBGridEh, ComCtrls, Mask, DBCtrlsEh,
-  ZAbstractTable, DBTables, DataModule;
+  ZAbstractTable,
+  //DBTables,
+  DataModule, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh,
+  EhLibVCL, GridsEh, DBAxisGridsEh;
 
 type
   TFormNewPriceRow = class(TForm)
