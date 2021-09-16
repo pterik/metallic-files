@@ -5,7 +5,9 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset,
-  ZDataset, Grids, DBGrids, DBGridEh, DataModule, MdiChild, ExtCtrls, CommonUnit;
+  ZDataset, Grids, DBGrids, DBGridEh, DataModule, MdiChild, ExtCtrls, CommonUnit,
+  DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, EhLibVCL,
+  GridsEh, DBAxisGridsEh;
 
 type
   TFormPriceShow = class(TFormMDIChild)
@@ -307,7 +309,7 @@ begin
     TDBGridEh(Sender).Canvas.Font.Color:= clHighLightText;
   end;
   // Просим GRID перерисоваться самому
-  TDBGridEh(Sender).DefaultDrawColumnCell(Rect, DataCol, Column, State);
+  TDBGridEh(Sender).DefaultDrawColumnCell(Rect, DataCol, Column, TGridDrawState(State));
 end;
 
 procedure TFormPriceShow.GridDblClick(Sender: TObject);
@@ -315,7 +317,8 @@ var
   LCompanyShow: TFormCompaniesShow;
   LFormPriceChange:TFormPriceChange;
   link:string;
-  BK:TbookmarkStr;
+//  BK:TbookmarkStr;
+  BK:TBookmark;
 begin
 if varIsNull(qData['CM_ID']) then Exit;
 if (F_FieldName = 'CM_NAME') then
@@ -412,7 +415,7 @@ procedure TFormPriceShow.GridKeyUp(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 var
   LFormPriceChange:TFormPriceChange;
-  BK:TbookmarkStr;
+  BK:Tbookmark;
 begin
   inherited;
   case Key of

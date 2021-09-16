@@ -1,11 +1,11 @@
 object FormTree: TFormTree
   Left = 210
   Top = 173
-  Width = 1496
-  Height = 819
   HorzScrollBar.Tracking = True
   VertScrollBar.Tracking = True
   Caption = #1055#1088#1072#1081#1089'-'#1083#1080#1089#1090
+  ClientHeight = 780
+  ClientWidth = 1480
   Color = clBtnFace
   Font.Charset = RUSSIAN_CHARSET
   Font.Color = clWindowText
@@ -26,9 +26,10 @@ object FormTree: TFormTree
     Left = 163
     Top = 0
     Width = 1317
-    Height = 781
+    Height = 780
     Align = alClient
     TabOrder = 0
+    ExplicitHeight = 781
     object Grid: TDBGridEh
       Left = 1
       Top = 73
@@ -36,20 +37,17 @@ object FormTree: TFormTree
       Height = 707
       Align = alClient
       DataSource = DSData
+      DynProps = <>
       Font.Charset = RUSSIAN_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
       Font.Name = 'MS Sans Serif'
       Font.Style = []
-      FooterColor = clWindow
-      FooterFont.Charset = RUSSIAN_CHARSET
-      FooterFont.Color = clWindowText
-      FooterFont.Height = -11
-      FooterFont.Name = 'MS Sans Serif'
-      FooterFont.Style = []
-      HorzScrollBar.Tracking = True
+      FooterParams.Color = clWindow
+      GridLineParams.VertEmptySpaceStyle = dessNonEh
+      IndicatorOptions = []
       Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-      OptionsEh = [dghFixed3D, dghResizeWholeRightPart, dghHighlightFocus, dghClearSelection, dghAutoSortMarking, dghDblClickOptimizeColWidth, dghDialogFind]
+      OptionsEh = [dghFixed3D, dghResizeWholeRightPart, dghHighlightFocus, dghClearSelection, dghAutoSortMarking, dghDblClickOptimizeColWidth, dghDialogFind, dghColumnResize, dghColumnMove]
       ParentFont = False
       ReadOnly = True
       RowSizingAllowed = True
@@ -57,13 +55,7 @@ object FormTree: TFormTree
       SumList.Active = True
       SumList.VirtualRecords = True
       TabOrder = 0
-      TitleFont.Charset = RUSSIAN_CHARSET
-      TitleFont.Color = clWindowText
-      TitleFont.Height = -11
-      TitleFont.Name = 'MS Sans Serif'
-      TitleFont.Style = []
-      UseMultiTitle = True
-      VertScrollBar.Tracking = True
+      TitleParams.MultiTitle = True
       VertScrollBar.VisibleMode = sbAlwaysShowEh
       OnCellClick = GridCellClick
       OnDblClick = GridDblClick
@@ -73,77 +65,103 @@ object FormTree: TFormTree
       OnTitleClick = GridTitleClick
       Columns = <
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'CM_NAME'
           Footers = <>
           Width = 100
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'PL_DATE_UPDATE'
           Footers = <>
           Width = 80
         end
         item
+          CellButtons = <>
           DisplayFormat = '#0.00'
+          DynProps = <>
           EditButtons = <>
           FieldName = 'PL_PRICE'
           Footers = <>
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'PL_VALUE1'
           Footers = <>
           Width = 100
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'PL_VALUE2'
           Footers = <>
           Width = 100
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'PL_VALUE3'
           Footers = <>
           Width = 100
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'PL_VALUE4'
           Footers = <>
           Width = 100
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'PL_VALUE5'
           Footers = <>
           Width = 100
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'PL_VALUE6'
           Footers = <>
           Width = 100
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'PL_VALUE7'
           Footers = <>
           Width = 100
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'PL_VALUE8'
           Footers = <>
           Width = 100
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'PL_VALUE9'
           Footers = <>
           Width = 100
         end>
+      object RowDetailData: TRowDetailPanelControlEh
+      end
     end
     object pnlTop: TPanel
       Left = 1
@@ -180,7 +198,6 @@ object FormTree: TFormTree
           Top = 4
           Width = 105
           Height = 21
-          ItemHeight = 13
           TabOrder = 0
           Text = 'CBFields'
           OnSelect = CBFieldsSelect
@@ -199,7 +216,6 @@ object FormTree: TFormTree
           Top = 28
           Width = 105
           Height = 21
-          ItemHeight = 13
           TabOrder = 2
           Text = 'CBFilter'
         end
@@ -288,7 +304,7 @@ object FormTree: TFormTree
     Left = 0
     Top = 0
     Width = 163
-    Height = 781
+    Height = 780
     Align = alLeft
     Font.Charset = RUSSIAN_CHARSET
     Font.Color = clWindowText
@@ -301,12 +317,14 @@ object FormTree: TFormTree
     TabOrder = 1
     OnChange = TreeChange
     OnExpanding = TreeExpanding
-    Items.Data = {
-      020000001F0000000000000000000000FFFFFFFFFFFFFFFF0000000001000000
-      06546573746F31210000000000000000000000FFFFFFFFFFFFFFFF0000000000
-      00000008546573746F2031321D0000000000000000000000FFFFFFFFFFFFFFFF
-      000000000100000004CAF0F3E3200000000000000000000000FFFFFFFFFFFFFF
-      FF000000000000000007CAF0F3E3203130}
+    Items.NodeData = {
+      03020000002A0000000000000000000000FFFFFFFFFFFFFFFF00000000000000
+      0001000000010654006500730074006F0031002E0000000000000000000000FF
+      FFFFFFFFFFFFFF000000000000000000000000010854006500730074006F0020
+      0031003200260000000000000000000000FFFFFFFFFFFFFFFF00000000000000
+      000100000001041A044004430433042C0000000000000000000000FFFFFFFFFF
+      FFFFFF00000000000000000000000001071A04400443043304200031003000}
+    ExplicitHeight = 781
   end
   object DSData: TDataSource
     DataSet = qData

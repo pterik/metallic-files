@@ -5,7 +5,9 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset,
-  ZDataset, Grids, DBGrids, DBGridEh, MdiChild, ShowTree, ExtCtrls, CommonUnit;
+  ZDataset, Grids, DBGrids, DBGridEh, MdiChild, ShowTree, ExtCtrls, CommonUnit,
+  DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, EhLibVCL,
+  GridsEh, DBAxisGridsEh;
 
 type
   TFormCompaniesShow = class(TFormMdiChild)
@@ -189,7 +191,7 @@ begin
     TDBGridEh(Sender).Canvas.Font.Color := clHighLightText;
   end;
   // Просим GRID перерисоваться самому
-  TDBGridEh(Sender).DefaultDrawColumnCell(Rect, DataCol, Column, State);
+  TDBGridEh(Sender).DefaultDrawColumnCell(Rect, DataCol, Column, TGridDrawState(State));
 end;
 
 procedure TFormCompaniesShow.cbFieldsSelect(Sender: TObject);

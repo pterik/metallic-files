@@ -105,10 +105,10 @@ procedure TFormPriceChange.BitBtnSaveClick(Sender: TObject);
 begin
 if (edtNewPrice.Text<>edtPrice.Text) or  (edtNewRest.Text<>edtRest.Text) then
   begin
-  if Pos(',',edtNewPrice.Text)>0 then edtNewPrice.Text:=AnsiReplaceStr(edtNewPrice.Text,',',SysUtils.DecimalSeparator);
-  if Pos('.',edtNewPrice.Text)>0 then edtNewPrice.Text:=AnsiReplaceStr(edtNewPrice.Text,'.',SysUtils.DecimalSeparator);
-  if Pos(',',edtNewrest.Text)>0 then edtNewrest.Text:=AnsiReplaceStr(edtNewRest.Text,',',SysUtils.DecimalSeparator);
-  if Pos('.',edtNewRest.Text)>0 then edtNewRest.Text:=AnsiReplaceStr(edtNewRest.Text,'.',SysUtils.DecimalSeparator);
+  if Pos(',',edtNewPrice.Text)>0 then edtNewPrice.Text:=AnsiReplaceStr(edtNewPrice.Text,',',FormatSettings.DecimalSeparator);
+  if Pos('.',edtNewPrice.Text)>0 then edtNewPrice.Text:=AnsiReplaceStr(edtNewPrice.Text,'.',FormatSettings.DecimalSeparator);
+  if Pos(',',edtNewrest.Text)>0 then edtNewrest.Text:=AnsiReplaceStr(edtNewRest.Text,',',FormatSettings.DecimalSeparator);
+  if Pos('.',edtNewRest.Text)>0 then edtNewRest.Text:=AnsiReplaceStr(edtNewRest.Text,'.',FormatSettings.DecimalSeparator);
   QUpdatePrice.Close;
   QUpdatePrice.ParamByName('ID').AsInteger:=F_ID;
   if F_RestName='0'

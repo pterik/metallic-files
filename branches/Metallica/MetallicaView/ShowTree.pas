@@ -5,7 +5,8 @@ interface
 uses
   Windows, Classes, Graphics, Forms, Controls, Grids, DBGridEh, ComCtrls,
   DB, ZAbstractRODataset, ZDataset, DataModule, StdCtrls, MDIChild, Buttons,
-  Mask, DBCtrlsEh, ExtCtrls, CommonUnit;
+  Mask, DBCtrlsEh, ExtCtrls, CommonUnit, DBGridEhGrouping, ToolCtrlsEh,
+  DBGridEhToolCtrls, DynVarsEh, EhLibVCL, GridsEh, DBAxisGridsEh;
 
 type
   TFormTree = class(TFormMDIChild)
@@ -137,7 +138,7 @@ var
   LFormPriceShow: TFormPriceShow;
   LFormPriceChange: TFormPriceChange;
   link:string;
-  BK:TBookmarkStr;
+  BK:TBookmark;
 begin
 if varIsNull(qData['CM_ID']) then Exit;
 if (F_FieldName1 = 'CM_NAME') then
@@ -456,7 +457,7 @@ end;
 procedure TFormTree.GridKeyUp(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 var  LFormPriceChange: TFormPriceChange;
-  BK:TBookmarkStr;
+  BK:TBookmark;
 begin
   inherited;
   case Key of

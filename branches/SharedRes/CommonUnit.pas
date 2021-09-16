@@ -42,7 +42,7 @@ type
   Field:array [1..5] of string;
   Text:array [1..5] of string;
   Value: array[1..5] of string;
-  Business, CompanyLike:string;
+  Business, CompanyLike, City:string;
   Counter:Integer;
   procedure ClearAll;
   procedure Clear(N:Integer);

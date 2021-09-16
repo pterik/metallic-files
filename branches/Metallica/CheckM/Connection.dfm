@@ -1,9 +1,9 @@
 object FormConnection: TFormConnection
   Left = 316
   Top = 249
-  Width = 410
-  Height = 490
   Caption = #1055#1086#1076#1082#1083#1102#1095#1077#1085#1080#1077' '#1082' '#1073#1072#1079#1077' '#1076#1072#1085#1085#1099#1093
+  ClientHeight = 451
+  ClientWidth = 394
   Color = clBtnFace
   Constraints.MinHeight = 490
   Constraints.MinWidth = 410
@@ -18,8 +18,8 @@ object FormConnection: TFormConnection
   OnCreate = FormCreate
   OnKeyUp = FormKeyUp
   DesignSize = (
-    402
-    456)
+    394
+    451)
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel
@@ -119,7 +119,7 @@ object FormConnection: TFormConnection
     end
     object MemoInfo: TMemo
       Left = 8
-      Top = 200
+      Top = 201
       Width = 385
       Height = 153
       Color = clWhite
@@ -141,8 +141,6 @@ object FormConnection: TFormConnection
       Width = 89
       Height = 25
       Caption = #1044#1086#1089#1090#1091#1087#1077#1085'?'
-      TabOrder = 5
-      OnClick = BitBtnPingClick
       Glyph.Data = {
         76010000424D7601000000000000760000002800000020000000100000000100
         04000000000000010000120B0000120B00001000000000000000000000000000
@@ -157,13 +155,14 @@ object FormConnection: TFormConnection
         FFF07F3737F7FFFFFFF70FFFF030000000007FFFF7F777777777000000333333
         3333777777333333333333333333333333333333333333333333}
       NumGlyphs = 2
+      TabOrder = 5
+      OnClick = BitBtnPingClick
     end
     object CBProtocol: TComboBox
       Left = 90
       Top = 91
       Width = 191
       Height = 21
-      ItemHeight = 13
       TabOrder = 6
       Items.Strings = (
         'firebird-2.1'
@@ -243,9 +242,10 @@ object FormConnection: TFormConnection
     Height = 25
     Anchors = [akRight, akBottom]
     Caption = #1047#1072#1082#1088#1099#1090#1100
+    Kind = bkClose
+    NumGlyphs = 2
     TabOrder = 1
     OnClick = BitBtnCloseClick
-    Kind = bkClose
   end
   object BitBtnSave: TBitBtn
     Left = 208
@@ -254,9 +254,6 @@ object FormConnection: TFormConnection
     Height = 25
     Anchors = [akLeft, akBottom]
     Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' (F2)'
-    ModalResult = 1
-    TabOrder = 2
-    OnClick = BitBtnSaveClick
     Glyph.Data = {
       76010000424D7601000000000000760000002800000020000000100000000100
       04000000000000010000120B0000120B00001000000000000000000000000000
@@ -270,7 +267,10 @@ object FormConnection: TFormConnection
       00037F7F333333337F7F000FFFFFFFFF00037F7F333333337F7F000FFFFFFFFF
       00037F7F333333337F7F000FFFFFFFFF07037F7F33333333777F000FFFFFFFFF
       0003737FFFFFFFFF7F7330099999999900333777777777777733}
+    ModalResult = 1
     NumGlyphs = 2
+    TabOrder = 2
+    OnClick = BitBtnSaveClick
   end
   object BitBtnConnect: TBitBtn
     Left = 8
@@ -279,8 +279,6 @@ object FormConnection: TFormConnection
     Height = 25
     Anchors = [akLeft, akBottom]
     Caption = #1057#1086#1077#1076#1080#1085#1077#1085#1080#1077
-    TabOrder = 3
-    OnClick = BitBtnConnectClick
     Glyph.Data = {
       76010000424D7601000000000000760000002800000020000000100000000100
       04000000000000010000120B0000120B00001000000000000000000000000000
@@ -295,6 +293,8 @@ object FormConnection: TFormConnection
       3333333337FFFF7F333333333000000333333333377777733333333333077033
       33333333337FF7F3333333333300003333333333337777333333}
     NumGlyphs = 2
+    TabOrder = 3
+    OnClick = BitBtnConnectClick
   end
   object BitBtnExport: TBitBtn
     Left = 104
@@ -303,9 +303,6 @@ object FormConnection: TFormConnection
     Height = 25
     Anchors = [akLeft, akBottom]
     Caption = 'INI '#1092#1072#1081#1083#1099
-    ModalResult = 1
-    TabOrder = 4
-    OnClick = BitBtnExportClick
     Glyph.Data = {
       76010000424D7601000000000000760000002800000020000000100000000100
       04000000000000010000130B0000130B00001000000000000000000000000000
@@ -319,7 +316,10 @@ object FormConnection: TFormConnection
       33337F773777777333330FFFF0FF033333337F3FF7F3733333330F08F0F03333
       33337F7737F7333333330FFFF003333333337FFFF77333333333000000333333
       3333777777333333333333333333333333333333333333333333}
+    ModalResult = 1
     NumGlyphs = 2
+    TabOrder = 4
+    OnClick = BitBtnExportClick
   end
   object QDual: TZQuery
     SQL.Strings = (
@@ -331,18 +331,24 @@ object FormConnection: TFormConnection
     Top = 96
   end
   object ZC: TZConnection
-    Protocol = 'sybase'
+    ControlsCodePage = cCP_UTF16
+    Catalog = ''
+    ReadOnly = True
+    SQLHourGlass = True
     HostName = 'localhost'
+    Port = 0
     Database = 'C:\Projects\Calendar\database.fdb'
     User = 'SYSDBA'
     Password = 'masterkey'
-    ReadOnly = True
-    SQLHourGlass = True
+    Protocol = 'sybase'
     Left = 152
     Top = 96
   end
   object IdIcmpClient: TIdIcmpClient
     ReceiveTimeout = 1000
+    Protocol = 1
+    ProtocolIPv6 = 58
+    IPVersion = Id_IPv4
     OnReply = IdIcmpClientReply
     Left = 80
     Top = 184

@@ -7,7 +7,7 @@ uses
 	Dialogs, StdCtrls, Buttons, ExtCtrls, DB, ZAbstractRODataset,
 	ZAbstractDataset, ZDataset, ZConnection, Mask, DBCtrlsEh, DBLookupEh,
 	IdBaseComponent, IdComponent, IdRawBase, IdRawClient, IdIcmpClient,
-  IdTCPConnection, IdTCPClient, IdWhois, IdIPWatch;
+  IdTCPConnection, IdTCPClient, IdWhois, IdIPWatch, ZAbstractConnection;
 
 // const IniName='database.ini';
  const RegisterBranchMetallica='SOFTWARE\PterikSoft\Metallica';
@@ -80,6 +80,18 @@ implementation
 
 {$R *.dfm}
 uses CommonUnit, Export;
+
+Function ReadComputerName:string;
+var
+i:DWORD;
+p:PChar;
+begin
+i:=255;
+GetMem(p, i);
+GetComputerName(p, i);
+Result:=String(p);
+FreeMem(p);
+end;
 
 procedure TFormConnection.BitBtnConnectClick(Sender: TObject);
 begin
@@ -368,8 +380,10 @@ end;
 
 procedure TFormConnection.CheckServerName;
 begin
+
 if not IdIPWatch1.Active then IdIPWatch1.Active:=true;
-if   (UpperCase(IdIPWatch1.LocalName)=UpperCase(EdtHostName.Text))
+//if   (UpperCase(IdIPWatch1.LocalName)=UpperCase(EdtHostName.Text))
+if  (UpperCase(ReadComputerName)=UpperCase(EdtHostName.Text))
 	 or(UpperCase(edtHostName.Text)='LOCALHOST')
 	 or(pos('127.',UpperCase(edtHostName.Text))<>0)
 	 or((UpperCase(edtHostName.Text)=IdIPWatch1.CurrentIP) and (IdIPWatch1.CurrentIP<>''))

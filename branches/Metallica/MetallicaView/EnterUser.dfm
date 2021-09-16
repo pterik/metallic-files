@@ -1,9 +1,9 @@
 object FormEnterUser: TFormEnterUser
   Left = 447
   Top = 232
-  Width = 360
-  Height = 162
   Caption = #1042#1099#1073#1077#1088#1080#1090#1077' '#1087#1086#1083#1100#1079#1086#1074#1072#1090#1077#1083#1103' '#1080#1079' '#1089#1087#1080#1089#1082#1072
+  ClientHeight = 123
+  ClientWidth = 344
   Color = clBtnFace
   Constraints.MaxHeight = 400
   Constraints.MaxWidth = 360
@@ -63,9 +63,10 @@ object FormEnterUser: TFormEnterUser
     Width = 89
     Height = 25
     Caption = #1054#1090#1084#1077#1085#1072
+    Kind = bkCancel
+    NumGlyphs = 2
     TabOrder = 1
     OnClick = BitBtnCancelClick
-    Kind = bkCancel
   end
   object BitBtnEnter: TBitBtn
     Left = 200
@@ -73,9 +74,10 @@ object FormEnterUser: TFormEnterUser
     Width = 75
     Height = 25
     Caption = #1042#1093#1086#1076
+    Kind = bkOK
+    NumGlyphs = 2
     TabOrder = 2
     OnClick = BitBtnEnterClick
-    Kind = bkOK
   end
   object EPWD: TEdit
     Left = 112
@@ -90,6 +92,8 @@ object FormEnterUser: TFormEnterUser
     Top = 9
     Width = 201
     Height = 24
+    DynProps = <>
+    DataField = ''
     EditButtons = <>
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText

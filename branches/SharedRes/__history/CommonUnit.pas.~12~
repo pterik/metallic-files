@@ -87,7 +87,7 @@ function DeleteFirstSpaces(const A: string): string;
 function MondayOfDate(const Day: TDate): TDate;
 function DayOfWeekRussian(CurDate: TDateTime): Integer;
 function DetectDay(CurDate: TDateTime): string;
-function Decrypt(const AStrng: string): string;
+function Decrypt(const AStrng: AnsiString): String;
 //Процедуры работы с реестром
 function WriteToRegistry(const FVar, FProg, FName: string): Boolean;
 function ReadFromRegistry(var FVar: string; const FProg, FName: string): Boolean;
@@ -1078,19 +1078,20 @@ begin
   end;
 end;
 
-procedure MakeXOR(var AByte: Char; const BByte: Integer);
+procedure MakeXOR(var AByte: AnsiChar; const BByte: Integer);
 begin
-  AByte:= Char(Integer(AByte) xor BByte);
+  AByte:= AnsiChar(Integer(AByte) xor BByte);
 end;
 
-function Decrypt(const AStrng: string): string;
+function Decrypt(const AStrng: AnsiString): String;
 var
   I: Integer;
   Bt: AnsiChar;
   Str2: string[100];
 begin
   Str2:= AStrng;
-  for I:= 1 to Length(AStrng) do begin
+  for I:= 1 to Length(AStrng) do
+  begin
     Bt:= AStrng[I];
     MakeXOR(Bt, $96);
     Str2[I]:= Bt;

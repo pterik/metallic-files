@@ -37,7 +37,7 @@ var
 
 implementation
 
-uses DataModule, MainForm, CommonUnit;
+uses DataModule, MainForm, CommonUnit, System.UITypes;
 
 {$R *.dfm}
 
@@ -63,8 +63,7 @@ try
 FormMain.ZC.Connect;
 except on E:Exception do
 	begin
-	MessageDlg('Возникла ошибка. Возможная причина - отсутствует файл.'+chr(10)+chr(13)
-  +E.Message,mtError,[mbOK],0);
+	MessageDlg('Возникла ошибка. Возможная причина - отсутствует файл.'+chr(10)+chr(13) +E.Message,mtError,[mbOK],0);
   BitBtnEnter.Enabled:=false;
   exit;
 	end;

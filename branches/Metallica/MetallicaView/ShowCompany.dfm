@@ -1,9 +1,9 @@
 object FormCompaniesShow: TFormCompaniesShow
   Left = 261
   Top = 200
-  Width = 1263
-  Height = 592
   Caption = #1057#1087#1080#1089#1086#1082' '#1087#1086#1089#1090#1072#1074#1097#1080#1082#1086#1074
+  ClientHeight = 553
+  ClientWidth = 1247
   Color = clBtnFace
   Constraints.MinHeight = 500
   Constraints.MinWidth = 900
@@ -23,9 +23,10 @@ object FormCompaniesShow: TFormCompaniesShow
     Left = 910
     Top = 0
     Width = 337
-    Height = 554
+    Height = 553
     Align = alRight
     TabOrder = 0
+    ExplicitHeight = 554
     object pnlTop: TPanel
       Left = 1
       Top = 1
@@ -69,36 +70,31 @@ object FormCompaniesShow: TFormCompaniesShow
       Left = 1
       Top = 49
       Width = 335
-      Height = 504
+      Height = 503
       Align = alClient
       TabOrder = 1
+      ExplicitHeight = 504
       DesignSize = (
         335
-        504)
+        503)
       object DBGridPhones: TDBGridEh
         Left = 9
         Top = 8
         Width = 320
-        Height = 462
+        Height = 461
         Anchors = [akLeft, akTop, akRight, akBottom]
         AutoFitColWidths = True
         DataSource = DSPhones
-        FooterColor = clWindow
-        FooterFont.Charset = DEFAULT_CHARSET
-        FooterFont.Color = clWindowText
-        FooterFont.Height = -11
-        FooterFont.Name = 'MS Sans Serif'
-        FooterFont.Style = []
+        DynProps = <>
+        FooterParams.Color = clWindow
+        IndicatorOptions = []
         Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgConfirmDelete, dgCancelOnExit]
         TabOrder = 0
-        TitleFont.Charset = DEFAULT_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -11
-        TitleFont.Name = 'MS Sans Serif'
-        TitleFont.Style = []
-        TitleLines = 2
+        TitleParams.RowLines = 2
         Columns = <
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'PH_STR'
             Footers = <>
@@ -106,6 +102,8 @@ object FormCompaniesShow: TFormCompaniesShow
             Width = 104
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'PH_COMMENT'
             Footers = <>
@@ -115,21 +113,23 @@ object FormCompaniesShow: TFormCompaniesShow
             Width = 156
           end
           item
+            CellButtons = <>
+            DynProps = <>
             EditButtons = <>
             FieldName = 'SISCLOSED'
             Footers = <>
             Title.Caption = #1059#1076#1072#1083#1077#1085'?'
           end>
+        object RowDetailData: TRowDetailPanelControlEh
+        end
       end
       object btnShowPrice: TBitBtn
         Left = 14
-        Top = 475
+        Top = 474
         Width = 105
         Height = 25
         Anchors = [akLeft, akBottom]
         Caption = #1055#1088#1072#1081#1089'-'#1083#1080#1089#1090
-        TabOrder = 1
-        OnClick = btnShowPriceClick
         Glyph.Data = {
           F6000000424DF600000000000000760000002800000010000000100000000100
           04000000000080000000232E0000232E00001000000000000000FFFFFF008080
@@ -139,6 +139,9 @@ object FormCompaniesShow: TFormCompaniesShow
           4002000104000444400200010444444040023333333300400002300011130040
           0002311101034444400230101103004000023001110300400002311111034444
           2222300000030000042033333333000042000001000000002000}
+        TabOrder = 1
+        OnClick = btnShowPriceClick
+        ExplicitTop = 475
       end
     end
   end
@@ -146,9 +149,10 @@ object FormCompaniesShow: TFormCompaniesShow
     Left = 0
     Top = 0
     Width = 910
-    Height = 554
+    Height = 553
     Align = alClient
     TabOrder = 1
+    ExplicitHeight = 554
     object Grid: TDBGridEh
       Left = 1
       Top = 73
@@ -157,26 +161,20 @@ object FormCompaniesShow: TFormCompaniesShow
       Align = alClient
       AutoFitColWidths = True
       DataSource = DSCompanies
-      FooterColor = clWindow
-      FooterFont.Charset = DEFAULT_CHARSET
-      FooterFont.Color = clWindowText
-      FooterFont.Height = -11
-      FooterFont.Name = 'MS Sans Serif'
-      FooterFont.Style = []
+      DynProps = <>
+      FooterParams.Color = clWindow
+      IndicatorOptions = []
       Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgConfirmDelete, dgCancelOnExit]
       TabOrder = 0
-      TitleFont.Charset = DEFAULT_CHARSET
-      TitleFont.Color = clWindowText
-      TitleFont.Height = -11
-      TitleFont.Name = 'MS Sans Serif'
-      TitleFont.Style = []
-      TitleLines = 2
+      TitleParams.RowLines = 2
       OnCellClick = GridCellClick
       OnDblClick = GridDblClick
       OnDrawColumnCell = GridDrawColumnCell
       OnTitleClick = GridTitleClick
       Columns = <
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'CM_NAME'
           Footers = <>
@@ -186,6 +184,8 @@ object FormCompaniesShow: TFormCompaniesShow
           Width = 275
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'CM_CITY'
           Footers = <>
@@ -193,6 +193,8 @@ object FormCompaniesShow: TFormCompaniesShow
           Width = 140
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'CM_TRUNC_COMMENT'
           Footers = <>
@@ -200,6 +202,8 @@ object FormCompaniesShow: TFormCompaniesShow
           Width = 132
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'TL_NAME'
           Footers = <>
@@ -207,6 +211,8 @@ object FormCompaniesShow: TFormCompaniesShow
           Width = 98
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'CM_BUSINESS'
           Footers = <>
@@ -214,12 +220,16 @@ object FormCompaniesShow: TFormCompaniesShow
           Width = 200
         end
         item
+          CellButtons = <>
+          DynProps = <>
           EditButtons = <>
           FieldName = 'CM_HYPERLINK'
           Footers = <>
           Title.Caption = #1055#1088#1072#1081#1089'-'#1083#1080#1089#1090
           Width = 256
         end>
+      object RowDetailData: TRowDetailPanelControlEh
+      end
     end
     object pnlLeftTop: TPanel
       Left = 1
@@ -257,7 +267,6 @@ object FormCompaniesShow: TFormCompaniesShow
           Width = 105
           Height = 21
           Style = csDropDownList
-          ItemHeight = 13
           TabOrder = 0
           OnSelect = cbFieldsSelect
         end
@@ -275,7 +284,6 @@ object FormCompaniesShow: TFormCompaniesShow
           Top = 28
           Width = 105
           Height = 21
-          ItemHeight = 13
           TabOrder = 2
         end
         object btnFilterClear: TButton

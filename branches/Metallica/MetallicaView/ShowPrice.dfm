@@ -1,9 +1,9 @@
 object FormPriceShow: TFormPriceShow
   Left = 285
   Top = 168
-  Width = 1003
-  Height = 590
   Caption = #1055#1086#1079#1080#1094#1080#1080' '#1087#1088#1072#1081#1089'-'#1083#1080#1089#1090#1072
+  ClientHeight = 551
+  ClientWidth = 987
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -24,28 +24,20 @@ object FormPriceShow: TFormPriceShow
     Left = 0
     Top = 65
     Width = 987
-    Height = 487
+    Height = 486
     Align = alClient
     AutoFitColWidths = True
     DataSource = DSData
-    FooterColor = clWindow
-    FooterFont.Charset = DEFAULT_CHARSET
-    FooterFont.Color = clWindowText
-    FooterFont.Height = -11
-    FooterFont.Name = 'MS Sans Serif'
-    FooterFont.Style = []
-    HorzScrollBar.Tracking = True
+    DynProps = <>
+    FooterParams.Color = clWindow
+    GridLineParams.VertEmptySpaceStyle = dessNonEh
+    IndicatorOptions = []
     Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-    OptionsEh = [dghFixed3D, dghResizeWholeRightPart, dghHighlightFocus, dghClearSelection, dghDblClickOptimizeColWidth, dghDialogFind]
+    OptionsEh = [dghFixed3D, dghResizeWholeRightPart, dghHighlightFocus, dghClearSelection, dghDblClickOptimizeColWidth, dghDialogFind, dghColumnResize, dghColumnMove]
     ReadOnly = True
     RowSizingAllowed = True
     TabOrder = 0
-    TitleFont.Charset = DEFAULT_CHARSET
-    TitleFont.Color = clWindowText
-    TitleFont.Height = -11
-    TitleFont.Name = 'MS Sans Serif'
-    TitleFont.Style = []
-    UseMultiTitle = True
+    TitleParams.MultiTitle = True
     VertScrollBar.VisibleMode = sbAlwaysShowEh
     OnCellClick = GridCellClick
     OnDblClick = GridDblClick
@@ -54,77 +46,103 @@ object FormPriceShow: TFormPriceShow
     OnTitleClick = GridTitleClick
     Columns = <
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'CM_NAME'
         Footers = <>
         Width = 100
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_DATE_UPDATE'
         Footers = <>
         Width = 80
       end
       item
+        CellButtons = <>
         DisplayFormat = '#0.00'
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_PRICE'
         Footers = <>
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_VALUE1'
         Footers = <>
         Width = 100
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_VALUE2'
         Footers = <>
         Width = 100
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_VALUE3'
         Footers = <>
         Width = 100
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_VALUE4'
         Footers = <>
         Width = 100
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_VALUE5'
         Footers = <>
         Width = 100
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_VALUE6'
         Footers = <>
         Width = 100
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_VALUE7'
         Footers = <>
         Width = 100
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_VALUE8'
         Footers = <>
         Width = 100
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_VALUE9'
         Footers = <>
         Width = 100
       end>
+    object RowDetailData: TRowDetailPanelControlEh
+    end
   end
   object pnlTop: TPanel
     Left = 0
@@ -161,7 +179,6 @@ object FormPriceShow: TFormPriceShow
         Top = 4
         Width = 105
         Height = 21
-        ItemHeight = 13
         TabOrder = 0
         Text = 'CBFields'
         OnSelect = CBFieldsSelect
@@ -182,7 +199,6 @@ object FormPriceShow: TFormPriceShow
         Top = 28
         Width = 105
         Height = 21
-        ItemHeight = 13
         TabOrder = 1
         Text = 'CBFilter'
       end
