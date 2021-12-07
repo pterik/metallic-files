@@ -16,7 +16,7 @@ object FormForBoss: TFormForBoss
     182)
   PixelsPerInch = 96
   TextHeight = 13
-  object BitBtnClose: TBitBtn
+  object BitBtnClose: TsBitBtn
     Left = 15
     Top = 140
     Width = 200
@@ -46,7 +46,7 @@ object FormForBoss: TFormForBoss
       0000}
     NumGlyphs = 2
   end
-  object BitBtnAdditional: TBitBtn
+  object BitBtnAdditional: TsBitBtn
     Left = 15
     Top = 97
     Width = 202
@@ -56,7 +56,7 @@ object FormForBoss: TFormForBoss
     OnClick = BitBtnAdditionalClick
     NumGlyphs = 2
   end
-  object BitBtnUpdateTree: TBitBtn
+  object BitBtnUpdateTree: TsBitBtn
     Left = 15
     Top = 17
     Width = 202
@@ -66,7 +66,7 @@ object FormForBoss: TFormForBoss
     OnClick = BitBtnUpdateTreeClick
     NumGlyphs = 2
   end
-  object BitBtn1: TBitBtn
+  object BitBtn1: TsBitBtn
     Left = 15
     Top = 57
     Width = 202
@@ -165,4 +165,4 @@ object FormForBoss: TFormForBoss
         ParamType = ptUnknown
       end>
   end
-end
+end

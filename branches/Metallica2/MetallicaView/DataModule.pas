@@ -3,8 +3,9 @@ unit DataModule;
 interface
 
 uses
-  SysUtils, Classes, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, DateUtils,
-	Controls, ComCtrls, DBGridEh;
+  SysUtils, Classes, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, 
+  DateUtils, 	Controls, ComCtrls, DBGridEh, sTreeView, ZAbstractConnection,
+  ZConnection, MemDS, DBAccess, Uni;
 const ShiftLeft=30;
 			ShiftTop=30;
       MaxToolBtnCntr=20;
@@ -29,75 +30,48 @@ type
   function Print:string;
   end;
   TDM = class(TDataModule)
-    QIPhone: TZQuery;
-    QFindPhone: TZQuery;
-    QUPhoneDT_Com: TZQuery;
-    QMaxCompany: TZQuery;
-    QICompany: TZQuery;
-    QSCompanyNames: TZQuery;
-    QIPhoneCompany: TZQuery;
-    QCntrPhoneCompany: TZQuery;
-    QUsersOrdered: TZQuery;
-    QUsersOrderedUSER_NAME: TStringField;
-    QUContactsByOwner: TZQuery;
-    QUUserbyID: TZQuery;
-    QUCompanyByID: TZQuery;
-    QUContactByComp: TZQuery;
-    QUCompany: TZQuery;
-    QDelJobsForBoss: TZQuery;
-    QDelContactsViews: TZQuery;
-    QDelUsersForBoss: TZQuery;
-    QUsersOrderedORDERBY: TIntegerField;
-    QUsersOrderedU_ID: TIntegerField;
-    QIContact: TZQuery;
-    QMaxContact: TZQuery;
-    QDContact: TZQuery;
-    QDPhone: TZQuery;
-    QIComNT: TZQuery;
-    QCntrComNT: TZQuery;
+    QFindComNT: TUniQuery;
+    QCntrComNT: TUniQuery;
+    QMaxContact: TUniQuery;
+    QSettings: TUniQuery;
+    QShortcut: TUniQuery;
+    QSCompanyNames: TUniQuery;
+    QMaxCompany: TUniQuery;
+    QCntrPhoneCompany: TUniQuery;
+    QFindPhone: TUniQuery;
+    qHeaderDelete: TUniSQL;
+    QUContactByComp: TUniSQL;
+    qHeaderGlobInsert: TUniSQL;
+    qHeaderGlobDelete: TUniSQL;
+    QUSettings: TUniSQL;
+    QDPhone: TUniSQL;
+    QUPhoneDT: TUniSQL;
+    QUPhoneDT_Com: TUniSQL;
+    QIPhone: TUniSQL;
+    QUUserbyID: TUniSQL;
+    QIComNT: TUniSQL;
+    QIContact: TUniSQL;
+    QUPhoneCompany: TUniSQL;
+    QIPhoneCompany: TUniSQL;
+    QUCompany: TUniSQL;
+    QICompany: TUniSQL;
+    QShortcutCS_SHABLONE: TStringField;
+    QUCompanyByID: TUniSQL;
+    QUContactsByOwner: TUniSQL;
+    qHeaderInsert: TUniSQL;
+    QUContactAuto: TUniSQL;
+    QUContactByID: TUniSQL;
+    QDelUsersForBoss: TUniSQL;
+    QDContact: TUniSQL;
+    qDelJobsForBoss: TUniSQL;
+    qDelContactsViews: TUniSQL;
+    QUComNT: TUniSQL;
+    QMaxContactCNTR: TIntegerField;
     QCntrComNTCNTR: TIntegerField;
-    QFindComNT: TZQuery;
-    IntegerField1: TIntegerField;
-    QUComNT: TZQuery;
-    IntegerField2: TIntegerField;
-    QUContactByID: TZQuery;
-    QUContactAuto: TZQuery;
-    QShortcut: TZQuery;
-    QSettings: TZQuery;
-    QUSettings: TZQuery;
-    QUPhoneDT: TZQuery;
-    QUPhoneCompany: TZQuery;
-    qFindParent: TZReadOnlyQuery;
-    qFindParentPT_VALUE: TStringField;
-    qFindParentPARENTID: TIntegerField;
-    qFindParentPARENTVALUE: TStringField;
-    qFindParentPT_ID: TIntegerField;
-    qTreeParent: TZReadOnlyQuery;
-    qTreeParentPT_ID: TIntegerField;
-    qTreeParentPT_VALUE: TStringField;
-    qTreeParentPT_DATE: TDateField;
-    qTreeParentPT_ISCLOSED: TSmallintField;
-    qTreeParentPT_ORDERBY: TIntegerField;
-    qTreeChild: TZReadOnlyQuery;
-    IntegerField9: TIntegerField;
-    StringField3: TStringField;
-    DateField3: TDateField;
-    SmallintField1: TSmallintField;
-    IntegerField10: TIntegerField;
-    qTreeChildCNTR: TIntegerField;
-    qTreeChildPT_PARENTID: TIntegerField;
-    qHeaderGlobDelete: TZQuery;
-    qHeaderGlobInsert: TZQuery;
-    qHeaderDelete: TZQuery;
-    qHeaderInsert: TZQuery;
-    qDisplay: TZReadOnlyQuery;
-    qDisplayGS_FIELD: TStringField;
-    qDisplayGS_HEADER: TStringField;
-    qDisplayGS_SHOW: TSmallintField;
-    qDisplayGS_SIZE: TIntegerField;
-    qDisplayGS_DISPLAYFORMAT: TStringField;
-    qDisplayGS_TREEID: TIntegerField;
-    qDisplayGS_ORDERBY: TIntegerField;
+    qDisplay: TUniQuery;
+    qTreeChild: TUniQuery;
+    qTreeParent: TUniQuery;
+    qFindParent: TUniQuery;
 	private
 		function  CompanyDeleteBadNames(S:string; NChars:integer):string;
 		function  CompanyNTMaxID: integer;
@@ -120,7 +94,7 @@ type
       DisplayFormat: string; TreeId, Size, OrderBy: integer; Show:boolean);
     procedure RepaintGrid(var Grid:TDBGridEh; Treeid:integer);
     //  ==========================================
-    procedure TreeFulFill(Tree: TTreeView;isShowEmptyRows:boolean; HeaderID:integer);
+    procedure TreeFulFill(Tree: TsTreeView;isShowEmptyRows:boolean; HeaderID:integer);
 //  Функции и процедуры имеют префикс- имя таблицы. Сортировка по имени функции
 		function  CompanyClosebyID(CompanyID: integer): boolean;
 		function  CompanyInsert(CompanyName, City, SComment:string):integer;
@@ -161,7 +135,7 @@ var
 implementation
 
 {$R *.dfm}
-uses Dialogs, Variants, MainForm, CommonUnit;
+uses Dialogs, Variants, MainForm, CommonUnit, System.UITypes;
 { TDM }
 
 function TDM.GetErrorByCode(CodeID: integer): string;
@@ -230,13 +204,13 @@ var Res:integer;
 begin
 try
 Res:=CompanyMaxID+1;
-QICompany.Close;
 QICompany.ParamByName('CM_ID').AsInteger:=Res;
 QICompany.ParamByName('CM_NAME').AsString:=ANSIUpperCase(CompanyName);
 QICompany.ParamByName('CM_CITY').AsString:=City;
 QICompany.ParamByName('CM_COMMENT').AsString:=SComment;
 QICompany.ParamByName('CM_ISCLOSED').AsInteger:=0;
-QICompany.ExecSQL;
+if not QICompany.Prepared then QICompany.Prepare;
+QICompany.Execute;
 except on E:Exception do
 	begin
 	Result:=0;
@@ -249,12 +223,12 @@ end;
 function TDM.CompanyUpdate(CompanyID:integer; CompanyName, City, SComment: string): boolean;
 begin
 try
-QUCompany.Close;
 QUCompany.ParamByName('CM_ID').AsInteger:=CompanyID;
 QUCompany.ParamByName('CM_NAME').AsString:=ANSIUpperCase(CompanyName);
 QUCompany.ParamByName('CM_CITY').AsString:=ANSIUpperCase(City);
 QUCompany.ParamByName('CM_COMMENT').AsString:=SComment;
-QUCompany.ExecSQL;
+if not QUCompany.Prepared then QUCompany.Prepare;
+QUCompany.Execute;
 except on E:Exception do
 	begin
 	Result:=false;
@@ -376,12 +350,12 @@ end;
 function TDM.PhoneCompanyInsert(PhoneID:int64;UserID, CompanyID:integer; SDT:string): boolean;
 begin
 try
-QIPhoneCompany.Close;
 QIPhoneCompany.ParamByName('PC_PHID').AsInteger:=PhoneID;
 QIPhoneCompany.ParamByName('PC_UID').AsInteger:=UserID;
 QIPhoneCompany.ParamByName('PC_COMPANY').AsInteger:=CompanyID;
 QIPhoneCompany.ParamByName('PC_DATEUPDATE').AsDate:=StrToDate(SDT);
-QIPhoneCompany.ExecSQL;
+if not QIPhoneCompany.Prepared  then QIPhoneCompany.Prepare;
+QIPhoneCompany.Execute;
 except on E:Exception do
 	begin
 	Result:=false;
@@ -394,12 +368,12 @@ end;
 function TDM.PhoneCompanyUpdate(PhoneID:int64;UserID, CompanyID:integer; SDT:string): boolean;
 begin
 try
-QUPhoneCompany.Close;
 QUPhoneCompany.ParamByName('PC_PHID').AsInteger:=PhoneID;
 QUPhoneCompany.ParamByName('PC_COMPANY').AsInteger:=CompanyID;
 QUPhoneCompany.ParamByName('PC_UID').AsInteger:=UserID;
 QUPhoneCompany.ParamByName('PC_DATEUPDATE').AsDate:=StrToDate(SDT);
-QUPhoneCompany.ExecSQL;
+if not QUPhoneCompany.Prepared  then QUPhoneCompany.Prepare;
+QUPhoneCompany.Execute;
 except on E:Exception do
 	begin
 	Result:=false;
@@ -412,11 +386,11 @@ end;
 function TDM.PhoneInsert(Phone:int64; Comment, Date1:string):boolean;
 begin
 try
-qIPhone.Close;
 qIPhone.ParamByName('PH_ID').AsInteger:=Phone;
 qIPhone.ParamByName('PH_COMMENT').AsString:=Comment;
 qIPhone.ParamByName('PH_DATEBEGIN').AsDate:=StrToDate(Date1);
-qIPhone.ExecSQL;
+if not qIPhone.Prepared then qIPhone.Prepare;
+qIPhone.Execute;
 except on E:Exception do
 	begin
 	Result:=false;
@@ -440,11 +414,11 @@ function TDM.PhoneUpdateDateComment(Phone:int64;Comment,Date1:string):boolean;
 begin
 //При вызове телефон повторно помечается как активный
 try
-qUPhoneDT_Com.Close;
 qUPhoneDT_Com.ParamByName('PH_DATEBEGIN').AsDate:=StrToDate(Date1);
 qUPhoneDT_Com.ParamByName('PH_COMMENT').AsString:=Comment;
 qUPhoneDT_Com.ParamByName('PH_ID').AsInteger:=Phone;
-qUPhoneDT_Com.ExecSQL;
+if not qUPhoneDT_Com.Prepared then qUPhoneDT_Com.Prepare;
+qUPhoneDT_Com.Execute;
 except on E:Exception do
 	begin
 	Result:=false;
@@ -458,10 +432,10 @@ function TDM.PhoneUpdateDate(Phone:int64; Date1:string):boolean;
 begin
 //При вызове телефон повторно помечается как активный
 try
-qUPhoneDT.Close;
 qUPhoneDT.ParamByName('PH_ID').AsInteger:=Phone;
 qUPhoneDT.ParamByName('PH_DATEBEGIN').AsDate:=StrToDate(Date1);
-qUPhoneDT.ExecSQL;
+if not qUPhoneDT.Prepared then qUPhoneDT.Prepare;
+qUPhoneDT.Execute;
 except on E:Exception do
 	begin
 	Result:=false;
@@ -474,11 +448,12 @@ end;
 function TDM.PhoneDelete(Phone: int64; Date1: string; Manager:integer): boolean;
 begin
 try
-qDPhone.Close;
 qDPhone.ParamByName('PH_ID').AsInteger:=Phone;
 qDPhone.ParamByName('PH_DATEEND').AsDate:=StrToDate(Date1);
 qDPhone.ParamByName('PH_CLOSEDBY').AsInteger:=Manager;
-qDPhone.ExecSQL;
+if not qDPhone.Prepared then qDPhone.Prepare;
+
+qDPhone.Execute;
 except on E:Exception do
 	begin
 	Result:=false;
@@ -491,9 +466,10 @@ end;
 function TDM.ContactsCloseByOwner(Ownerid: integer): boolean;
 begin
 try
-QUContactsByOwner.Close;
+
 QUContactsByOwner.ParamByName('CN_OWNER').AsInteger:=OwnerID;
-QUContactsByOwner.ExecSQL;
+if not QUContactsByOwner.Prepared then QUContactsByOwner.Prepare;
+QUContactsByOwner.Execute;
 except on E:Exception do
 	begin
 	Result:=false;
@@ -506,9 +482,10 @@ end;
 function TDM.ContactsCloseByCompany(Companyid: integer): boolean;
 begin
 try
-QUContactByComp.Close;
+
 QUContactByComp.ParamByName('CN_COMPANY').AsInteger:=CompanyID;
-QUContactByComp.ExecSQL;
+if not QUContactByComp.Prepared then QUContactByComp.Prepare;
+QUContactByComp.Execute;
 except on E:Exception do
 	begin
 	Result:=false;
@@ -521,9 +498,9 @@ end;
 function TDM.UserClosebyID(UserID: integer): boolean;
 begin
 try
-QUUserbyID.Close;
 QUUserbyID.ParamByName('U_ID').AsInteger:=UserID;
-QUUserbyID.ExecSQL;
+if not QUUserbyID.Prepared then QUUserbyID.Prepare;
+QUUserbyID.Execute;
 except on E:Exception do
 	begin
 	Result:=false;
@@ -537,9 +514,9 @@ function TDM.CompanyClosebyID(CompanyID: integer): boolean;
 begin
 //Пометить компанию как закрытую, неактивную
 try
-QUCompanyByID.Close;
 QUCompanyByID.ParamByName('CM_ID').AsInteger:=CompanyID;
-QUCompanyByID.ExecSQL;
+if not QUCompanyByID.Prepared then QUCompanyByID.Prepare;
+QUCompanyByID.Execute;
 except on E:Exception do
 	begin
 	Result:=false;
@@ -554,15 +531,15 @@ begin
 //Функция отбирает права на просмотр для всех удаляемых пользователей
 // Таблицы JobsForBoss, ContactsViews по полю VIEWERID
 try
-qDelJobsForBoss.Close;
 qDelJobsForBoss.ParamByName('JB_VIEWERID').AsInteger:=UserID;
-qDelJobsForBoss.ExecSQL;
-qDelContactsViews.Close;
+if not qDelJobsForBoss.Prepared then qDelJobsForBoss.Prepare;
+qDelJobsForBoss.Execute;
 qDelContactsViews.ParamByName('CN_VIEWER').AsInteger:=UserID;
-qDelContactsViews.ExecSQL;
-QDelUsersForBoss.Close;
+if not qDelContactsViews.Prepared then qDelContactsViews.Prepare;
+qDelContactsViews.Execute;
 QDelUsersForBoss.ParamByName('UB_VIEWERID').AsInteger:=UserID;
-QDelUsersForBoss.ExecSQL;
+if not QDelUsersForBoss.Prepared then QDelUsersForBoss.Prepare;
+QDelUsersForBoss.Execute;
 except on E:Exception do
 	begin
 	Result:=false;
@@ -575,11 +552,11 @@ end;
 function TDM.ContactCloseByID(ContactID, ClosedByManager:integer; CommentClose: string): boolean;
 begin
 try
-QDContact.Close;
 QDContact.ParamByName('CN_ID').AsInteger:=ContactID;
-QDContact.ParamByName('CN_CLOSED_BY_MANAGER').AsInteger:=ClosedByManager; 
+QDContact.ParamByName('CN_CLOSED_BY_MANAGER').AsInteger:=ClosedByManager;
 QDContact.ParamByName('CN_COMMENT_CLOSE').AsString:=CommentClose;
-QDContact.ExecSQL;
+if not QDContact.Prepared then QDContact.Prepare;
+QDContact.Execute;
 except on E:Exception do
 	begin
 	Result:=false;
@@ -593,7 +570,6 @@ function TDM.ContactInsert(ManagerID, OwnerID, CompanyID, Periodicity: integer;
           Contacter, Comment, NextDate, JobComment: string; JobType:integer): boolean;
 begin
 try
-QIContact.Close;
 QIContact.ParamByName('CN_ID').AsInteger:=ContactMaxID+1;
 QIContact.ParamByName('CN_OWNER').AsInteger:=OwnerID;
 QIContact.ParamByName('CN_MANAGER').AsInteger:=ManagerID;
@@ -605,7 +581,8 @@ QIContact.ParamByName('CN_JOBCOMMENT').AsString:=JobComment;
 QIContact.ParamByName('CN_PERIODICITY').AsInteger:=Periodicity;
 //QIContact.ParamByName('CN_PARAMETER').AsString:=Parameter;
 QIContact.ParamByName('CN_NEXT_JOB_DATE').AsDate:=StrToDate(NextDate);
-QIContact.ExecSQL;
+if not QIContact.Prepared then QIContact.Prepare;
+QIContact.Execute;
 except on E:Exception do
 	begin
 	Result:=false;
@@ -619,7 +596,6 @@ function TDM.ContactUpdate(ContactID, ManagerID, OwnerID,CompanyID, Periodicity:
            Contacter, Comment, NextDate, JobComment: string; JobType:integer): boolean;
 begin
 try
-QUContactByID.Close;
 QUContactByID.ParamByName('CN_ID').AsInteger:=ContactID;
 QUContactByID.ParamByName('CN_OWNER').AsInteger:=OwnerID;
 QUContactByID.ParamByName('CN_MANAGER').AsInteger:=ManagerID;
@@ -631,7 +607,8 @@ QUContactByID.ParamByName('CN_JOBCOMMENT').AsString:=JobComment;
 QUContactByID.ParamByName('CN_PERIODICITY').AsInteger:=Periodicity;
 //QUContactByID.ParamByName('CN_PARAMETER').AsString:=Parameter;
 QUContactByID.ParamByName('CN_NEXT_JOB_DATE').AsDate:=StrToDate(NextDate);
-QUContactByID.ExecSQL;
+if not QUContactByID.Prepared then QUContactByID.Prepare;
+QUContactByID.Execute;
 except on E:Exception do
 	begin
 	Result:=false;
@@ -647,7 +624,6 @@ var DT:Variant;
 begin
 try
 if isClosed then DT:=0 else DT:=StrToDate(NextJobDate);
-QUContactAuto.Close;
 QUContactAuto.ParamByName('CN_ID').AsInteger:=ContactID;
 QUContactAuto.ParamByName('CN_LAST_JOB').AsInteger:=LastJobID;
 QUContactAuto.ParamByName('CN_LAST_JOB_DATE').AsDate:=StrToDate(LastJobDate);
@@ -655,7 +631,8 @@ QUContactAuto.ParamByName('CN_NEXT_JOB_DATE').AsDate:=DT;
 if IsClosed
   then QUContactAuto.ParamByName('CN_ISCLOSED').AsInteger:=1
   else QUContactAuto.ParamByName('CN_ISCLOSED').AsInteger:=0;
-QUContactAuto.ExecSQL;
+if not QUContactAuto.Prepared then QUContactAuto.Prepare;
+QUContactAuto.Execute;
 if IsClosed
 then ContactCloseByID(ContactID, ClosedBy,CommentClose);
 except on E:Exception do
@@ -679,11 +656,11 @@ end;
 function TDM.CompanyNTInsert(CompanyNameType: string): boolean;
 begin
 try
-QIComNT.Close;
 QIComNT.ParamByName('CNT_ID').AsInteger:=CompanyNTMaxID+1;
 QIComNT.ParamByName('CNT_NAME').Asstring:=AnsiUpperCase(CompanynameType);
 QIComNT.ParamByName('CNT_CNTR').AsInteger:=1;
-QIComNT.ExecSQL;
+if not QIComNT.Prepared then QIComNT.Prepare;
+QIComNT.Execute;
 except on E:Exception do
 	begin
 	Result:=false;
@@ -697,10 +674,10 @@ function TDM.CompanyNTUpdate(CompanyNameType: string): boolean;
 begin
 try
 //при каждом запуске добавляем +1
-QUComNT.Close;
 QUComNT.ParamByName('CNT_ADD').AsInteger:=1;
 QUComNT.ParamByName('CNT_NAME').Asstring:=AnsiUpperCase(CompanynameType);
-QUComNT.ExecSQL;
+if not QUComNT.Prepared then QUComNT.Prepare;
+QUComNT.Execute;
 except on E:Exception do
 	begin
 	Result:=false;
@@ -805,10 +782,10 @@ end;
 function TDM.WriteSettings(Name, Value:string): boolean;
 begin
 try
-QUSettings.Close;
 QUSettings.ParamByName('ST_NAME').AsString:=ANSIUpperCase(Name);
 QUSettings.ParamByName('ST_VALUE').AsString:=ANSIUpperCase(Value);
-QUSettings.ExecSQL;
+if not QUSettings.Prepared then QUSettings.Prepare;
+QUSettings.Execute;
 except on E:Exception do
 	begin
 	Result:=false;
@@ -835,7 +812,7 @@ then F_ParentValue:=''
 else F_ParentValue:=QFindParent['PARENTVALUE'];
 end;
 
-procedure TDM.TreeFulFill(Tree:TTreeView; isShowEmptyRows:boolean; HeaderID:integer);
+procedure TDM.TreeFulFill(Tree:TsTreeView; isShowEmptyRows:boolean; HeaderID:integer);
 Var i, j, ChildCntr   : Integer;
     ParentTreeNode, ChildTreeNode : TTreeNode;
     ShowTheRow:boolean;
@@ -880,14 +857,11 @@ procedure TDM.SaveGlobalHeader(Grid:TDBGridEh);
 var
   I: Integer;
 begin
-qHeaderGlobDelete.Close;
-//qHeaderGlobDelete.ParamByName('FORM').AsString:=FormName;
 qHeaderGlobDelete.ParamByName('FIELD').AsString:='';
-qHeaderGlobDelete.ExecSQL;
+if not qHeaderGlobDelete.Prepared then qHeaderGlobDelete.Prepare;
+qHeaderGlobDelete.Execute;
 for I := 0 to Grid.Columns.Count - 1 do    // Iterate
   begin
-  qHeaderGlobInsert.Close;
-//  qHeaderGlobInsert.ParamByName('FORM').AsString:=FormName;
   qHeaderGlobInsert.ParamByName('FIELD').AsString:=Grid.Columns[i].FieldName;
   if Grid.Columns[i].Width<=0
   then qHeaderGlobInsert.ParamByName('SIZE').AsInteger:=1
@@ -900,7 +874,8 @@ for I := 0 to Grid.Columns.Count - 1 do    // Iterate
   then qHeaderGlobInsert.ParamByName('DISPLAYFORMAT').AsString:=Grid.Columns[i].DisplayFormat
   else qHeaderGlobInsert.ParamByName('DISPLAYFORMAT').AsString:='';
   qHeaderGlobInsert.ParamByName('ORDERBY').AsInteger:=i;
-  qHeaderGlobInsert.ExecSQL;
+  if not qHeaderGlobInsert.Prepared then qHeaderGlobInsert.Prepare;
+  qHeaderGlobInsert.Execute;
   end;    // for
 end;
 
@@ -908,14 +883,12 @@ procedure TDM.SaveHeader(Grid:TDBGridEh; Treeid:integer);
 var
   I: Integer;
 begin
-qHeaderDelete.Close;
-//qHeaderDelete.ParamByName('FORM').AsString:=FormName;
 qHeaderDelete.ParamByName('FIELD').AsString:='';
 qHeaderDelete.ParamByName('TREEID').AsInteger:=TreeID;
-qHeaderDelete.ExecSQL;
+if not qHeaderDelete.Prepared then qHeaderDelete.Prepare;
+qHeaderDelete.Execute;
 for I := 0 to Grid.Columns.Count - 1 do    // Iterate
   begin
-  qHeaderInsert.Close;
 //  qHeaderInsert.ParamByName('FORM').AsString:=FormName;
   qHeaderInsert.ParamByName('TREEID').AsInteger:=TreeID;
   qHeaderInsert.ParamByName('FIELD').AsString:=Grid.Columns[i].FieldName;
@@ -930,19 +903,17 @@ for I := 0 to Grid.Columns.Count - 1 do    // Iterate
   then qHeaderInsert.ParamByName('DISPLAYFORMAT').AsString:=Grid.Columns[i].DisplayFormat
   else qHeaderInsert.ParamByName('DISPLAYFORMAT').AsString:='';
   qHeaderInsert.ParamByName('ORDERBY').AsInteger:=i;
-  qHeaderInsert.ExecSQL;
+  if not qHeaderInsert.Prepared then qHeaderInsert.Prepare;
+  qHeaderInsert.Execute;
   end;    // for
 end;
 
 procedure TDM.SaveGlobalHeaderInForm(Field, Header, DisplayFormat:string;
           Size, OrderBy:integer; Show:boolean);
 begin
-qHeaderGlobDelete.Close;
-//qHeaderGlobDelete.ParamByName('FORM').AsString:=FormName;
 qHeaderGlobDelete.ParamByName('FIELD').AsString:=Field;
-qHeaderGlobDelete.ExecSQL;
-qHeaderGlobInsert.Close;
-//qHeaderGlobInsert.ParamByName('FORM').AsString:=FormName;
+if not qHeaderGlobDelete.Prepared then qHeaderGlobDelete.Prepare;
+qHeaderGlobDelete.Execute;
 qHeaderGlobInsert.ParamByName('FIELD').AsString:=Field;
 if Size<=0
 then qHeaderGlobInsert.ParamByName('SIZE').AsInteger:=1
@@ -953,19 +924,17 @@ else qHeaderGlobInsert.ParamByName('SHOW').AsInteger:=0;
 qHeaderGlobInsert.ParamByName('HEADER').AsString:=Header;
 qHeaderGlobInsert.ParamByName('DISPLAYFORMAT').AsString:=DisplayFormat;
 qHeaderGlobInsert.ParamByName('ORDERBY').AsInteger:=Orderby;
-qHeaderGlobInsert.ExecSQL;
+if not qHeaderGlobInsert.Prepared then qHeaderGlobInsert.Prepare;
+qHeaderGlobInsert.Execute;
 end;
 
 procedure TDM.SaveHeaderInForm(Field, Header,
       DisplayFormat: string; TreeId, Size, OrderBy: integer; Show:boolean);
 begin
-qHeaderDelete.Close;
-//qHeaderDelete.ParamByName('FORM').AsString:=FormName;
 qHeaderDelete.ParamByName('FIELD').AsString:=Field;
 qHeaderDelete.ParamByName('TreeID').AsInteger:=TreeID;
-qHeaderDelete.ExecSQL;
-qHeaderInsert.Close;
-//qHeaderInsert.ParamByName('FORM').AsString:=FormName;
+if not qHeaderDelete.Prepared then qHeaderDelete.Prepare;
+qHeaderDelete.Execute;
 qHeaderInsert.ParamByName('FIELD').AsString:=Field;
 if Size<=0
 then qHeaderInsert.ParamByName('SIZE').AsInteger:=1
@@ -977,7 +946,8 @@ qHeaderInsert.ParamByName('HEADER').AsString:=Header;
 qHeaderInsert.ParamByName('TREEID').AsInteger:=TreeID;
 qHeaderInsert.ParamByName('DISPLAYFORMAT').AsString:=DisplayFormat;
 qHeaderInsert.ParamByName('ORDERBY').AsInteger:=Orderby;
-qHeaderInsert.ExecSQL;
+if not qHeaderInsert.Prepared then qHeaderInsert.Prepare;
+qHeaderInsert.Execute;
 end;
 
 procedure TDM.RepaintGrid(var Grid:TDBGridEh; Treeid:integer);

@@ -3,32 +3,32 @@ unit ChangePrice;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Buttons, DBCtrls, DB, Grids, DBGrids, Mask,
-  ZAbstractRODataset, ZDataset, DBCtrlsEh, DBLookupEh, DBGridEh,
-  ZAbstractDataset, StrUtils;
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
+  Dialogs, StdCtrls, Buttons, DBCtrls, DB, Grids, DBGrids, Mask, ZAbstractRODataset, 
+  ZDataset, DBCtrlsEh, DBLookupEh, DBGridEh, ZAbstractDataset, StrUtils, sTreeView,
+  sEdit, sBitBtn, sLabel, MemDS, DBAccess, Uni;
 
 type
   TFormPriceChange = class(TForm)
-    BitBtnCancel: TBitBtn;
-    Label1: TLabel;
-    Label4: TLabel;
+    BitBtnCancel: TsBitBtn;
+    Label1: TsLabel;
+    Label4: TsLabel;
     DSPrice: TDataSource;
-    BitBtnSave: TBitBtn;
-    Label2: TLabel;
-    Label3: TLabel;
-    edtPrice: TEdit;
-    edtNewPrice: TEdit;
-    edtRest: TEdit;
-    edtNewRest: TEdit;
-    QPrice: TZReadOnlyQuery;
-    QUpdatePrice: TZQuery;
-    QRestField: TZReadOnlyQuery;
-    strngfldQRestFieldGS_FIELD: TStringField;
-    intgrfldQRestFieldGS_ORDERBY: TIntegerField;
-    intgrfldQPricePL_ID: TIntegerField;
-    fltfldQPricePL_PRICE: TFloatField;
-    strngfldQPriceREST: TStringField;
+    BitBtnSave: TsBitBtn;
+    Label2: TsLabel;
+    Label3: TsLabel;
+    edtPrice: TsEdit;
+    edtNewPrice: TsEdit;
+    edtRest: TsEdit;
+    edtNewRest: TsEdit;
+    QPrice: TUniQuery;
+    QRestField: TUniQuery;
+    QPricePL_ID: TIntegerField;
+    QPricePL_PRICE: TFloatField;
+    QPriceREST: TStringField;
+    QRestFieldGS_FIELD: TStringField;
+    QRestFieldGS_ORDERBY: TIntegerField;
+    QUpdatePrice: TUniSQL;
     procedure FormKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure BitBtnSaveClick(Sender: TObject);
@@ -48,7 +48,7 @@ implementation
 {$R *.dfm}
 
 uses
-  DataModule, MainForm, CommonUnit;
+  DataModule, MainForm, CommonUnit, System.UITypes;
 
 const
   isReloadList: Boolean = True;
@@ -109,7 +109,6 @@ if (edtNewPrice.Text<>edtPrice.Text) or  (edtNewRest.Text<>edtRest.Text) then
   if Pos('.',edtNewPrice.Text)>0 then edtNewPrice.Text:=AnsiReplaceStr(edtNewPrice.Text,'.',FormatSettings.DecimalSeparator);
   if Pos(',',edtNewrest.Text)>0 then edtNewrest.Text:=AnsiReplaceStr(edtNewRest.Text,',',FormatSettings.DecimalSeparator);
   if Pos('.',edtNewRest.Text)>0 then edtNewRest.Text:=AnsiReplaceStr(edtNewRest.Text,'.',FormatSettings.DecimalSeparator);
-  QUpdatePrice.Close;
   QUpdatePrice.ParamByName('ID').AsInteger:=F_ID;
   if F_RestName='0'
     then QUpdatePrice.SQL.Text:='UPDATE PRICE_LINES SET PL_PRICE=:PRICE WHERE PL_ID=:ID'
@@ -119,9 +118,9 @@ if (edtNewPrice.Text<>edtPrice.Text) or  (edtNewRest.Text<>edtRest.Text) then
       QUpdatePrice.ParamByName('RESTVALUE').AsString:=edtNewRest.Text;
       end;
   QUpdatePrice.ParamByName('PRICE').AsFloat:=StrToFloat(edtNewPrice.Text);
-  QUpdatePrice.ExecSQL;
+  QUpdatePrice.Prepare;
+  QUpdatePrice.Execute;
   end;
 end;
 
 end.
-

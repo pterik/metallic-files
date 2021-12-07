@@ -3,65 +3,67 @@ unit ShowCompany;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset,
-  ZDataset, Grids, DBGrids, DBGridEh, MdiChild, ShowTree, ExtCtrls, CommonUnit,
-  DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, EhLibVCL,
-  GridsEh, DBAxisGridsEh;
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
+  Dialogs, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, 
+  Grids, DBGrids, DBGridEh, MdiChild, ShowTree, ExtCtrls, CommonUnit, 
+  DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, EhLibVCL, GridsEh, DBAxisGridsEh,
+  sButton, sComboBox, sLabel, sBitBtn, sCheckBox, sPanel, sTreeView, MemDS,
+  DBAccess, Uni;
 
 type
   TFormCompaniesShow = class(TFormMdiChild)
-    QCompany: TZQuery;
     DSCompanies: TDataSource;
-    QCompanySISCLOSED: TStringField;
-    QPhones: TZQuery;
     DSPhones: TDataSource;
-    QPhonesPH_COMMENT: TStringField;
-    QPhonesPH_DATEBEGIN: TDateField;
-    QPhonesUSERNAME: TStringField;
+    Grid: TDBGridEh;
+    DBGridPhones: TDBGridEh;
+    Panel1: TsPanel;
+    CBActive: TsCheckBox;
+    pnlRight: TsPanel;
+    pnlTop: TsPanel;
+    pnlClient: TsPanel;
+    btnShowPrice: TsBitBtn;
+    pnlLeft: TsPanel;
+    pnlLeftTop: TsPanel;
+    Panel2: TsPanel;
+    Label1: TsLabel;
+    Label2: TsLabel;
+    cbFields: TsComboBox;
+    btnFilterAdd: TsBitBtn;
+    cbFilter: TsComboBox;
+    btnFilterClear: TsButton;
+    pnlDisplayFilter: TsPanel;
+    chk1: TsCheckBox;
+    chk2: TsCheckBox;
+    chk3: TsCheckBox;
+    chk4: TsCheckBox;
+    QCompany: TUniQuery;
+    QPhones: TUniQuery;
+    qCompanyFL: TUniQuery;
+    QCompanyCOMPANYID: TIntegerField;
     QCompanyCM_NAME: TStringField;
     QCompanyCM_COMMENT: TStringField;
     QCompanyCM_ISCLOSED: TIntegerField;
-    QPhonesPH_ID: TLargeintField;
-    QPhonesPH_STR: TStringField;
-    QPhonesWHO_WHERE: TStringField;
-    Grid: TDBGridEh;
-    DBGridPhones: TDBGridEh;
-    QPhonesPH_ISCLOSED: TSmallintField;
-    QPhonesSISCLOSED: TStringField;
-    QCompanyCM_OWNER: TIntegerField;
-    QCompanyCM_TRUNC_COMMENT: TStringField;
-    QCompanyCOMPANYID: TIntegerField;
-    Panel1: TPanel;
-    CBActive: TCheckBox;
-    QCompanyTL_NAME: TStringField;
-    QCompanyTL_COLOR: TIntegerField;
-    pnlRight: TPanel;
-    pnlTop: TPanel;
-    pnlClient: TPanel;
     QCompanyCM_HYPERLINK: TStringField;
-    btnShowPrice: TBitBtn;
-    pnlLeft: TPanel;
-    pnlLeftTop: TPanel;
-    Panel2: TPanel;
-    Label1: TLabel;
-    Label2: TLabel;
-    cbFields: TComboBox;
-    btnFilterAdd: TBitBtn;
-    cbFilter: TComboBox;
-    btnFilterClear: TButton;
-    pnlDisplayFilter: TPanel;
-    qCompanyFL: TZReadOnlyQuery;
-    strngfldQCompanyCM_BUSINESS: TStringField;
-    chk1: TCheckBox;
-    chk2: TCheckBox;
-    chk3: TCheckBox;
-    chk4: TCheckBox;
-    strngfldQCompanyCM_CITY: TStringField;
-    procedure QCompanyCalcFields(DataSet: TDataSet);
-    procedure QPhonesCalcFields(DataSet: TDataSet);
+    QCompanyCM_BUSINESS: TStringField;
+    QCompanyCM_OWNER: TIntegerField;
+    QCompanyCM_CITY: TStringField;
+    QCompanyTL_COLOR: TIntegerField;
+    QCompanyTL_NAME: TStringField;
+    QCompanySISCLOSED: TStringField;
+    QCompanyCM_TRUNC_COMMENT: TStringField;
+    QPhonesPH_ID: TFloatField;
+    QPhonesPH_COMMENT: TStringField;
+    QPhonesPH_ISCLOSED: TSmallintField;
+    QPhonesPH_DATEBEGIN: TDateField;
+    QPhonesUSERNAME: TStringField;
+    QPhonesPH_STR: TStringField;
+    QPhonesSISCLOSED: TStringField;
+    QPhonesWHO_WHERE: TStringField;
+    qCompanyFLRES: TStringField;
+    procedure QCompany2CalcFields(DataSet: TDataSet);
+    procedure QPhones2CalcFields(DataSet: TDataSet);
     procedure CBActiveClick(Sender: TObject);
-    procedure QCompanyAfterScroll(DataSet: TDataSet);
+    procedure QCompany2AfterScroll(DataSet: TDataSet);
     procedure GridTitleClick(Column: TColumnEh);
     procedure GridDrawColumnCell(Sender: TObject;
       const Rect: TRect; DataCol: Integer; Column: TColumnEh;
@@ -115,14 +117,14 @@ begin
   CBFilter.Clear;
 end;
 
-procedure TFormCompaniesShow.QCompanyCalcFields(DataSet: TDataSet);
+procedure TFormCompaniesShow.QCompany2CalcFields(DataSet: TDataSet);
 begin
   if QCompany['CM_ISCLOSED'] = 1 then QCompany['SISCLOSED'] := 'мер';
   if QCompany['CM_ISCLOSED'] = 0 then QCompany['SISCLOSED'] := 'дю';
   QCompany['CM_TRUNC_COMMENT'] := DeleteReturns(QCompany['CM_COMMENT']);
 end;
 
-procedure TFormCompaniesShow.QPhonesCalcFields(DataSet: TDataSet);
+procedure TFormCompaniesShow.QPhones2CalcFields(DataSet: TDataSet);
 begin
   if not VarIsNull(QPhones['PH_DATEBEGIN']) then  QPhones['WHO_WHERE'] := DateToStr(QPhones['PH_DATEBEGIN']);
   if not VarIsNull(QPhones['USERNAME']) then QPhones['WHO_WHERE'] := QPhones['WHO_WHERE'] + ' ' + QPhones['USERNAME'];
@@ -157,7 +159,7 @@ begin
   RefreshPhones;
 end;
 
-procedure TFormCompaniesShow.QCompanyAfterScroll(DataSet: TDataSet);
+procedure TFormCompaniesShow.QCompany2AfterScroll(DataSet: TDataSet);
 begin
   RefreshPhones;
 end;
@@ -166,13 +168,16 @@ procedure TFormCompaniesShow.GridTitleClick(Column: TColumnEh);
 begin
   if F_LastSorted = Column.FieldName then
   begin
-    QCompany.SortedFields := Column.FieldName;
-    QCompany.SortType := stDescending;
+    //QCompany.SortedFields := Column.FieldName;
+    //QCompany.SortType := stDescending;
+    QCompany.IndexFieldNames:= Column.FieldName+ ' DESC' ;
+    //DataSet1.IndexFieldNames := 'LastName ASC CIS; DateDue DESC';
   end
   else
   begin
-    QCompany.SortedFields := Column.FieldName;
-    QCompany.SortType := stAscending;
+    //QCompany.SortedFields := Column.FieldName;
+    //QCompany.SortType := stAscending;
+    QCompany.IndexFieldNames:= Column.FieldName+ ' ASC' ;
   end;
   F_LastSorted := Column.FieldName;
 end;
@@ -405,4 +410,3 @@ end;
 
 
 end.
-

@@ -20,7 +20,7 @@ object FormCompanies: TFormCompanies
     469)
   PixelsPerInch = 96
   TextHeight = 13
-  object lbl1: TLabel
+  object lbl1: TsLabel
     Left = 8
     Top = 6
     Width = 80
@@ -33,7 +33,7 @@ object FormCompanies: TFormCompanies
     Font.Style = []
     ParentFont = False
   end
-  object lbl2: TLabel
+  object lbl2: TsLabel
     Left = 248
     Top = 6
     Width = 119
@@ -46,7 +46,7 @@ object FormCompanies: TFormCompanies
     Font.Style = []
     ParentFont = False
   end
-  object lbl3: TLabel
+  object lbl3: TsLabel
     Left = 488
     Top = 6
     Width = 39
@@ -59,7 +59,7 @@ object FormCompanies: TFormCompanies
     Font.Style = []
     ParentFont = False
   end
-  object CBActive: TCheckBox
+  object CBActive: TsCheckBox
     Left = 691
     Top = 8
     Width = 249
@@ -80,7 +80,7 @@ object FormCompanies: TFormCompanies
     TabOrder = 1
     OnClick = CBActiveClick
   end
-  object BitBtnInsert: TBitBtn
+  object BitBtnInsert: TsBitBtn
     Left = 8
     Top = 436
     Width = 149
@@ -133,7 +133,7 @@ object FormCompanies: TFormCompanies
     TabOrder = 3
     OnClick = BitBtnInsertClick
   end
-  object BitBtnUpdate: TBitBtn
+  object BitBtnUpdate: TsBitBtn
     Left = 172
     Top = 436
     Width = 105
@@ -186,7 +186,7 @@ object FormCompanies: TFormCompanies
     TabOrder = 4
     OnClick = BitBtnUpdateClick
   end
-  object BitBtnDelete: TBitBtn
+  object BitBtnDelete: TsBitBtn
     Left = 289
     Top = 436
     Width = 137
@@ -239,7 +239,7 @@ object FormCompanies: TFormCompanies
     TabOrder = 5
     OnClick = BitBtnDeleteClick
   end
-  object BitBtnClose: TBitBtn
+  object BitBtnClose: TsBitBtn
     Left = 856
     Top = 436
     Width = 77
@@ -413,7 +413,7 @@ object FormCompanies: TFormCompanies
     object RowDetailData: TRowDetailPanelControlEh
     end
   end
-  object BitBtnNewPhone: TBitBtn
+  object BitBtnNewPhone: TsBitBtn
     Left = 432
     Top = 436
     Width = 141
@@ -480,7 +480,7 @@ object FormCompanies: TFormCompanies
     TabOrder = 7
     OnClick = BitBtnNewPhoneClick
   end
-  object BitBtnClosePhone: TBitBtn
+  object BitBtnClosePhone: TsBitBtn
     Left = 581
     Top = 436
     Width = 121
@@ -533,7 +533,7 @@ object FormCompanies: TFormCompanies
     TabOrder = 8
     OnClick = BitBtnClosePhoneClick
   end
-  object btnShowPrice: TBitBtn
+  object btnShowPrice: TsBitBtn
     Left = 708
     Top = 436
     Width = 105
@@ -552,7 +552,7 @@ object FormCompanies: TFormCompanies
     TabOrder = 9
     OnClick = btnShowPriceClick
   end
-  object edtCompany: TEdit
+  object edtCompany: TsEdit
     Left = 88
     Top = 4
     Width = 153
@@ -566,7 +566,7 @@ object FormCompanies: TFormCompanies
     TabOrder = 10
     OnExit = edtCompanyExit
   end
-  object edtBusiness: TEdit
+  object edtBusiness: TsEdit
     Left = 368
     Top = 4
     Width = 113
@@ -580,7 +580,7 @@ object FormCompanies: TFormCompanies
     TabOrder = 11
     OnExit = edtBusinessExit
   end
-  object edtCity: TEdit
+  object edtCity: TsEdit
     Left = 536
     Top = 4
     Width = 137
@@ -882,4 +882,4 @@ object FormCompanies: TFormCompanies
     Left = 568
     Top = 200
   end
-end
+end

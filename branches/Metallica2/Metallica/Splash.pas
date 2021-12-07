@@ -3,7 +3,7 @@ unit Splash;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
   Dialogs, jpeg, ExtCtrls, StdCtrls;
 
 type
@@ -33,4 +33,4 @@ Image1.Left:=(Width-514) div 2;
 Image1.Top:=(Height-162)div 2;
 end;
 
-end.
+end.

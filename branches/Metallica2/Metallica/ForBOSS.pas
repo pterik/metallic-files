@@ -3,9 +3,8 @@ unit ForBOSS;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset,
-  ZDataset;
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
+  Dialogs, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset;
 
 type
   Flds= record
@@ -13,10 +12,10 @@ type
   Size,Show,Orderby:integer;
   end;
   TFormForBoss = class(TForm)
-    BitBtnClose: TBitBtn;
-    BitBtnAdditional: TBitBtn;
-    BitBtnUpdateTree: TBitBtn;
-    BitBtn1: TBitBtn;
+    BitBtnClose: TsBitBtn;
+    BitBtnAdditional: TsBitBtn;
+    BitBtnUpdateTree: TsBitBtn;
+    BitBtn1: TsBitBtn;
     qGlobDelete: TZQuery;
     qGlobDeleteCNTR: TIntegerField;
     qGlobInsert: TZQuery;
@@ -109,4 +108,4 @@ for I := 0 to 13 do
   end;
 end;
 
-end.
+end.

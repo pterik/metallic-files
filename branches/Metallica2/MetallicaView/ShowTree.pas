@@ -3,57 +3,34 @@ unit ShowTree;
 interface
 
 uses
-  Windows, Classes, Graphics, Forms, Controls, Grids, DBGridEh, ComCtrls,
-  DB, ZAbstractRODataset, ZDataset, DataModule, StdCtrls, MDIChild, Buttons,
-  Mask, DBCtrlsEh, ExtCtrls, CommonUnit, DBGridEhGrouping, ToolCtrlsEh,
-  DBGridEhToolCtrls, DynVarsEh, EhLibVCL, GridsEh, DBAxisGridsEh;
+  Windows, Classes, Graphics, Forms, Controls, Grids, DBGridEh, ComCtrls, DB, 
+  ZAbstractRODataset, ZDataset, DataModule, StdCtrls, MDIChild, Buttons, Mask, DBCtrlsEh, 
+  ExtCtrls, CommonUnit, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, 
+  DynVarsEh, EhLibVCL, GridsEh, DBAxisGridsEh, sTreeView, sCheckBox, sButton,
+  sBitBtn, sComboBox, sLabel, sPanel, MemDS, DBAccess, Uni;
 
 type
   TFormTree = class(TFormMDIChild)
-    Tree: TTreeView;
+    Tree: TsTreeView;
     Grid: TDBGridEh;
     DSData: TDataSource;
-    qData: TZReadOnlyQuery;
-    qDataPL_ID: TIntegerField;
-    qDataPL_HEADERID: TIntegerField;
-    qDataPL_TREEID: TIntegerField;
-    qDataCM_NAME: TStringField;
-    qDataCM_ID: TIntegerField;
-    qDataPL_PRICE: TFloatField;
-    qDataPL_VALUE1: TStringField;
-    qDataPL_VALUE2: TStringField;
-    qDataPL_VALUE3: TStringField;
-    qDataPL_VALUE4: TStringField;
-    qDataPL_VALUE5: TStringField;
-    qDataPL_VALUE6: TStringField;
-    qDataPL_VALUE7: TStringField;
-    qDataPL_VALUE8: TStringField;
-    qDataPL_VALUE9: TStringField;
-    qDataPL_ORDERBY: TIntegerField;
-    qDataPL_DATE_UPDATE: TDateTimeField;
-    qDataPL_ISCLOSED: TSmallintField;
-    qDataPL_PARENT: TStringField;
-    qDataPT_VALUE: TStringField;
-    qDataCM_CITY: TStringField;
-    qDataFl: TZReadOnlyQuery;
-    Panel1: TPanel;
-    Panel2: TPanel;
-    Label1: TLabel;
-    CBFields: TComboBox;
-    BitBtnInsert: TBitBtn;
-    Label2: TLabel;
-    CBFilter: TComboBox;
-    ButtonFilterClear: TButton;
-    qDataTL_COLOR: TIntegerField;
-    pnlRight: TPanel;
-    pnlTop: TPanel;
-    qDataCM_BUSINESS: TStringField;
-    strngfldDataCM_HYPERLINK: TStringField;
-    chk1: TCheckBox;
-    chk2: TCheckBox;
-    chk3: TCheckBox;
-    chk4: TCheckBox;
-    chk5: TCheckBox;
+    Panel1: TsPanel;
+    Panel2: TsPanel;
+    Label1: TsLabel;
+    CBFields: TsComboBox;
+    BitBtnInsert: TsBitBtn;
+    Label2: TsLabel;
+    CBFilter: TsComboBox;
+    ButtonFilterClear: TsButton;
+    pnlRight: TsPanel;
+    pnlTop: TsPanel;
+    chk1: TsCheckBox;
+    chk2: TsCheckBox;
+    chk3: TsCheckBox;
+    chk4: TsCheckBox;
+    chk5: TsCheckBox;
+    qDataFl: TUniQuery;
+    qData: TUniQuery;
     procedure TreeChange(Sender: TObject; Node: TTreeNode);
     procedure TreeExpanding(Sender: TObject; Node: TTreeNode;
       var AllowExpansion: Boolean);
@@ -77,6 +54,7 @@ type
     procedure chk5Click(Sender: TObject);
     procedure GridKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     F_CBFieldsName, F_CBFieldsTitle:string;
     F_LastSorted: string;
@@ -97,7 +75,7 @@ type
 implementation
 
 uses
-  SysUtils, ShowCompany, Variants, Dialogs, ShowPrice, MainForm, ChangePrice;
+  SysUtils, ShowCompany, Variants, Dialogs, ShowPrice, MainForm, ChangePrice, System.UITypes;
 
 {$R *.DFM}
 
@@ -175,6 +153,13 @@ begin
   F_FieldName1:= 'CM_NAME';
 end;
 
+procedure TFormTree.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  inherited;
+if qData.Active then qData.Close;
+if qDataFL.Active then qDataFl.Close;
+end;
+
 procedure TFormTree.FormCreate(Sender: TObject);
 begin
   MyNode:= TNodeValue.Create;
@@ -203,13 +188,15 @@ begin
   //qData.SortedFields:=Column.FieldName;
   if F_LastSorted = Column.FieldName then
   begin
-    QData.SortedFields:= Column.FieldName;
-    QData.SortType:= stDescending;
+    //QData.SortedFields:= Column.FieldName;
+    //QData.SortType:= stDescending;
+    QData.IndexFieldNames:= Column.FieldName+ ' DESC' ;
   end
   else
   begin
-    QData.SortedFields:= Column.FieldName;
-    QData.SortType:= stAscending;
+    //QData.SortedFields:= Column.FieldName;
+    //QData.SortType:= stAscending;
+    QData.IndexFieldNames:= Column.FieldName+ ' ASC' ;
   end;
   F_LastSorted:= Column.FieldName;
   if VarIsNull(qData['PL_ID']) then Exit;
@@ -267,6 +254,7 @@ qDataFl.SQL.Text:= 'select distinct ' +
   ' and (upper(cm_business) like ''%''||:business||''%'' or (cast(:business as varchar(100)) ='''') ) ';
 qDataFl.SQL.Add(Filter.Query);
 qDataFl.SQL.Add(')');
+if not qDataFL.Prepared then qDataFL.Prepare;
 qDataFL.ParamByName('Company').AsString:= AnsiUpperCase(Filter.CompanyLike);
 qDataFL.ParamByName('City').AsString:= AnsiUpperCase(Filter.City);
 qDataFL.ParamByName('Business').AsString:= AnsiUppercase(Filter.Business);
@@ -398,6 +386,7 @@ qData.SQL.Text:='SELECT pl_id, pl_headerid, pl.pl_treeid, pl_price, '+
 ' and (upper(cm_city) like upper(''%''||:CITY||''%'') or (cast(:CITY as varchar(100))  = '''')) '+
 ' AND (upper(cm_business) like ''%''||:business||''%'' or (cast(:business as varchar(100)) ='''') )';
 qData.SQL.Add(Filter.Query);
+if not qData.Prepared then qData.Prepare;
 qData.ParamByName('Company').AsString:= AnsiUpperCase(Filter.CompanyLike);
 qData.ParamByName('City').AsString:= AnsiUpperCase(Filter.City);
 qData.ParamByName('Business').AsString:= AnsiUppercase(Filter.Business);
@@ -474,4 +463,3 @@ begin
 end;
 
 end.
-

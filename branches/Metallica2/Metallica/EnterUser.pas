@@ -3,23 +3,22 @@ unit EnterUser;
 interface
 
 uses
-	Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-	Dialogs, StdCtrls, Buttons, ExtCtrls, DB, ZAbstractRODataset,
-	ZAbstractDataset, ZDataset, ZConnection, Mask, DBCtrlsEh, DBLookupEh,
-  DBGridEh, MemDS, DBAccess, Uni;
+  	Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
+  	Dialogs, StdCtrls, Buttons, ExtCtrls, DB, ZAbstractRODataset, 	ZAbstractDataset, 
+  ZDataset, ZConnection, Mask, DBCtrlsEh, DBLookupEh, DBGridEh, MemDS, DBAccess, Uni;
 
 type
 	TFormEnterUser = class(TForm)
-		Label3: TLabel;
-		BitBtnCancel: TBitBtn;
-		BitBtnEnter: TBitBtn;
+		Label3: TsLabel;
+		BitBtnCancel: TsBitBtn;
+		BitBtnEnter: TsBitBtn;
     QUsers2: TZQuery;
-    EPWD: TEdit;
-    Label2: TLabel;
-    Label4: TLabel;
+    EPWD: TsEdit;
+    Label2: TsLabel;
+    Label4: TsLabel;
     DBUsers: TDBLookupComboboxEh;
     DSUsers: TDataSource;
-    EFIO: TEdit;
+    EFIO: TsEdit;
     QUsers: TUniQuery;
     QUsers2U_ID: TIntegerField;
     QUsers2U_LOGIN: TStringField;
@@ -222,4 +221,4 @@ begin
 if not F_ValidUser then halt(2);
 end;
 
-end.
+end.

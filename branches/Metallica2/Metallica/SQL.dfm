@@ -18,21 +18,21 @@ object FormSQL: TFormSQL
     407)
   PixelsPerInch = 96
   TextHeight = 13
-  object Label1: TLabel
+  object Label1: TsLabel
     Left = 48
     Top = 0
     Width = 244
     Height = 13
     Caption = #1047#1072#1087#1088#1086#1089' '#1076#1086#1083#1078#1077#1085' '#1073#1099#1090#1100' '#1090#1086#1083#1100#1082#1086' '#1080#1079' '#1086#1076#1085#1086#1081' '#1082#1086#1084#1072#1085#1076#1099'.'
   end
-  object Label2: TLabel
+  object Label2: TsLabel
     Left = 40
     Top = 248
     Width = 170
     Height = 13
     Caption = #1044#1083#1103' '#1082#1086#1084#1072#1085#1076' c INSERT '#1080' UPDATE'
   end
-  object BitBtnExecute: TBitBtn
+  object BitBtnExecute: TsBitBtn
     Left = 224
     Top = 235
     Width = 121
@@ -55,7 +55,7 @@ object FormSQL: TFormSQL
     TabOrder = 4
     OnClick = BitBtnExecuteClick
   end
-  object MemoSQL: TMemo
+  object MemoSQL: TsMemo
     Left = 8
     Top = 16
     Width = 337
@@ -63,14 +63,14 @@ object FormSQL: TFormSQL
     ScrollBars = ssBoth
     TabOrder = 0
   end
-  object EditName: TEdit
+  object EditName: TsEdit
     Left = 8
     Top = 208
     Width = 313
     Height = 21
     TabOrder = 1
   end
-  object ButtonOpenFile: TButton
+  object ButtonOpenFile: TsButton
     Left = 328
     Top = 210
     Width = 17
@@ -79,7 +79,7 @@ object FormSQL: TFormSQL
     TabOrder = 2
     OnClick = ButtonOpenFileClick
   end
-  object CBExecute: TCheckBox
+  object CBExecute: TsCheckBox
     Left = 16
     Top = 232
     Width = 209
@@ -99,7 +99,7 @@ object FormSQL: TFormSQL
     object RowDetailData: TRowDetailPanelControlEh
     end
   end
-  object BitBtnCancel: TBitBtn
+  object BitBtnCancel: TsBitBtn
     Left = 8
     Top = 386
     Width = 75
@@ -141,10 +141,10 @@ object FormSQL: TFormSQL
     Left = 128
     Top = 288
   end
-  object SDSQL: TSaveDialog
+  object SDSQL: TsSaveDialog
     DefaultExt = 'Text files|*.txt'
     Filter = 'SQL file|*.sql|Any file|*.*'
     Left = 200
     Top = 80
   end
-end
+end

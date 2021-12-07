@@ -144,7 +144,7 @@ object FormPriceShow: TFormPriceShow
     object RowDetailData: TRowDetailPanelControlEh
     end
   end
-  object pnlTop: TPanel
+  object pnlTop: TsPanel
     Left = 0
     Top = 0
     Width = 987
@@ -154,38 +154,39 @@ object FormPriceShow: TFormPriceShow
     DesignSize = (
       987
       65)
-    object pnlButtons: TPanel
+    object pnlButtons: TsPanel
       Left = 8
       Top = 8
       Width = 257
       Height = 50
       TabOrder = 0
-      object Label1: TLabel
+      object Label1: TsLabel
         Left = 8
         Top = 8
         Width = 26
         Height = 13
         Caption = #1055#1086#1083#1077
       end
-      object Label2: TLabel
+      object Label2: TsLabel
         Left = 8
         Top = 24
         Width = 30
         Height = 13
         Caption = #1088#1072#1074#1085#1086
       end
-      object CBFields: TComboBox
+      object CBFields: TsComboBox
         Left = 40
         Top = 4
         Width = 105
         Height = 21
+        ItemIndex = -1
         TabOrder = 0
         Text = 'CBFields'
         OnSelect = CBFieldsSelect
         Items.Strings = (
           '11111')
       end
-      object BitBtnInsert: TBitBtn
+      object BitBtnInsert: TsBitBtn
         Left = 160
         Top = 4
         Width = 81
@@ -194,15 +195,16 @@ object FormPriceShow: TFormPriceShow
         TabOrder = 2
         OnClick = BitBtnInsertClick
       end
-      object CBFilter: TComboBox
+      object CBFilter: TsComboBox
         Left = 40
         Top = 28
         Width = 105
         Height = 21
+        ItemIndex = -1
         TabOrder = 1
         Text = 'CBFilter'
       end
-      object ButtonFilterClear: TButton
+      object ButtonFilterClear: TsButton
         Left = 158
         Top = 24
         Width = 83
@@ -212,7 +214,7 @@ object FormPriceShow: TFormPriceShow
         OnClick = ButtonFilterClearClick
       end
     end
-    object pnlFilters: TPanel
+    object pnlFilters: TsPanel
       Left = 273
       Top = 0
       Width = 712
@@ -221,79 +223,84 @@ object FormPriceShow: TFormPriceShow
       Anchors = [akLeft, akTop, akRight]
       TabOrder = 1
       OnResize = pnlFiltersResize
-      object chk1: TCheckBox
+      object chk1: TsCheckBox
         Left = 1
         Top = 9
-        Width = 140
-        Height = 45
-        BiDiMode = bdRightToLeftNoAlign
+        Width = 46
+        Height = 17
         Caption = 'chk1'
+        BiDiMode = bdRightToLeftNoAlign
         Checked = True
         ParentBiDiMode = False
         State = cbChecked
         TabOrder = 0
-        WordWrap = True
         OnClick = chk1Click
+        WordWrap = True
       end
-      object chk2: TCheckBox
+      object chk2: TsCheckBox
         Left = 141
         Top = 10
-        Width = 140
-        Height = 45
-        BiDiMode = bdRightToLeftNoAlign
+        Width = 46
+        Height = 17
         Caption = 'chk2'
+        BiDiMode = bdRightToLeftNoAlign
         Checked = True
         ParentBiDiMode = False
         State = cbChecked
         TabOrder = 1
-        WordWrap = True
         OnClick = chk2Click
+        WordWrap = True
       end
-      object chk3: TCheckBox
+      object chk3: TsCheckBox
         Left = 280
         Top = 10
-        Width = 140
-        Height = 45
-        BiDiMode = bdRightToLeftNoAlign
+        Width = 46
+        Height = 17
         Caption = 'chk3'
+        BiDiMode = bdRightToLeftNoAlign
         Checked = True
         ParentBiDiMode = False
         State = cbChecked
         TabOrder = 2
-        WordWrap = True
         OnClick = chk3Click
+        WordWrap = True
       end
-      object chk4: TCheckBox
+      object chk4: TsCheckBox
         Left = 421
         Top = 10
-        Width = 140
-        Height = 45
-        BiDiMode = bdRightToLeftNoAlign
+        Width = 46
+        Height = 17
         Caption = 'chk4'
+        BiDiMode = bdRightToLeftNoAlign
         Checked = True
         ParentBiDiMode = False
         State = cbChecked
         TabOrder = 3
-        WordWrap = True
         OnClick = chk4Click
+        WordWrap = True
       end
-      object chk5: TCheckBox
+      object chk5: TsCheckBox
         Left = 561
         Top = 10
-        Width = 140
-        Height = 45
-        BiDiMode = bdRightToLeftNoAlign
+        Width = 46
+        Height = 17
         Caption = 'chk5'
+        BiDiMode = bdRightToLeftNoAlign
         Checked = True
         ParentBiDiMode = False
         State = cbChecked
         TabOrder = 4
-        WordWrap = True
         OnClick = chk5Click
+        WordWrap = True
       end
     end
   end
-  object qData: TZReadOnlyQuery
+  object DSData: TDataSource
+    DataSet = qData
+    Left = 160
+    Top = 200
+  end
+  object qData: TUniQuery
     Connection = FormMain.ZC
     SQL.Strings = (
       'SELECT pl_id, pl_headerid, pl.pl_treeid, pl_price,'
@@ -328,66 +335,39 @@ object FormPriceShow: TFormPriceShow
       
         'and (upper(cm_business) like '#39'%'#39'||:business||'#39'%'#39' or (cast(:busin' +
         'ess as varchar(100)) ='#39#39') )'
-      'ORDER BY ph.ph_date_insert, pl_orderby'
-      ' '
-      ' '
-      ' '
-      ' ')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'node'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftString
-        Name = 'treeid'
-        ParamType = ptUnknown
-        Value = '8'
-      end
-      item
-        DataType = ftUnknown
-        Name = 'company'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'CITY'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'business'
-        ParamType = ptUnknown
-      end>
-    Left = 112
-    Top = 200
+      'ORDER BY ph.ph_date_insert, pl_orderby')
+    Left = 216
+    Top = 336
     ParamData = <
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'node'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end
       item
         DataType = ftString
         Name = 'treeid'
-        ParamType = ptUnknown
-        Value = '8'
+        ParamType = ptInput
+        Value = ''
       end
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'company'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'CITY'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'business'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end>
     object qDataPL_ID: TIntegerField
       FieldName = 'PL_ID'
@@ -402,15 +382,18 @@ object FormPriceShow: TFormPriceShow
     end
     object qDataCM_NAME: TStringField
       FieldName = 'CM_NAME'
+      ReadOnly = True
       Size = 100
     end
     object qDataCM_CITY: TStringField
       FieldName = 'CM_CITY'
+      ReadOnly = True
       Required = True
       Size = 100
     end
     object qDataCM_ID: TIntegerField
       FieldName = 'CM_ID'
+      ReadOnly = True
       Required = True
     end
     object qDataPL_PRICE: TFloatField
@@ -455,6 +438,7 @@ object FormPriceShow: TFormPriceShow
     end
     object qDataPL_ORDERBY: TIntegerField
       FieldName = 'PL_ORDERBY'
+      Required = True
     end
     object qDataPL_DATE_UPDATE: TDateTimeField
       FieldName = 'PL_DATE_UPDATE'
@@ -475,24 +459,21 @@ object FormPriceShow: TFormPriceShow
     end
     object qDataTL_COLOR: TIntegerField
       FieldName = 'TL_COLOR'
-      Required = True
+      ReadOnly = True
     end
-    object strngfldDataCM_BUSINESS: TStringField
+    object qDataCM_BUSINESS: TStringField
       FieldName = 'CM_BUSINESS'
+      ReadOnly = True
       Required = True
       Size = 100
     end
-    object strngfldDataCM_HYPERLINK: TStringField
+    object qDataCM_HYPERLINK: TStringField
       FieldName = 'CM_HYPERLINK'
+      ReadOnly = True
       Size = 1000
     end
   end
-  object DSData: TDataSource
-    DataSet = qData
-    Left = 160
-    Top = 200
-  end
-  object qDataFl: TZReadOnlyQuery
+  object qDataFl: TUniQuery
     Connection = FormMain.ZC
     SQL.Strings = (
       'SELECT pl_id, pl_headerid, pl.pl_treeid, pl_price,'
@@ -525,61 +506,126 @@ object FormPriceShow: TFormPriceShow
         'ess as varchar(100)) ='#39#39'))'
       'ORDER BY ph.ph_date_insert, pl_orderby'
       ' ')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'node'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftString
-        Name = 'treeid'
-        ParamType = ptUnknown
-        Value = '8'
-      end
-      item
-        DataType = ftUnknown
-        Name = 'company'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'CITY'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'business'
-        ParamType = ptUnknown
-      end>
-    Left = 256
-    Top = 192
+    Left = 296
+    Top = 336
     ParamData = <
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'node'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end
       item
         DataType = ftString
         Name = 'treeid'
-        ParamType = ptUnknown
-        Value = '8'
+        ParamType = ptInput
+        Value = nil
       end
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'company'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'CITY'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'business'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end>
+    object qDataFlPL_ID: TIntegerField
+      FieldName = 'PL_ID'
+      Required = True
+    end
+    object qDataFlPL_HEADERID: TIntegerField
+      FieldName = 'PL_HEADERID'
+      Required = True
+    end
+    object qDataFlPL_TREEID: TIntegerField
+      FieldName = 'PL_TREEID'
+    end
+    object qDataFlPL_PRICE: TFloatField
+      FieldName = 'PL_PRICE'
+      Required = True
+    end
+    object qDataFlPL_PARENT: TStringField
+      FieldName = 'PL_PARENT'
+      ReadOnly = True
+      Size = 200
+    end
+    object qDataFlPT_VALUE: TStringField
+      FieldName = 'PT_VALUE'
+      ReadOnly = True
+      Size = 100
+    end
+    object qDataFlCM_NAME: TStringField
+      FieldName = 'CM_NAME'
+      ReadOnly = True
+      Size = 100
+    end
+    object qDataFlCM_ID: TIntegerField
+      FieldName = 'CM_ID'
+      ReadOnly = True
+      Required = True
+    end
+    object qDataFlCM_CITY: TStringField
+      FieldName = 'CM_CITY'
+      ReadOnly = True
+      Required = True
+      Size = 100
+    end
+    object qDataFlPL_VALUE1: TStringField
+      FieldName = 'PL_VALUE1'
+      Size = 200
+    end
+    object qDataFlPL_VALUE2: TStringField
+      FieldName = 'PL_VALUE2'
+      Size = 200
+    end
+    object qDataFlPL_VALUE3: TStringField
+      FieldName = 'PL_VALUE3'
+      Size = 200
+    end
+    object qDataFlPL_VALUE4: TStringField
+      FieldName = 'PL_VALUE4'
+      Size = 200
+    end
+    object qDataFlPL_VALUE5: TStringField
+      FieldName = 'PL_VALUE5'
+      Size = 200
+    end
+    object qDataFlPL_VALUE6: TStringField
+      FieldName = 'PL_VALUE6'
+      Size = 200
+    end
+    object qDataFlPL_VALUE7: TStringField
+      FieldName = 'PL_VALUE7'
+      Size = 200
+    end
+    object qDataFlPL_VALUE8: TStringField
+      FieldName = 'PL_VALUE8'
+      Size = 200
+    end
+    object qDataFlPL_VALUE9: TStringField
+      FieldName = 'PL_VALUE9'
+      Size = 200
+    end
+    object qDataFlPL_ORDERBY: TIntegerField
+      FieldName = 'PL_ORDERBY'
+      Required = True
+    end
+    object qDataFlPL_DATE_UPDATE: TDateTimeField
+      FieldName = 'PL_DATE_UPDATE'
+    end
+    object qDataFlPL_ISCLOSED: TSmallintField
+      FieldName = 'PL_ISCLOSED'
+      Required = True
+    end
   end
 end

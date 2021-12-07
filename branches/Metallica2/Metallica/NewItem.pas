@@ -3,17 +3,16 @@ unit NewItem;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, ComCtrls, StdCtrls, Buttons, DB, ZAbstractRODataset,
-  ZAbstractDataset, ZDataset, DBCtrls, Grids, DBGrids, DBLookupEh, Mask,
-  DBCtrlsEh, DBGridEh;
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
+  Dialogs, ComCtrls, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset, 
+  ZDataset, DBCtrls, Grids, DBGrids, DBLookupEh, Mask, DBCtrlsEh, DBGridEh;
 
 type
 	TFormNewItem = class(TForm)
-    BitBtnCancel: TBitBtn;
-		Label1: TLabel;
-    BitBtnSave: TBitBtn;
-    EditTree: TEdit;
+    BitBtnCancel: TsBitBtn;
+		Label1: TsLabel;
+    BitBtnSave: TsBitBtn;
+    EditTree: TsEdit;
     qMaxParentPos: TZReadOnlyQuery;
     qMaxParentPosMAXPOS: TLargeintField;
     qTreeInsertParent: TZQuery;
@@ -88,4 +87,4 @@ if VarIsNull(qMaxParentPos['MAXPOS'])
   else Result:=qMaxParentPos['MAXPOS'];
 end;
 
-end.
+end.

@@ -13,7 +13,7 @@ object FormExport: TFormExport
   OldCreateOrder = False
   PixelsPerInch = 96
   TextHeight = 13
-  object BitBtnLoad: TBitBtn
+  object BitBtnLoad: TsBitBtn
     Left = 8
     Top = 258
     Width = 129
@@ -36,7 +36,7 @@ object FormExport: TFormExport
     TabOrder = 0
     OnClick = BitBtnLoadClick
   end
-  object BitBtnSave: TBitBtn
+  object BitBtnSave: TsBitBtn
     Left = 168
     Top = 258
     Width = 137
@@ -59,7 +59,7 @@ object FormExport: TFormExport
     TabOrder = 1
     OnClick = BitBtnSaveClick
   end
-  object BitBtnClose: TBitBtn
+  object BitBtnClose: TsBitBtn
     Left = 328
     Top = 258
     Width = 105
@@ -88,7 +88,7 @@ object FormExport: TFormExport
     NumGlyphs = 2
     TabOrder = 2
   end
-  object MemoLoad: TMemo
+  object MemoLoad: TsMemo
     Left = 8
     Top = 72
     Width = 425
@@ -121,7 +121,7 @@ object FormExport: TFormExport
     ParentFont = False
     TabOrder = 4
   end
-  object OD: TOpenDialog
+  object OD: TsOpenDialog
     DefaultExt = '*.ini'
     Filter = #1060#1072#1081#1083' '#1085#1072#1089#1090#1088#1086#1077#1082' (*.txt)|*.ini|'#1051#1102#1073#1086#1081' '#1092#1072#1081#1083' (*.*)|*.*'
     Options = [ofHideReadOnly, ofExtensionDifferent, ofEnableSizing]

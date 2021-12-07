@@ -18,7 +18,7 @@ object FormEnterUser: TFormEnterUser
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
-  object Label3: TLabel
+  object Label3: TsLabel
     Left = 64
     Top = 12
     Width = 39
@@ -31,7 +31,7 @@ object FormEnterUser: TFormEnterUser
     Font.Style = []
     ParentFont = False
   end
-  object Label2: TLabel
+  object Label2: TsLabel
     Left = 56
     Top = 68
     Width = 49
@@ -44,7 +44,7 @@ object FormEnterUser: TFormEnterUser
     Font.Style = []
     ParentFont = False
   end
-  object Label4: TLabel
+  object Label4: TsLabel
     Left = 8
     Top = 40
     Width = 95
@@ -57,7 +57,7 @@ object FormEnterUser: TFormEnterUser
     Font.Style = []
     ParentFont = False
   end
-  object BitBtnCancel: TBitBtn
+  object BitBtnCancel: TsBitBtn
     Left = 72
     Top = 96
     Width = 89
@@ -68,7 +68,7 @@ object FormEnterUser: TFormEnterUser
     TabOrder = 1
     OnClick = BitBtnCancelClick
   end
-  object BitBtnEnter: TBitBtn
+  object BitBtnEnter: TsBitBtn
     Left = 200
     Top = 96
     Width = 75
@@ -79,7 +79,7 @@ object FormEnterUser: TFormEnterUser
     TabOrder = 2
     OnClick = BitBtnEnterClick
   end
-  object EPWD: TEdit
+  object EPWD: TsEdit
     Left = 112
     Top = 64
     Width = 201
@@ -108,7 +108,7 @@ object FormEnterUser: TFormEnterUser
     Visible = True
     OnChange = DBUsersChange
   end
-  object EFIO: TEdit
+  object EFIO: TsEdit
     Left = 112
     Top = 37
     Width = 201
@@ -210,4 +210,4 @@ object FormEnterUser: TFormEnterUser
         Value = ''
       end>
   end
-end
+end

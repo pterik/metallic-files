@@ -1,9 +1,9 @@
 object FormMain: TFormMain
   Left = 257
   Top = 170
-  Width = 918
-  Height = 542
   Caption = #1055#1088#1086#1089#1084#1086#1090#1088#1077#1090#1100' '#1087#1088#1072#1081#1089#1099
+  ClientHeight = 287
+  ClientWidth = 464
   Color = clBtnFace
   DefaultMonitor = dmMainForm
   Font.Charset = DEFAULT_CHARSET
@@ -17,6 +17,7 @@ object FormMain: TFormMain
   Position = poDefault
   WindowState = wsMaximized
   WindowMenu = mmWindow
+  OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnDestroy = FormDestroy
@@ -26,61 +27,6 @@ object FormMain: TFormMain
     OnException = ApplicationEvents1Exception
     Left = 56
     Top = 312
-  end
-  object ZC: TZConnection
-    Protocol = 'firebird-2.1'
-    Database = 'C:\Projects\Metallica\Database\DATABASE.FDB'
-    User = 'SYSDBA'
-    Password = 'masterkey'
-    TransactIsolationLevel = tiReadCommitted
-    Left = 56
-    Top = 176
-  end
-  object QViewUsers: TZQuery
-    Connection = ZC
-    SQL.Strings = (
-      'SELECT '
-      'U_LOGIN,U_FIO,U_COMMENT, U_ID, '
-      'U_ISCLOSED, U_ISBOSS, U_EDIT_PRICES'
-      'FROM USERS U'
-      'where U_ID=:U_ID')
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'U_ID'
-        ParamType = ptUnknown
-        Value = 4
-      end>
-    WhereMode = wmWhereAll
-    Options = []
-    Left = 24
-    Top = 16
-    ParamData = <
-      item
-        DataType = ftInteger
-        Name = 'U_ID'
-        ParamType = ptUnknown
-        Value = 4
-      end>
-    object QViewUsersU_LOGIN: TStringField
-      FieldName = 'U_LOGIN'
-      Size = 30
-    end
-    object QViewUsersU_FIO: TStringField
-      FieldName = 'U_FIO'
-      Size = 50
-    end
-    object QViewUsersU_COMMENT: TStringField
-      FieldName = 'U_COMMENT'
-      Size = 50
-    end
-    object QViewUsersU_ISCLOSED: TSmallintField
-      FieldName = 'U_ISCLOSED'
-      Required = True
-    end
-    object QViewUsersU_ISBOSS: TIntegerField
-      FieldName = 'U_ISBOSS'
-    end
   end
   object mmMain: TMainMenu
     Images = ImageList1
@@ -893,5 +839,65 @@ object FormMain: TFormMain
       FEBF80030003DCF7FC9F80070003FF0FFDDF807F0003FFFFFDDF80FF8007FFFF
       FDDF81FFF87FFFFFFFFFFFFFFFFFFFFF00000000000000000000000000000000
       000000000000}
+  end
+  object ZC: TUniConnection
+    ProviderName = 'InterBase'
+    Database = 'C:\Projects\Metallica\Database\DATABASE.FDB'
+    Username = 'SYSDBA'
+    Server = 'localhost'
+    Connected = True
+    LoginPrompt = False
+    Left = 16
+    Top = 56
+    EncryptedPassword = '92FF9EFF8CFF8BFF9AFF8DFF94FF9AFF86FF'
+  end
+  object InterBaseUniProvider1: TInterBaseUniProvider
+    Left = 240
+    Top = 99
+  end
+  object QViewUsers: TUniQuery
+    Connection = ZC
+    SQL.Strings = (
+      'SELECT '
+      'U_LOGIN,U_FIO,U_COMMENT, U_ID, '
+      'U_ISCLOSED, U_ISBOSS, U_EDIT_PRICES'
+      'FROM USERS U'
+      'where U_ID=:U_ID')
+    Left = 72
+    Top = 128
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'U_ID'
+        ParamType = ptInput
+        Value = 1
+      end>
+    object QViewUsersU_LOGIN: TStringField
+      FieldName = 'U_LOGIN'
+      Size = 30
+    end
+    object QViewUsersU_FIO: TStringField
+      FieldName = 'U_FIO'
+      Size = 50
+    end
+    object QViewUsersU_COMMENT: TStringField
+      FieldName = 'U_COMMENT'
+      Size = 50
+    end
+    object QViewUsersU_ID: TIntegerField
+      FieldName = 'U_ID'
+      Required = True
+    end
+    object QViewUsersU_ISCLOSED: TSmallintField
+      FieldName = 'U_ISCLOSED'
+      Required = True
+    end
+    object QViewUsersU_ISBOSS: TIntegerField
+      FieldName = 'U_ISBOSS'
+    end
+    object QViewUsersU_EDIT_PRICES: TSmallintField
+      FieldName = 'U_EDIT_PRICES'
+      Required = True
+    end
   end
 end

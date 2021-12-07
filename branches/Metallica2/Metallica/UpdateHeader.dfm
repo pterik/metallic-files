@@ -22,7 +22,7 @@ object FormUpdateHeader: TFormUpdateHeader
     324)
   PixelsPerInch = 96
   TextHeight = 13
-  object Label1: TLabel
+  object Label1: TsLabel
     Left = 16
     Top = 8
     Width = 110
@@ -35,7 +35,7 @@ object FormUpdateHeader: TFormUpdateHeader
     Font.Style = []
     ParentFont = False
   end
-  object Label2: TLabel
+  object Label2: TsLabel
     Left = 16
     Top = 128
     Width = 124
@@ -48,7 +48,7 @@ object FormUpdateHeader: TFormUpdateHeader
     Font.Style = []
     ParentFont = False
   end
-  object Label3: TLabel
+  object Label3: TsLabel
     Left = 16
     Top = 104
     Width = 73
@@ -61,7 +61,7 @@ object FormUpdateHeader: TFormUpdateHeader
     Font.Style = []
     ParentFont = False
   end
-  object BitBtnCancel: TBitBtn
+  object BitBtnCancel: TsBitBtn
     Left = 16
     Top = 278
     Width = 75
@@ -90,7 +90,7 @@ object FormUpdateHeader: TFormUpdateHeader
       0000}
     NumGlyphs = 2
   end
-  object BitBtnSave: TBitBtn
+  object BitBtnSave: TsBitBtn
     Left = 153
     Top = 278
     Width = 105
@@ -116,7 +116,7 @@ object FormUpdateHeader: TFormUpdateHeader
       0003737FFFFFFFFF7F7330099999999900333777777777777733}
     NumGlyphs = 2
   end
-  object EditHeader: TEdit
+  object EditHeader: TsEdit
     Left = 16
     Top = 24
     Width = 249
@@ -124,7 +124,7 @@ object FormUpdateHeader: TFormUpdateHeader
     TabOrder = 0
     Text = 'EditHeader'
   end
-  object EditOrderby: TEdit
+  object EditOrderby: TsEdit
     Left = 152
     Top = 104
     Width = 57
@@ -133,7 +133,7 @@ object FormUpdateHeader: TFormUpdateHeader
     TabOrder = 1
     Text = 'EditOrderby'
   end
-  object EditFormat: TEdit
+  object EditFormat: TsEdit
     Left = 16
     Top = 192
     Width = 73
@@ -156,7 +156,7 @@ object FormUpdateHeader: TFormUpdateHeader
     ParentFont = False
     TabOrder = 6
   end
-  object CBSaveGlobally: TCheckBox
+  object CBSaveGlobally: TsCheckBox
     Left = 16
     Top = 248
     Width = 249
@@ -185,7 +185,7 @@ object FormUpdateHeader: TFormUpdateHeader
     ParentFont = False
     TabOrder = 7
   end
-  object EditSize: TEdit
+  object EditSize: TsEdit
     Left = 152
     Top = 128
     Width = 57
@@ -194,7 +194,7 @@ object FormUpdateHeader: TFormUpdateHeader
     TabOrder = 8
     Text = 'EditSize'
   end
-  object CBHideField: TCheckBox
+  object CBHideField: TsCheckBox
     Left = 16
     Top = 224
     Width = 249
@@ -209,4 +209,4 @@ object FormUpdateHeader: TFormUpdateHeader
     TabOrder = 9
     Visible = False
   end
-end
+end

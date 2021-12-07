@@ -20,7 +20,7 @@ object FormAbout: TFormAbout
     201)
   PixelsPerInch = 96
   TextHeight = 13
-  object Memo1: TMemo
+  object Memo1: TsMemo
     Left = 8
     Top = 0
     Width = 377
@@ -42,7 +42,7 @@ object FormAbout: TFormAbout
     ScrollBars = ssVertical
     TabOrder = 0
   end
-  object BitBtnClose: TBitBtn
+  object BitBtnClose: TsBitBtn
     Left = 301
     Top = 172
     Width = 75
@@ -72,4 +72,4 @@ object FormAbout: TFormAbout
     NumGlyphs = 2
     TabOrder = 1
   end
-end
+end

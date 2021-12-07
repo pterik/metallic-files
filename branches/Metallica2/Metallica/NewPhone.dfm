@@ -20,7 +20,7 @@ object FormNewPhone: TFormNewPhone
     216)
   PixelsPerInch = 96
   TextHeight = 13
-  object Label1: TLabel
+  object Label1: TsLabel
     Left = 16
     Top = 40
     Width = 60
@@ -33,7 +33,7 @@ object FormNewPhone: TFormNewPhone
     Font.Style = []
     ParentFont = False
   end
-  object Label2: TLabel
+  object Label2: TsLabel
     Left = 8
     Top = 8
     Width = 64
@@ -46,7 +46,7 @@ object FormNewPhone: TFormNewPhone
     Font.Style = []
     ParentFont = False
   end
-  object BitBtnCancel: TBitBtn
+  object BitBtnCancel: TsBitBtn
     Left = 8
     Top = 183
     Width = 75
@@ -77,7 +77,7 @@ object FormNewPhone: TFormNewPhone
       0000}
     NumGlyphs = 2
   end
-  object MEditPref1: TMaskEdit
+  object MEditPref1: TsMaskEdit
     Left = 80
     Top = 40
     Width = 30
@@ -93,7 +93,7 @@ object FormNewPhone: TFormNewPhone
     TabOrder = 1
     Text = '  '
   end
-  object MEditPhone1: TMaskEdit
+  object MEditPhone1: TsMaskEdit
     Left = 112
     Top = 40
     Width = 73
@@ -139,7 +139,7 @@ object FormNewPhone: TFormNewPhone
     ParentFont = False
     TabOrder = 7
   end
-  object EditCompany: TEdit
+  object EditCompany: TsEdit
     Left = 80
     Top = 8
     Width = 153
@@ -156,7 +156,7 @@ object FormNewPhone: TFormNewPhone
     TabOrder = 0
     Text = 'EditCompany'
   end
-  object EditContacter: TEdit
+  object EditContacter: TsEdit
     Left = 8
     Top = 96
     Width = 225
@@ -186,7 +186,7 @@ object FormNewPhone: TFormNewPhone
     ParentFont = False
     TabOrder = 8
   end
-  object BitBtnSave: TBitBtn
+  object BitBtnSave: TsBitBtn
     Left = 129
     Top = 183
     Width = 105
@@ -211,4 +211,4 @@ object FormNewPhone: TFormNewPhone
       0003737FFFFFFFFF7F7330099999999900333777777777777733}
     NumGlyphs = 2
   end
-end
+end

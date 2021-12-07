@@ -3,14 +3,14 @@ unit SelectTree;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset,
-  ZDataset, Grids, DBGrids, DBGridEh, ComCtrls, Mask, DBCtrlsEh, DataModule;
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
+  Dialogs, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, 
+  Grids, DBGrids, DBGridEh, ComCtrls, Mask, DBCtrlsEh, DataModule;
 
 type
   TFormSelectTree = class(TForm)
-    Tree: TTreeView;
-    BitBtnCancel: TBitBtn;
+    Tree: TsTreeView;
+    BitBtnCancel: TsBitBtn;
     StaticText1: TStaticText;
     procedure TreeChange(Sender: TObject; Node: TTreeNode);
     procedure TreeExpanding(Sender: TObject; Node: TTreeNode;
@@ -96,4 +96,4 @@ begin
 FormNewPriceList.SelectedTreeID:=0;
 end;
 
-end.
+end.

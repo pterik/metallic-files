@@ -3,19 +3,19 @@ unit Users;
 interface
 
 uses
-	Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-	Dialogs, StdCtrls, Buttons, Grids, DBGrids, DB, ZAbstractRODataset,
+  	Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
+  	Dialogs, StdCtrls, Buttons, Grids, DBGrids, DB, ZAbstractRODataset, 
   ZAbstractDataset, ZDataset, DBGridEh;
 
 type
 	TFormUsers = class(TForm)
-		BitBtnInsert: TBitBtn;
-		BitBtnUpdate: TBitBtn;
-		BitBtnDelete: TBitBtn;
-		BitBtnClose: TBitBtn;
+		BitBtnInsert: TsBitBtn;
+		BitBtnUpdate: TsBitBtn;
+		BitBtnDelete: TsBitBtn;
+		BitBtnClose: TsBitBtn;
 		DSUsers: TDataSource;
     QViewFormUsers: TZQuery;
-    BitBtnRights: TBitBtn;
+    BitBtnRights: TsBitBtn;
     QGrantBoss: TZQuery;
     QInsertGrant: TZQuery;
     QUsersWOMe: TZQuery;
@@ -27,7 +27,7 @@ type
     QViewFormUsersU_COMMENT: TStringField;
     QViewFormUsersSISBOSS: TStringField;
     QViewFormUsersSISACTIVE: TStringField;
-    CBOnlyWorkers: TCheckBox;
+    CBOnlyWorkers: TsCheckBox;
     QViewFormUsersU_ID: TIntegerField;
     QViewFormUsersU_ISBOSS: TIntegerField;
     QViewFormUsersU_ISCLOSED: TSmallintField;
@@ -267,4 +267,4 @@ end;    // case
 
 end;
 
-end.
+end.

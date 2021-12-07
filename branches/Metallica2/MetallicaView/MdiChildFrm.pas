@@ -3,8 +3,8 @@ unit MdiChildFrm;
 interface
 
 uses
-  SysUtils, Windows, Messages, Classes, Graphics, Controls,
-  Forms, Dialogs,  Menus, ComCtrls, ToolWin, ImgList;
+  SysUtils, Windows, Messages, Classes, Graphics, Controls, Forms, Dialogs, 
+  Menus, ComCtrls, ToolWin, ImgList, System.ImageList;
 
 type
 
@@ -22,7 +22,7 @@ type
     mmiPrintSetup: TMenuItem;
     N1: TMenuItem;
     mmiExit: TMenuItem;
-    tlbMain: TToolBar;
+    tlbMain: TsToolBar;
     tbOpen: TToolButton;
     tbNew: TToolButton;
     tbPrint: TToolButton;
@@ -109,4 +109,4 @@ end;
 end.
 
 
-
+

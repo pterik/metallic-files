@@ -1,9 +1,9 @@
 object FormAbout: TFormAbout
   Left = 438
   Top = 312
-  Width = 640
-  Height = 366
   Caption = #1054' '#1087#1088#1086#1075#1088#1072#1084#1084#1077
+  ClientHeight = 327
+  ClientWidth = 624
   Color = clBtnFace
   Constraints.MinHeight = 240
   Constraints.MinWidth = 400
@@ -17,11 +17,11 @@ object FormAbout: TFormAbout
   Position = poDefault
   Visible = True
   DesignSize = (
-    607
-    328)
+    624
+    327)
   PixelsPerInch = 96
   TextHeight = 13
-  object Memo1: TMemo
+  object Memo1: TsMemo
     Left = 8
     Top = 8
     Width = 617
@@ -39,5 +39,6 @@ object FormAbout: TFormAbout
     ReadOnly = True
     ScrollBars = ssVertical
     TabOrder = 0
+    Text = #1055#1088#1086#1075#1088#1072#1084#1084#1072' Metallica'#13#10
   end
 end

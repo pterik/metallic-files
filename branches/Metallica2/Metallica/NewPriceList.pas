@@ -3,13 +3,13 @@ unit NewPriceList;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset,
-  ZDataset, Grids, DBGrids, DBGridEh, ComCtrls, Mask, DBCtrlsEh, DataModule;
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
+  Dialogs, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, 
+  Grids, DBGrids, DBGridEh, ComCtrls, Mask, DBCtrlsEh, DataModule;
 
 type
   TFormNewPriceList = class(TForm)
-    BitBtnClose: TBitBtn;
+    BitBtnClose: TsBitBtn;
     Grid: TDBGridEh;
     qDataView: TZReadOnlyQuery;
     qDataViewPL_ID: TIntegerField;
@@ -31,20 +31,20 @@ type
     qDataViewPL_ISCLOSED: TSmallintField;
     DSData: TDataSource;
     qDataViewPL_PRICE: TFloatField;
-    Tree: TTreeView;
-    EditCompany: TEdit;
-    LabelComp: TLabel;
-    LabelCity: TLabel;
-    EditCity: TEdit;
+    Tree: TsTreeView;
+    EditCompany: TsEdit;
+    LabelComp: TsLabel;
+    LabelCity: TsLabel;
+    EditCity: TsEdit;
     QCompany: TZQuery;
     QCompanyCOMPANYID: TIntegerField;
     QCompanyCM_NAME: TStringField;
     QCompanyCM_COMMENT: TStringField;
     DBPrice: TDBEditEh;
-    EditNewPrice: TEdit;
-    BitBtnNewTree: TBitBtn;
-    BitBtnUpdate: TBitBtn;
-    BitBtnNewRow: TBitBtn;
+    EditNewPrice: TsEdit;
+    BitBtnNewTree: TsBitBtn;
+    BitBtnUpdate: TsBitBtn;
+    BitBtnNewRow: TsBitBtn;
     qRowInsert: TZQuery;
     qRowMaxOrder: TZReadOnlyQuery;
     qRowMaxOrderMAXPOS: TLargeintField;
@@ -52,18 +52,18 @@ type
     qRowExistsCNTR: TIntegerField;
     qPriceUpdate: TZQuery;
     IntegerField1: TIntegerField;
-    BitBtnSave: TBitBtn;
+    BitBtnSave: TsBitBtn;
     StaticTextX: TStaticText;
-    BitBtnStore: TBitBtn;
+    BitBtnStore: TsBitBtn;
     QCompanyCM_CITY: TStringField;
-    BitBtnDelete: TBitBtn;
+    BitBtnDelete: TsBitBtn;
     qRowUpdate: TZQuery;
     qDataViewPL_NODE: TStringField;
     qPLisFinished: TZQuery;
     IntegerField2: TIntegerField;
     qDataViewCM_CITY: TStringField;
-    ButtonLeft: TButton;
-    ButtonRight: TButton;
+    ButtonLeft: TsButton;
+    ButtonRight: TsButton;
     procedure TreeChange(Sender: TObject; Node: TTreeNode);
     procedure TreeExpanding(Sender: TObject; Node: TTreeNode;
       var AllowExpansion: Boolean);
@@ -549,4 +549,4 @@ end;
 
 end;
 
-end.
+end.

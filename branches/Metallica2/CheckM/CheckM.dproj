@@ -69,6 +69,7 @@
         <VerInfo_Locale>1033</VerInfo_Locale>
         <UsePackages>true</UsePackages>
         <VerInfo_Keys>CompanyName=Crystal Decisions Inc.;FileDescription=Crystal Reports 9 VCL;FileVersion=9.0.0.8;InternalName=TCrpe - TCrpeDS;LegalCopyright=©2001 - 2003 Crystal Decisions;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=9.0.0.0;Comments=</VerInfo_Keys>
+        <DCC_Optimize>false</DCC_Optimize>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win32)'!=''">
         <DCC_Namespace>Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
@@ -83,6 +84,7 @@
         <UWP_DelphiLogo150>$(BDS)\bin\Artwork\Windows\UWP\delphi_UwpDefault_150.png</UWP_DelphiLogo150>
         <UsePackages>true</UsePackages>
         <DCC_DebugInformation>2</DCC_DebugInformation>
+        <DCC_Optimize>false</DCC_Optimize>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win64)'!=''">
         <Icon_MainIcon>CheckM_Icon.ico</Icon_MainIcon>
@@ -116,8 +118,8 @@
         <DCC_DebugInformation>2</DCC_DebugInformation>
         <BRCC_EnableMultiByte>true</BRCC_EnableMultiByte>
         <DCC_DebugInfoInExe>true</DCC_DebugInfoInExe>
-        <DCC_Optimize>true</DCC_Optimize>
         <DCC_OldDosFileNames>true</DCC_OldDosFileNames>
+        <DCC_LocalDebugSymbols>true</DCC_LocalDebugSymbols>
         <DCC_TypedAtParameter>true</DCC_TypedAtParameter>
     </PropertyGroup>
     <ItemGroup>

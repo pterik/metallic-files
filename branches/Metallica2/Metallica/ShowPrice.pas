@@ -3,14 +3,13 @@ unit ShowPrice;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset,
-  ZDataset, Grids, DBGrids, DBGridEh, DataModule, Mask, DBCtrlsEh,
-  DBLookupEh;
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
+  Dialogs, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, 
+  Grids, DBGrids, DBGridEh, DataModule, Mask, DBCtrlsEh, DBLookupEh;
 
 type
   TFormPriceShow = class(TForm)
-    BitBtnClose: TBitBtn;
+    BitBtnClose: TsBitBtn;
     Grid: TDBGridEh;
     qData: TZReadOnlyQuery;
     qDataPL_ID: TIntegerField;
@@ -31,7 +30,7 @@ type
     qDataPL_DATE_UPDATE: TDateTimeField;
     qDataPL_ISCLOSED: TSmallintField;
     DSData: TDataSource;
-    BitBtnCompanies: TBitBtn;
+    BitBtnCompanies: TsBitBtn;
     qDataPL_PRICE: TFloatField;
     qDataPL_PARENT: TStringField;
     qDataPT_VALUE: TStringField;
@@ -140,4 +139,4 @@ begin
 end;
 
 end.
-
+

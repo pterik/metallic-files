@@ -3,25 +3,25 @@ unit SQL;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Buttons, Grids, DBGrids, DB, ZAbstractRODataset,
-  ZAbstractDataset, ZDataset, DBGridEh, DBGridEhGrouping, ToolCtrlsEh,
-  DBGridEhToolCtrls, DynVarsEh, EhLibVCL, GridsEh, DBAxisGridsEh;
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
+  Dialogs, StdCtrls, Buttons, Grids, DBGrids, DB, ZAbstractRODataset, 
+  ZAbstractDataset, ZDataset, DBGridEh, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, 
+  DynVarsEh, EhLibVCL, GridsEh, DBAxisGridsEh;
 
 type
   TFormSQL = class(TForm)
-    BitBtnExecute: TBitBtn;
-    MemoSQL: TMemo;
-    EditName: TEdit;
-    ButtonOpenFile: TButton;
-    CBExecute: TCheckBox;
+    BitBtnExecute: TsBitBtn;
+    MemoSQL: TsMemo;
+    EditName: TsEdit;
+    ButtonOpenFile: TsButton;
+    CBExecute: TsCheckBox;
     DSQuery: TDataSource;
     ZQuery: TZQuery;
-    SDSQL: TSaveDialog;
-    Label1: TLabel;
-    Label2: TLabel;
+    SDSQL: TsSaveDialog;
+    Label1: TsLabel;
+    Label2: TsLabel;
     DBGridEh1: TDBGridEh;
-    BitBtnCancel: TBitBtn;
+    BitBtnCancel: TsBitBtn;
     procedure ButtonOpenFileClick(Sender: TObject);
     procedure BitBtnExecuteClick(Sender: TObject);
     procedure FormKeyUp(Sender: TObject; var Key: Word;
@@ -90,4 +90,4 @@ end;    // case
 
 end;
 
-end.
+end.

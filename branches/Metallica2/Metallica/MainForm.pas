@@ -3,22 +3,20 @@ unit MainForm;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Buttons, ZConnection, Grids, DBGrids, DB, ZDataset,
-  ZDbcCache, ZAbstractRODataset, ZDbcMySQL, ZDbcPostgreSQL, ZSqlUpdate,
-  ComCtrls, ZAbstractDataset, ExtCtrls, AppEvnts, Mask,
-  DBCtrlsEh, DBGridEh, DBLookupEh,
-  ADODB, DataModule, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls,
-  DynVarsEh, ZAbstractConnection, EhLibVCL, GridsEh, DBAxisGridsEh, DBAccess,
-  Uni;
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
+  Dialogs, StdCtrls, Buttons, ZConnection, Grids, DBGrids, DB, ZDataset, ZDbcCache, 
+  ZAbstractRODataset, ZDbcMySQL, ZDbcPostgreSQL, ZSqlUpdate, ComCtrls, ZAbstractDataset, 
+  ExtCtrls, AppEvnts, Mask, DBCtrlsEh, DBGridEh, DBLookupEh, ADODB, DataModule, 
+  DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, ZAbstractConnection, 
+  EhLibVCL, GridsEh, DBAxisGridsEh, DBAccess, Uni;
 
 type
   TFormMain = class(TForm)
-    BitBtnClose: TBitBtn;
-    BitBtnAbout: TBitBtn;
+    BitBtnClose: TsBitBtn;
+    BitBtnAbout: TsBitBtn;
     ZC2: TZConnection;
-    BitBtnCompanies: TBitBtn;
-    BitBtnUsers: TBitBtn;
+    BitBtnCompanies: TsBitBtn;
+    BitBtnUsers: TsBitBtn;
     QViewUsers: TZQuery;
     QViewUsersU_LOGIN: TStringField;
     QViewUsersU_FIO: TStringField;
@@ -27,10 +25,10 @@ type
     QViewUsersU_ISCLOSED: TSmallintField;
     QViewUsersU_ISBOSS: TIntegerField;
     QViewUsersU_FIO_PLUS_BOSS: TStringField;
-    EditMyName: TEdit;
-    Label1: TLabel;
-    BitBtnForBoss: TBitBtn;
-    Tree: TTreeView;
+    EditMyName: TsEdit;
+    Label1: TsLabel;
+    BitBtnForBoss: TsBitBtn;
+    Tree: TsTreeView;
     Grid: TDBGridEh;
     DSData: TDataSource;
     qData: TZReadOnlyQuery;
@@ -50,16 +48,16 @@ type
     qDataPL_DATE_UPDATE: TDateTimeField;
     qDataPL_ISCLOSED: TSmallintField;
     qDataPL_HEADERID: TIntegerField;
-    BitBtnNewPrice: TBitBtn;
+    BitBtnNewPrice: TsBitBtn;
     QViewUsersU_EDIT_PRICES: TSmallintField;
     qDataPL_PARENT: TStringField;
     qDataPT_VALUE: TStringField;
     qDataCM_CITY: TStringField;
     qDataTL_COLOR: TIntegerField;
-    lbl1: TLabel;
-    edtCompany: TEdit;
-    lbl2: TLabel;
-    edtBusiness: TEdit;
+    lbl1: TsLabel;
+    edtCompany: TsEdit;
+    lbl2: TsLabel;
+    edtBusiness: TsEdit;
     qDataPL_TREEID: TIntegerField;
     qDataCM_BUSINESS: TStringField;
     qDataPL_PRICE: TSingleField;
@@ -559,4 +557,4 @@ begin
 end;
 
 end.
-
+

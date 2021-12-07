@@ -3,9 +3,9 @@ unit SelectCompany;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset,
-  ZDataset, Grids, DBGrids, DBGridEh;
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
+  Dialogs, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, 
+  Grids, DBGrids, DBGridEh;
 
 type
   TFormSelectCompany = class(TForm)
@@ -16,8 +16,8 @@ type
     DBGridCompanies: TDBGridEh;
     QCompanyCM_TRUNC_COMMENT: TStringField;
     QCompanyCOMPANYID: TIntegerField;
-    BitBtnCancel: TBitBtn;
-    Label1: TLabel;
+    BitBtnCancel: TsBitBtn;
+    Label1: TsLabel;
     qPriceHeader: TZReadOnlyQuery;
     qPriceHeaderPH_ID: TIntegerField;
     QNewHeader: TZQuery;
@@ -119,4 +119,4 @@ else
 F_LastSorted:=Column.FieldName;
 end;
 
-end.
+end.

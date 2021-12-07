@@ -3,19 +3,19 @@ unit Companies;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset,
-  ZDataset, Grids, DBGrids, DBGridEh, Mask, DBCtrlsEh, DBLookupEh, ExtCtrls,
-  ImgList, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh,
-  EhLibVCL, GridsEh, DBAxisGridsEh, MemDS, DBAccess, Uni;
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
+  Dialogs, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, 
+  Grids, DBGrids, DBGridEh, Mask, DBCtrlsEh, DBLookupEh, ExtCtrls, ImgList, 
+  DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, EhLibVCL, GridsEh, 
+  DBAxisGridsEh, MemDS, DBAccess, Uni;
 
 type
   TFormCompanies = class(TForm)
-    CBActive: TCheckBox;
-    BitBtnInsert: TBitBtn;
-    BitBtnUpdate: TBitBtn;
-    BitBtnDelete: TBitBtn;
-    BitBtnClose: TBitBtn;
+    CBActive: TsCheckBox;
+    BitBtnInsert: TsBitBtn;
+    BitBtnUpdate: TsBitBtn;
+    BitBtnDelete: TsBitBtn;
+    BitBtnClose: TsBitBtn;
     QCompanies2: TZQuery;
     DSCompanies2: TDataSource;
     QCompanies2SISCLOSED: TStringField;
@@ -32,8 +32,8 @@ type
     QPhones2PH_ISCLOSED: TSmallintField;
     QPhones2SISCLOSED: TStringField;
     QCompanies2CM_TRUNC_COMMENT: TStringField;
-    BitBtnNewPhone: TBitBtn;
-    BitBtnClosePhone: TBitBtn;
+    BitBtnNewPhone: TsBitBtn;
+    BitBtnClosePhone: TsBitBtn;
     QCompanies2COMPANYID: TIntegerField;
     QCompanies2CM_NAME: TStringField;
     QCompanies2CM_HYPERLINK: TStringField;
@@ -44,14 +44,14 @@ type
     QCompanies2TL_LEVEL: TIntegerField;
     QCompanies2TL_COLOR: TIntegerField;
     QCompanies2TL_NAME: TStringField;
-    btnShowPrice: TBitBtn;
+    btnShowPrice: TsBitBtn;
     strngfldQCompaniesCM_BUSINESS: TStringField;
-    lbl1: TLabel;
-    edtCompany: TEdit;
-    lbl2: TLabel;
-    edtBusiness: TEdit;
-    lbl3: TLabel;
-    edtCity: TEdit;
+    lbl1: TsLabel;
+    edtCompany: TsEdit;
+    lbl2: TsLabel;
+    edtBusiness: TsEdit;
+    lbl3: TsLabel;
+    edtCity: TsEdit;
     QCompanies: TUniQuery;
     QPhones: TUniQuery;
     DSCompanies: TUniDataSource;
@@ -401,4 +401,4 @@ begin
 end;
 
 end.
-
+

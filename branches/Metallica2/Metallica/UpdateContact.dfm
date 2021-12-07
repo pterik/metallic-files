@@ -20,7 +20,7 @@ object FormUpdateContact: TFormUpdateContact
     426)
   PixelsPerInch = 96
   TextHeight = 13
-  object Label1: TLabel
+  object Label1: TsLabel
     Left = 0
     Top = 0
     Width = 64
@@ -48,7 +48,7 @@ object FormUpdateContact: TFormUpdateContact
     ParentFont = False
     TabOrder = 7
   end
-  object MemoComment: TMemo
+  object MemoComment: TsMemo
     Left = 120
     Top = 56
     Width = 225
@@ -80,7 +80,7 @@ object FormUpdateContact: TFormUpdateContact
     ParentFont = False
     TabOrder = 6
   end
-  object EContacter: TEdit
+  object EContacter: TsEdit
     Left = 120
     Top = 32
     Width = 226
@@ -95,7 +95,7 @@ object FormUpdateContact: TFormUpdateContact
     TabOrder = 1
     Text = 'EContacter'
   end
-  object GroupBox1: TGroupBox
+  object GroupBox1: TsGroupBox
     Left = 0
     Top = 132
     Width = 347
@@ -112,7 +112,7 @@ object FormUpdateContact: TFormUpdateContact
     DesignSize = (
       347
       249)
-    object Label5: TLabel
+    object Label5: TsLabel
       Left = 16
       Top = 24
       Width = 103
@@ -125,7 +125,7 @@ object FormUpdateContact: TFormUpdateContact
       Font.Style = []
       ParentFont = False
     end
-    object LabelParameter: TLabel
+    object LabelParameter: TsLabel
       Left = 16
       Top = 84
       Width = 97
@@ -138,7 +138,7 @@ object FormUpdateContact: TFormUpdateContact
       Font.Style = []
       ParentFont = False
     end
-    object Label4: TLabel
+    object Label4: TsLabel
       Left = 8
       Top = 217
       Width = 71
@@ -151,7 +151,7 @@ object FormUpdateContact: TFormUpdateContact
       Font.Style = []
       ParentFont = False
     end
-    object Label3: TLabel
+    object Label3: TsLabel
       Left = 8
       Top = 104
       Width = 87
@@ -164,7 +164,7 @@ object FormUpdateContact: TFormUpdateContact
       Font.Style = []
       ParentFont = False
     end
-    object Label2: TLabel
+    object Label2: TsLabel
       Left = 8
       Top = 132
       Width = 83
@@ -243,7 +243,7 @@ object FormUpdateContact: TFormUpdateContact
       ParentFont = False
       TabOrder = 7
     end
-    object MemoJobComment: TMemo
+    object MemoJobComment: TsMemo
       Left = 144
       Top = 160
       Width = 195
@@ -352,7 +352,7 @@ object FormUpdateContact: TFormUpdateContact
     TabOrder = 0
     Visible = True
   end
-  object BitBtnCancel: TBitBtn
+  object BitBtnCancel: TsBitBtn
     Left = 16
     Top = 389
     Width = 75
@@ -383,7 +383,7 @@ object FormUpdateContact: TFormUpdateContact
       0000}
     NumGlyphs = 2
   end
-  object BitBtnSave: TBitBtn
+  object BitBtnSave: TsBitBtn
     Left = 225
     Top = 389
     Width = 105
@@ -636,4 +636,4 @@ object FormUpdateContact: TFormUpdateContact
     DataSet = QCompanies
     Left = 280
   end
-end
+end

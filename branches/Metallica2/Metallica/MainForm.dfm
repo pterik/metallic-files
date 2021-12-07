@@ -36,7 +36,7 @@ object FormMain: TFormMain
     617)
   PixelsPerInch = 96
   TextHeight = 13
-  object Label1: TLabel
+  object Label1: TsLabel
     Left = 8
     Top = 8
     Width = 71
@@ -49,7 +49,7 @@ object FormMain: TFormMain
     Font.Style = []
     ParentFont = False
   end
-  object lbl1: TLabel
+  object lbl1: TsLabel
     Left = 264
     Top = 8
     Width = 80
@@ -62,7 +62,7 @@ object FormMain: TFormMain
     Font.Style = []
     ParentFont = False
   end
-  object lbl2: TLabel
+  object lbl2: TsLabel
     Left = 520
     Top = 8
     Width = 119
@@ -75,7 +75,7 @@ object FormMain: TFormMain
     Font.Style = []
     ParentFont = False
   end
-  object BitBtnClose: TBitBtn
+  object BitBtnClose: TsBitBtn
     Left = 810
     Top = 589
     Width = 110
@@ -103,7 +103,7 @@ object FormMain: TFormMain
     TabOrder = 6
     OnClick = BitBtnCloseClick
   end
-  object BitBtnAbout: TBitBtn
+  object BitBtnAbout: TsBitBtn
     Left = 825
     Top = 2
     Width = 105
@@ -116,7 +116,7 @@ object FormMain: TFormMain
     TabStop = False
     OnClick = BitBtnAboutClick
   end
-  object BitBtnCompanies: TBitBtn
+  object BitBtnCompanies: TsBitBtn
     Left = 564
     Top = 589
     Width = 110
@@ -140,7 +140,7 @@ object FormMain: TFormMain
     TabOrder = 4
     OnClick = BitBtnCompaniesClick
   end
-  object BitBtnUsers: TBitBtn
+  object BitBtnUsers: TsBitBtn
     Left = 686
     Top = 589
     Width = 110
@@ -159,7 +159,7 @@ object FormMain: TFormMain
     TabOrder = 5
     OnClick = BitBtnUsersClick
   end
-  object EditMyName: TEdit
+  object EditMyName: TsEdit
     Left = 88
     Top = 4
     Width = 169
@@ -176,7 +176,7 @@ object FormMain: TFormMain
     TabOrder = 0
     Text = 'EditMyName'
   end
-  object BitBtnForBoss: TBitBtn
+  object BitBtnForBoss: TsBitBtn
     Left = 420
     Top = 589
     Width = 130
@@ -200,7 +200,7 @@ object FormMain: TFormMain
     TabOrder = 3
     OnClick = BitBtnForBossClick
   end
-  object Tree: TTreeView
+  object Tree: TsTreeView
     Left = 8
     Top = 32
     Width = 170
@@ -352,7 +352,7 @@ object FormMain: TFormMain
     object RowDetailData: TRowDetailPanelControlEh
     end
   end
-  object BitBtnNewPrice: TBitBtn
+  object BitBtnNewPrice: TsBitBtn
     Left = 12
     Top = 587
     Width = 101
@@ -405,7 +405,7 @@ object FormMain: TFormMain
     TabOrder = 10
     OnClick = BitBtnNewPriceClick
   end
-  object edtCompany: TEdit
+  object edtCompany: TsEdit
     Left = 352
     Top = 4
     Width = 153
@@ -419,7 +419,7 @@ object FormMain: TFormMain
     TabOrder = 1
     OnExit = edtCompanyExit
   end
-  object edtBusiness: TEdit
+  object edtBusiness: TsEdit
     Left = 640
     Top = 4
     Width = 169
@@ -723,4 +723,4 @@ object FormMain: TFormMain
     Top = 256
     EncryptedPassword = '92FF9EFF8CFF8BFF9AFF8DFF94FF9AFF86FF'
   end
-end
+end

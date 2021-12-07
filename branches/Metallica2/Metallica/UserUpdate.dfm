@@ -20,7 +20,7 @@ object FormUserUpdate: TFormUserUpdate
     279)
   PixelsPerInch = 96
   TextHeight = 13
-  object Label1: TLabel
+  object Label1: TsLabel
     Left = 16
     Top = 8
     Width = 150
@@ -33,7 +33,7 @@ object FormUserUpdate: TFormUserUpdate
     Font.Style = []
     ParentFont = False
   end
-  object Label2: TLabel
+  object Label2: TsLabel
     Left = 16
     Top = 56
     Width = 174
@@ -46,7 +46,7 @@ object FormUserUpdate: TFormUserUpdate
     Font.Style = []
     ParentFont = False
   end
-  object Label3: TLabel
+  object Label3: TsLabel
     Left = 16
     Top = 104
     Width = 49
@@ -59,7 +59,7 @@ object FormUserUpdate: TFormUserUpdate
     Font.Style = []
     ParentFont = False
   end
-  object Label4: TLabel
+  object Label4: TsLabel
     Left = 16
     Top = 152
     Width = 71
@@ -72,7 +72,7 @@ object FormUserUpdate: TFormUserUpdate
     Font.Style = []
     ParentFont = False
   end
-  object BitBtnCancel: TBitBtn
+  object BitBtnCancel: TsBitBtn
     Left = 16
     Top = 241
     Width = 75
@@ -102,7 +102,7 @@ object FormUserUpdate: TFormUserUpdate
       0000}
     NumGlyphs = 2
   end
-  object EditFIO: TEdit
+  object EditFIO: TsEdit
     Left = 16
     Top = 24
     Width = 185
@@ -117,7 +117,7 @@ object FormUserUpdate: TFormUserUpdate
     TabOrder = 0
     Text = 'EditFIO'
   end
-  object EditLogin: TEdit
+  object EditLogin: TsEdit
     Left = 16
     Top = 72
     Width = 185
@@ -134,7 +134,7 @@ object FormUserUpdate: TFormUserUpdate
     TabOrder = 1
     Text = 'EditLogin'
   end
-  object EditPWD: TEdit
+  object EditPWD: TsEdit
     Left = 16
     Top = 120
     Width = 185
@@ -149,7 +149,7 @@ object FormUserUpdate: TFormUserUpdate
     TabOrder = 2
     Text = 'EditPWD'
   end
-  object EditComment: TEdit
+  object EditComment: TsEdit
     Left = 16
     Top = 168
     Width = 185
@@ -164,7 +164,7 @@ object FormUserUpdate: TFormUserUpdate
     TabOrder = 3
     Text = 'EditComment'
   end
-  object BitBtnSave: TBitBtn
+  object BitBtnSave: TsBitBtn
     Left = 99
     Top = 241
     Width = 105
@@ -189,7 +189,7 @@ object FormUserUpdate: TFormUserUpdate
       0003737FFFFFFFFF7F7330099999999900333777777777777733}
     NumGlyphs = 2
   end
-  object CBEditPrices: TCheckBox
+  object CBEditPrices: TsCheckBox
     Left = 8
     Top = 208
     Width = 201
@@ -268,4 +268,4 @@ object FormUserUpdate: TFormUserUpdate
         ParamType = ptUnknown
       end>
   end
-end
+end

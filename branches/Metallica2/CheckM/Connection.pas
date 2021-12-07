@@ -3,12 +3,12 @@ unit Connection;
 interface
 
 uses
-	Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-	Dialogs, StdCtrls, Buttons, ExtCtrls, DB, ZAbstractRODataset,
-	ZAbstractDataset, ZDataset, ZConnection, Mask, DBCtrlsEh, DBLookupEh,
-	IdBaseComponent, IdComponent, IdRawBase, IdRawClient, IdIcmpClient,
-  IdTCPConnection, IdTCPClient, IdWhois, IdIPWatch, ZAbstractConnection,
-  DBAccess, Uni, MemDS, UniProvider, InterBaseUniProvider;
+  	Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
+  	Dialogs, StdCtrls, Buttons, ExtCtrls, DB, ZAbstractRODataset, 	ZAbstractDataset, 
+  ZDataset, ZConnection, Mask, DBCtrlsEh, DBLookupEh, 	IdBaseComponent, 
+  IdComponent, IdRawBase, IdRawClient, IdIcmpClient, IdTCPConnection, IdTCPClient, 
+  IdWhois, IdIPWatch, ZAbstractConnection, DBAccess, Uni, MemDS, UniProvider, InterBaseUniProvider,
+  sDialogs, sCheckBox, sButton, sComboBox, sBitBtn, sMemo, sEdit, sLabel, sPanel;
 
 // const IniName='database.ini';
  const RegisterBranchMetallica='SOFTWARE\PterikSoft\Metallica';
@@ -16,32 +16,32 @@ uses
 
 type
 	TFormConnection = class(TForm)
-		Panel1: TPanel;
-		Label1: TLabel;
-		lblProtocol: TLabel;
-		lblHostName: TLabel;
-		edtHostName: TEdit;
-		lblDatabase: TLabel;
-		edtDatabase: TEdit;
-		lblUserName: TLabel;
-    edtUser: TEdit;
-		lblPassword: TLabel;
-		edtPassword: TEdit;
-    BitBtnClose: TBitBtn;
-    BitBtnSave: TBitBtn;
-    MemoInfo: TMemo;
+		Panel1: TsPanel;
+		Label1: TsLabel;
+		lblProtocol: TsLabel;
+		lblHostName: TsLabel;
+		edtHostName: TsEdit;
+		lblDatabase: TsLabel;
+		edtDatabase: TsEdit;
+		lblUserName: TsLabel;
+    edtUser: TsEdit;
+		lblPassword: TsLabel;
+		edtPassword: TsEdit;
+    BitBtnClose: TsBitBtn;
+    BitBtnSave: TsBitBtn;
+    MemoInfo: TsMemo;
     IdIcmpClient: TIdIcmpClient;
-    BitBtnPing: TBitBtn;
-    BitBtnConnect: TBitBtn;
-    CBProtocol: TComboBox;
-    Label2: TLabel;
-    ButtonSetDB: TButton;
-    OpenDB: TOpenDialog;
+    BitBtnPing: TsBitBtn;
+    BitBtnConnect: TsBitBtn;
+    CBProtocol: TsComboBox;
+    Label2: TsLabel;
+    ButtonSetDB: TsButton;
+    OpenDB: TsOpenDialog;
     StaticText1: TStaticText;
     IdIPWatch1: TIdIPWatch;
-    CheckBox1: TCheckBox;
-    BitBtnExport: TBitBtn;
-    Label3: TLabel;
+    CheckBox1: TsCheckBox;
+    BitBtnExport: TsBitBtn;
+    Label3: TsLabel;
     UniConnection: TUniConnection;
     InterBaseUniProvider1: TInterBaseUniProvider;
 		procedure BitBtnConnectClick(Sender: TObject);
@@ -172,8 +172,8 @@ end;
 
 procedure TFormConnection.LoadRegister;
 var
-//S:string;
-//K:integer;
+S:string;
+K:integer;
 openResult:boolean;
 KAccess:LongWord;
 //Res:boolean;
@@ -213,14 +213,21 @@ else
   reg := TRegistry.Create(KEY_READ);
 	reg.RootKey := HKEY_CURRENT_USER;
 	openResult := reg.OpenKey('SOFTWARE\PterikSoft\Metallica',True);
+  S:=reg.ReadString('HOSTNAME');
   EdtHostName.Text:=reg.ReadString('HOSTNAME');
+  S:=reg.ReadString('DATABASE');
 	EdtDatabase.Text:=reg.ReadString('DATABASE');
+  S:=reg.ReadString('PROTOCOL');
 	CBProtocol.Text:=reg.ReadString('PROTOCOL');
+  K:=reg.ReadInteger('ISSERVER');
   if reg.ReadInteger('ISSERVER')=0 then F_IsServer:=false;
   if reg.ReadInteger('ISSERVER')=1 then F_IsServer:=true;
 	F_Chipered:=reg.ReadInteger('CHIPERED');
+  S:=reg.ReadString('USERNAME');
 	EdtUser.Text:=reg.ReadString('USERNAME');
+  S:=reg.ReadString('PASSWORD');
 	EdtPassword.Text:=reg.ReadString('PASSWORD');
+  K:=reg.ReadInteger('SETPARAM');
 	F_ParametersCorrect:=reg.ReadInteger('SETPARAM');
 
 //	Res:=Res and ReadRegisterDWORD(K,RegisterBranchMetallica,'SETPARAM');
@@ -256,9 +263,10 @@ end;
 
 procedure TFormConnection.BitBtnSaveClick(Sender: TObject);
 var 
-//Res:boolean;
+Res:boolean;
 reg : TRegistry;
 openResult:boolean;
+F_IsServer:integer;
 begin
 if (EdtHostName.Text='') and (EdtDatabase.Text='') then
 	begin
@@ -279,7 +287,6 @@ if (not reg.KeyExists('SOFTWARE\PterikSoft')) then
 	begin
 	reg.Access := KEY_WRITE;
 	openResult := reg.OpenKey('SOFTWARE\PterikSoft\Metallica',True);
-	reg.WriteString('HOSTNAME', Uppercase(trim(EdtHostName.Text)));
 	if not openResult then
   	  begin
       MessageDlg('Ошибка при работе с реестром SOFTWARE\PterikSoft\Metallica. Обратитесь к разработчику программы .',mtError, mbOKCancel, 0);
@@ -289,26 +296,26 @@ if (not reg.KeyExists('SOFTWARE\PterikSoft')) then
 
 //Res:=true;
 try
-reg.WriteString('HOSTNAME', Uppercase(trim(EdtHostName.Text)));
-if F_IsServer then reg.WriteString('ISSERVER', '1') else reg.WriteString('ISSERVER', '0');
-reg.WriteString('DATABASE', Uppercase(trim(EdtDatabase.Text)));
-reg.WriteString('PROTOCOL', CBProtocol.Text);
-reg.WriteInteger('CHIPERED', 0);
-reg.WriteString('USERNAME', Uppercase(trim(EdtUser.Text)));
-reg.WriteString('PASSWORD', trim(EdtPassword.Text));
-reg.WriteInteger('SETPARAM', F_ParametersCorrect);
-//Res:=WriteRegisterStr(EdtHostName.Text,RegisterBranchMetallica,'HOSTNAME');
-//Res:=Res and WriteRegisterDWORD(F_IsServer,RegisterBranchMetallica,'ISSERVER');
-//Res:=Res and WriteRegisterStr(EdtDatabase.Text,RegisterBranchMetallica,'DATABASE');
-//Res:=Res and WriteRegisterStr(CBProtocol.Text,RegisterBranchMetallica,'PROTOCOL');
+//reg.WriteString('HOSTNAME', Uppercase(trim(EdtHostName.Text)));
+//if F_IsServer then reg.WriteString('ISSERVER', '1') else reg.WriteString('ISSERVER', '0');
+//reg.WriteString('DATABASE', Uppercase(trim(EdtDatabase.Text)));
+//reg.WriteString('PROTOCOL', CBProtocol.Text);
+//reg.WriteInteger('CHIPERED', 0);
+//reg.WriteString('USERNAME', Uppercase(trim(EdtUser.Text)));
+//reg.WriteString('PASSWORD', trim(EdtPassword.Text));
+//reg.WriteInteger('SETPARAM', F_ParametersCorrect);
+Res:=WriteRegisterStr(EdtHostName.Text,RegisterBranchMetallica,'HOSTNAME');
+Res:=Res and WriteRegisterDWORD(F_IsServer,RegisterBranchMetallica,'ISSERVER');
+Res:=Res and WriteRegisterStr(EdtDatabase.Text,RegisterBranchMetallica,'DATABASE');
+Res:=Res and WriteRegisterStr(CBProtocol.Text,RegisterBranchMetallica,'PROTOCOL');
 // 0 если пароли не шифруются, >0 если шифруются в зависимости от вида шифрования
 { TODO : Дописать шифрование пароля по XOR, обработать если пароль не указан}
-//Res:=Res and WriteRegisterDWORD(0,RegisterBranchMetallica,'CHIPERED');
-//Res:=Res and WriteRegisterStr(EdtUser.Text,RegisterBranchMetallica,'USERNAME');
-//Res:=Res and WriteRegisterStr(EdtPassword.Text,RegisterBranchMetallica,'PASSWORD');
+Res:=Res and WriteRegisterDWORD(0,RegisterBranchMetallica,'CHIPERED');
+Res:=Res and WriteRegisterStr(EdtUser.Text,RegisterBranchMetallica,'USERNAME');
+Res:=Res and WriteRegisterStr(EdtPassword.Text,RegisterBranchMetallica,'PASSWORD');
 // 0 если данные неверные, >0 если верные в зависимости от версии параметров
 // Все версии параметров фиксируются в техдокументации
-//Res:=Res and WriteRegisterDWORD(F_ParametersCorrect,RegisterBranchMetallica,'SETPARAM');
+Res:=Res and WriteRegisterDWORD(F_ParametersCorrect,RegisterBranchMetallica,'SETPARAM');
 except
 on E:Exception do
 	begin

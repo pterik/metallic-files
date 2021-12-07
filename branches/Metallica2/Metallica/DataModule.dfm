@@ -2,8 +2,7 @@ object DM: TDM
   OldCreateOrder = False
   Height = 541
   Width = 620
-  object QIPhone: TZQuery
-    Connection = FormMain.ZC
+  object QIPhone2: TZQuery
     SQL.Strings = (
       'insert into phones(ph_id, ph_comment, ph_datebegin)'
       'values(:ph_id, :ph_comment, :ph_datebegin)')
@@ -46,8 +45,7 @@ object DM: TDM
         ParamType = ptUnknown
       end>
   end
-  object QFindPhone: TZQuery
-    Connection = FormMain.ZC
+  object QFindPhone2: TZQuery
     SQL.Strings = (
       'select count(*)  as cntr from phones'
       'where (ph_id=:ph_id) ')
@@ -70,8 +68,7 @@ object DM: TDM
         ParamType = ptUnknown
       end>
   end
-  object QUPhoneDT_Com: TZQuery
-    Connection = FormMain.ZC
+  object QUPhoneDT_Com2: TZQuery
     SQL.Strings = (
       'update phones'
       'set ph_datebegin=:ph_datebegin,'
@@ -118,8 +115,7 @@ object DM: TDM
         ParamType = ptUnknown
       end>
   end
-  object QMaxCompany: TZQuery
-    Connection = FormMain.ZC
+  object QMaxCompany2: TZQuery
     SQL.Strings = (
       'select max(cm_id) as cntr from company')
     Params = <>
@@ -127,8 +123,7 @@ object DM: TDM
     Left = 120
     Top = 112
   end
-  object QICompany: TZQuery
-    Connection = FormMain.ZC
+  object QICompany2: TZQuery
     SQL.Strings = (
       'INSERT INTO company(cm_id, cm_name, cm_owner, '
       
@@ -239,8 +234,7 @@ object DM: TDM
         ParamType = ptUnknown
       end>
   end
-  object QSCompanyNames: TZQuery
-    Connection = FormMain.ZC
+  object QSCompanyNames2: TZQuery
     SQL.Strings = (
       'select cm_name, cm_id from company'
       'where (upper(cm_name) like :Param)')
@@ -263,8 +257,7 @@ object DM: TDM
         ParamType = ptUnknown
       end>
   end
-  object QIPhoneCompany: TZQuery
-    Connection = FormMain.ZC
+  object QIPhoneCompany2: TZQuery
     SQL.Strings = (
       
         'insert into phones_companies(pc_phid, pc_uid, pc_company, pc_dat' +
@@ -321,8 +314,7 @@ object DM: TDM
         ParamType = ptUnknown
       end>
   end
-  object QCntrPhoneCompany: TZQuery
-    Connection = FormMain.ZC
+  object QCntrPhoneCompany2: TZQuery
     SQL.Strings = (
       'select count(*) as cntr from phones_companies'
       'where pc_phid=:pc_phid and pc_company=:pc_company')
@@ -355,8 +347,7 @@ object DM: TDM
         ParamType = ptUnknown
       end>
   end
-  object QUsersOrdered: TZQuery
-    Connection = FormMain.ZC
+  object QUsersOrdered2: TZQuery
     SQL.Strings = (
       
         'select 0 orderby, U_ID, U_LOGIN||'#39' : '#39'||U_FIO USER_NAME  from us' +
@@ -395,23 +386,22 @@ object DM: TDM
         Name = 'CUR_USER'
         ParamType = ptUnknown
       end>
-    object QUsersOrderedUSER_NAME: TStringField
+    object QUsersOrdered2USER_NAME: TStringField
       FieldName = 'USER_NAME'
       ReadOnly = True
       Size = 83
     end
-    object QUsersOrderedORDERBY: TIntegerField
+    object QUsersOrdered2ORDERBY: TIntegerField
       FieldName = 'ORDERBY'
       ReadOnly = True
       Required = True
     end
-    object QUsersOrderedU_ID: TIntegerField
+    object QUsersOrdered2U_ID: TIntegerField
       FieldName = 'U_ID'
       Required = True
     end
   end
-  object QUContactsByOwner: TZQuery
-    Connection = FormMain.ZC
+  object QUContactsByOwner2: TZQuery
     SQL.Strings = (
       'UPDATE CONTACTS'
       'SET  CN_ISCLOSED=1'
@@ -432,8 +422,7 @@ object DM: TDM
         ParamType = ptUnknown
       end>
   end
-  object QUUserbyID: TZQuery
-    Connection = FormMain.ZC
+  object QUUserbyID2: TZQuery
     SQL.Strings = (
       'UPDATE USERS'
       'SET U_ISCLOSED=1'
@@ -454,8 +443,7 @@ object DM: TDM
         ParamType = ptUnknown
       end>
   end
-  object QUCompanyByID: TZQuery
-    Connection = FormMain.ZC
+  object QUCompanyByID2: TZQuery
     SQL.Strings = (
       'UPDATE COMPANY'
       'SET CM_ISCLOSED=1'
@@ -476,8 +464,7 @@ object DM: TDM
         ParamType = ptUnknown
       end>
   end
-  object QUContactByComp: TZQuery
-    Connection = FormMain.ZC
+  object QUContactByComp2: TZQuery
     SQL.Strings = (
       'UPDATE CONTACTS'
       'SET  CN_ISCLOSED=1'
@@ -498,8 +485,7 @@ object DM: TDM
         ParamType = ptUnknown
       end>
   end
-  object QUCompany: TZQuery
-    Connection = FormMain.ZC
+  object QUCompany2: TZQuery
     SQL.Strings = (
       'UPDATE company'
       'SET CM_NAME=:CM_NAME, '
@@ -590,8 +576,7 @@ object DM: TDM
         ParamType = ptUnknown
       end>
   end
-  object QDelJobsForBoss: TZQuery
-    Connection = FormMain.ZC
+  object QDelJobsForBoss2: TZQuery
     SQL.Strings = (
       'delete from JOBSFORBOSS'
       'WHERE JB_VIEWERID=:JB_VIEWERID')
@@ -611,8 +596,7 @@ object DM: TDM
         ParamType = ptUnknown
       end>
   end
-  object QDelContactsViews: TZQuery
-    Connection = FormMain.ZC
+  object QDelContactsViews2: TZQuery
     SQL.Strings = (
       'delete from CONTACTVIEWS'
       'WHERE CN_VIEWER=:CN_VIEWER')
@@ -632,8 +616,7 @@ object DM: TDM
         ParamType = ptUnknown
       end>
   end
-  object QDelUsersForBoss: TZQuery
-    Connection = FormMain.ZC
+  object QDelUsersForBoss2: TZQuery
     SQL.Strings = (
       'delete from USERSFORBOSS'
       'WHERE UB_VIEWERID=:UB_VIEWERID')
@@ -653,8 +636,7 @@ object DM: TDM
         ParamType = ptUnknown
       end>
   end
-  object QIContact: TZQuery
-    Connection = FormMain.ZC
+  object QIContact2: TZQuery
     SQL.Strings = (
       
         'INSERT INTO CONTACTS(CN_ID, CN_OWNER, CN_MANAGER, CN_COMPANY, CN' +
@@ -774,8 +756,7 @@ object DM: TDM
         ParamType = ptUnknown
       end>
   end
-  object QMaxContact: TZQuery
-    Connection = FormMain.ZC
+  object QMaxContact2: TZQuery
     SQL.Strings = (
       'select max(cn_id) as cntr from contacts')
     Params = <>
@@ -783,8 +764,7 @@ object DM: TDM
     Left = 104
     Top = 384
   end
-  object QDContact: TZQuery
-    Connection = FormMain.ZC
+  object QDContact2: TZQuery
     SQL.Strings = (
       'UPDATE CONTACTS'
       'SET CN_COMMENT_CLOSE=:CN_COMMENT_CLOSE,'
@@ -828,8 +808,7 @@ object DM: TDM
         ParamType = ptUnknown
       end>
   end
-  object QDPhone: TZQuery
-    Connection = FormMain.ZC
+  object QDPhone2: TZQuery
     SQL.Strings = (
       'update phones'
       'set ph_dateend=:ph_dateend,'
@@ -876,8 +855,7 @@ object DM: TDM
         ParamType = ptUnknown
       end>
   end
-  object QIComNT: TZQuery
-    Connection = FormMain.ZC
+  object QIComNT2: TZQuery
     SQL.Strings = (
       'insert into COMPANYNAMETYPES'
       '        (CNT_ID, CNT_NAME, CNT_CNTR)'
@@ -921,8 +899,7 @@ object DM: TDM
         ParamType = ptUnknown
       end>
   end
-  object QCntrComNT: TZQuery
-    Connection = FormMain.ZC
+  object QCntrComNT2: TZQuery
     SQL.Strings = (
       'select max(cnt_id) as cntr'
       'from companynametypes')
@@ -933,13 +910,12 @@ object DM: TDM
     Options = []
     Left = 168
     Top = 440
-    object QCntrComNTCNTR: TIntegerField
+    object QCntrComNT2CNTR: TIntegerField
       FieldName = 'CNTR'
       ReadOnly = True
     end
   end
-  object QFindComNT: TZQuery
-    Connection = FormMain.ZC
+  object QFindComNT2: TZQuery
     SQL.Strings = (
       'select count(cnt_id) as cntr'
       'from companynametypes'
@@ -967,8 +943,7 @@ object DM: TDM
       ReadOnly = True
     end
   end
-  object QUComNT: TZQuery
-    Connection = FormMain.ZC
+  object QUComNT2: TZQuery
     SQL.Strings = (
       'update COMPANYNAMETYPES'
       'set CNT_CNTR=CNT_CNTR+:CNT_ADD'
@@ -1006,8 +981,7 @@ object DM: TDM
       ReadOnly = True
     end
   end
-  object QUContactByID: TZQuery
-    Connection = FormMain.ZC
+  object QUContactByID2: TZQuery
     SQL.Strings = (
       'update  CONTACTS'
       'set'
@@ -1127,8 +1101,7 @@ object DM: TDM
         ParamType = ptUnknown
       end>
   end
-  object QUContactAuto: TZQuery
-    Connection = FormMain.ZC
+  object QUContactAuto2: TZQuery
     SQL.Strings = (
       'update contacts'
       'set CN_LAST_JOB=:CN_LAST_JOB,'
@@ -1192,8 +1165,7 @@ object DM: TDM
         ParamType = ptUnknown
       end>
   end
-  object QShortcut: TZQuery
-    Connection = FormMain.ZC
+  object QShortcut2: TZQuery
     SQL.Strings = (
       'select CS_SHABLONE from call_shablone'
       'where cs_shortcut=:cs_shortcut')
@@ -1212,8 +1184,7 @@ object DM: TDM
         ParamType = ptUnknown
       end>
   end
-  object QSettings: TZQuery
-    Connection = FormMain.ZC
+  object QSettings2: TZQuery
     SQL.Strings = (
       'SELECT ST_ID, ST_NAME, ST_VALUE, ST_COMMENT '
       'FROM SETTINGS'
@@ -1237,8 +1208,7 @@ object DM: TDM
         ParamType = ptUnknown
       end>
   end
-  object QUSettings: TZQuery
-    Connection = FormMain.ZC
+  object QUSettings2: TZQuery
     SQL.Strings = (
       'UPDATE SETTINGS'
       'SET ST_VALUE=:ST_VALUE'
@@ -1272,8 +1242,7 @@ object DM: TDM
         ParamType = ptUnknown
       end>
   end
-  object QUPhoneDT: TZQuery
-    Connection = FormMain.ZC
+  object QUPhoneDT2: TZQuery
     SQL.Strings = (
       'update phones'
       'set ph_datebegin=:ph_datebegin, '
@@ -1309,8 +1278,7 @@ object DM: TDM
         ParamType = ptUnknown
       end>
   end
-  object QUPhoneCompany: TZQuery
-    Connection = FormMain.ZC
+  object QUPhoneCompany2: TZQuery
     SQL.Strings = (
       'update phones_companies'
       'set pc_uid=:pc_uid,'
@@ -1369,8 +1337,7 @@ object DM: TDM
         ParamType = ptUnknown
       end>
   end
-  object qFindParent: TZReadOnlyQuery
-    Connection = FormMain.ZC
+  object qFindParent2: TZReadOnlyQuery
     SQL.Strings = (
       
         'select pt.pt_id, pt.PT_VALUE  PT_VALUE,  pt.PT_PARENTID PARENTID' +
@@ -1395,26 +1362,25 @@ object DM: TDM
         Name = 'ID'
         ParamType = ptUnknown
       end>
-    object qFindParentPT_VALUE: TStringField
+    object qFindParent2PT_VALUE: TStringField
       FieldName = 'PT_VALUE'
       Required = True
       Size = 100
     end
-    object qFindParentPARENTID: TIntegerField
+    object qFindParent2PARENTID: TIntegerField
       FieldName = 'PARENTID'
     end
-    object qFindParentPARENTVALUE: TStringField
+    object qFindParent2PARENTVALUE: TStringField
       FieldName = 'PARENTVALUE'
       Required = True
       Size = 100
     end
-    object qFindParentPT_ID: TIntegerField
+    object qFindParent2PT_ID: TIntegerField
       FieldName = 'PT_ID'
       Required = True
     end
   end
-  object qTreeParent: TZReadOnlyQuery
-    Connection = FormMain.ZC
+  object qTreeParent2: TZReadOnlyQuery
     SQL.Strings = (
       'select PT_ID, PT_VALUE, PT_ORDERBY,'
       'PT_DATE, PT_ISCLOSED From PRICES_TREE'
@@ -1424,28 +1390,27 @@ object DM: TDM
     Params = <>
     Left = 24
     Top = 224
-    object qTreeParentPT_ID: TIntegerField
+    object qTreeParent2PT_ID: TIntegerField
       FieldName = 'PT_ID'
       Required = True
     end
-    object qTreeParentPT_VALUE: TStringField
+    object qTreeParent2PT_VALUE: TStringField
       FieldName = 'PT_VALUE'
       Required = True
       Size = 100
     end
-    object qTreeParentPT_DATE: TDateField
+    object qTreeParent2PT_DATE: TDateField
       FieldName = 'PT_DATE'
     end
-    object qTreeParentPT_ISCLOSED: TSmallintField
+    object qTreeParent2PT_ISCLOSED: TSmallintField
       FieldName = 'PT_ISCLOSED'
       Required = True
     end
-    object qTreeParentPT_ORDERBY: TIntegerField
+    object qTreeParent2PT_ORDERBY: TIntegerField
       FieldName = 'PT_ORDERBY'
     end
   end
-  object qTreeChild: TZReadOnlyQuery
-    Connection = FormMain.ZC
+  object qTreeChild2: TZReadOnlyQuery
     SQL.Strings = (
       'select PT_ID, PT_VALUE, PT_ORDERBY, PT_PARENTID,'
       'PT_DATE, PT_ISCLOSED,'
@@ -1500,16 +1465,15 @@ object DM: TDM
     object IntegerField10: TIntegerField
       FieldName = 'PT_ORDERBY'
     end
-    object qTreeChildCNTR: TIntegerField
+    object qTreeChild2CNTR: TIntegerField
       FieldName = 'CNTR'
       ReadOnly = True
     end
-    object qTreeChildPT_PARENTID: TIntegerField
+    object qTreeChild2PT_PARENTID: TIntegerField
       FieldName = 'PT_PARENTID'
     end
   end
-  object qHdrGlobExists: TZQuery
-    Connection = FormMain.ZC
+  object qHdrGlobExists2: TZQuery
     SQL.Strings = (
       'select count(*) as cntr FROM grid_show'
       'WHERE (gs_treeid IS NULL)'
@@ -1530,13 +1494,12 @@ object DM: TDM
         Name = 'field'
         ParamType = ptUnknown
       end>
-    object qHdrGlobExistsCNTR: TIntegerField
+    object qHdrGlobExists2CNTR: TIntegerField
       FieldName = 'CNTR'
       ReadOnly = True
     end
   end
-  object qHdrGlobInsert: TZQuery
-    Connection = FormMain.ZC
+  object qHdrGlobInsert2: TZQuery
     SQL.Strings = (
       'INSERT INTO GRID_SHOW (GS_TREEID, GS_FIELD, GS_HEADER, GS_SHOW,'
       'GS_SIZE, GS_DISPLAYFORMAT, GS_ORDERBY)'
@@ -1599,8 +1562,7 @@ object DM: TDM
         ParamType = ptUnknown
       end>
   end
-  object qHdrExists: TZQuery
-    Connection = FormMain.ZC
+  object qHdrExists2: TZQuery
     SQL.Strings = (
       'select count(*) as cntr FROM grid_show'
       'WHERE (gs_treeid = :TREEID)'
@@ -1631,13 +1593,12 @@ object DM: TDM
         Name = 'field'
         ParamType = ptUnknown
       end>
-    object qHdrExistsCNTR: TIntegerField
+    object qHdrExists2CNTR: TIntegerField
       FieldName = 'CNTR'
       ReadOnly = True
     end
   end
-  object qHdrInsert: TZQuery
-    Connection = FormMain.ZC
+  object qHdrInsert2: TZQuery
     SQL.Strings = (
       'INSERT INTO GRID_SHOW (GS_TREEID, GS_FIELD, GS_HEADER, GS_SHOW,'
       'GS_SIZE, GS_DISPLAYFORMAT, GS_ORDERBY)'
@@ -1720,8 +1681,7 @@ object DM: TDM
         ParamType = ptUnknown
       end>
   end
-  object qDisplay: TZReadOnlyQuery
-    Connection = FormMain.ZC
+  object qDisplay2: TZReadOnlyQuery
     SortedFields = 'GS_ORDERBY'
     SQL.Strings = (
       'SELECT gs_treeid, gs_field, gs_header, gs_show,'
@@ -1749,35 +1709,34 @@ object DM: TDM
         Name = 'treeid'
         ParamType = ptUnknown
       end>
-    object qDisplayGS_FIELD: TStringField
+    object qDisplay2GS_FIELD: TStringField
       FieldName = 'GS_FIELD'
       Size = 50
     end
-    object qDisplayGS_HEADER: TStringField
+    object qDisplay2GS_HEADER: TStringField
       FieldName = 'GS_HEADER'
       Size = 50
     end
-    object qDisplayGS_SHOW: TSmallintField
+    object qDisplay2GS_SHOW: TSmallintField
       FieldName = 'GS_SHOW'
       Required = True
     end
-    object qDisplayGS_SIZE: TIntegerField
+    object qDisplay2GS_SIZE: TIntegerField
       FieldName = 'GS_SIZE'
       Required = True
     end
-    object qDisplayGS_DISPLAYFORMAT: TStringField
+    object qDisplay2GS_DISPLAYFORMAT: TStringField
       FieldName = 'GS_DISPLAYFORMAT'
     end
-    object qDisplayGS_TREEID: TIntegerField
+    object qDisplay2GS_TREEID: TIntegerField
       FieldName = 'GS_TREEID'
     end
-    object qDisplayGS_ORDERBY: TIntegerField
+    object qDisplay2GS_ORDERBY: TIntegerField
       FieldName = 'GS_ORDERBY'
       Required = True
     end
   end
-  object qHdrGlobUpdate: TZQuery
-    Connection = FormMain.ZC
+  object qHdrGlobUpdate2: TZQuery
     SQL.Strings = (
       'update GRID_SHOW'
       'set GS_HEADER =:HEADER,'
@@ -1843,8 +1802,7 @@ object DM: TDM
         ParamType = ptUnknown
       end>
   end
-  object qHdrUpdate: TZQuery
-    Connection = FormMain.ZC
+  object qHdrUpdate2: TZQuery
     SQL.Strings = (
       'update GRID_SHOW'
       'set GS_HEADER =:HEADER,'

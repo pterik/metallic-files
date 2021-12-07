@@ -3,15 +3,15 @@ unit ShowCompany;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset,
-  ZDataset, Grids, DBGrids, DBGridEh, ExtCtrls, DBGridEhGrouping, ToolCtrlsEh,
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
+  Dialogs, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, 
+  Grids, DBGrids, DBGridEh, ExtCtrls, DBGridEhGrouping, ToolCtrlsEh, 
   DBGridEhToolCtrls, DynVarsEh, EhLibVCL, GridsEh, DBAxisGridsEh;
 
 type
   TFormCompaniesShow = class(TForm)
-    CBActive: TCheckBox;
-    BitBtnClose: TBitBtn;
+    CBActive: TsCheckBox;
+    BitBtnClose: TsBitBtn;
     QCompany: TZQuery;
     DSCompanies: TDataSource;
     QCompanySISCLOSED: TStringField;
@@ -38,13 +38,13 @@ type
     QCompanyTL_COLOR: TIntegerField;
     QCompanyTL_NAME: TStringField;
     QCompanyCM_HYPERLINK: TStringField;
-    btnShowPrice: TBitBtn;
-    lbl1: TLabel;
-    edtCompany: TEdit;
-    lbl2: TLabel;
-    edtBusiness: TEdit;
-    lbl3: TLabel;
-    edtCity: TEdit;
+    btnShowPrice: TsBitBtn;
+    lbl1: TsLabel;
+    edtCompany: TsEdit;
+    lbl2: TsLabel;
+    edtBusiness: TsEdit;
+    lbl3: TsLabel;
+    edtCity: TsEdit;
     procedure QCompanyCalcFields(DataSet: TDataSet);
     procedure QPhonesCalcFields(DataSet: TDataSet);
     procedure CBActiveClick(Sender: TObject);
@@ -236,4 +236,4 @@ begin
 end;
 
 end.
-
+

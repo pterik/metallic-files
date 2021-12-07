@@ -21,7 +21,7 @@ object FormSelectTree: TFormSelectTree
     463)
   PixelsPerInch = 96
   TextHeight = 13
-  object Tree: TTreeView
+  object Tree: TsTreeView
     Left = 8
     Top = 8
     Width = 377
@@ -42,7 +42,7 @@ object FormSelectTree: TFormSelectTree
       000000000100000004CAF0F3E3200000000000000000000000FFFFFFFFFFFFFF
       FF000000000000000007CAF0F3E3203130}
   end
-  object BitBtnCancel: TBitBtn
+  object BitBtnCancel: TsBitBtn
     Left = 281
     Top = 424
     Width = 104
@@ -88,4 +88,4 @@ object FormSelectTree: TFormSelectTree
     ParentFont = False
     TabOrder = 2
   end
-end
+end

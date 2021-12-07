@@ -3,16 +3,16 @@ unit Export;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Buttons;
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
+  Dialogs, StdCtrls, Buttons, sBitBtn, sDialogs, sMemo;
 
 type
   TFormExport = class(TForm)
-    BitBtnLoad: TBitBtn;
-    BitBtnSave: TBitBtn;
-    BitBtnClose: TBitBtn;
-    MemoLoad: TMemo;
-    OD: TOpenDialog;
+    BitBtnLoad: TsBitBtn;
+    BitBtnSave: TsBitBtn;
+    BitBtnClose: TsBitBtn;
+    MemoLoad: TsMemo;
+    OD: TsOpenDialog;
     StaticText1: TStaticText;
     procedure BitBtnLoadClick(Sender: TObject);
     procedure BitBtnSaveClick(Sender: TObject);

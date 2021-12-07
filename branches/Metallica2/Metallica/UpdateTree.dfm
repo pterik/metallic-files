@@ -21,7 +21,7 @@ object FormUpdateTree: TFormUpdateTree
     463)
   PixelsPerInch = 96
   TextHeight = 13
-  object BitBtnClose: TBitBtn
+  object BitBtnClose: TsBitBtn
     Left = 309
     Top = 432
     Width = 77
@@ -51,7 +51,7 @@ object FormUpdateTree: TFormUpdateTree
       0000}
     NumGlyphs = 2
   end
-  object Tree: TTreeView
+  object Tree: TsTreeView
     Left = 8
     Top = 8
     Width = 377
@@ -69,7 +69,7 @@ object FormUpdateTree: TFormUpdateTree
       000000000100000004CAF0F3E3200000000000000000000000FFFFFFFFFFFFFF
       FF000000000000000007CAF0F3E3203130}
   end
-  object BitBtnSameNode: TBitBtn
+  object BitBtnSameNode: TsBitBtn
     Left = 104
     Top = 430
     Width = 105
@@ -79,7 +79,7 @@ object FormUpdateTree: TFormUpdateTree
     TabOrder = 2
     OnClick = BitBtnSameNodeClick
   end
-  object BitBtnNewNode: TBitBtn
+  object BitBtnNewNode: TsBitBtn
     Left = 8
     Top = 430
     Width = 89
@@ -89,7 +89,7 @@ object FormUpdateTree: TFormUpdateTree
     TabOrder = 3
     OnClick = BitBtnNewNodeClick
   end
-  object BitBtnDelete: TBitBtn
+  object BitBtnDelete: TsBitBtn
     Left = 215
     Top = 432
     Width = 82
@@ -272,4 +272,4 @@ object FormUpdateTree: TFormUpdateTree
         ParamType = ptUnknown
       end>
   end
-end
+end

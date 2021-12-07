@@ -20,7 +20,7 @@ object FormNewCompany: TFormNewCompany
     495)
   PixelsPerInch = 96
   TextHeight = 13
-  object Label1: TLabel
+  object Label1: TsLabel
     Left = 8
     Top = 8
     Width = 226
@@ -33,7 +33,7 @@ object FormNewCompany: TFormNewCompany
     Font.Style = []
     ParentFont = False
   end
-  object Label2: TLabel
+  object Label2: TsLabel
     Left = 8
     Top = 384
     Width = 263
@@ -46,7 +46,7 @@ object FormNewCompany: TFormNewCompany
     Font.Style = []
     ParentFont = False
   end
-  object Label4: TLabel
+  object Label4: TsLabel
     Left = 8
     Top = 52
     Width = 227
@@ -59,7 +59,7 @@ object FormNewCompany: TFormNewCompany
     Font.Style = []
     ParentFont = False
   end
-  object Label5: TLabel
+  object Label5: TsLabel
     Left = 34
     Top = 72
     Width = 239
@@ -72,7 +72,7 @@ object FormNewCompany: TFormNewCompany
     Font.Style = []
     ParentFont = False
   end
-  object Label6: TLabel
+  object Label6: TsLabel
     Left = 8
     Top = 300
     Width = 127
@@ -85,7 +85,7 @@ object FormNewCompany: TFormNewCompany
     Font.Style = []
     ParentFont = False
   end
-  object Label7: TLabel
+  object Label7: TsLabel
     Left = 10
     Top = 92
     Width = 270
@@ -98,7 +98,7 @@ object FormNewCompany: TFormNewCompany
     Font.Style = []
     ParentFont = False
   end
-  object Label8: TLabel
+  object Label8: TsLabel
     Left = 10
     Top = 324
     Width = 291
@@ -111,7 +111,7 @@ object FormNewCompany: TFormNewCompany
     Font.Style = []
     ParentFont = False
   end
-  object Label3: TLabel
+  object Label3: TsLabel
     Left = 8
     Top = 344
     Width = 30
@@ -124,7 +124,7 @@ object FormNewCompany: TFormNewCompany
     Font.Style = []
     ParentFont = False
   end
-  object Label9: TLabel
+  object Label9: TsLabel
     Left = 8
     Top = 268
     Width = 57
@@ -137,7 +137,7 @@ object FormNewCompany: TFormNewCompany
     Font.Style = []
     ParentFont = False
   end
-  object Label10: TLabel
+  object Label10: TsLabel
     Left = 8
     Top = 116
     Width = 75
@@ -150,7 +150,7 @@ object FormNewCompany: TFormNewCompany
     Font.Style = []
     ParentFont = False
   end
-  object btnSelectPrice: TSpeedButton
+  object btnSelectPrice: TsSpeedButton
     Left = 296
     Top = 136
     Width = 23
@@ -158,7 +158,7 @@ object FormNewCompany: TFormNewCompany
     Caption = '...'
     OnClick = btnSelectPriceClick
   end
-  object lblBusiness: TLabel
+  object lblBusiness: TsLabel
     Left = 8
     Top = 164
     Width = 230
@@ -171,7 +171,7 @@ object FormNewCompany: TFormNewCompany
     Font.Style = []
     ParentFont = False
   end
-  object BitBtnCancel: TBitBtn
+  object BitBtnCancel: TsBitBtn
     Left = 24
     Top = 468
     Width = 75
@@ -202,7 +202,7 @@ object FormNewCompany: TFormNewCompany
     TabOrder = 8
     OnClick = BitBtnCancelClick
   end
-  object EditCompany: TEdit
+  object EditCompany: TsEdit
     Left = 8
     Top = 24
     Width = 281
@@ -216,7 +216,7 @@ object FormNewCompany: TFormNewCompany
     TabOrder = 0
     Text = 'EditCompany'
   end
-  object MEChars: TMaskEdit
+  object MEChars: TsMaskEdit
     Left = 10
     Top = 70
     Width = 18
@@ -228,7 +228,7 @@ object FormNewCompany: TFormNewCompany
     TabOrder = 1
     Text = ' '
   end
-  object CBCompanyNameType: TComboBox
+  object CBCompanyNameType: TsComboBox
     Left = 152
     Top = 296
     Width = 105
@@ -242,7 +242,7 @@ object FormNewCompany: TFormNewCompany
     TabOrder = 5
     Text = 'CBCompanyNameType'
   end
-  object MemoComment: TMemo
+  object MemoComment: TsMemo
     Left = 8
     Top = 408
     Width = 316
@@ -261,7 +261,7 @@ object FormNewCompany: TFormNewCompany
     ShowHint = False
     TabOrder = 7
   end
-  object BitBtnSave: TBitBtn
+  object BitBtnSave: TsBitBtn
     Left = 220
     Top = 468
     Width = 105
@@ -286,7 +286,7 @@ object FormNewCompany: TFormNewCompany
     TabOrder = 9
     OnClick = BitBtnSaveClick
   end
-  object EditCity: TEdit
+  object EditCity: TsEdit
     Left = 8
     Top = 360
     Width = 281
@@ -300,7 +300,7 @@ object FormNewCompany: TFormNewCompany
     TabOrder = 6
     Text = 'EditCity'
   end
-  object CBTrustLevel: TComboBox
+  object CBTrustLevel: TsComboBox
     Left = 80
     Top = 264
     Width = 225
@@ -314,7 +314,7 @@ object FormNewCompany: TFormNewCompany
     TabOrder = 4
     Text = 'CBTrustLevel'
   end
-  object txtPriceList: TEdit
+  object txtPriceList: TsEdit
     Left = 8
     Top = 136
     Width = 289
@@ -327,7 +327,7 @@ object FormNewCompany: TFormNewCompany
     ParentFont = False
     TabOrder = 2
   end
-  object mmoBusiness: TMemo
+  object mmoBusiness: TsMemo
     Left = 8
     Top = 184
     Width = 316
@@ -398,10 +398,10 @@ object FormNewCompany: TFormNewCompany
     Left = 280
     Top = 168
   end
-  object SelectPriceDialog: TOpenDialog
+  object SelectPriceDialog: TsOpenDialog
     Filter = 'Excel|*.xls;*xlsx|All|*.*'
     Options = [ofHideReadOnly, ofPathMustExist, ofFileMustExist, ofEnableSizing]
     Left = 176
     Top = 248
   end
-end
+end

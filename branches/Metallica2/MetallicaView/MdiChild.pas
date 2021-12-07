@@ -3,8 +3,8 @@ unit MdiChild;
 interface
 
 uses
-  Windows, Classes, Graphics, Forms, Controls, Grids, DBGridEh, ComCtrls,
-  DB, ZAbstractRODataset, ZDataset, DataModule, StdCtrls;
+  Windows, Classes, Graphics, Forms, Controls, Grids, DBGridEh, ComCtrls, DB, 
+  ZAbstractRODataset, ZDataset, DataModule, StdCtrls;
 
 type
   TFormMDIChild = class(TForm)

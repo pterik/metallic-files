@@ -3,48 +3,48 @@ unit UpdateCompany;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Buttons, Mask, DB, ZAbstractRODataset,
-  ZAbstractDataset, ZDataset, DBCtrlsEh, DBLookupEh, DBGridEh;
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
+  Dialogs, StdCtrls, Buttons, Mask, DB, ZAbstractRODataset, ZAbstractDataset, 
+  ZDataset, DBCtrlsEh, DBLookupEh, DBGridEh;
 
 type
   TFormUpdateCompany = class(TForm)
-    Label1: TLabel;
-    EditCompany: TEdit;
-    Label2: TLabel;
-    Label4: TLabel;
-    MEChars: TMaskEdit;
-    Label5: TLabel;
-    BitBtnCancel: TBitBtn;
-    LabelisClosed: TLabel;
-    EditComment: TMemo;
-    BitBtnSave: TBitBtn;
+    Label1: TsLabel;
+    EditCompany: TsEdit;
+    Label2: TsLabel;
+    Label4: TsLabel;
+    MEChars: TsMaskEdit;
+    Label5: TsLabel;
+    BitBtnCancel: TsBitBtn;
+    LabelisClosed: TsLabel;
+    EditComment: TsMemo;
+    BitBtnSave: TsBitBtn;
     QCompany: TZQuery;
     QCompanyCM_ID: TIntegerField;
     QCompanyCM_NAME: TStringField;
     QCompanyCM_COMMENT: TStringField;
     QCompanyCM_ISCLOSED: TIntegerField;
     QCompanyCM_HYPERLINK: TStringField;
-    Label6: TLabel;
-    Label7: TLabel;
-    Label3: TLabel;
-    EditCity: TEdit;
+    Label6: TsLabel;
+    Label7: TsLabel;
+    Label3: TsLabel;
+    EditCity: TsEdit;
     QCompanyCM_CITY: TStringField;
     QCompanyCM_TRUST: TSmallintField;
-    Label8: TLabel;
-    CBTrustLevel: TComboBox;
+    Label8: TsLabel;
+    CBTrustLevel: TsComboBox;
     DSTrust: TDataSource;
     QTrustLevel: TZReadOnlyQuery;
     QTrustLevelTL_ID: TIntegerField;
     QTrustLevelTL_LEVEL: TIntegerField;
     QTrustLevelTL_COLOR: TIntegerField;
     QTrustLevelTL_NAME: TStringField;
-    Label9: TLabel;
-    txtPriceList: TEdit;
-    btnSelectPrice: TSpeedButton;
-    SelectPriceDialog: TOpenDialog;
-    lblBusiness: TLabel;
-    mmoBusiness: TMemo;
+    Label9: TsLabel;
+    txtPriceList: TsEdit;
+    btnSelectPrice: TsSpeedButton;
+    SelectPriceDialog: TsOpenDialog;
+    lblBusiness: TsLabel;
+    mmoBusiness: TsMemo;
     strngfldQCompanyCM_BUSINESS: TStringField;
     procedure BitBtnCancelClick(Sender: TObject);
     procedure FormKeyUp(Sender: TObject; var Key: Word;
@@ -173,4 +173,4 @@ begin
 end;
 
 end.
-
+

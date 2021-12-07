@@ -22,28 +22,28 @@ object FormNewPriceRow: TFormNewPriceRow
     458)
   PixelsPerInch = 96
   TextHeight = 13
-  object LabelComp: TLabel
+  object LabelComp: TsLabel
     Left = 8
     Top = 8
     Width = 58
     Height = 13
     Caption = #1055#1086#1089#1090#1072#1074#1097#1080#1082
   end
-  object LabelCity: TLabel
+  object LabelCity: TsLabel
     Left = 288
     Top = 8
     Width = 30
     Height = 13
     Caption = #1043#1086#1088#1086#1076
   end
-  object Label1: TLabel
+  object Label1: TsLabel
     Left = 8
     Top = 32
     Width = 36
     Height = 13
     Caption = #1057#1090#1088#1086#1082#1072
   end
-  object Label2: TLabel
+  object Label2: TsLabel
     Left = 8
     Top = 248
     Width = 189
@@ -56,7 +56,7 @@ object FormNewPriceRow: TFormNewPriceRow
     Font.Style = []
     ParentFont = False
   end
-  object Label3: TLabel
+  object Label3: TsLabel
     Left = 8
     Top = 64
     Width = 181
@@ -69,7 +69,7 @@ object FormNewPriceRow: TFormNewPriceRow
     Font.Style = []
     ParentFont = False
   end
-  object Label4: TLabel
+  object Label4: TsLabel
     Left = 432
     Top = 8
     Width = 31
@@ -197,7 +197,7 @@ object FormNewPriceRow: TFormNewPriceRow
     object RowDetailData: TRowDetailPanelControlEh
     end
   end
-  object EditCompany: TEdit
+  object EditCompany: TsEdit
     Left = 72
     Top = 8
     Width = 209
@@ -212,7 +212,7 @@ object FormNewPriceRow: TFormNewPriceRow
     TabOrder = 3
     Text = 'EditCompany'
   end
-  object EditAddress: TEdit
+  object EditAddress: TsEdit
     Left = 472
     Top = 8
     Width = 201
@@ -227,7 +227,7 @@ object FormNewPriceRow: TFormNewPriceRow
     TabOrder = 4
     Text = 'EditAddress'
   end
-  object BitBtnCancel: TBitBtn
+  object BitBtnCancel: TsBitBtn
     Left = 8
     Top = 429
     Width = 75
@@ -258,7 +258,7 @@ object FormNewPriceRow: TFormNewPriceRow
     TabOrder = 6
     OnClick = BitBtnCancelClick
   end
-  object BitBtnSave: TBitBtn
+  object BitBtnSave: TsBitBtn
     Left = 586
     Top = 429
     Width = 105
@@ -283,7 +283,7 @@ object FormNewPriceRow: TFormNewPriceRow
     TabOrder = 1
     OnClick = BitBtnSaveClick
   end
-  object EditNodeValue: TEdit
+  object EditNodeValue: TsEdit
     Left = 72
     Top = 32
     Width = 353
@@ -414,7 +414,7 @@ object FormNewPriceRow: TFormNewPriceRow
     object RowDetailData: TRowDetailPanelControlEh
     end
   end
-  object EditCity: TEdit
+  object EditCity: TsEdit
     Left = 328
     Top = 8
     Width = 97
@@ -609,4 +609,4 @@ object FormNewPriceRow: TFormNewPriceRow
     Left = 136
     Top = 144
   end
-end
+end

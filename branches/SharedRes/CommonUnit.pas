@@ -827,7 +827,7 @@ var
 begin
   R:= TRegistry.Create;
   try
-    R.Rootkey:= HKEY_LOCAL_MACHINE;
+    R.Rootkey:= HKEY_CURRENT_USER;
     R.OpenKey('SOFTWARE\PterikSoft\TyperADS', False);
     AUSER:= R.ReadString('USER');
     APWD:= R.ReadString('PWD');
@@ -853,7 +853,7 @@ var
 begin
   R:= TRegistry.Create;
   try
-    R.Rootkey:= HKEY_LOCAL_MACHINE;
+    R.Rootkey:= HKEY_CURRENT_USER;
     R.OpenKey('SOFTWARE\PterikSoft\TyperADS', True);
     R.WriteString('USER', AUser);
     R.WriteString('PWD', APWD);
@@ -877,7 +877,7 @@ begin
   // Функция устаревшая, используй WriteToRegister2
   R:= TRegistry.Create;
   try
-    R.Rootkey:= HKEY_LOCAL_MACHINE;
+    R.Rootkey:= HKEY_CURRENT_USER;
     R.OpenKey('SOFTWARE\PterikSoft\' + FProg, True);
     R.WriteString(FName, FVar);
     R.CloseKey;
@@ -899,7 +899,7 @@ begin
   // Функция устаревшая, используй ReadRegisterStr
   R:= TRegistry.Create;
   try
-    R.Rootkey:= HKEY_LOCAL_MACHINE;
+    R.Rootkey:= HKEY_CURRENT_USER;
     R.OpenKey('SOFTWARE\PterikSoft\' + FProg, False);
     FVar:= R.ReadString(FName);
   except on E: ERegistryException do begin
@@ -922,7 +922,7 @@ var
 begin
   R:= TRegistry.Create;
   try
-    R.Rootkey:= HKEY_LOCAL_MACHINE;
+    R.Rootkey:= HKEY_CURRENT_USER;
     R.OpenKey(FBranch, True);
     R.WriteString(FName, FVar);
     R.CloseKey;
@@ -942,7 +942,7 @@ var
 begin
   R:= TRegistry.Create;
   try
-    R.Rootkey:= HKEY_LOCAL_MACHINE;
+    R.Rootkey:= HKEY_CURRENT_USER;
     R.OpenKey(FBranch, True);
     R.WriteInteger(FName, FVar);
     R.CloseKey;
@@ -962,7 +962,7 @@ var
 begin
   R:= TRegistry.Create;
   try
-    R.Rootkey:= HKEY_LOCAL_MACHINE;
+    R.Rootkey:= HKEY_CURRENT_USER;
     R.OpenKey(FBranch, False);
     FVar:= R.ReadString(FName);
   except on E: ERegistryException do begin
@@ -981,7 +981,7 @@ var
 begin
   R:= TRegistry.Create;
   try
-    R.Rootkey:= HKEY_LOCAL_MACHINE;
+    R.Rootkey:= HKEY_CURRENT_USER;
     R.OpenKey(FBranch, False);
     FVar:= R.ReadInteger(FName);
   except on E: ERegistryException do begin
@@ -999,7 +999,7 @@ var
   R: TRegistry;
 begin
   R:= TRegistry.Create;
-  R.Rootkey:= HKEY_LOCAL_MACHINE;
+  R.Rootkey:= HKEY_CURRENT_USER;
   Result:= R.KeyExists(FBranch);
   R.Free;
 end;
@@ -1009,7 +1009,7 @@ var
   R: TRegistry;
 begin
   R:= TRegistry.Create;
-  R.Rootkey:= HKEY_LOCAL_MACHINE;
+  R.Rootkey:= HKEY_CURRENT_USER;
   Result:= R.OpenKeyReadOnly(FBranch);
   //KEY_ALL_ACCESS	combination of KEY_READ, KEY_WRITE, and KEY_CREATE_LINK.
   //KEY_READ	combination of KEY_QUERY_VALUE, KEY_ENUMERATE_SUB_KEYS, and KEY_NOTIFY.
@@ -1031,7 +1031,7 @@ var
 begin
   R:= TRegistry.Create;
   try
-    R.Rootkey:= HKEY_LOCAL_MACHINE;
+    R.Rootkey:= HKEY_CURRENT_USER;
     if R.KeyExists(FName) then
       R.DeleteKey(FName);
   except on E: ERegistryException do begin

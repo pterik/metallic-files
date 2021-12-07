@@ -3,17 +3,17 @@ unit UpdateTree;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset,
-  ZDataset, Grids, DBGrids, DBGridEh, ComCtrls, Mask, DBCtrlsEh, DataModule;
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
+  Dialogs, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, 
+  Grids, DBGrids, DBGridEh, ComCtrls, Mask, DBCtrlsEh, DataModule;
 
 type
   TFormUpdateTree = class(TForm)
-    BitBtnClose: TBitBtn;
-    Tree: TTreeView;
-    BitBtnSameNode: TBitBtn;
-    BitBtnNewNode: TBitBtn;
-    BitBtnDelete: TBitBtn;
+    BitBtnClose: TsBitBtn;
+    Tree: TsTreeView;
+    BitBtnSameNode: TsBitBtn;
+    BitBtnNewNode: TsBitBtn;
+    BitBtnDelete: TsBitBtn;
     qTreeDelete: TZQuery;
     qLinesDelete: TZQuery;
     qSubTreeExists: TZQuery;
@@ -159,4 +159,4 @@ else
 DM.TreeFulFill(Tree, true,0);
 end;
 
-end.
+end.

@@ -3,45 +3,45 @@ unit NewCompany;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Buttons, DBCtrls, DB, Grids, DBGrids, Mask,
-  ZAbstractRODataset, ZDataset, DBCtrlsEh, DBLookupEh, DBGridEh;
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
+  Dialogs, StdCtrls, Buttons, DBCtrls, DB, Grids, DBGrids, Mask, ZAbstractRODataset, 
+  ZDataset, DBCtrlsEh, DBLookupEh, DBGridEh;
 
 type
   TFormNewCompany = class(TForm)
-    BitBtnCancel: TBitBtn;
-    EditCompany: TEdit;
-    Label1: TLabel;
-    Label2: TLabel;
-    Label4: TLabel;
-    MEChars: TMaskEdit;
-    Label5: TLabel;
-    Label6: TLabel;
+    BitBtnCancel: TsBitBtn;
+    EditCompany: TsEdit;
+    Label1: TsLabel;
+    Label2: TsLabel;
+    Label4: TsLabel;
+    MEChars: TsMaskEdit;
+    Label5: TsLabel;
+    Label6: TsLabel;
     QCompanyNameType: TZReadOnlyQuery;
     DSCompanyNameType: TDataSource;
     QCompanyNameTypeCNT_ID: TIntegerField;
     QCompanyNameTypeCNT_NAME: TStringField;
-    CBCompanyNameType: TComboBox;
-    MemoComment: TMemo;
-    Label7: TLabel;
-    Label8: TLabel;
-    BitBtnSave: TBitBtn;
-    Label3: TLabel;
-    EditCity: TEdit;
-    Label9: TLabel;
+    CBCompanyNameType: TsComboBox;
+    MemoComment: TsMemo;
+    Label7: TsLabel;
+    Label8: TsLabel;
+    BitBtnSave: TsBitBtn;
+    Label3: TsLabel;
+    EditCity: TsEdit;
+    Label9: TsLabel;
     QTrustLevel: TZReadOnlyQuery;
     QTrustLevelTL_ID: TIntegerField;
     DSTrust: TDataSource;
-    CBTrustLevel: TComboBox;
+    CBTrustLevel: TsComboBox;
     QTrustLevelTL_LEVEL: TIntegerField;
     QTrustLevelTL_COLOR: TIntegerField;
     QTrustLevelTL_NAME: TStringField;
-    Label10: TLabel;
-    txtPriceList: TEdit;
-    btnSelectPrice: TSpeedButton;
-    SelectPriceDialog: TOpenDialog;
-    lblBusiness: TLabel;
-    mmoBusiness: TMemo;
+    Label10: TsLabel;
+    txtPriceList: TsEdit;
+    btnSelectPrice: TsSpeedButton;
+    SelectPriceDialog: TsOpenDialog;
+    lblBusiness: TsLabel;
+    mmoBusiness: TsMemo;
     procedure BitBtnCancelClick(Sender: TObject);
     procedure FormKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
@@ -186,4 +186,4 @@ begin
 end;
 
 end.
-
+

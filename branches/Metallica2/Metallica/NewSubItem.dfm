@@ -20,7 +20,7 @@ object FormNewSubItem: TFormNewSubItem
     151)
   PixelsPerInch = 96
   TextHeight = 13
-  object Label1: TLabel
+  object Label1: TsLabel
     Left = 8
     Top = 0
     Width = 184
@@ -33,7 +33,7 @@ object FormNewSubItem: TFormNewSubItem
     Font.Style = []
     ParentFont = False
   end
-  object Label2: TLabel
+  object Label2: TsLabel
     Left = 16
     Top = 56
     Width = 121
@@ -46,7 +46,7 @@ object FormNewSubItem: TFormNewSubItem
     Font.Style = []
     ParentFont = False
   end
-  object BitBtnCancel: TBitBtn
+  object BitBtnCancel: TsBitBtn
     Left = 16
     Top = 114
     Width = 75
@@ -75,7 +75,7 @@ object FormNewSubItem: TFormNewSubItem
       0000}
     NumGlyphs = 2
   end
-  object BitBtnSave: TBitBtn
+  object BitBtnSave: TsBitBtn
     Left = 114
     Top = 114
     Width = 105
@@ -101,7 +101,7 @@ object FormNewSubItem: TFormNewSubItem
       0003737FFFFFFFFF7F7330099999999900333777777777777733}
     NumGlyphs = 2
   end
-  object EditTree: TEdit
+  object EditTree: TsEdit
     Left = 16
     Top = 24
     Width = 193
@@ -109,7 +109,7 @@ object FormNewSubItem: TFormNewSubItem
     TabOrder = 0
     Text = 'EditTree'
   end
-  object EditParent: TEdit
+  object EditParent: TsEdit
     Left = 16
     Top = 80
     Width = 193
@@ -194,4 +194,4 @@ object FormNewSubItem: TFormNewSubItem
       ReadOnly = True
     end
   end
-end
+end

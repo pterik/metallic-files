@@ -3,18 +3,17 @@ unit Settings;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset,
-  ZDataset, Mask;
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
+  Dialogs, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, Mask;
 
 type
   TFormSettings = class(TForm)
-    BitBtnCancel: TBitBtn;
-    BitBtnSave: TBitBtn;
-    MESearch: TMaskEdit;
+    BitBtnCancel: TsBitBtn;
+    BitBtnSave: TsBitBtn;
+    MESearch: TsMaskEdit;
     StaticText1: TStaticText;
     StaticText2: TStaticText;
-    MECode: TMaskEdit;
+    MECode: TsMaskEdit;
     procedure BitBtnSaveClick(Sender: TObject);
   private
   public
@@ -68,4 +67,4 @@ except on E:EConvertError do
 end;
 end;
 
-end.
+end.

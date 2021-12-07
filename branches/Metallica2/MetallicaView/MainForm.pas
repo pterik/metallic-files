@@ -3,22 +3,17 @@ unit MainForm;
 interface
 
 uses
-  Windows, SysUtils, Classes, Graphics, Forms, Controls, Menus,
-  StdCtrls, Dialogs, Buttons, Messages, ExtCtrls, ComCtrls,
-  DB, ZAbstractRODataset, ZDataset, Grids, DBGridEh, ZAbstractDataset,
-  ZConnection, AppEvnts, DataModule, MdiChild, ShowTree, ShowCompany,
-  ToolWin, ImgList, StdActns, ActnList;
+  Windows, SysUtils, Classes, Graphics, Forms, Controls, Menus, StdCtrls, 
+  Dialogs, Buttons, Messages, ExtCtrls, ComCtrls, DB, ZAbstractRODataset, ZDataset, 
+  Grids, DBGridEh, ZAbstractDataset, ZConnection, AppEvnts, DataModule, 
+  MdiChild, ShowTree, ShowCompany, ToolWin, ImgList, StdActns, ActnList,
+  System.ImageList, System.Actions, ZAbstractConnection, sTreeView, sCheckBox, sButton,
+  sBitBtn, sComboBox, sLabel, sPanel, DBAccess, Uni, UniDacVcl, UniProvider,
+  InterBaseUniProvider, MemDS ;
 
 type
   TFormMain = class(TForm)
     ApplicationEvents1: TApplicationEvents;
-    ZC: TZConnection;
-    QViewUsers: TZQuery;
-    QViewUsersU_LOGIN: TStringField;
-    QViewUsersU_FIO: TStringField;
-    QViewUsersU_COMMENT: TStringField;
-    QViewUsersU_ISCLOSED: TSmallintField;
-    QViewUsersU_ISBOSS: TIntegerField;
     mmMain: TMainMenu;
     mmWindow: TMenuItem;
     mmiNewTree: TMenuItem;
@@ -47,6 +42,16 @@ type
     WindowArrangeAll1: TWindowArrange;
     HelpAbout1: TAction;
     ImageList1: TImageList;
+    ZC: TUniConnection;
+    InterBaseUniProvider1: TInterBaseUniProvider;
+    QViewUsers: TUniQuery;
+    QViewUsersU_LOGIN: TStringField;
+    QViewUsersU_FIO: TStringField;
+    QViewUsersU_COMMENT: TStringField;
+    QViewUsersU_ID: TIntegerField;
+    QViewUsersU_ISCLOSED: TSmallintField;
+    QViewUsersU_ISBOSS: TIntegerField;
+    QViewUsersU_EDIT_PRICES: TSmallintField;
     procedure mmiNewTreeClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -59,6 +64,7 @@ type
     procedure N8Click(Sender: TObject);
     procedure N7Click(Sender: TObject);
     procedure N3Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     F_EnteredLogin: string;
     F_EntereduserFullName: string;
@@ -85,7 +91,7 @@ implementation
 {$R *.DFM}
 
 uses
-  About, CommonUnit, Variants;
+  About, CommonUnit, Variants, system.UITypes;
 
 procedure TFormMain.FormCreate(Sender: TObject);
 begin
@@ -147,13 +153,19 @@ begin
   Result:= F_EnteredUserFullName;
 end;
 
+procedure TFormMain.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+if qViewUsers.Active then qViewUsers.Close;
+
+if ZC.Connected then ZC.Close;
+end;
+
 procedure TFormMain.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
   if ConfirmClose then
     if MessageDlg('Закрыть программу?', mtConfirmation, [mbYes, mbNo], 0) = mrNo then
       CanClose:= False
-    else
-      WriteRegisterStr(F_EnteredLogin, RegisterBranchMetallica, 'LASTDBUSER');
+    else WriteRegisterStr(F_EnteredLogin, RegisterBranchMetallica, 'LASTDBUSER');
 end;
 
 procedure TFormMain.FormDestroy(Sender: TObject);
@@ -215,9 +227,9 @@ begin
     Exit;
   end;
   ZC.Database:= DM.F_Database;
-  ZC.Protocol:= DM.F_Protocol;
-  ZC.HostName:= DM.F_HostName;
-  ZC.User:= DM.F_User;
+  ZC.ProviderName:= DM.F_Protocol;
+  ZC.Server:= DM.F_HostName;
+  ZC.UserName:= DM.F_User;
   ZC.Password:= DM.F_Password;
   ZC.LoginPrompt:= False;
   try
@@ -260,4 +272,3 @@ begin
 end;
 
 end.
-

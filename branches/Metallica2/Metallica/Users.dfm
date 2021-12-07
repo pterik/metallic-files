@@ -20,7 +20,7 @@ object FormUsers: TFormUsers
     320)
   PixelsPerInch = 96
   TextHeight = 13
-  object BitBtnInsert: TBitBtn
+  object BitBtnInsert: TsBitBtn
     Left = 4
     Top = 294
     Width = 85
@@ -73,7 +73,7 @@ object FormUsers: TFormUsers
       0405060708090A0B020128282828280102020202020202020201282828282801
       0101010101010101010128282828282828282828282828282828}
   end
-  object BitBtnUpdate: TBitBtn
+  object BitBtnUpdate: TsBitBtn
     Left = 102
     Top = 294
     Width = 107
@@ -126,7 +126,7 @@ object FormUsers: TFormUsers
       E5E5F5A31E192A1C1DF5E5E5E5E5E5E5E5E5E5F51A181C1C1EF5E5E5E5E5E5E5
       E5E5E5E5F51D1C1EF5E5E5E5E5E5E5E5E5E5E5E5E5F5F5F5E5E5}
   end
-  object BitBtnDelete: TBitBtn
+  object BitBtnDelete: TsBitBtn
     Left = 448
     Top = 294
     Width = 86
@@ -179,7 +179,7 @@ object FormUsers: TFormUsers
       0B0B05050607080902013B3B3B3B3B01020202020202020202013B3B3B3B3B01
       010101010101010101013B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B}
   end
-  object BitBtnClose: TBitBtn
+  object BitBtnClose: TsBitBtn
     Left = 548
     Top = 294
     Width = 77
@@ -209,7 +209,7 @@ object FormUsers: TFormUsers
       0000}
     NumGlyphs = 2
   end
-  object BitBtnRights: TBitBtn
+  object BitBtnRights: TsBitBtn
     Left = 218
     Top = 294
     Width = 81
@@ -220,7 +220,7 @@ object FormUsers: TFormUsers
     OnClick = BitBtnRightsClick
     NumGlyphs = 2
   end
-  object CBOnlyWorkers: TCheckBox
+  object CBOnlyWorkers: TsCheckBox
     Left = 294
     Top = 8
     Width = 265
@@ -651,4 +651,4 @@ object FormUsers: TFormUsers
       Size = 7
     end
   end
-end
+end

@@ -3,26 +3,25 @@ unit UpdateHeader;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, ComCtrls, StdCtrls, Buttons, DB, ZAbstractRODataset,
-  ZAbstractDataset, ZDataset, DBCtrls, Grids, DBGrids, DBLookupEh, Mask,
-  DBCtrlsEh, DBGridEh, DataModule;
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
+  Dialogs, ComCtrls, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset, 
+  ZDataset, DBCtrls, Grids, DBGrids, DBLookupEh, Mask, DBCtrlsEh, DBGridEh, DataModule;
 
 type
 	TFormUpdateHeader = class(TForm)
-    BitBtnCancel: TBitBtn;
-		Label1: TLabel;
-    BitBtnSave: TBitBtn;
-    EditHeader: TEdit;
-    Label2: TLabel;
-    EditOrderby: TEdit;
-    EditFormat: TEdit;
+    BitBtnCancel: TsBitBtn;
+		Label1: TsLabel;
+    BitBtnSave: TsBitBtn;
+    EditHeader: TsEdit;
+    Label2: TsLabel;
+    EditOrderby: TsEdit;
+    EditFormat: TsEdit;
     StaticText1: TStaticText;
-    CBSaveGlobally: TCheckBox;
+    CBSaveGlobally: TsCheckBox;
     STRubrika: TStaticText;
-    EditSize: TEdit;
-    Label3: TLabel;
-    CBHideField: TCheckBox;
+    EditSize: TsEdit;
+    Label3: TsLabel;
+    CBHideField: TsCheckBox;
     procedure FormKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure BitBtnSaveClick(Sender: TObject);
@@ -143,4 +142,4 @@ begin
 MyNode.Destroy;
 end;
 
-end.
+end.

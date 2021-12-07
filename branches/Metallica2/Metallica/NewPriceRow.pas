@@ -3,12 +3,10 @@ unit NewPriceRow;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset,
-  ZDataset, Grids, DBGrids, DBGridEh, ComCtrls, Mask, DBCtrlsEh,
-  ZAbstractTable,
-  //DBTables,
-  DataModule, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh,
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
+  Dialogs, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, 
+  Grids, DBGrids, DBGridEh, ComCtrls, Mask, DBCtrlsEh, ZAbstractTable, //DBTables, 
+  DataModule, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, 
   EhLibVCL, GridsEh, DBAxisGridsEh;
 
 type
@@ -22,23 +20,23 @@ type
     qDisplayGS_SHOW: TSmallintField;
     qDisplayGS_SIZE: TIntegerField;
     qDisplayGS_DISPLAYFORMAT: TStringField;
-    EditCompany: TEdit;
-    LabelComp: TLabel;
-    LabelCity: TLabel;
-    EditAddress: TEdit;
+    EditCompany: TsEdit;
+    LabelComp: TsLabel;
+    LabelCity: TsLabel;
+    EditAddress: TsEdit;
     QCompany: TZQuery;
     QCompanyCOMPANYID: TIntegerField;
     QCompanyCM_NAME: TStringField;
     QCompanyCM_COMMENT: TStringField;
-    BitBtnCancel: TBitBtn;
-    BitBtnSave: TBitBtn;
-    Label1: TLabel;
-    EditNodeValue: TEdit;
+    BitBtnCancel: TsBitBtn;
+    BitBtnSave: TsBitBtn;
+    Label1: TsLabel;
+    EditNodeValue: TsEdit;
     ZTableEdit: TZTable;
     DSEdit: TDataSource;
     GridTable: TDBGridEh;
-    Label2: TLabel;
-    Label3: TLabel;
+    Label2: TsLabel;
+    Label3: TsLabel;
     qDataViewPL_ID: TIntegerField;
     qDataViewPL_HEADERID: TIntegerField;
     qDataViewPL_TREEID: TIntegerField;
@@ -56,8 +54,8 @@ type
     qDataViewPL_DATE_UPDATE: TDateTimeField;
     qDataViewPL_ISCLOSED: TSmallintField;
     QCompanyCM_CITY: TStringField;
-    EditCity: TEdit;
-    Label4: TLabel;
+    EditCity: TsEdit;
+    Label4: TsLabel;
     procedure FormKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure BitBtnSaveClick(Sender: TObject);
@@ -161,4 +159,4 @@ begin
 MyNode.Destroy;
 end;
 
-end.
+end.

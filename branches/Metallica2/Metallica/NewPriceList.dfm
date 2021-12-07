@@ -23,21 +23,21 @@ object FormNewPriceList: TFormNewPriceList
     470)
   PixelsPerInch = 96
   TextHeight = 13
-  object LabelComp: TLabel
+  object LabelComp: TsLabel
     Left = 8
     Top = 8
     Width = 58
     Height = 13
     Caption = #1055#1086#1089#1090#1072#1074#1097#1080#1082
   end
-  object LabelCity: TLabel
+  object LabelCity: TsLabel
     Left = 8
     Top = 56
     Width = 30
     Height = 13
     Caption = #1043#1086#1088#1086#1076
   end
-  object BitBtnClose: TBitBtn
+  object BitBtnClose: TsBitBtn
     Left = 708
     Top = 432
     Width = 77
@@ -169,7 +169,7 @@ object FormNewPriceList: TFormNewPriceList
         Width = 100
       end>
   end
-  object Tree: TTreeView
+  object Tree: TsTreeView
     Left = 8
     Top = 88
     Width = 201
@@ -188,7 +188,7 @@ object FormNewPriceList: TFormNewPriceList
       000000000100000004CAF0F3E3200000000000000000000000FFFFFFFFFFFFFF
       FF000000000000000007CAF0F3E3203130}
   end
-  object EditCompany: TEdit
+  object EditCompany: TsEdit
     Left = 8
     Top = 24
     Width = 201
@@ -203,7 +203,7 @@ object FormNewPriceList: TFormNewPriceList
     TabOrder = 3
     Text = 'EditCompany'
   end
-  object EditCity: TEdit
+  object EditCity: TsEdit
     Left = 40
     Top = 56
     Width = 129
@@ -237,7 +237,7 @@ object FormNewPriceList: TFormNewPriceList
     TabOrder = 5
     Visible = True
   end
-  object EditNewPrice: TEdit
+  object EditNewPrice: TsEdit
     Left = 536
     Top = 432
     Width = 57
@@ -247,7 +247,7 @@ object FormNewPriceList: TFormNewPriceList
     TabOrder = 6
     Text = '0'
   end
-  object BitBtnNewTree: TBitBtn
+  object BitBtnNewTree: TsBitBtn
     Left = 4
     Top = 430
     Width = 93
@@ -271,7 +271,7 @@ object FormNewPriceList: TFormNewPriceList
       3000333333333333377733333333333333333333333333333333}
     NumGlyphs = 2
   end
-  object BitBtnUpdate: TBitBtn
+  object BitBtnUpdate: TsBitBtn
     Left = 208
     Top = 430
     Width = 105
@@ -324,7 +324,7 @@ object FormNewPriceList: TFormNewPriceList
       E5E5F5A31E192A1C1DF5E5E5E5E5E5E5E5E5E5F51A181C1C1EF5E5E5E5E5E5E5
       E5E5E5E5F51D1C1EF5E5E5E5E5E5E5E5E5E5E5E5E5F5F5F5E5E5}
   end
-  object BitBtnNewRow: TBitBtn
+  object BitBtnNewRow: TsBitBtn
     Left = 116
     Top = 430
     Width = 77
@@ -377,7 +377,7 @@ object FormNewPriceList: TFormNewPriceList
       0405060708090A0B020128282828280102020202020202020201282828282801
       0101010101010101010128282828282828282828282828282828}
   end
-  object BitBtnSave: TBitBtn
+  object BitBtnSave: TsBitBtn
     Left = 600
     Top = 432
     Width = 97
@@ -412,7 +412,7 @@ object FormNewPriceList: TFormNewPriceList
     Caption = #1087#1086#1084#1077#1085#1103#1090#1100' '#1094#1077#1085#1091
     TabOrder = 11
   end
-  object BitBtnStore: TBitBtn
+  object BitBtnStore: TsBitBtn
     Left = 176
     Top = 54
     Width = 33
@@ -434,7 +434,7 @@ object FormNewPriceList: TFormNewPriceList
       3333333333777773333333333333333333333333333333333333}
     NumGlyphs = 2
   end
-  object BitBtnDelete: TBitBtn
+  object BitBtnDelete: TsBitBtn
     Left = 320
     Top = 432
     Width = 73
@@ -487,7 +487,7 @@ object FormNewPriceList: TFormNewPriceList
       0B0B05050607080902013B3B3B3B3B01020202020202020202013B3B3B3B3B01
       010101010101010101013B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B}
   end
-  object ButtonLeft: TButton
+  object ButtonLeft: TsButton
     Left = 152
     Top = 8
     Width = 25
@@ -496,7 +496,7 @@ object FormNewPriceList: TFormNewPriceList
     TabOrder = 14
     OnClick = ButtonLeftClick
   end
-  object ButtonRight: TButton
+  object ButtonRight: TsButton
     Left = 184
     Top = 8
     Width = 25
@@ -915,4 +915,4 @@ object FormNewPriceList: TFormNewPriceList
       ReadOnly = True
     end
   end
-end
+end

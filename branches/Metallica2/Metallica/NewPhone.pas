@@ -3,22 +3,22 @@ unit NewPhone;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
   Dialogs, StdCtrls, Buttons, ComCtrls, Mask;
 
 type
   TFormNewPhone = class(TForm)
-    BitBtnCancel: TBitBtn;
-    Label1: TLabel;
-    MEditPref1: TMaskEdit;
-    MEditPhone1: TMaskEdit;
+    BitBtnCancel: TsBitBtn;
+    Label1: TsLabel;
+    MEditPref1: TsMaskEdit;
+    MEditPhone1: TsMaskEdit;
     DT: TDateTimePicker;
     StaticText1: TStaticText;
-    EditCompany: TEdit;
-    Label2: TLabel;
-    EditContacter: TEdit;
+    EditCompany: TsEdit;
+    Label2: TsLabel;
+    EditContacter: TsEdit;
     StaticText2: TStaticText;
-    BitBtnSave: TBitBtn;
+    BitBtnSave: TsBitBtn;
     procedure BitBtnSaveClick(Sender: TObject);
     procedure FormKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
@@ -120,4 +120,4 @@ begin
 FocusControl(EditCompany);
 end;
 
-end.
+end.

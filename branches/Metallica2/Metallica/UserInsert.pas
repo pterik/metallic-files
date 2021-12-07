@@ -3,25 +3,24 @@ unit UserInsert;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset,
-  ZDataset;
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
+  Dialogs, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset;
 
 type
   TFormUserInsert = class(TForm)
-    Label1: TLabel;
-    EditLogin: TEdit;
-    BitBtnCancel: TBitBtn;
+    Label1: TsLabel;
+    EditLogin: TsEdit;
+    BitBtnCancel: TsBitBtn;
 		QMaxUserID: TZQuery;
 		QInsertUser: TZQuery;
     QBOSSES: TZQuery;
     QInsertBOSS: TZQuery;
-    Label2: TLabel;
-    EditPWD: TEdit;
-    Label3: TLabel;
-    EditFIO: TEdit;
-    Label4: TLabel;
-    EditComment: TEdit;
+    Label2: TsLabel;
+    EditPWD: TsEdit;
+    Label3: TsLabel;
+    EditFIO: TsEdit;
+    Label4: TsLabel;
+    EditComment: TsEdit;
     QBOSSESU_LOGIN: TStringField;
     QBOSSESU_PASSWORD: TStringField;
     QBOSSESU_FIO: TStringField;
@@ -29,8 +28,8 @@ type
     QBOSSESU_ID: TIntegerField;
     QBOSSESU_ISBOSS: TIntegerField;
     QBOSSESU_ISCLOSED: TSmallintField;
-    BitBtnSave: TBitBtn;
-    CBEditPrices: TCheckBox;
+    BitBtnSave: TsBitBtn;
+    CBEditPrices: TsCheckBox;
 		procedure BitBtnCancelClick(Sender: TObject);
     procedure FormKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
@@ -117,4 +116,4 @@ while not QBosses.EOF do
 FocusControl(EditFIO);
 end;
 
-end.
+end.

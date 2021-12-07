@@ -20,7 +20,7 @@ object FormUpdateCompany: TFormUpdateCompany
     504)
   PixelsPerInch = 96
   TextHeight = 13
-  object Label1: TLabel
+  object Label1: TsLabel
     Left = 8
     Top = 8
     Width = 64
@@ -33,7 +33,7 @@ object FormUpdateCompany: TFormUpdateCompany
     Font.Style = []
     ParentFont = False
   end
-  object Label2: TLabel
+  object Label2: TsLabel
     Left = 8
     Top = 224
     Width = 39
@@ -46,7 +46,7 @@ object FormUpdateCompany: TFormUpdateCompany
     Font.Style = []
     ParentFont = False
   end
-  object Label4: TLabel
+  object Label4: TsLabel
     Left = 8
     Top = 430
     Width = 174
@@ -54,7 +54,7 @@ object FormUpdateCompany: TFormUpdateCompany
     Anchors = [akLeft, akBottom]
     Caption = #1042' '#1087#1086#1080#1089#1082#1077' '#1087#1086#1093#1086#1078#1080#1093' '#1080#1084#1105#1085' '#1091#1095#1072#1089#1090#1074#1091#1102#1090
   end
-  object Label5: TLabel
+  object Label5: TsLabel
     Left = 210
     Top = 430
     Width = 65
@@ -62,7 +62,7 @@ object FormUpdateCompany: TFormUpdateCompany
     Anchors = [akLeft, akBottom]
     Caption = #1089#1080#1084#1074#1086#1083#1072' ('#1086#1074')'
   end
-  object LabelisClosed: TLabel
+  object LabelisClosed: TsLabel
     Left = 8
     Top = 456
     Width = 87
@@ -76,7 +76,7 @@ object FormUpdateCompany: TFormUpdateCompany
     Font.Style = []
     ParentFont = False
   end
-  object Label6: TLabel
+  object Label6: TsLabel
     Left = 10
     Top = 383
     Width = 251
@@ -90,7 +90,7 @@ object FormUpdateCompany: TFormUpdateCompany
     Font.Style = []
     ParentFont = False
   end
-  object Label7: TLabel
+  object Label7: TsLabel
     Left = 10
     Top = 405
     Width = 190
@@ -104,7 +104,7 @@ object FormUpdateCompany: TFormUpdateCompany
     Font.Style = []
     ParentFont = False
   end
-  object Label3: TLabel
+  object Label3: TsLabel
     Left = 8
     Top = 272
     Width = 255
@@ -117,7 +117,7 @@ object FormUpdateCompany: TFormUpdateCompany
     Font.Style = []
     ParentFont = False
   end
-  object Label8: TLabel
+  object Label8: TsLabel
     Left = 8
     Top = 196
     Width = 57
@@ -130,7 +130,7 @@ object FormUpdateCompany: TFormUpdateCompany
     Font.Style = []
     ParentFont = False
   end
-  object Label9: TLabel
+  object Label9: TsLabel
     Left = 8
     Top = 56
     Width = 75
@@ -143,7 +143,7 @@ object FormUpdateCompany: TFormUpdateCompany
     Font.Style = []
     ParentFont = False
   end
-  object btnSelectPrice: TSpeedButton
+  object btnSelectPrice: TsSpeedButton
     Left = 328
     Top = 72
     Width = 23
@@ -151,7 +151,7 @@ object FormUpdateCompany: TFormUpdateCompany
     Caption = '...'
     OnClick = btnSelectPriceClick
   end
-  object lblBusiness: TLabel
+  object lblBusiness: TsLabel
     Left = 8
     Top = 100
     Width = 230
@@ -164,7 +164,7 @@ object FormUpdateCompany: TFormUpdateCompany
     Font.Style = []
     ParentFont = False
   end
-  object EditCompany: TEdit
+  object EditCompany: TsEdit
     Left = 8
     Top = 24
     Width = 343
@@ -179,7 +179,7 @@ object FormUpdateCompany: TFormUpdateCompany
     TabOrder = 0
     Text = 'EditCompany'
   end
-  object MEChars: TMaskEdit
+  object MEChars: TsMaskEdit
     Left = 186
     Top = 427
     Width = 18
@@ -192,7 +192,7 @@ object FormUpdateCompany: TFormUpdateCompany
     TabOrder = 6
     Text = ' '
   end
-  object BitBtnCancel: TBitBtn
+  object BitBtnCancel: TsBitBtn
     Left = 24
     Top = 479
     Width = 75
@@ -223,7 +223,7 @@ object FormUpdateCompany: TFormUpdateCompany
       0000}
     NumGlyphs = 2
   end
-  object EditComment: TMemo
+  object EditComment: TsMemo
     Left = 8
     Top = 296
     Width = 347
@@ -240,7 +240,7 @@ object FormUpdateCompany: TFormUpdateCompany
     ScrollBars = ssVertical
     TabOrder = 5
   end
-  object BitBtnSave: TBitBtn
+  object BitBtnSave: TsBitBtn
     Left = 244
     Top = 479
     Width = 105
@@ -265,7 +265,7 @@ object FormUpdateCompany: TFormUpdateCompany
       0003737FFFFFFFFF7F7330099999999900333777777777777733}
     NumGlyphs = 2
   end
-  object EditCity: TEdit
+  object EditCity: TsEdit
     Left = 8
     Top = 240
     Width = 343
@@ -280,7 +280,7 @@ object FormUpdateCompany: TFormUpdateCompany
     TabOrder = 4
     Text = 'EditCity'
   end
-  object CBTrustLevel: TComboBox
+  object CBTrustLevel: TsComboBox
     Left = 80
     Top = 192
     Width = 265
@@ -295,7 +295,7 @@ object FormUpdateCompany: TFormUpdateCompany
     TabOrder = 3
     Text = 'CBTrustLevel'
   end
-  object txtPriceList: TEdit
+  object txtPriceList: TsEdit
     Left = 8
     Top = 72
     Width = 321
@@ -308,7 +308,7 @@ object FormUpdateCompany: TFormUpdateCompany
     ParentFont = False
     TabOrder = 1
   end
-  object mmoBusiness: TMemo
+  object mmoBusiness: TsMemo
     Left = 8
     Top = 120
     Width = 337
@@ -412,10 +412,10 @@ object FormUpdateCompany: TFormUpdateCompany
       Size = 100
     end
   end
-  object SelectPriceDialog: TOpenDialog
+  object SelectPriceDialog: TsOpenDialog
     Filter = 'Excel|*.xls;*xlsx|All|*.*'
     Options = [ofHideReadOnly, ofPathMustExist, ofFileMustExist, ofEnableSizing]
     Left = 176
     Top = 216
   end
-end
+end

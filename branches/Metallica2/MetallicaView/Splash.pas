@@ -3,7 +3,7 @@ unit Splash;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
   Dialogs, jpeg, ExtCtrls, StdCtrls;
 
 type

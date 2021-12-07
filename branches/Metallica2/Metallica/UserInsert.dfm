@@ -20,7 +20,7 @@ object FormUserInsert: TFormUserInsert
     281)
   PixelsPerInch = 96
   TextHeight = 13
-  object Label1: TLabel
+  object Label1: TsLabel
     Left = 16
     Top = 48
     Width = 192
@@ -33,7 +33,7 @@ object FormUserInsert: TFormUserInsert
     Font.Style = []
     ParentFont = False
   end
-  object Label2: TLabel
+  object Label2: TsLabel
     Left = 16
     Top = 104
     Width = 49
@@ -46,7 +46,7 @@ object FormUserInsert: TFormUserInsert
     Font.Style = []
     ParentFont = False
   end
-  object Label3: TLabel
+  object Label3: TsLabel
     Left = 16
     Top = 0
     Width = 150
@@ -59,7 +59,7 @@ object FormUserInsert: TFormUserInsert
     Font.Style = []
     ParentFont = False
   end
-  object Label4: TLabel
+  object Label4: TsLabel
     Left = 16
     Top = 152
     Width = 71
@@ -72,7 +72,7 @@ object FormUserInsert: TFormUserInsert
     Font.Style = []
     ParentFont = False
   end
-  object EditLogin: TEdit
+  object EditLogin: TsEdit
     Left = 16
     Top = 64
     Width = 179
@@ -87,7 +87,7 @@ object FormUserInsert: TFormUserInsert
     TabOrder = 1
     Text = 'EditLogin'
   end
-  object BitBtnCancel: TBitBtn
+  object BitBtnCancel: TsBitBtn
     Left = 16
     Top = 240
     Width = 75
@@ -117,7 +117,7 @@ object FormUserInsert: TFormUserInsert
       0000}
     NumGlyphs = 2
   end
-  object EditPWD: TEdit
+  object EditPWD: TsEdit
     Left = 16
     Top = 120
     Width = 179
@@ -132,7 +132,7 @@ object FormUserInsert: TFormUserInsert
     TabOrder = 2
     Text = 'EditPWD'
   end
-  object EditFIO: TEdit
+  object EditFIO: TsEdit
     Left = 16
     Top = 16
     Width = 179
@@ -147,7 +147,7 @@ object FormUserInsert: TFormUserInsert
     TabOrder = 0
     Text = 'EditFIO'
   end
-  object EditComment: TEdit
+  object EditComment: TsEdit
     Left = 16
     Top = 168
     Width = 179
@@ -162,7 +162,7 @@ object FormUserInsert: TFormUserInsert
     TabOrder = 3
     Text = 'EditComment'
   end
-  object BitBtnSave: TBitBtn
+  object BitBtnSave: TsBitBtn
     Left = 99
     Top = 240
     Width = 105
@@ -187,7 +187,7 @@ object FormUserInsert: TFormUserInsert
       0003737FFFFFFFFF7F7330099999999900333777777777777733}
     NumGlyphs = 2
   end
-  object CBEditPrices: TCheckBox
+  object CBEditPrices: TsCheckBox
     Left = 8
     Top = 208
     Width = 201
@@ -353,4 +353,4 @@ object FormUserInsert: TFormUserInsert
         ParamType = ptUnknown
       end>
   end
-end
+end

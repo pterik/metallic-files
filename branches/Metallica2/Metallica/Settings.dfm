@@ -16,7 +16,7 @@ object FormSettings: TFormSettings
     161)
   PixelsPerInch = 96
   TextHeight = 13
-  object BitBtnCancel: TBitBtn
+  object BitBtnCancel: TsBitBtn
     Left = 8
     Top = 128
     Width = 75
@@ -46,7 +46,7 @@ object FormSettings: TFormSettings
       0000}
     NumGlyphs = 2
   end
-  object BitBtnSave: TBitBtn
+  object BitBtnSave: TsBitBtn
     Left = 113
     Top = 128
     Width = 105
@@ -71,7 +71,7 @@ object FormSettings: TFormSettings
       0003737FFFFFFFFF7F7330099999999900333777777777777733}
     NumGlyphs = 2
   end
-  object MESearch: TMaskEdit
+  object MESearch: TsMaskEdit
     Left = 178
     Top = 12
     Width = 18
@@ -103,7 +103,7 @@ object FormSettings: TFormSettings
       #1073#1099#1090#1100' '#1076#1074#1091#1093#1079#1085#1072#1095#1085#1099#1084
     TabOrder = 5
   end
-  object MECode: TMaskEdit
+  object MECode: TsMaskEdit
     Left = 178
     Top = 60
     Width = 29
@@ -113,4 +113,4 @@ object FormSettings: TFormSettings
     TabOrder = 1
     Text = '  '
   end
-end
+end

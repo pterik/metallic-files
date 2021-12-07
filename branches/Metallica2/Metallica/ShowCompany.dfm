@@ -19,7 +19,7 @@ object FormCompaniesShow: TFormCompaniesShow
     613)
   PixelsPerInch = 96
   TextHeight = 13
-  object lbl1: TLabel
+  object lbl1: TsLabel
     Left = 8
     Top = 6
     Width = 80
@@ -32,7 +32,7 @@ object FormCompaniesShow: TFormCompaniesShow
     Font.Style = []
     ParentFont = False
   end
-  object lbl2: TLabel
+  object lbl2: TsLabel
     Left = 248
     Top = 6
     Width = 119
@@ -45,7 +45,7 @@ object FormCompaniesShow: TFormCompaniesShow
     Font.Style = []
     ParentFont = False
   end
-  object lbl3: TLabel
+  object lbl3: TsLabel
     Left = 520
     Top = 6
     Width = 39
@@ -58,7 +58,7 @@ object FormCompaniesShow: TFormCompaniesShow
     Font.Style = []
     ParentFont = False
   end
-  object CBActive: TCheckBox
+  object CBActive: TsCheckBox
     Left = 744
     Top = 8
     Width = 221
@@ -79,7 +79,7 @@ object FormCompaniesShow: TFormCompaniesShow
     TabOrder = 1
     OnClick = CBActiveClick
   end
-  object BitBtnClose: TBitBtn
+  object BitBtnClose: TsBitBtn
     Left = 937
     Top = 587
     Width = 77
@@ -227,7 +227,7 @@ object FormCompaniesShow: TFormCompaniesShow
     object RowDetailData: TRowDetailPanelControlEh
     end
   end
-  object btnShowPrice: TBitBtn
+  object btnShowPrice: TsBitBtn
     Left = 736
     Top = 585
     Width = 105
@@ -246,7 +246,7 @@ object FormCompaniesShow: TFormCompaniesShow
     TabOrder = 4
     OnClick = btnShowPriceClick
   end
-  object edtCompany: TEdit
+  object edtCompany: TsEdit
     Left = 96
     Top = 4
     Width = 145
@@ -260,7 +260,7 @@ object FormCompaniesShow: TFormCompaniesShow
     TabOrder = 5
     OnExit = edtCompanyExit
   end
-  object edtBusiness: TEdit
+  object edtBusiness: TsEdit
     Left = 368
     Top = 4
     Width = 137
@@ -274,7 +274,7 @@ object FormCompaniesShow: TFormCompaniesShow
     TabOrder = 6
     OnExit = edtBusinessExit
   end
-  object edtCity: TEdit
+  object edtCity: TsEdit
     Left = 568
     Top = 4
     Width = 137
@@ -483,4 +483,4 @@ object FormCompaniesShow: TFormCompaniesShow
     Left = 624
     Top = 104
   end
-end
+end

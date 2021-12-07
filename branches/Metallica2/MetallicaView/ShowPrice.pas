@@ -3,21 +3,44 @@ unit ShowPrice;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset,
-  ZDataset, Grids, DBGrids, DBGridEh, DataModule, MdiChild, ExtCtrls, CommonUnit,
-  DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, EhLibVCL,
-  GridsEh, DBAxisGridsEh;
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
+  Dialogs, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, 
+  Grids, DBGrids, DBGridEh, DataModule, MdiChild, ExtCtrls, CommonUnit, 
+  DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, EhLibVCL, GridsEh, DBAxisGridsEh, sTreeView,
+  sCheckBox, sButton, sBitBtn, sComboBox, sLabel, sPanel, MemDS, DBAccess, Uni;
 
 type
   TFormPriceShow = class(TFormMDIChild)
     Grid: TDBGridEh;
-    qData: TZReadOnlyQuery;
+    DSData: TDataSource;
+    pnlFilters: TsPanel;
+    pnlButtons: TsPanel;
+    Label1: TsLabel;
+    CBFields: TsComboBox;
+    BitBtnInsert: TsBitBtn;
+    Label2: TsLabel;
+    CBFilter: TsComboBox;
+    ButtonFilterClear: TsButton;
+    pnlTop: TsPanel;
+    chk1: TsCheckBox;
+    chk2: TsCheckBox;
+    chk3: TsCheckBox;
+    chk4: TsCheckBox;
+    chk5: TsCheckBox;
+    qData: TUniQuery;
+    qDataFl: TUniQuery;
     qDataPL_ID: TIntegerField;
     qDataPL_HEADERID: TIntegerField;
     qDataPL_TREEID: TIntegerField;
+    qDataPL_PRICE: TFloatField;
+    qDataPL_PARENT: TStringField;
+    qDataPT_VALUE: TStringField;
     qDataCM_NAME: TStringField;
     qDataCM_ID: TIntegerField;
+    qDataCM_CITY: TStringField;
+    qDataCM_BUSINESS: TStringField;
+    qDataCM_HYPERLINK: TStringField;
+    qDataTL_COLOR: TIntegerField;
     qDataPL_VALUE1: TStringField;
     qDataPL_VALUE2: TStringField;
     qDataPL_VALUE3: TStringField;
@@ -30,29 +53,27 @@ type
     qDataPL_ORDERBY: TIntegerField;
     qDataPL_DATE_UPDATE: TDateTimeField;
     qDataPL_ISCLOSED: TSmallintField;
-    DSData: TDataSource;
-    qDataPL_PRICE: TFloatField;
-    qDataPL_PARENT: TStringField;
-    qDataPT_VALUE: TStringField;
-    qDataFl: TZReadOnlyQuery;
-    qDataCM_CITY: TStringField;
-    pnlFilters: TPanel;
-    pnlButtons: TPanel;
-    Label1: TLabel;
-    CBFields: TComboBox;
-    BitBtnInsert: TBitBtn;
-    Label2: TLabel;
-    CBFilter: TComboBox;
-    ButtonFilterClear: TButton;
-    qDataTL_COLOR: TIntegerField;
-    pnlTop: TPanel;
-    strngfldDataCM_BUSINESS: TStringField;
-    strngfldDataCM_HYPERLINK: TStringField;
-    chk1: TCheckBox;
-    chk2: TCheckBox;
-    chk3: TCheckBox;
-    chk4: TCheckBox;
-    chk5: TCheckBox;
+    qDataFlPL_ID: TIntegerField;
+    qDataFlPL_HEADERID: TIntegerField;
+    qDataFlPL_TREEID: TIntegerField;
+    qDataFlPL_PRICE: TFloatField;
+    qDataFlPL_PARENT: TStringField;
+    qDataFlPT_VALUE: TStringField;
+    qDataFlCM_NAME: TStringField;
+    qDataFlCM_ID: TIntegerField;
+    qDataFlCM_CITY: TStringField;
+    qDataFlPL_VALUE1: TStringField;
+    qDataFlPL_VALUE2: TStringField;
+    qDataFlPL_VALUE3: TStringField;
+    qDataFlPL_VALUE4: TStringField;
+    qDataFlPL_VALUE5: TStringField;
+    qDataFlPL_VALUE6: TStringField;
+    qDataFlPL_VALUE7: TStringField;
+    qDataFlPL_VALUE8: TStringField;
+    qDataFlPL_VALUE9: TStringField;
+    qDataFlPL_ORDERBY: TIntegerField;
+    qDataFlPL_DATE_UPDATE: TDateTimeField;
+    qDataFlPL_ISCLOSED: TSmallintField;
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure ButtonFilterClearClick(Sender: TObject);
@@ -283,12 +304,14 @@ begin
   inherited;
   if F_LastSorted = Column.FieldName then
   begin
-    QData.SortedFields:= Column.FieldName;
-    QData.SortType:= stDescending;
+    //QData.SortedFields:= Column.FieldName;
+    //QData.SortType:= stDescending;
+    QData.IndexFieldNames:= Column.FieldName+ ' DESC' ;
   end
   else begin
-    QData.SortedFields:= Column.FieldName;
-    QData.SortType:= stAscending;
+    //QData.SortedFields:= Column.FieldName;
+    //QData.SortType:= stAscending;
+    QData.IndexFieldNames:= Column.FieldName+ ' ASC' ;
   end;
   F_LastSorted:= Column.FieldName;
 end;
@@ -449,4 +472,3 @@ begin
 end;
 
 end.
-

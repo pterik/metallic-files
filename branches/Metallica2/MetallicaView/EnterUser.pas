@@ -3,23 +3,32 @@ unit EnterUser;
 interface
 
 uses
-	Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-	Dialogs, StdCtrls, Buttons, ExtCtrls, DB, ZAbstractRODataset,
-	ZAbstractDataset, ZDataset, ZConnection, Mask, DBCtrlsEh, DBLookupEh,
-  DBGridEh;
+  	Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
+  	Dialogs, StdCtrls, Buttons, ExtCtrls, DB, ZAbstractRODataset, 	ZAbstractDataset, 
+  ZDataset, ZConnection, Mask, DBCtrlsEh, DBLookupEh, DBGridEh, sTreeView,
+  sEdit, sBitBtn, sLabel, MemDS, DBAccess, Uni;
 
 type
 	TFormEnterUser = class(TForm)
-		Label3: TLabel;
-		BitBtnCancel: TBitBtn;
-		BitBtnEnter: TBitBtn;
-		QUsers: TZQuery;
-    EPWD: TEdit;
-    Label2: TLabel;
-    Label4: TLabel;
+		Label3: TsLabel;
+		BitBtnCancel: TsBitBtn;
+		BitBtnEnter: TsBitBtn;
+    EPWD: TsEdit;
+    Label2: TsLabel;
+    Label4: TsLabel;
     DBUsers: TDBLookupComboboxEh;
     DSUsers: TDataSource;
-    EFIO: TEdit;
+    EFIO: TsEdit;
+    QUsers: TUniQuery;
+    QUsersU_ID: TIntegerField;
+    QUsersU_LOGIN: TStringField;
+    QUsersU_PASSWORD: TStringField;
+    QUsersU_ISBOSS: TIntegerField;
+    QUsersU_FIO: TStringField;
+    QUsersU_COMMENT: TStringField;
+    QUsersU_EDIT_OWN_JOBS: TSmallintField;
+    QUsersU_EDIT_PRICES: TSmallintField;
+    QUsersU_ISCLOSED: TSmallintField;
 		procedure BitBtnConnectClick(Sender: TObject);
 		procedure BitBtnCancelClick(Sender: TObject);
 		procedure BitBtnEnterClick(Sender: TObject);
@@ -54,9 +63,9 @@ if not DM.LoadRegister then
 	exit;
 	end;
 FormMain.ZC.Database:=DM.F_Database;
-FormMain.ZC.Protocol:=DM.F_Protocol;
-FormMain.ZC.HostName:=DM.F_HostName;
-FormMain.ZC.User:=DM.F_User;
+FormMain.ZC.ProviderName:=DM.F_Protocol;
+FormMain.ZC.Server:=DM.F_HostName;
+FormMain.ZC.UserName:=DM.F_User;
 FormMain.ZC.Password:=DM.F_Password;
 FormMain.ZC.LoginPrompt:=false;
 try
@@ -79,6 +88,7 @@ end;
 
 procedure TFormEnterUser.BitBtnCancelClick(Sender: TObject);
 begin
+if FormMain.ZC.Connected then FormMain.ZC.Close;
 if not (FormMain=nil) then
   begin
   FormMain.ConfirmClose:=false;
@@ -118,7 +128,7 @@ if IsValidPassword then
 //  FormClock.Close;
 	FormMain.Show;
   F_ValidUser:=true;
-	FormEnterUser.Close;
+	if FormEnterUser.Active then FormEnterUser.Close;
 	end;
 end;
 
@@ -182,6 +192,7 @@ end;
 procedure TFormEnterUser.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
+if Qusers.Active then Qusers.Close;
 if not F_ValidUser then halt(2);
 end;
 

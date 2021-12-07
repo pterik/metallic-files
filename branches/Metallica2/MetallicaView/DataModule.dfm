@@ -1,78 +1,317 @@
 object DM: TDM
   OldCreateOrder = False
-  Left = 424
-  Top = 170
   Height = 541
-  Width = 443
-  object QIPhone: TZQuery
+  Width = 424
+  object QFindComNT: TUniQuery
     Connection = FormMain.ZC
     SQL.Strings = (
-      'insert into phones(ph_id, ph_comment, ph_datebegin)'
-      'values(:ph_id, :ph_comment, :ph_datebegin)')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'ph_id'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'ph_comment'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'ph_datebegin'
-        ParamType = ptUnknown
-      end>
-    Properties.Strings = (
-      'insert into phones(PH_ID, PH_STR, PH_COMMENT, PH_DATEBEGIN)'
-      'values(:PH_ID, :PH_STR, :PH_COMMENT, :PH_DATEBEGIN);')
-    Options = []
-    Left = 32
-    Top = 16
+      'select count(cnt_id) as cntr'
+      'from companynametypes'
+      'where CNT_NAME=:CNT_NAME')
+    Left = 104
+    Top = 376
     ParamData = <
       item
-        DataType = ftUnknown
-        Name = 'ph_id'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'ph_comment'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'ph_datebegin'
-        ParamType = ptUnknown
+        DataType = ftString
+        Name = 'CNT_NAME'
+        ParamType = ptInput
+        Value = nil
       end>
   end
-  object QFindPhone: TZQuery
+  object QCntrComNT: TUniQuery
+    Connection = FormMain.ZC
+    SQL.Strings = (
+      'select max(cnt_id) as cntr'
+      'from companynametypes')
+    Left = 176
+    Top = 376
+    object QCntrComNTCNTR: TIntegerField
+      FieldName = 'CNTR'
+      ReadOnly = True
+    end
+  end
+  object QMaxContact: TUniQuery
+    Connection = FormMain.ZC
+    SQL.Strings = (
+      'select max(cn_id) as cntr from contacts')
+    Left = 320
+    Top = 328
+    object QMaxContactCNTR: TIntegerField
+      FieldName = 'CNTR'
+      ReadOnly = True
+    end
+  end
+  object QSettings: TUniQuery
+    Connection = FormMain.ZC
+    SQL.Strings = (
+      'SELECT ST_ID, ST_NAME, ST_VALUE, ST_COMMENT '
+      'FROM SETTINGS'
+      'where ST_NAME=:ST_NAME')
+    Left = 240
+    Top = 456
+    ParamData = <
+      item
+        DataType = ftString
+        Name = 'ST_NAME'
+        ParamType = ptInput
+        Value = nil
+      end>
+  end
+  object QShortcut: TUniQuery
+    Connection = FormMain.ZC
+    SQL.Strings = (
+      'select CS_SHABLONE from call_shablone'
+      'where cs_shortcut=:cs_shortcut')
+    Left = 312
+    Top = 136
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'cs_shortcut'
+        ParamType = ptInput
+        Value = nil
+      end>
+    object QShortcutCS_SHABLONE: TStringField
+      FieldName = 'CS_SHABLONE'
+      Size = 100
+    end
+  end
+  object QSCompanyNames: TUniQuery
+    Connection = FormMain.ZC
+    SQL.Strings = (
+      'select cm_name, cm_id from company'
+      'where (upper(cm_name) like :Param)')
+    Left = 240
+    Top = 72
+    ParamData = <
+      item
+        DataType = ftString
+        Name = 'Param'
+        ParamType = ptInput
+        Value = nil
+      end>
+  end
+  object QMaxCompany: TUniQuery
+    Connection = FormMain.ZC
+    SQL.Strings = (
+      'select max(cm_id) as cntr from company')
+    Left = 168
+    Top = 72
+  end
+  object QCntrPhoneCompany: TUniQuery
+    Connection = FormMain.ZC
+    SQL.Strings = (
+      'select count(*) as cntr from phones_companies'
+      'where pc_phid=:pc_phid and pc_company=:pc_company')
+    Left = 312
+    Top = 72
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'pc_phid'
+        ParamType = ptInput
+        Value = nil
+      end
+      item
+        DataType = ftString
+        Name = 'pc_company'
+        ParamType = ptInput
+        Value = nil
+      end>
+  end
+  object QFindPhone: TUniQuery
     Connection = FormMain.ZC
     SQL.Strings = (
       'select count(*)  as cntr from phones'
       'where (ph_id=:ph_id) ')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'ph_id'
-        ParamType = ptUnknown
-      end>
-    Properties.Strings = (
-      'select count(*)  as CNTR from phones'
-      'where (ph_id=:ph_id) or (ph_str=:ph_str)')
-    Options = []
-    Left = 224
+    Left = 112
     Top = 16
     ParamData = <
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'ph_id'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = 1
       end>
   end
-  object QUPhoneDT_Com: TZQuery
+  object qHeaderDelete: TUniSQL
+    Connection = FormMain.ZC
+    SQL.Strings = (
+      'DELETE FROM grid_show'
+      'WHERE gs_treeid =:TREEID'
+      'AND ((gs_field =:field) OR (:field =CAST('#39#39' AS VARCHAR(50))))')
+    Left = 32
+    Top = 456
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'TREEID'
+        ParamType = ptInput
+        Value = nil
+      end
+      item
+        DataType = ftString
+        Name = 'field'
+        ParamType = ptInput
+        Value = nil
+      end>
+  end
+  object QUContactByComp: TUniSQL
+    Connection = FormMain.ZC
+    SQL.Strings = (
+      'UPDATE CONTACTS'
+      'SET  CN_ISCLOSED=1'
+      'WHERE CN_COMPANY=:CN_COMPANY')
+    Left = 120
+    Top = 264
+    ParamData = <
+      item
+        DataType = ftString
+        Name = 'CN_COMPANY'
+        ParamType = ptInput
+        Value = nil
+      end>
+  end
+  object qHeaderGlobInsert: TUniSQL
+    Connection = FormMain.ZC
+    SQL.Strings = (
+      'INSERT INTO GRID_SHOW '
+      '(GS_TREEID, GS_FIELD, GS_HEADER, GS_SHOW,'
+      'GS_SIZE, GS_DISPLAYFORMAT, GS_ORDERBY)'
+      'VALUES (NULL, :FIELD, :HEADER, :SHOW,'
+      ':SIZE, :DISPLAYFORMAT, :ORDERBY)')
+    Left = 248
+    Top = 192
+    ParamData = <
+      item
+        DataType = ftString
+        Name = 'FIELD'
+        ParamType = ptInput
+        Value = nil
+      end
+      item
+        DataType = ftString
+        Name = 'HEADER'
+        ParamType = ptInput
+        Value = nil
+      end
+      item
+        DataType = ftSmallint
+        Name = 'SHOW'
+        ParamType = ptInput
+        Value = 0
+      end
+      item
+        DataType = ftInteger
+        Name = 'SIZE'
+        ParamType = ptInput
+        Value = 0
+      end
+      item
+        DataType = ftString
+        Name = 'DISPLAYFORMAT'
+        ParamType = ptInput
+        Value = ''
+      end
+      item
+        DataType = ftInteger
+        Name = 'ORDERBY'
+        ParamType = ptInput
+        Value = 0
+      end>
+  end
+  object qHeaderGlobDelete: TUniSQL
+    Connection = FormMain.ZC
+    SQL.Strings = (
+      'DELETE FROM grid_show'
+      'WHERE gs_treeid IS NULL'
+      'AND ((gs_field =:field) OR (:field =CAST('#39#39' AS VARCHAR(50))))')
+    Left = 184
+    Top = 192
+    ParamData = <
+      item
+        DataType = ftString
+        Name = 'field'
+        ParamType = ptInput
+        Value = nil
+      end>
+  end
+  object QUSettings: TUniSQL
+    Connection = FormMain.ZC
+    SQL.Strings = (
+      'UPDATE SETTINGS'
+      'SET ST_VALUE=:ST_VALUE'
+      'WHERE ST_NAME=:ST_NAME')
+    Left = 112
+    Top = 192
+    ParamData = <
+      item
+        DataType = ftString
+        Name = 'ST_VALUE'
+        ParamType = ptInput
+        Value = nil
+      end
+      item
+        DataType = ftString
+        Name = 'ST_NAME'
+        ParamType = ptInput
+        Value = nil
+      end>
+  end
+  object QDPhone: TUniSQL
+    Connection = FormMain.ZC
+    SQL.Strings = (
+      'update phones'
+      'set ph_dateend=:ph_dateend,'
+      'ph_closedby=:ph_closedby, '
+      'ph_isclosed=1'
+      'where ph_id=:ph_id')
+    Left = 168
+    Top = 16
+    ParamData = <
+      item
+        DataType = ftDateTime
+        Name = 'ph_dateend'
+        ParamType = ptInput
+        Value = nil
+      end
+      item
+        DataType = ftInteger
+        Name = 'ph_closedby'
+        ParamType = ptInput
+        Value = nil
+      end
+      item
+        DataType = ftInteger
+        Name = 'ph_id'
+        ParamType = ptInput
+        Value = nil
+      end>
+  end
+  object QUPhoneDT: TUniSQL
+    Connection = FormMain.ZC
+    SQL.Strings = (
+      'update phones'
+      'set ph_datebegin=:ph_datebegin, '
+      'ph_isclosed=0'
+      'where ph_id=:ph_id')
+    Left = 232
+    Top = 16
+    ParamData = <
+      item
+        DataType = ftDateTime
+        Name = 'ph_datebegin'
+        ParamType = ptInput
+        Value = nil
+      end
+      item
+        DataType = ftInteger
+        Name = 'ph_id'
+        ParamType = ptInput
+        Value = nil
+      end>
+  end
+  object QUPhoneDT_Com: TUniSQL
     Connection = FormMain.ZC
     SQL.Strings = (
       'update phones'
@@ -80,505 +319,99 @@ object DM: TDM
       'ph_comment=:ph_comment,'
       'ph_isclosed=0'
       'where ph_id=:ph_id')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'ph_datebegin'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'ph_comment'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'ph_id'
-        ParamType = ptUnknown
-      end>
-    Properties.Strings = (
-      'update PHONES'
-      'set ph_datebegin=:ph_datebegin'
-      'where (ph_id=:ph_id) or (ph_str=:ph_str)')
-    Options = []
-    Left = 88
+    Left = 312
     Top = 16
     ParamData = <
       item
-        DataType = ftUnknown
+        DataType = ftDateTime
         Name = 'ph_datebegin'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'ph_comment'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'ph_id'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end>
   end
-  object QMaxCompany: TZQuery
+  object QIPhone: TUniSQL
     Connection = FormMain.ZC
     SQL.Strings = (
-      'select max(cm_id) as cntr from company')
-    Params = <>
-    Options = []
-    Left = 128
-    Top = 112
-  end
-  object QICompany: TZQuery
-    Connection = FormMain.ZC
-    SQL.Strings = (
-      
-        'INSERT INTO company(cm_id, cm_name, cm_city, cm_comment, cm_iscl' +
-        'osed)'
-      'VALUES(:cm_id, :cm_name, :cm_city, :cm_comment, :cm_isclosed)')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'cm_id'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'cm_name'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'cm_city'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'cm_comment'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'cm_isclosed'
-        ParamType = ptUnknown
-      end>
-    Properties.Strings = (
-      
-        'insert into company(cm_id, cm_name, cm_manager, cm_comment, cm_i' +
-        'sclosed)'
-      'values(:cm_id, :cm_name, :cm_manager, :cm_comment, :cm_isclosed)')
-    Options = []
-    Left = 32
-    Top = 64
+      'insert into phones(ph_id, ph_comment, ph_datebegin)'
+      'values(:ph_id, :ph_comment, :ph_datebegin)')
+    Left = 48
+    Top = 16
     ParamData = <
       item
-        DataType = ftUnknown
-        Name = 'cm_id'
-        ParamType = ptUnknown
+        DataType = ftInteger
+        Name = 'ph_id'
+        ParamType = ptInput
+        Value = nil
       end
       item
-        DataType = ftUnknown
-        Name = 'cm_name'
-        ParamType = ptUnknown
+        DataType = ftString
+        Name = 'ph_comment'
+        ParamType = ptInput
+        Value = nil
       end
       item
-        DataType = ftUnknown
-        Name = 'cm_city'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'cm_comment'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'cm_isclosed'
-        ParamType = ptUnknown
+        DataType = ftDateTime
+        Name = 'ph_datebegin'
+        ParamType = ptInput
+        Value = nil
       end>
   end
-  object QSCompanyNames: TZQuery
-    Connection = FormMain.ZC
-    SQL.Strings = (
-      'select cm_name, cm_id from company'
-      'where (upper(cm_name) like :Param)')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'Param'
-        ParamType = ptUnknown
-      end>
-    Properties.Strings = (
-      'select count(*)  as CNTR from phones'
-      'where (ph_id=:ph_id) or (ph_str=:ph_str)')
-    Options = []
-    Left = 32
-    Top = 112
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'Param'
-        ParamType = ptUnknown
-      end>
-  end
-  object QIPhoneCompany: TZQuery
-    Connection = FormMain.ZC
-    SQL.Strings = (
-      
-        'insert into phones_companies(pc_phid, pc_uid, pc_company, pc_dat' +
-        'eupdate)'
-      'values(:pc_phid, :pc_uid, :pc_company, :pc_dateupdate)')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'pc_phid'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'pc_uid'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'pc_company'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'pc_dateupdate'
-        ParamType = ptUnknown
-      end>
-    Properties.Strings = (
-      
-        'insert into company(cm_id, cm_name, cm_manager, cm_comment, cm_i' +
-        'sclosed)'
-      'values(:cm_id, :cm_name, :cm_manager, :cm_comment, :cm_isclosed)')
-    Options = []
-    Left = 32
-    Top = 160
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'pc_phid'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'pc_uid'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'pc_company'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'pc_dateupdate'
-        ParamType = ptUnknown
-      end>
-  end
-  object QCntrPhoneCompany: TZQuery
-    Connection = FormMain.ZC
-    SQL.Strings = (
-      'select count(*) as cntr from phones_companies'
-      'where pc_phid=:pc_phid and pc_company=:pc_company')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'pc_phid'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'pc_company'
-        ParamType = ptUnknown
-      end>
-    Properties.Strings = (
-      'select count(*)  as CNTR from phones'
-      'where (ph_id=:ph_id) or (ph_str=:ph_str)')
-    Options = []
-    Left = 200
-    Top = 160
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'pc_phid'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'pc_company'
-        ParamType = ptUnknown
-      end>
-  end
-  object QUsersOrdered: TZQuery
-    Connection = FormMain.ZC
-    SQL.Strings = (
-      
-        'select 0 orderby, U_ID, U_LOGIN||'#39' : '#39'||U_FIO USER_NAME  from us' +
-        'ers u'
-      'where ((U.U_ISCLOSED=:U_ISCLOSED) or (:U_ISCLOSED=-1))'
-      'and (U_ID=:CUR_USER)'
-      'union all'
-      
-        'select U_ID orderby, U_ID, U_LOGIN||'#39' : '#39'||U_FIO USER_NAME  from' +
-        ' users u'
-      'where ((U.U_ISCLOSED=:U_ISCLOSED) or (:U_ISCLOSED=-1))'
-      'and (U_ID<>:CUR_USER)'
-      'order by 1')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'U_ISCLOSED'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'CUR_USER'
-        ParamType = ptUnknown
-      end>
-    Options = []
-    Left = 32
-    Top = 272
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'U_ISCLOSED'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'CUR_USER'
-        ParamType = ptUnknown
-      end>
-    object QUsersOrderedUSER_NAME: TStringField
-      FieldName = 'USER_NAME'
-      ReadOnly = True
-      Size = 83
-    end
-    object QUsersOrderedORDERBY: TIntegerField
-      FieldName = 'ORDERBY'
-      ReadOnly = True
-      Required = True
-    end
-    object QUsersOrderedU_ID: TIntegerField
-      FieldName = 'U_ID'
-      Required = True
-    end
-  end
-  object QUContactsByOwner: TZQuery
-    Connection = FormMain.ZC
-    SQL.Strings = (
-      'UPDATE CONTACTS'
-      'SET  CN_ISCLOSED=1'
-      'WHERE CN_OWNER=:CN_OWNER')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'CN_OWNER'
-        ParamType = ptUnknown
-      end>
-    Options = []
-    Left = 112
-    Top = 328
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'CN_OWNER'
-        ParamType = ptUnknown
-      end>
-  end
-  object QUUserbyID: TZQuery
+  object QUUserbyID: TUniSQL
     Connection = FormMain.ZC
     SQL.Strings = (
       'UPDATE USERS'
       'SET U_ISCLOSED=1'
       'WHERE U_ID=:U_ID')
-    Params = <
+    Left = 48
+    Top = 192
+    ParamData = <
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'U_ID'
-        ParamType = ptUnknown
-      end>
-    Options = []
-    Left = 256
-    Top = 328
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'U_ID'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end>
   end
-  object QUCompanyByID: TZQuery
+  object QIComNT: TUniSQL
     Connection = FormMain.ZC
     SQL.Strings = (
-      'UPDATE COMPANY'
-      'SET CM_ISCLOSED=1'
-      'WHERE CM_ID=:CM_ID')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'CM_ID'
-        ParamType = ptUnknown
-      end>
-    Options = []
-    Left = 320
-    Top = 328
+      'insert into COMPANYNAMETYPES'
+      '        (CNT_ID, CNT_NAME, CNT_CNTR)'
+      'values (:CNT_ID, :CNT_NAME, :CNT_CNTR)')
+    Left = 248
+    Top = 136
     ParamData = <
       item
-        DataType = ftUnknown
-        Name = 'CM_ID'
-        ParamType = ptUnknown
-      end>
-  end
-  object QUContactByComp: TZQuery
-    Connection = FormMain.ZC
-    SQL.Strings = (
-      'UPDATE CONTACTS'
-      'SET  CN_ISCLOSED=1'
-      'WHERE CN_COMPANY=:CN_COMPANY')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'CN_COMPANY'
-        ParamType = ptUnknown
-      end>
-    Options = []
-    Left = 32
-    Top = 328
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'CN_COMPANY'
-        ParamType = ptUnknown
-      end>
-  end
-  object QUCompany: TZQuery
-    Connection = FormMain.ZC
-    SQL.Strings = (
-      'UPDATE company'
-      'SET CM_NAME=:CM_NAME, '
-      '    CM_CITY=:CM_CITY,'
-      '    CM_COMMENT=:CM_COMMENT '
-      'WHERE CM_ID=:CM_ID')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'cm_name'
-        ParamType = ptUnknown
+        DataType = ftInteger
+        Name = 'CNT_ID'
+        Value = 0
       end
       item
-        DataType = ftUnknown
-        Name = 'CM_CITY'
-        ParamType = ptUnknown
+        DataType = ftString
+        Name = 'CNT_NAME'
+        ParamType = ptInput
+        Value = ''
       end
       item
-        DataType = ftUnknown
-        Name = 'cm_comment'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'cm_id'
-        ParamType = ptUnknown
-      end>
-    Properties.Strings = (
-      
-        'insert into company(cm_id, cm_name, cm_manager, cm_comment, cm_i' +
-        'sclosed)'
-      'values(:cm_id, :cm_name, :cm_manager, :cm_comment, :cm_isclosed)')
-    Options = []
-    Left = 224
-    Top = 64
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'cm_name'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'CM_CITY'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'cm_comment'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'cm_id'
-        ParamType = ptUnknown
+        DataType = ftInteger
+        Name = 'CNT_CNTR'
+        ParamType = ptInput
+        Value = nil
       end>
   end
-  object QDelJobsForBoss: TZQuery
-    Connection = FormMain.ZC
-    SQL.Strings = (
-      'delete from JOBSFORBOSS'
-      'WHERE JB_VIEWERID=:JB_VIEWERID')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'JB_VIEWERID'
-        ParamType = ptUnknown
-      end>
-    Options = []
-    Left = 112
-    Top = 272
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'JB_VIEWERID'
-        ParamType = ptUnknown
-      end>
-  end
-  object QDelContactsViews: TZQuery
-    Connection = FormMain.ZC
-    SQL.Strings = (
-      'delete from CONTACTVIEWS'
-      'WHERE CN_VIEWER=:CN_VIEWER')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'CN_VIEWER'
-        ParamType = ptUnknown
-      end>
-    Options = []
-    Left = 200
-    Top = 272
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'CN_VIEWER'
-        ParamType = ptUnknown
-      end>
-  end
-  object QDelUsersForBoss: TZQuery
-    Connection = FormMain.ZC
-    SQL.Strings = (
-      'delete from USERSFORBOSS'
-      'WHERE UB_VIEWERID=:UB_VIEWERID')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'UB_VIEWERID'
-        ParamType = ptUnknown
-      end>
-    Options = []
-    Left = 296
-    Top = 272
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'UB_VIEWERID'
-        ParamType = ptUnknown
-      end>
-  end
-  object QIContact: TZQuery
+  object QIContact: TUniSQL
     Connection = FormMain.ZC
     SQL.Strings = (
       
@@ -593,345 +426,220 @@ object DM: TDM
       
         '    :CN_COMMENT, :CN_JOBTYPE, :CN_JOBCOMMENT, :CN_PERIODICITY, :' +
         'CN_NEXT_JOB_DATE)')
-    Params = <
+    Left = 184
+    Top = 136
+    ParamData = <
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'CN_ID'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = 0
       end
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'CN_OWNER'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = 0
       end
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'CN_MANAGER'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = 0
       end
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'CN_COMPANY'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = 0
       end
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'CN_CONTACTER'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'CN_COMMENT'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'CN_JOBTYPE'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = 0
       end
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'CN_JOBCOMMENT'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = ''
       end
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'CN_PERIODICITY'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = 0
       end
       item
-        DataType = ftUnknown
+        DataType = ftDateTime
         Name = 'CN_NEXT_JOB_DATE'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end>
-    Options = []
-    Left = 32
-    Top = 384
+  end
+  object QUPhoneCompany: TUniSQL
+    Connection = FormMain.ZC
+    SQL.Strings = (
+      'update phones_companies'
+      'set pc_uid=:pc_uid,'
+      'pc_dateupdate=:pc_dateupdate'
+      'where pc_phid=:pc_phid'
+      'and pc_company=:pc_company'
+      '')
+    Left = 112
+    Top = 136
     ParamData = <
       item
-        DataType = ftUnknown
-        Name = 'CN_ID'
-        ParamType = ptUnknown
+        DataType = ftInteger
+        Name = 'pc_uid'
+        ParamType = ptInput
+        Value = nil
       end
       item
-        DataType = ftUnknown
-        Name = 'CN_OWNER'
-        ParamType = ptUnknown
+        DataType = ftDateTime
+        Name = 'pc_dateupdate'
+        ParamType = ptInput
+        Value = nil
       end
       item
-        DataType = ftUnknown
-        Name = 'CN_MANAGER'
-        ParamType = ptUnknown
+        DataType = ftInteger
+        Name = 'pc_phid'
+        ParamType = ptInput
+        Value = nil
       end
       item
-        DataType = ftUnknown
-        Name = 'CN_COMPANY'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'CN_CONTACTER'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'CN_COMMENT'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'CN_JOBTYPE'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'CN_JOBCOMMENT'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'CN_PERIODICITY'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'CN_NEXT_JOB_DATE'
-        ParamType = ptUnknown
+        DataType = ftString
+        Name = 'pc_company'
+        ParamType = ptInput
+        Value = nil
       end>
   end
-  object QMaxContact: TZQuery
+  object QIPhoneCompany: TUniSQL
     Connection = FormMain.ZC
     SQL.Strings = (
-      'select max(cn_id) as cntr from contacts')
-    Params = <>
-    Options = []
-    Left = 104
-    Top = 384
-  end
-  object QDContact: TZQuery
-    Connection = FormMain.ZC
-    SQL.Strings = (
-      'UPDATE CONTACTS'
-      'SET CN_COMMENT_CLOSE=:CN_COMMENT_CLOSE,'
-      '    CN_NEXT_JOB_DATE=NULL,'
-      '    CN_CLOSED_BY_MANAGER=:CN_CLOSED_BY_MANAGER,'
-      '    CN_ISCLOSED=1'
-      'WHERE CN_ID=:CN_ID')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'CN_COMMENT_CLOSE'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'CN_CLOSED_BY_MANAGER'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'CN_ID'
-        ParamType = ptUnknown
-      end>
-    Options = []
-    Left = 248
-    Top = 384
+      
+        'insert into phones_companies(pc_phid, pc_uid, pc_company, pc_dat' +
+        'eupdate)'
+      'values(:pc_phid, :pc_uid, :pc_company, :pc_dateupdate)')
+    Left = 48
+    Top = 136
     ParamData = <
       item
-        DataType = ftUnknown
-        Name = 'CN_COMMENT_CLOSE'
-        ParamType = ptUnknown
+        DataType = ftInteger
+        Name = 'pc_phid'
+        ParamType = ptInput
+        Value = 0
       end
       item
-        DataType = ftUnknown
-        Name = 'CN_CLOSED_BY_MANAGER'
-        ParamType = ptUnknown
+        DataType = ftInteger
+        Name = 'pc_uid'
+        ParamType = ptInput
+        Value = 0
       end
       item
-        DataType = ftUnknown
-        Name = 'CN_ID'
-        ParamType = ptUnknown
+        DataType = ftString
+        Name = 'pc_company'
+        ParamType = ptInput
+        Value = 'A'
+      end
+      item
+        DataType = ftDateTime
+        Name = 'pc_dateupdate'
+        ParamType = ptInput
+        Value = nil
       end>
   end
-  object QDPhone: TZQuery
+  object QUCompany: TUniSQL
     Connection = FormMain.ZC
     SQL.Strings = (
-      'update phones'
-      'set ph_dateend=:ph_dateend,'
-      'ph_closedby=:ph_closedby, '
-      'ph_isclosed=1'
-      'where ph_id=:ph_id')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'ph_dateend'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'ph_closedby'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'ph_id'
-        ParamType = ptUnknown
-      end>
-    Properties.Strings = (
-      'update PHONES'
-      'set ph_datebegin=:ph_datebegin'
-      'where (ph_id=:ph_id) or (ph_str=:ph_str)')
-    Options = []
-    Left = 304
-    Top = 16
+      'UPDATE company'
+      'SET CM_NAME=:CM_NAME, '
+      '    CM_CITY=:CM_CITY,'
+      '    CM_COMMENT=:CM_COMMENT '
+      'WHERE CM_ID=:CM_ID')
+    Left = 112
+    Top = 72
     ParamData = <
       item
-        DataType = ftUnknown
-        Name = 'ph_dateend'
-        ParamType = ptUnknown
+        DataType = ftString
+        Name = 'CM_NAME'
+        ParamType = ptInput
+        Value = nil
       end
       item
-        DataType = ftUnknown
-        Name = 'ph_closedby'
-        ParamType = ptUnknown
+        DataType = ftString
+        Name = 'CM_CITY'
+        ParamType = ptInput
+        Value = nil
       end
       item
-        DataType = ftUnknown
-        Name = 'ph_id'
-        ParamType = ptUnknown
+        DataType = ftString
+        Name = 'CM_COMMENT'
+        ParamType = ptInput
+        Value = nil
+      end
+      item
+        DataType = ftInteger
+        Name = 'CM_ID'
+        ParamType = ptInput
+        Value = nil
       end>
   end
-  object QIComNT: TZQuery
+  object QICompany: TUniSQL
     Connection = FormMain.ZC
     SQL.Strings = (
-      'insert into COMPANYNAMETYPES'
-      '        (CNT_ID, CNT_NAME, CNT_CNTR)'
-      'values (:CNT_ID, :CNT_NAME, :CNT_CNTR)')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'CNT_ID'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'CNT_NAME'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'CNT_CNTR'
-        ParamType = ptUnknown
-      end>
-    Properties.Strings = (
-      'select count(*)  as CNTR from phones'
-      'where (ph_id=:ph_id) or (ph_str=:ph_str)')
-    Options = []
-    Left = 32
-    Top = 440
+      
+        'INSERT INTO company(cm_id, cm_name, cm_city, cm_comment, cm_iscl' +
+        'osed)'
+      'VALUES(:cm_id, :cm_name, :cm_city, :cm_comment, :cm_isclosed)')
+    Left = 48
+    Top = 72
     ParamData = <
       item
-        DataType = ftUnknown
-        Name = 'CNT_ID'
-        ParamType = ptUnknown
+        DataType = ftInteger
+        Name = 'cm_id'
+        ParamType = ptInput
+        Value = 0
       end
       item
-        DataType = ftUnknown
-        Name = 'CNT_NAME'
-        ParamType = ptUnknown
+        DataType = ftString
+        Name = 'cm_name'
+        ParamType = ptInput
+        Value = nil
       end
       item
-        DataType = ftUnknown
-        Name = 'CNT_CNTR'
-        ParamType = ptUnknown
-      end>
-  end
-  object QCntrComNT: TZQuery
-    Connection = FormMain.ZC
-    SQL.Strings = (
-      'select max(cnt_id) as cntr'
-      'from companynametypes')
-    Params = <>
-    Properties.Strings = (
-      'select count(*)  as CNTR from phones'
-      'where (ph_id=:ph_id) or (ph_str=:ph_str)')
-    Options = []
-    Left = 168
-    Top = 440
-    object QCntrComNTCNTR: TIntegerField
-      FieldName = 'CNTR'
-      ReadOnly = True
-    end
-  end
-  object QFindComNT: TZQuery
-    Connection = FormMain.ZC
-    SQL.Strings = (
-      'select count(cnt_id) as cntr'
-      'from companynametypes'
-      'where CNT_NAME=:CNT_NAME')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'CNT_NAME'
-        ParamType = ptUnknown
-      end>
-    Properties.Strings = (
-      'select count(*)  as CNTR from phones'
-      'where (ph_id=:ph_id) or (ph_str=:ph_str)')
-    Options = []
-    Left = 240
-    Top = 440
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'CNT_NAME'
-        ParamType = ptUnknown
-      end>
-    object IntegerField1: TIntegerField
-      FieldName = 'CNTR'
-      ReadOnly = True
-    end
-  end
-  object QUComNT: TZQuery
-    Connection = FormMain.ZC
-    SQL.Strings = (
-      'update COMPANYNAMETYPES'
-      'set CNT_CNTR=CNT_CNTR+:CNT_ADD'
-      'where CNT_NAME= :CNT_NAME')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'CNT_ADD'
-        ParamType = ptUnknown
+        DataType = ftString
+        Name = 'cm_city'
+        ParamType = ptInput
+        Value = nil
       end
       item
-        DataType = ftUnknown
-        Name = 'CNT_NAME'
-        ParamType = ptUnknown
-      end>
-    Properties.Strings = (
-      'select count(*)  as CNTR from phones'
-      'where (ph_id=:ph_id) or (ph_str=:ph_str)')
-    Options = []
-    Left = 88
-    Top = 440
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'CNT_ADD'
-        ParamType = ptUnknown
+        DataType = ftString
+        Name = 'cm_comment'
+        ParamType = ptInput
+        Value = nil
       end
       item
-        DataType = ftUnknown
-        Name = 'CNT_NAME'
-        ParamType = ptUnknown
+        DataType = ftSmallint
+        Name = 'cm_isclosed'
+        ParamType = ptInput
+        Value = nil
       end>
-    object IntegerField2: TIntegerField
-      FieldName = 'CNTR'
-      ReadOnly = True
-    end
   end
-  object QUContactByID: TZQuery
+  object QUCompanyByID: TUniSQL
     Connection = FormMain.ZC
     SQL.Strings = (
       'update  CONTACTS'
@@ -946,113 +654,140 @@ object DM: TDM
       'CN_PERIODICITY=:CN_PERIODICITY,'
       'CN_NEXT_JOB_DATE=:CN_NEXT_JOB_DATE'
       'where CN_ID=:CN_ID')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'CN_OWNER'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'CN_MANAGER'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'CN_COMPANY'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'CN_CONTACTER'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'CN_COMMENT'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'CN_JOBTYPE'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'CN_JOBCOMMENT'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'CN_PERIODICITY'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'CN_NEXT_JOB_DATE'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'CN_ID'
-        ParamType = ptUnknown
-      end>
-    Options = []
-    Left = 176
-    Top = 384
+    Left = 184
+    Top = 256
     ParamData = <
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'CN_OWNER'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'CN_MANAGER'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'CN_COMPANY'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'CN_CONTACTER'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'CN_COMMENT'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'CN_JOBTYPE'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'CN_JOBCOMMENT'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'CN_PERIODICITY'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end
       item
-        DataType = ftUnknown
+        DataType = ftDateTime
         Name = 'CN_NEXT_JOB_DATE'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'CN_ID'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end>
   end
-  object QUContactAuto: TZQuery
+  object QUContactsByOwner: TUniSQL
+    Connection = FormMain.ZC
+    SQL.Strings = (
+      'UPDATE CONTACTS'
+      'SET  CN_ISCLOSED=1'
+      'WHERE CN_OWNER=:CN_OWNER')
+    Left = 48
+    Top = 248
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'CN_OWNER'
+        ParamType = ptInput
+        Value = nil
+      end>
+  end
+  object qHeaderInsert: TUniSQL
+    Connection = FormMain.ZC
+    SQL.Strings = (
+      'INSERT INTO GRID_SHOW (GS_TREEID, GS_FIELD, GS_HEADER, GS_SHOW,'
+      'GS_SIZE, GS_DISPLAYFORMAT, GS_ORDERBY)'
+      'VALUES (:TREEID, :FIELD, :HEADER, :SHOW,'
+      ':SIZE, :DISPLAYFORMAT, :ORDERBY)')
+    Left = 312
+    Top = 192
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'TREEID'
+        ParamType = ptInput
+        Value = 0
+      end
+      item
+        DataType = ftString
+        Name = 'FIELD'
+        ParamType = ptInput
+        Value = ''
+      end
+      item
+        DataType = ftString
+        Name = 'HEADER'
+        ParamType = ptInput
+        Value = ''
+      end
+      item
+        DataType = ftSmallint
+        Name = 'SHOW'
+        ParamType = ptInput
+        Value = 0
+      end
+      item
+        DataType = ftInteger
+        Name = 'SIZE'
+        ParamType = ptInput
+        Value = 0
+      end
+      item
+        DataType = ftString
+        Name = 'DISPLAYFORMAT'
+        ParamType = ptInput
+        Value = ''
+      end
+      item
+        DataType = ftInteger
+        Name = 'ORDERBY'
+        ParamType = ptInput
+        Value = 0
+      end>
+  end
+  object QUContactAuto: TUniSQL
     Connection = FormMain.ZC
     SQL.Strings = (
       'update contacts'
@@ -1061,594 +796,219 @@ object DM: TDM
       'CN_NEXT_JOB_DATE=:CN_NEXT_JOB_DATE, '
       'CN_ISCLOSED=:CN_ISCLOSED'
       'where CN_ID=:CN_ID')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'CN_LAST_JOB'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'CN_LAST_JOB_DATE'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'CN_NEXT_JOB_DATE'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'CN_ISCLOSED'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'CN_ID'
-        ParamType = ptUnknown
-      end>
-    Options = []
-    Left = 184
-    Top = 328
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'CN_LAST_JOB'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'CN_LAST_JOB_DATE'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'CN_NEXT_JOB_DATE'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'CN_ISCLOSED'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'CN_ID'
-        ParamType = ptUnknown
-      end>
-  end
-  object QShortcut: TZQuery
-    Connection = FormMain.ZC
-    SQL.Strings = (
-      'select CS_SHABLONE from call_shablone'
-      'where cs_shortcut=:cs_shortcut')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'cs_shortcut'
-        ParamType = ptUnknown
-      end>
-    Left = 304
-    Top = 72
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'cs_shortcut'
-        ParamType = ptUnknown
-      end>
-  end
-  object QSettings: TZQuery
-    Connection = FormMain.ZC
-    SQL.Strings = (
-      'SELECT ST_ID, ST_NAME, ST_VALUE, ST_COMMENT '
-      'FROM SETTINGS'
-      'where ST_NAME=:ST_NAME')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'ST_NAME'
-        ParamType = ptUnknown
-      end>
-    Properties.Strings = (
-      'insert into phones(PH_ID, PH_STR, PH_COMMENT, PH_DATEBEGIN)'
-      'values(:PH_ID, :PH_STR, :PH_COMMENT, :PH_DATEBEGIN);')
-    Options = []
-    Left = 224
-    Top = 120
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'ST_NAME'
-        ParamType = ptUnknown
-      end>
-  end
-  object QUSettings: TZQuery
-    Connection = FormMain.ZC
-    SQL.Strings = (
-      'UPDATE SETTINGS'
-      'SET ST_VALUE=:ST_VALUE'
-      'WHERE ST_NAME=:ST_NAME')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'ST_VALUE'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'ST_NAME'
-        ParamType = ptUnknown
-      end>
-    Properties.Strings = (
-      'insert into phones(PH_ID, PH_STR, PH_COMMENT, PH_DATEBEGIN)'
-      'values(:PH_ID, :PH_STR, :PH_COMMENT, :PH_DATEBEGIN);')
-    Options = []
-    Left = 304
-    Top = 120
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'ST_VALUE'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'ST_NAME'
-        ParamType = ptUnknown
-      end>
-  end
-  object QUPhoneDT: TZQuery
-    Connection = FormMain.ZC
-    SQL.Strings = (
-      'update phones'
-      'set ph_datebegin=:ph_datebegin, '
-      'ph_isclosed=0'
-      'where ph_id=:ph_id')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'ph_datebegin'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'ph_id'
-        ParamType = ptUnknown
-      end>
-    Properties.Strings = (
-      'update PHONES'
-      'set ph_datebegin=:ph_datebegin'
-      'where (ph_id=:ph_id) or (ph_str=:ph_str)')
-    Options = []
-    Left = 168
-    Top = 16
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'ph_datebegin'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'ph_id'
-        ParamType = ptUnknown
-      end>
-  end
-  object QUPhoneCompany: TZQuery
-    Connection = FormMain.ZC
-    SQL.Strings = (
-      'update phones_companies'
-      'set pc_uid=:pc_uid,'
-      'pc_dateupdate=:pc_dateupdate'
-      'where pc_phid=:pc_phid'
-      'and pc_company=:pc_company'
-      '')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'pc_uid'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'pc_dateupdate'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'pc_phid'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'pc_company'
-        ParamType = ptUnknown
-      end>
-    Properties.Strings = (
-      
-        'insert into company(cm_id, cm_name, cm_manager, cm_comment, cm_i' +
-        'sclosed)'
-      'values(:cm_id, :cm_name, :cm_manager, :cm_comment, :cm_isclosed)')
-    Options = []
-    Left = 120
-    Top = 176
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'pc_uid'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'pc_dateupdate'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'pc_phid'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'pc_company'
-        ParamType = ptUnknown
-      end>
-  end
-  object qFindParent: TZReadOnlyQuery
-    Connection = FormMain.ZC
-    SQL.Strings = (
-      
-        'select pt.pt_id, pt.PT_VALUE  PT_VALUE,  pt.PT_PARENTID PARENTID' +
-        ','
-      'pr.PT_VALUE PARENTVALUE'
-      'from PRICES_TREE pt'
-      'left join PRICES_TREE pr on pr.pt_id = pt.pt_parentid'
-      'where pt.PT_ID=:ID'
-      'and pt.pt_isclosed=0'
-      'and (pr.pt_isclosed=0 or pr.pt_isclosed is null)')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'ID'
-        ParamType = ptUnknown
-      end>
-    Left = 184
-    Top = 208
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'ID'
-        ParamType = ptUnknown
-      end>
-    object qFindParentPT_VALUE: TStringField
-      FieldName = 'PT_VALUE'
-      Required = True
-      Size = 100
-    end
-    object qFindParentPARENTID: TIntegerField
-      FieldName = 'PARENTID'
-    end
-    object qFindParentPARENTVALUE: TStringField
-      FieldName = 'PARENTVALUE'
-      Required = True
-      Size = 100
-    end
-    object qFindParentPT_ID: TIntegerField
-      FieldName = 'PT_ID'
-      Required = True
-    end
-  end
-  object qTreeParent: TZReadOnlyQuery
-    Connection = FormMain.ZC
-    SQL.Strings = (
-      'select PT_ID, PT_VALUE, PT_ORDERBY,'
-      'PT_DATE, PT_ISCLOSED From PRICES_TREE'
-      'where PT_PARENTID IS NULL'
-      'and PT_isclosed=0'
-      'order by PT_ORDERBY')
-    Params = <>
-    Left = 24
-    Top = 224
-    object qTreeParentPT_ID: TIntegerField
-      FieldName = 'PT_ID'
-      Required = True
-    end
-    object qTreeParentPT_VALUE: TStringField
-      FieldName = 'PT_VALUE'
-      Required = True
-      Size = 100
-    end
-    object qTreeParentPT_DATE: TDateField
-      FieldName = 'PT_DATE'
-    end
-    object qTreeParentPT_ISCLOSED: TSmallintField
-      FieldName = 'PT_ISCLOSED'
-      Required = True
-    end
-    object qTreeParentPT_ORDERBY: TIntegerField
-      FieldName = 'PT_ORDERBY'
-    end
-  end
-  object qTreeChild: TZReadOnlyQuery
-    Connection = FormMain.ZC
-    SQL.Strings = (
-      'select PT_ID, PT_VALUE, PT_ORDERBY, PT_PARENTID,'
-      'PT_DATE, PT_ISCLOSED,'
-      '(select count(*) from price_lines pl'
-      'where pl.pl_headerid = :headerid'
-      'and pl.pl_treeid =pt.pt_id) cntr'
-      ' From PRICES_TREE PT'
-      'where PT_ParentID=:ParentID'
-      'and PT_isclosed=0'
-      'order by PT_ORDERBY')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'headerid'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'ParentID'
-        ParamType = ptUnknown
-      end>
-    Left = 80
-    Top = 224
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'headerid'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'ParentID'
-        ParamType = ptUnknown
-      end>
-    object IntegerField9: TIntegerField
-      FieldName = 'PT_ID'
-      Required = True
-    end
-    object StringField3: TStringField
-      FieldName = 'PT_VALUE'
-      Required = True
-      Size = 100
-    end
-    object DateField3: TDateField
-      FieldName = 'PT_DATE'
-    end
-    object SmallintField1: TSmallintField
-      FieldName = 'PT_ISCLOSED'
-      Required = True
-    end
-    object IntegerField10: TIntegerField
-      FieldName = 'PT_ORDERBY'
-    end
-    object qTreeChildCNTR: TIntegerField
-      FieldName = 'CNTR'
-      ReadOnly = True
-    end
-    object qTreeChildPT_PARENTID: TIntegerField
-      FieldName = 'PT_PARENTID'
-    end
-  end
-  object qHeaderGlobDelete: TZQuery
-    Connection = FormMain.ZC
-    SQL.Strings = (
-      'DELETE FROM grid_show'
-      'WHERE gs_treeid IS NULL'
-      'AND ((gs_field =:field) OR (:field =CAST('#39#39' AS VARCHAR(50))))')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'field'
-        ParamType = ptUnknown
-      end>
-    WhereMode = wmWhereAll
-    Options = []
     Left = 248
-    Top = 176
+    Top = 320
     ParamData = <
       item
-        DataType = ftUnknown
-        Name = 'field'
-        ParamType = ptUnknown
+        DataType = ftInteger
+        Name = 'CN_LAST_JOB'
+        ParamType = ptInput
+        Value = nil
+      end
+      item
+        DataType = ftDateTime
+        Name = 'CN_LAST_JOB_DATE'
+        ParamType = ptInput
+        Value = nil
+      end
+      item
+        DataType = ftDateTime
+        Name = 'CN_NEXT_JOB_DATE'
+        ParamType = ptInput
+        Value = nil
+      end
+      item
+        DataType = ftSmallint
+        Name = 'CN_ISCLOSED'
+        ParamType = ptInput
+        Value = nil
+      end
+      item
+        DataType = ftInteger
+        Name = 'CN_ID'
+        ParamType = ptInput
+        Value = nil
       end>
   end
-  object qHeaderGlobInsert: TZQuery
+  object QUContactByID: TUniSQL
     Connection = FormMain.ZC
     SQL.Strings = (
-      'INSERT INTO GRID_SHOW (GS_TREEID, GS_FIELD, GS_HEADER, GS_SHOW,'
-      'GS_SIZE, GS_DISPLAYFORMAT, GS_ORDERBY)'
-      'VALUES (NULL, :FIELD, :HEADER, :SHOW,'
-      ':SIZE, :DISPLAYFORMAT, :ORDERBY)')
-    Params = <
+      'update  CONTACTS'
+      'set'
+      'CN_OWNER=:CN_OWNER,'
+      'CN_MANAGER=:CN_MANAGER,'
+      'CN_COMPANY=:CN_COMPANY,'
+      'CN_CONTACTER=:CN_CONTACTER,'
+      'CN_COMMENT=:CN_COMMENT,'
+      'CN_JOBTYPE=:CN_JOBTYPE,'
+      'CN_JOBCOMMENT=:CN_JOBCOMMENT,'
+      'CN_PERIODICITY=:CN_PERIODICITY,'
+      'CN_NEXT_JOB_DATE=:CN_NEXT_JOB_DATE'
+      'where CN_ID=:CN_ID')
+    Left = 176
+    Top = 320
+    ParamData = <
       item
-        DataType = ftUnknown
-        Name = 'FIELD'
-        ParamType = ptUnknown
+        DataType = ftInteger
+        Name = 'CN_OWNER'
+        ParamType = ptInput
+        Value = nil
       end
       item
-        DataType = ftUnknown
-        Name = 'HEADER'
-        ParamType = ptUnknown
+        DataType = ftInteger
+        Name = 'CN_MANAGER'
+        ParamType = ptInput
+        Value = nil
       end
       item
-        DataType = ftUnknown
-        Name = 'SHOW'
-        ParamType = ptUnknown
+        DataType = ftInteger
+        Name = 'CN_COMPANY'
+        ParamType = ptInput
+        Value = nil
       end
       item
-        DataType = ftUnknown
-        Name = 'SIZE'
-        ParamType = ptUnknown
+        DataType = ftString
+        Name = 'CN_CONTACTER'
+        ParamType = ptInput
+        Value = nil
       end
       item
-        DataType = ftUnknown
-        Name = 'DISPLAYFORMAT'
-        ParamType = ptUnknown
+        DataType = ftString
+        Name = 'CN_COMMENT'
+        ParamType = ptInput
+        Value = nil
       end
       item
-        DataType = ftUnknown
-        Name = 'ORDERBY'
-        ParamType = ptUnknown
+        DataType = ftInteger
+        Name = 'CN_JOBTYPE'
+        ParamType = ptInput
+        Value = nil
+      end
+      item
+        DataType = ftString
+        Name = 'CN_JOBCOMMENT'
+        ParamType = ptInput
+        Value = nil
+      end
+      item
+        DataType = ftInteger
+        Name = 'CN_PERIODICITY'
+        ParamType = ptInput
+        Value = nil
+      end
+      item
+        DataType = ftDateTime
+        Name = 'CN_NEXT_JOB_DATE'
+        ParamType = ptInput
+        Value = nil
+      end
+      item
+        DataType = ftInteger
+        Name = 'CN_ID'
+        ParamType = ptInput
+        Value = nil
       end>
-    WhereMode = wmWhereAll
-    Options = []
+  end
+  object QDelUsersForBoss: TUniSQL
+    Connection = FormMain.ZC
+    SQL.Strings = (
+      'delete from USERSFORBOSS'
+      'WHERE UB_VIEWERID=:UB_VIEWERID')
+    Left = 40
+    Top = 312
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'UB_VIEWERID'
+        ParamType = ptInput
+        Value = nil
+      end>
+  end
+  object QDContact: TUniSQL
+    Connection = FormMain.ZC
+    SQL.Strings = (
+      'UPDATE CONTACTS'
+      'SET CN_COMMENT_CLOSE=:CN_COMMENT_CLOSE,'
+      '    CN_NEXT_JOB_DATE=NULL,'
+      '    CN_CLOSED_BY_MANAGER=:CN_CLOSED_BY_MANAGER,'
+      '    CN_ISCLOSED=1'
+      'WHERE CN_ID=:CN_ID')
+    Left = 112
+    Top = 312
+    ParamData = <
+      item
+        DataType = ftString
+        Name = 'CN_COMMENT_CLOSE'
+        ParamType = ptInput
+        Value = nil
+      end
+      item
+        DataType = ftInteger
+        Name = 'CN_CLOSED_BY_MANAGER'
+        ParamType = ptInput
+        Value = nil
+      end
+      item
+        DataType = ftInteger
+        Name = 'CN_ID'
+        ParamType = ptInput
+        Value = nil
+      end>
+  end
+  object qDelJobsForBoss: TUniSQL
+    Connection = FormMain.ZC
+    SQL.Strings = (
+      'delete from JOBSFORBOSS'
+      'WHERE JB_VIEWERID=:JB_VIEWERID')
+    Left = 248
+    Top = 264
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'JB_VIEWERID'
+        ParamType = ptInput
+        Value = nil
+      end>
+  end
+  object qDelContactsViews: TUniSQL
+    Connection = FormMain.ZC
+    SQL.Strings = (
+      'delete from CONTACTVIEWS'
+      'WHERE CN_VIEWER=:CN_VIEWER')
     Left = 320
-    Top = 168
+    Top = 256
     ParamData = <
       item
-        DataType = ftUnknown
-        Name = 'FIELD'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'HEADER'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'SHOW'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'SIZE'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'DISPLAYFORMAT'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'ORDERBY'
-        ParamType = ptUnknown
+        DataType = ftInteger
+        Name = 'CN_VIEWER'
+        ParamType = ptInput
+        Value = nil
       end>
   end
-  object qHeaderDelete: TZQuery
+  object QUComNT: TUniSQL
     Connection = FormMain.ZC
     SQL.Strings = (
-      'DELETE FROM grid_show'
-      'WHERE gs_treeid =:TREEID'
-      'AND ((gs_field =:field) OR (:field =CAST('#39#39' AS VARCHAR(50))))')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'TREEID'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'field'
-        ParamType = ptUnknown
-      end>
-    WhereMode = wmWhereAll
-    Options = []
-    Left = 239
-    Top = 232
+      'update COMPANYNAMETYPES'
+      'set CNT_CNTR=CNT_CNTR+:CNT_ADD'
+      'where CNT_NAME= :CNT_NAME')
+    Left = 32
+    Top = 376
     ParamData = <
       item
-        DataType = ftUnknown
-        Name = 'TREEID'
-        ParamType = ptUnknown
+        DataType = ftInteger
+        Name = 'CNT_ADD'
+        ParamType = ptInput
+        Value = nil
       end
       item
-        DataType = ftUnknown
-        Name = 'field'
-        ParamType = ptUnknown
+        DataType = ftString
+        Name = 'CNT_NAME'
+        ParamType = ptInput
+        Value = nil
       end>
   end
-  object qHeaderInsert: TZQuery
+  object qDisplay: TUniQuery
     Connection = FormMain.ZC
-    SQL.Strings = (
-      'INSERT INTO GRID_SHOW (GS_TREEID, GS_FIELD, GS_HEADER, GS_SHOW,'
-      'GS_SIZE, GS_DISPLAYFORMAT, GS_ORDERBY)'
-      'VALUES (:TREEID, :FIELD, :HEADER, :SHOW,'
-      ':SIZE, :DISPLAYFORMAT, :ORDERBY)')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'TREEID'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'FIELD'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'HEADER'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'SHOW'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'SIZE'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'DISPLAYFORMAT'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'ORDERBY'
-        ParamType = ptUnknown
-      end>
-    WhereMode = wmWhereAll
-    Options = []
-    Left = 311
-    Top = 216
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'TREEID'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'FIELD'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'HEADER'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'SHOW'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'SIZE'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'DISPLAYFORMAT'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'ORDERBY'
-        ParamType = ptUnknown
-      end>
-  end
-  object qDisplay: TZReadOnlyQuery
-    Connection = FormMain.ZC
-    SortedFields = 'GS_ORDERBY'
     SQL.Strings = (
       'SELECT gs_treeid, gs_field, gs_header, gs_show,'
       'gs_size, gs_displayformat, gs_orderby FROM grid_show'
@@ -1660,46 +1020,75 @@ object DM: TDM
       'SELECT gs_treeid, gs_field, gs_header, gs_show,'
       'gs_size, gs_displayformat, gs_orderby FROM grid_show'
       'WHERE gs_treeid = :treeid')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'treeid'
-        ParamType = ptUnknown
-      end>
-    IndexFieldNames = 'GS_ORDERBY Asc'
-    Left = 128
-    Top = 224
+    Left = 96
+    Top = 448
     ParamData = <
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'treeid'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end>
-    object qDisplayGS_FIELD: TStringField
-      FieldName = 'GS_FIELD'
-      Size = 50
-    end
-    object qDisplayGS_HEADER: TStringField
-      FieldName = 'GS_HEADER'
-      Size = 50
-    end
-    object qDisplayGS_SHOW: TSmallintField
-      FieldName = 'GS_SHOW'
-      Required = True
-    end
-    object qDisplayGS_SIZE: TIntegerField
-      FieldName = 'GS_SIZE'
-      Required = True
-    end
-    object qDisplayGS_DISPLAYFORMAT: TStringField
-      FieldName = 'GS_DISPLAYFORMAT'
-    end
-    object qDisplayGS_TREEID: TIntegerField
-      FieldName = 'GS_TREEID'
-    end
-    object qDisplayGS_ORDERBY: TIntegerField
-      FieldName = 'GS_ORDERBY'
-      Required = True
-    end
+  end
+  object qTreeChild: TUniQuery
+    Connection = FormMain.ZC
+    SQL.Strings = (
+      'select PT_ID, PT_VALUE, PT_ORDERBY, PT_PARENTID,'
+      'PT_DATE, PT_ISCLOSED,'
+      '(select count(*) from price_lines pl'
+      'where pl.pl_headerid = :headerid'
+      'and pl.pl_treeid =pt.pt_id) cntr'
+      ' From PRICES_TREE PT'
+      'where PT_ParentID=:ParentID'
+      'and PT_isclosed=0'
+      'order by PT_ORDERBY')
+    Left = 168
+    Top = 448
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'headerid'
+        ParamType = ptInput
+        Value = nil
+      end
+      item
+        DataType = ftInteger
+        Name = 'ParentID'
+        ParamType = ptInput
+        Value = nil
+      end>
+  end
+  object qTreeParent: TUniQuery
+    Connection = FormMain.ZC
+    SQL.Strings = (
+      'select PT_ID, PT_VALUE, PT_ORDERBY,'
+      'PT_DATE, PT_ISCLOSED From PRICES_TREE'
+      'where PT_PARENTID IS NULL'
+      'and PT_isclosed=0'
+      'order by PT_ORDERBY')
+    Left = 320
+    Top = 384
+  end
+  object qFindParent: TUniQuery
+    Connection = FormMain.ZC
+    SQL.Strings = (
+      
+        'select pt.pt_id, pt.PT_VALUE  PT_VALUE,  pt.PT_PARENTID PARENTID' +
+        ','
+      'pr.PT_VALUE PARENTVALUE'
+      'from PRICES_TREE pt'
+      'left join PRICES_TREE pr on pr.pt_id = pt.pt_parentid'
+      'where pt.PT_ID=:ID'
+      'and pt.pt_isclosed=0'
+      'and (pr.pt_isclosed=0 or pr.pt_isclosed is null)')
+    Left = 248
+    Top = 381
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptInput
+        Value = nil
+      end>
   end
 end

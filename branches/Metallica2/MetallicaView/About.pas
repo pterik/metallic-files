@@ -3,12 +3,12 @@ unit About;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Buttons,  MdiChild;
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
+  Dialogs, StdCtrls, Buttons, MdiChild, sTreeView, sMemo;
 
 type
   TFormAbout = class(TFormMDIChild)
-    Memo1: TMemo;
+    Memo1: TsMemo;
   private
     { Private declarations }
   public

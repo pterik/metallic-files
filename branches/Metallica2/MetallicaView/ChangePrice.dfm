@@ -20,59 +20,59 @@ object FormPriceChange: TFormPriceChange
     140)
   PixelsPerInch = 96
   TextHeight = 13
-  object Label1: TLabel
+  object Label1: TsLabel
     Left = 8
     Top = 8
     Width = 72
     Height = 13
     Caption = #1058#1077#1082#1091#1097#1072#1103' '#1094#1077#1085#1072
+    ParentFont = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    ParentFont = False
   end
-  object Label4: TLabel
+  object Label4: TsLabel
     Left = 112
     Top = 8
     Width = 59
     Height = 13
     Caption = #1053#1086#1074#1072#1103' '#1094#1077#1085#1072
+    ParentFont = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    ParentFont = False
   end
-  object Label2: TLabel
+  object Label2: TsLabel
     Left = 8
     Top = 56
     Width = 88
     Height = 13
     Caption = #1058#1077#1082#1091#1097#1080#1081' '#1086#1089#1090#1072#1090#1086#1082
+    ParentFont = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    ParentFont = False
   end
-  object Label3: TLabel
+  object Label3: TsLabel
     Left = 120
     Top = 56
     Width = 77
     Height = 13
     Caption = #1053#1086#1074#1099#1081' '#1086#1089#1090#1072#1090#1086#1082
+    ParentFont = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    ParentFont = False
   end
-  object BitBtnCancel: TBitBtn
+  object BitBtnCancel: TsBitBtn
     Left = 8
     Top = 113
     Width = 75
@@ -101,7 +101,7 @@ object FormPriceChange: TFormPriceChange
     NumGlyphs = 2
     TabOrder = 3
   end
-  object BitBtnSave: TBitBtn
+  object BitBtnSave: TsBitBtn
     Left = 98
     Top = 113
     Width = 105
@@ -127,7 +127,7 @@ object FormPriceChange: TFormPriceChange
     TabOrder = 2
     OnClick = BitBtnSaveClick
   end
-  object edtPrice: TEdit
+  object edtPrice: TsEdit
     Left = 8
     Top = 24
     Width = 73
@@ -138,7 +138,7 @@ object FormPriceChange: TFormPriceChange
     TabOrder = 4
     Text = 'edtPrice'
   end
-  object edtNewPrice: TEdit
+  object edtNewPrice: TsEdit
     Left = 104
     Top = 24
     Width = 73
@@ -146,7 +146,7 @@ object FormPriceChange: TFormPriceChange
     TabOrder = 0
     Text = 'edtNewPrice'
   end
-  object edtRest: TEdit
+  object edtRest: TsEdit
     Left = 8
     Top = 80
     Width = 73
@@ -157,7 +157,7 @@ object FormPriceChange: TFormPriceChange
     TabOrder = 5
     Text = 'edtRest'
   end
-  object edtNewRest: TEdit
+  object edtNewRest: TsEdit
     Left = 104
     Top = 80
     Width = 73
@@ -167,75 +167,37 @@ object FormPriceChange: TFormPriceChange
   end
   object DSPrice: TDataSource
     DataSet = QPrice
-    Left = 96
+    Left = 72
     Top = 24
   end
-  object QPrice: TZReadOnlyQuery
+  object QPrice: TUniQuery
     Connection = FormMain.ZC
     SQL.Strings = (
       
         'select PL_ID, PL_PRICE,  PL_VALUE5 REST from price_lines pl wher' +
-        'e pl_id = :id'
-      ' ')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'id'
-        ParamType = ptUnknown
-      end>
-    Left = 56
-    Top = 24
+        'e pl_id = :id')
+    Left = 24
+    Top = 72
     ParamData = <
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'id'
-        ParamType = ptUnknown
+        Value = nil
       end>
-    object intgrfldQPricePL_ID: TIntegerField
+    object QPricePL_ID: TIntegerField
       FieldName = 'PL_ID'
       Required = True
     end
-    object fltfldQPricePL_PRICE: TFloatField
+    object QPricePL_PRICE: TFloatField
       FieldName = 'PL_PRICE'
       Required = True
     end
-    object strngfldQPriceREST: TStringField
+    object QPriceREST: TStringField
       FieldName = 'REST'
       Size = 200
     end
   end
-  object QUpdatePrice: TZQuery
-    Connection = FormMain.ZC
-    SQL.Strings = (
-      'UPDATE PRICE_LINES'
-      'SET PL_PRICE=:PRICE'
-      'WHERE PL_ID=:ID')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'PRICE'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'ID'
-        ParamType = ptUnknown
-      end>
-    Left = 144
-    Top = 24
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'PRICE'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'ID'
-        ParamType = ptUnknown
-      end>
-  end
-  object QRestField: TZReadOnlyQuery
+  object QRestField: TUniQuery
     Connection = FormMain.ZC
     SQL.Strings = (
       'select gs_field, gs_orderby from ('
@@ -254,27 +216,44 @@ object FormPriceChange: TFormPriceChange
       'and gs_show = 1)'
       'where gs_field is not null'
       'order by gs_orderby desc')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'treeid'
-        ParamType = ptUnknown
-      end>
-    Left = 144
+    Left = 168
     Top = 72
     ParamData = <
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'treeid'
-        ParamType = ptUnknown
+        Value = nil
       end>
-    object strngfldQRestFieldGS_FIELD: TStringField
+    object QRestFieldGS_FIELD: TStringField
       FieldName = 'GS_FIELD'
+      ReadOnly = True
       Size = 50
     end
-    object intgrfldQRestFieldGS_ORDERBY: TIntegerField
+    object QRestFieldGS_ORDERBY: TIntegerField
       FieldName = 'GS_ORDERBY'
       ReadOnly = True
     end
+  end
+  object QUpdatePrice: TUniSQL
+    Connection = FormMain.ZC
+    SQL.Strings = (
+      'UPDATE PRICE_LINES'
+      'SET PL_PRICE=:PRICE'
+      'WHERE PL_ID=:ID')
+    Left = 88
+    Top = 72
+    ParamData = <
+      item
+        DataType = ftFloat
+        Name = 'PRICE'
+        ParamType = ptInput
+        Value = nil
+      end
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptInput
+        Value = nil
+      end>
   end
 end

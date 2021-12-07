@@ -3,23 +3,22 @@ unit UserView;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset,
-  ZDataset;
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
+  Dialogs, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset;
 
 type
   TFormUserUpdate = class(TForm)
-    BitBtnCancel: TBitBtn;
-    Label1: TLabel;
-    EditFIO: TEdit;
+    BitBtnCancel: TsBitBtn;
+    Label1: TsLabel;
+    EditFIO: TsEdit;
     QUpdateUser: TZQuery;
-    Label2: TLabel;
-    EditLogin: TEdit;
-    Label3: TLabel;
-    EditPWD: TEdit;
-    Label4: TLabel;
-    EditComment: TEdit;
-    BitBtnSave: TBitBtn;
+    Label2: TsLabel;
+    EditLogin: TsEdit;
+    Label3: TsLabel;
+    EditPWD: TsEdit;
+    Label4: TsLabel;
+    EditComment: TsEdit;
+    BitBtnSave: TsBitBtn;
     procedure BitBtnCancelClick(Sender: TObject);
     procedure FormKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
@@ -93,4 +92,4 @@ FormUsers.QViewFormUsers.Refresh;
 FocusControl(EditFIO);
 end;
 
-end.
+end.

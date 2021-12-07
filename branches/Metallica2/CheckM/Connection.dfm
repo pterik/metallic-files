@@ -22,70 +22,70 @@ object FormConnection: TFormConnection
     463)
   PixelsPerInch = 96
   TextHeight = 13
-  object Panel1: TPanel
+  object Panel1: TsPanel
     Left = 0
     Top = 0
     Width = 409
     Height = 417
     Anchors = [akLeft, akTop, akRight]
     TabOrder = 0
-    object Label1: TLabel
+    object Label1: TsLabel
       Left = 72
       Top = 6
       Width = 205
       Height = 13
       Caption = #1048#1085#1092#1086#1088#1084#1072#1094#1080#1103' '#1086' '#1041#1044' '#1080' '#1083#1086#1075#1080#1085' '#1087#1086#1076#1082#1083#1102#1095#1077#1085#1080#1103
     end
-    object lblProtocol: TLabel
+    object lblProtocol: TsLabel
       Left = 30
       Top = 90
       Width = 49
       Height = 13
       Caption = #1055#1088#1086#1090#1086#1082#1086#1083
     end
-    object lblHostName: TLabel
+    object lblHostName: TsLabel
       Left = 8
       Top = 28
       Width = 67
       Height = 13
       Caption = #1048#1084#1103' '#1089#1077#1088#1074#1077#1088#1072
     end
-    object lblDatabase: TLabel
+    object lblDatabase: TsLabel
       Left = 16
       Top = 116
       Width = 65
       Height = 13
       Caption = #1041#1072#1079#1072' '#1076#1072#1085#1085#1099#1093
     end
-    object lblUserName: TLabel
+    object lblUserName: TsLabel
       Left = 8
       Top = 142
       Width = 73
       Height = 13
       Caption = #1055#1086#1083#1100#1079#1086#1074#1072#1090#1077#1083#1100
     end
-    object lblPassword: TLabel
+    object lblPassword: TsLabel
       Left = 40
       Top = 168
       Width = 38
       Height = 13
       Caption = #1055#1072#1088#1086#1083#1100
     end
-    object Label2: TLabel
+    object Label2: TsLabel
       Left = 88
       Top = 50
       Width = 214
       Height = 13
       Caption = '('#1082#1086#1084#1087#1100#1102#1090#1077#1088#1072', '#1075#1076#1077' '#1085#1072#1093#1086#1076#1080#1090#1089#1103' '#1073#1072#1079#1072' '#1076#1072#1085#1085#1099#1093')'
     end
-    object Label3: TLabel
+    object Label3: TsLabel
       Left = 288
       Top = 160
       Width = 96
       Height = 13
       Caption = '('#1089#1084'. '#1092#1072#1081#1083' '#1087#1086#1084#1086#1097#1080')'
     end
-    object edtHostName: TEdit
+    object edtHostName: TsEdit
       Left = 90
       Top = 26
       Width = 167
@@ -93,7 +93,7 @@ object FormConnection: TFormConnection
       TabOrder = 0
       OnChange = edtHostNameChange
     end
-    object edtDatabase: TEdit
+    object edtDatabase: TsEdit
       Left = 91
       Top = 116
       Width = 238
@@ -101,7 +101,7 @@ object FormConnection: TFormConnection
       TabOrder = 1
       OnChange = edtDatabaseChange
     end
-    object edtUser: TEdit
+    object edtUser: TsEdit
       Left = 91
       Top = 142
       Width = 193
@@ -109,7 +109,7 @@ object FormConnection: TFormConnection
       TabOrder = 2
       OnChange = edtUserChange
     end
-    object edtPassword: TEdit
+    object edtPassword: TsEdit
       Left = 91
       Top = 168
       Width = 193
@@ -117,7 +117,7 @@ object FormConnection: TFormConnection
       TabOrder = 3
       OnChange = edtPasswordChange
     end
-    object MemoInfo: TMemo
+    object MemoInfo: TsMemo
       Left = 8
       Top = 201
       Width = 385
@@ -135,7 +135,7 @@ object FormConnection: TFormConnection
       ScrollBars = ssVertical
       TabOrder = 4
     end
-    object BitBtnPing: TBitBtn
+    object BitBtnPing: TsBitBtn
       Left = 264
       Top = 24
       Width = 89
@@ -158,41 +158,17 @@ object FormConnection: TFormConnection
       TabOrder = 5
       OnClick = BitBtnPingClick
     end
-    object CBProtocol: TComboBox
+    object CBProtocol: TsComboBox
       Left = 90
       Top = 91
       Width = 191
       Height = 21
+      ItemIndex = -1
       TabOrder = 6
       Items.Strings = (
-        'firebird-2.1'
-        'firebird-2.0'
-        'ado'
-        'ASA7'
-        'ASA8'
-        'ASA9'
-        'firebird-1.5'
-        'interbase-5'
-        'interbase-6'
-        'mssql'
-        'mysql'
-        'mysql-4.1'
-        'mysql-5'
-        'mysqld-4.1'
-        'mysqld-5'
-        'oracle'
-        'oracle-9i'
-        'postgresql'
-        'postgresql-7'
-        'postgresql-8'
-        'sqlite'
-        'sqlite-2.8'
-        'sqlite-3'
-        'sybase'
-        'firebirdd-1.5'
-        'firebirdd-2.0')
+        'interbase')
     end
-    object ButtonSetDB: TButton
+    object ButtonSetDB: TsButton
       Left = 336
       Top = 120
       Width = 25
@@ -219,11 +195,11 @@ object FormConnection: TFormConnection
       ParentFont = False
       TabOrder = 8
     end
-    object CheckBox1: TCheckBox
+    object CheckBox1: TsCheckBox
       Left = 80
       Top = 64
-      Width = 249
-      Height = 25
+      Width = 232
+      Height = 17
       Caption = #1042' '#1080#1084#1077#1085#1080' '#1089#1077#1088#1074#1077#1088#1072' '#1091#1082#1072#1079#1072#1085' '#1101#1090#1086#1090' '#1082#1086#1084#1087#1100#1102#1090#1077#1088
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -235,7 +211,7 @@ object FormConnection: TFormConnection
       OnClick = CheckBox1Click
     end
   end
-  object BitBtnClose: TBitBtn
+  object BitBtnClose: TsBitBtn
     Left = 321
     Top = 430
     Width = 74
@@ -247,7 +223,7 @@ object FormConnection: TFormConnection
     TabOrder = 1
     OnClick = BitBtnCloseClick
   end
-  object BitBtnSave: TBitBtn
+  object BitBtnSave: TsBitBtn
     Left = 208
     Top = 430
     Width = 105
@@ -272,7 +248,7 @@ object FormConnection: TFormConnection
     TabOrder = 2
     OnClick = BitBtnSaveClick
   end
-  object BitBtnConnect: TBitBtn
+  object BitBtnConnect: TsBitBtn
     Left = 8
     Top = 430
     Width = 89
@@ -296,7 +272,7 @@ object FormConnection: TFormConnection
     TabOrder = 3
     OnClick = BitBtnConnectClick
   end
-  object BitBtnExport: TBitBtn
+  object BitBtnExport: TsBitBtn
     Left = 104
     Top = 430
     Width = 97
@@ -329,7 +305,7 @@ object FormConnection: TFormConnection
     Left = 80
     Top = 184
   end
-  object OpenDB: TOpenDialog
+  object OpenDB: TsOpenDialog
     DefaultExt = '*.fdb'
     Filter = 
       #1060#1072#1081#1083' '#1076#1083#1103' Firebird (*.fdb)|*.fdb|'#1060#1072#1081#1083' '#1076#1083#1103' Interbase (*.ib;*.gdb)|' +

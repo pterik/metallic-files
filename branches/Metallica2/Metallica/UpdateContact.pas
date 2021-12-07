@@ -3,17 +3,17 @@ unit UpdateContact;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, DB, ZAbstractRODataset, ZDataset, StdCtrls, Buttons, Mask,
-  DBCtrlsEh, DBLookupEh, ComCtrls, ZAbstractDataset, DBGridEh;
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
+  Dialogs, DB, ZAbstractRODataset, ZDataset, StdCtrls, Buttons, Mask, DBCtrlsEh, 
+  DBLookupEh, ComCtrls, ZAbstractDataset, DBGridEh;
 
 type
   TFormUpdateContact = class(TForm)
-    Label1: TLabel;
+    Label1: TsLabel;
     StaticText2: TStaticText;
-    MemoComment: TMemo;
+    MemoComment: TsMemo;
     StaticText3: TStaticText;
-    EContacter: TEdit;
+    EContacter: TsEdit;
     QManager: TZReadOnlyQuery;
     QManagerU_ID: TIntegerField;
     QManagerU_FIO: TStringField;
@@ -31,19 +31,19 @@ type
     QPeriodPR_COMMENT: TStringField;
     QPeriodPR_NAME: TStringField;
     DSPeriod: TDataSource;
-    GroupBox1: TGroupBox;
-    Label5: TLabel;
+    GroupBox1: TsGroupBox;
+    Label5: TsLabel;
     DBPeriod: TDBLookupComboboxEh;
     StaticText4: TStaticText;
     DT: TDateTimePicker;
-    LabelParameter: TLabel;
+    LabelParameter: TsLabel;
     StaticText5: TStaticText;
-    MemoJobComment: TMemo;
-    Label4: TLabel;
+    MemoJobComment: TsMemo;
+    Label4: TsLabel;
     DBOwner: TDBLookupComboboxEh;
-    Label3: TLabel;
+    Label3: TsLabel;
     DBManager: TDBLookupComboboxEh;
-    Label2: TLabel;
+    Label2: TsLabel;
     DBJobType: TDBLookupComboboxEh;
     QJobtype: TZReadOnlyQuery;
     QJobtypeJT_ID: TIntegerField;
@@ -71,8 +71,8 @@ type
     QCompaniesCM_COMMENT: TStringField;
     QCompaniesCM_ISCLOSED: TIntegerField;
     QCompaniesCM_ID: TIntegerField;
-    BitBtnCancel: TBitBtn;
-    BitBtnSave: TBitBtn;
+    BitBtnCancel: TsBitBtn;
+    BitBtnSave: TsBitBtn;
     QOwnerU_ISCLOSED: TSmallintField;
     QManagerU_ISCLOSED: TSmallintField;
     procedure QManagerCalcFields(DataSet: TDataSet);
@@ -319,4 +319,4 @@ begin
 FocusControl(EContacter);
 end;
 
-end.
+end.

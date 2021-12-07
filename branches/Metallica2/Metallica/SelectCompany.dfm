@@ -19,7 +19,7 @@ object FormSelectCompany: TFormSelectCompany
     463)
   PixelsPerInch = 96
   TextHeight = 13
-  object Label1: TLabel
+  object Label1: TsLabel
     Left = 8
     Top = 424
     Width = 491
@@ -85,7 +85,7 @@ object FormSelectCompany: TFormSelectCompany
         Width = 231
       end>
   end
-  object BitBtnCancel: TBitBtn
+  object BitBtnCancel: TsBitBtn
     Left = 632
     Top = 424
     Width = 131
@@ -235,4 +235,4 @@ object FormSelectCompany: TFormSelectCompany
         ParamType = ptUnknown
       end>
   end
-end
+end

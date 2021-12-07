@@ -21,7 +21,7 @@ object FormPriceShow: TFormPriceShow
     463)
   PixelsPerInch = 96
   TextHeight = 13
-  object BitBtnClose: TBitBtn
+  object BitBtnClose: TsBitBtn
     Left = 708
     Top = 432
     Width = 77
@@ -155,7 +155,7 @@ object FormPriceShow: TFormPriceShow
         Width = 100
       end>
   end
-  object BitBtnCompanies: TBitBtn
+  object BitBtnCompanies: TsBitBtn
     Left = 16
     Top = 430
     Width = 201
@@ -322,4 +322,4 @@ object FormPriceShow: TFormPriceShow
     Left = 96
     Top = 64
   end
-end
+end
