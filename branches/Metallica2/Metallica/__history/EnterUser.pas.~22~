@@ -1,0 +1,215 @@
+unit EnterUser;
+
+interface
+
+uses
+	Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+	Dialogs, StdCtrls, Buttons, ExtCtrls, DB, ZAbstractRODataset,
+	ZAbstractDataset, ZDataset, ZConnection, Mask, DBCtrlsEh, DBLookupEh,
+  DBGridEh;
+
+type
+	TFormEnterUser = class(TForm)
+		Label3: TLabel;
+		BitBtnCancel: TBitBtn;
+		BitBtnEnter: TBitBtn;
+		QUsers: TZQuery;
+    EPWD: TEdit;
+    Label2: TLabel;
+    Label4: TLabel;
+    DBUsers: TDBLookupComboboxEh;
+    DSUsers: TDataSource;
+    EFIO: TEdit;
+		procedure BitBtnConnectClick(Sender: TObject);
+		procedure BitBtnCancelClick(Sender: TObject);
+		procedure BitBtnEnterClick(Sender: TObject);
+		procedure FormCreate(Sender: TObject);
+    procedure DBUsersChange(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+	private
+    F_HostName, F_Database, F_Protocol, F_User, F_Password, F_LastUser:string;
+    F_ValidUser:boolean;
+		function LoadRegister:boolean;
+	public
+		procedure ConnectToDatabase;
+	end;
+
+var
+	FormEnterUser: TFormEnterUser;
+
+implementation
+
+uses DataModule, MainForm, CommonUnit, System.Win.Registry;
+
+{$R *.dfm}
+
+procedure TFormEnterUser.BitBtnConnectClick(Sender: TObject);
+begin
+ConnectToDatabase;
+end;
+
+procedure TFormEnterUser.ConnectToDatabase;
+begin
+if not LoadRegister then
+	begin
+	BitBtnEnter.Enabled:=false;
+	exit;
+	end;
+
+exit;
+FormMain.ZC.Database:=F_Database;
+FormMain.ZC.Protocol:=F_Protocol;
+FormMain.ZC.HostName:=F_HostName;
+FormMain.ZC.User:=F_User;
+FormMain.ZC.Password:=F_Password;
+FormMain.ZC.LoginPrompt:=false;
+try
+FormMain.ZC.Connect;
+except on E:Exception do
+	begin
+	MessageDlg('Возникла ошибка. Возможная причина - отсутствие файла '+chr(10)+chr(13)+E.Message,mtError,[mbOK],0);
+  BitBtnEnter.Enabled:=false;
+  exit;
+	end;
+end;
+QUsers.Close;
+QUsers.ParamByName('U_LOGIN').Asstring:=F_LastUser;
+QUsers.Open;
+QUsers.First;
+DBUsers.Text:=QUsers['U_LOGIN'];
+FormMain.Visible:=false;
+FormEnterUser.ShowModal;
+end;
+
+procedure TFormEnterUser.BitBtnCancelClick(Sender: TObject);
+begin
+if not (FormMain=nil) then
+  begin
+  FormMain.ConfirmClose:=false;
+  FormMain.Close;
+  end;
+Close;
+end;
+
+procedure TFormEnterUser.BitBtnEnterClick(Sender: TObject);
+var IsValidPassword:boolean;
+Password:string;
+begin
+if FormMain.ZC.Connected=false then
+	begin
+		MessageDlg('Нет подключения к базе данных',mtError,[mbOK],0);
+		exit;
+	end;
+if VarIsNull(QUsers['U_PASSWORD']) then Password:='' else Password:=AnsiUpperCase(trim(QUsers['U_PASSWORD']));
+IsValidPassword:=(AnsiUpperCase(trim(EPWD.Text))=AnsiUpperCase(Password));
+//Это место уязвимое для взлома паролей, оператор =
+if not IsValidPassword then
+    begin
+    MessageDlg('Введен неверный пароль',mtWarning,[mbOK],0);
+    EPWD.Clear;
+    ModalResult:=mrNone;
+    FocusControl(EPwd);
+    end;
+if IsValidPassword then
+	begin
+	//Пользователь корректно ввёл пароль
+//if FormClock=nil then Application.CreateForm(TFormClock, FormClock);
+//  FormClock.SetPosition(Self.Left,Self.Top);
+//  FormClock.SetClock;
+//  FormClock.Show;
+  FormMain.SetMainForm(QUsers['U_ID'],QUsers['U_LOGIN'],QUsers['U_FIO'],QUsers['U_ISBOSS']);
+//  FormClock.StopClock;
+//  FormClock.Close;
+	FormMain.Show;
+  F_ValidUser:=true;
+	FormEnterUser.Close;
+	end;
+end;
+
+procedure TFormEnterUser.FormCreate(Sender: TObject);
+begin
+Left:=(Screen.Width-Width) div 2;
+Top:=(Screen.Height-Height) div 2;
+FormEnterUser.F_ValidUser:=false;
+end;
+
+function TFormEnterUser.LoadRegister:boolean;
+var
+//KAccess:LongWord;
+reg : TRegistry;
+Res:boolean;
+//ReadBranch:boolean;
+ParametersCorrect:integer; // хранит набор параметров
+openResult:boolean;
+Chipered:integer;          // шифрование пароля
+begin
+Result:=true;
+//Сначала читаем только ветку есть ли она
+//ReadBranch:=RegisterRecordExists(RegisterBranchMetallica);
+//ReadBranch:=ReadOnlyBranch(RegisterBranchMetallica, KAccess);
+	reg := TRegistry.Create(KEY_READ);
+	reg.RootKey := HKEY_CURRENT_USER;
+	openResult := reg.OpenKey('SOFTWARE\PterikSoft\Metallica',False);
+  F_HostName:=reg.ReadString('HOSTNAME');
+//ReadBranch:=ReadOnlyBranch(RegisterBranchCalendar, KAccess);
+if not openResult then
+	begin
+	MessageDlg('Информация о расположении Базы Данных отсутствует. Необходимо запустит программу CheckCom.exe, сообщите системному администратору',mtError,[mbOK],0);
+	Result:=false;
+	exit;
+	end;
+	Res:=true;
+	try
+	//F_ParametersCorrect=0 если данные неверные, >0 если верные в зависимости от версии параметров
+	// Все версии параметров фиксируются в техдокументации
+//	Res:=Res and ReadRegisterDWORD(ParametersCorrect,RegisterBranchMetallica,'SETPARAM');
+//	Res:=Res and ReadRegisterStr(F_HostName,RegisterBranchMetallica,'HOSTNAME');
+//	Res:=Res and ReadRegisterStr(F_Database,RegisterBranchMetallica,'DATABASE');
+//	Res:=Res and ReadRegisterStr(F_Protocol,RegisterBranchMetallica,'PROTOCOL');
+	//0 если пароли не шифруются, >0 если шифруются в зависимости от вида шифрования
+//	Res:=Res and ReadRegisterDWORD(Chipered,RegisterBranchMetallica,'CHIPERED');
+	{ TODO : Дописать расшифрование (чтение) пароля по XOR }
+//	Res:=Res and ReadRegisterStr(F_User,RegisterBranchMetallica,'USERNAME');
+//	Res:=Res and ReadRegisterStr(F_Password,RegisterBranchMetallica,'PASSWORD');
+//	Res:=Res and ReadRegisterStr(F_LastUser,RegisterBranchMetallica,'LASTDBUSER');
+  reg := TRegistry.Create(KEY_READ);
+	reg.RootKey := HKEY_CURRENT_USER;
+  F_HostName:=reg.ReadString('HOSTNAME');
+	F_Database:=reg.ReadString('DATABASE');
+	F_Protocol:=reg.ReadString('PROTOCOL');
+//  if reg.ReadInteger('ISSERVER')=0 then F_IsServer:=false;
+//  if reg.ReadInteger('ISSERVER')=1 then F_IsServer:=true;
+//	Chipered:=reg.ReadInteger('CHIPERED');
+	F_User:=reg.ReadString('USERNAME');
+	F_Password:=reg.ReadString('PASSWORD');
+	//F_ParametersCorrect:=reg.ReadInteger('SETPARAM');
+	F_LastUser:=reg.ReadString('LASTDBUSER');
+	finally
+	reg.CloseKey();
+	reg.Free;
+	if not Res then
+  	begin
+	  if MessageDlg('Информация в реестре о расположении Базы Данных неверая, сообщите об этом системному администратору'+chr(13)+chr(10)+
+             'Он запустит программу CheckCom.exe и исправит ошибку'+chr(13)+chr(10)+
+             'Возможны сбои в работе программы. Продолжать?',mtWarning,[mbYes,mbNo],0)=mrYes
+    then Result:=true
+    else
+      begin
+      Result:=false;
+      end;
+  	end;
+	end;
+end;
+
+procedure TFormEnterUser.DBUsersChange(Sender: TObject);
+begin
+if not VarIsNull(QUsers['U_FIO']) then EFIO.Text:=QUsers['U_FIO'];
+end;
+
+procedure TFormEnterUser.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+if not F_ValidUser then halt(2);
+end;
+
+end.

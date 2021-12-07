@@ -1,7 +1,0 @@
-// Этот файл создан программой CheckCom.exe ТОЛЬКО для переноса 
-// настроек между компьютерами. 
-HOSTNAME=localhost
-DATABASE=C:\Projects\Calendar\Database\DATABASE.FDB
-PROTOCOL=firebird-2.0
-USERNAME=SYSDBA
-PASSWORD=masterkey
