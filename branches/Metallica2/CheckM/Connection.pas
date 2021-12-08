@@ -218,6 +218,12 @@ else
 		F_ParametersCorrect:=-1;
 	end;
 end;//else
+if not Res then
+  begin
+  MemoInfo.Lines.Add('Данные о подключении не удалось прочитать реестра');
+  exit;
+  end;
+
 if F_ParametersCorrect>0 then MemoInfo.Lines.Add('Данные о подключении прочитаны из реестра ');
 if F_ParametersCorrect=0 then MemoInfo.Lines.Add('Информация о Базе Данных невера. Укажите правильное расположение БД и нажмите "Соединение"');
 if F_ParametersCorrect=-1 then MemoInfo.Lines.Add('Укажите расположение БД и нажмите "Соединение". После успешного соединения нажмите "Сохранить", параметры будут записаны в реестр');
