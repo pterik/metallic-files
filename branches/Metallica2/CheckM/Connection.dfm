@@ -321,7 +321,7 @@ object FormConnection: TFormConnection
     Left = 80
     Top = 256
   end
-  object UniConnection: TUniConnection
+  object ZC: TUniConnection
     ProviderName = 'InterBase'
     Database = 'd:\Projects\DATABASE_ODS11.FDB'
     Username = 'SYSDBA'

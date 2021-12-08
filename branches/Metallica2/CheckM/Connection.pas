@@ -42,7 +42,7 @@ type
     CheckBox1: TsCheckBox;
     BitBtnExport: TsBitBtn;
     Label3: TsLabel;
-    UniConnection: TUniConnection;
+    ZC: TUniConnection;
     InterBaseUniProvider1: TInterBaseUniProvider;
 		procedure BitBtnConnectClick(Sender: TObject);
 		procedure BitBtnEnterClick(Sender: TObject);
@@ -115,16 +115,16 @@ F_Pinged:=true;
 //ZC.User:=EdtUser.Text;
 //ZC.Password:=EdtPassword.Text;
 //ZC.LoginPrompt:=false;
-UniConnection.Disconnect;
-UniConnection.Database:=trim(EdtDatabase.Text);
+ZC.Disconnect;
+ZC.Database:=trim(EdtDatabase.Text);
 //UniConnection.Protocol:=CBProtocol.Text;
-UniConnection.ProviderName:='InterBase';
-UniConnection.Server:=trim(EdtHostName.Text);
-UniConnection.UserName:=trim(EdtUser.Text);
-UniConnection.Password:=trim(EdtPassword.Text);
-UniConnection.LoginPrompt:=false;
+ZC.ProviderName:='InterBase';
+ZC.Server:=trim(EdtHostName.Text);
+ZC.UserName:=trim(EdtUser.Text);
+ZC.Password:=trim(EdtPassword.Text);
+ZC.LoginPrompt:=false;
 try
-UniConnection.Connect;
+ZC.Connect;
 except on E:Exception do
 	begin
 	MemoInfo.Lines.Add('Ошибка: '+E.Message);
@@ -149,7 +149,7 @@ end;
 procedure TFormConnection.BitBtnEnterClick(Sender: TObject);
 begin
 //if ZC.Connected=false then
-if UniConnection.Connected=false then
+if ZC.Connected=false then
 	begin
 		MemoInfo.Lines.Add('Нет подключения к базе данных');
 		exit;
@@ -176,7 +176,7 @@ S:string;
 K:integer;
 openResult:boolean;
 KAccess:LongWord;
-//Res:boolean;
+Res:boolean;
 ReadBranch:boolean;
 reg : TRegistry;
 begin
@@ -193,59 +193,27 @@ if not ReadBranch then
 	F_Chipered:=0;
 	EdtUser.Text:='';
 	EdtPassword.Text:='';
-	//case KAccess of
-	//KEY_ALL_ACCESS					: S:='KEY_ALL_ACCESS	combination of KEY_READ, KEY_WRITE, and KEY_CREATE_LINK';
-	//KEY_READ                : S:='KEY_READ	combination of KEY_QUERY_VALUE, KEY_ENUMERATE_SUB_KEYS, and KEY_NOTIFY';
-	//KEY_WRITE               : S:='KEY_WRITE	combination of KEY_SET_VALUE and KEY_CREATE_SUB_KEY';
-	//KEY_QUERY_VALUE         : S:='KEY_QUERY_VALUE	grants permission to query subkey data';
-	//KEY_ENUMERATE_SUB_KEYS  : S:='KEY_ENUMERATE_SUB_KEYS	grants permission to enumerate subkeys.';
-	//KEY_NOTIFY              : S:='KEY_NOTIFY	grants ability to receive change notifications';
-	//KEY_SET_VALUE           : S:='KEY_SET_VALUE	grants permission to set subkey data.';
-	//KEY_CREATE_SUB_KEY      : S:='KEY_CREATE_SUB_KEY	grants permission to create subkeys';
-	//KEY_CREATE_LINK         : S:='KEY_CREATE_LINK	grants permission to create symbolic links';
-	//end;
 	end
 else
 	begin
 	try
-	//F_ParametersCorrect=0 если данные неверные, >0 если верные в зависимости от версии параметров
-	// Все версии параметров фиксируются в техдокументации
-  reg := TRegistry.Create(KEY_READ);
-	reg.RootKey := HKEY_CURRENT_USER;
-	openResult := reg.OpenKey('SOFTWARE\PterikSoft\Metallica',True);
-  S:=reg.ReadString('HOSTNAME');
-  EdtHostName.Text:=reg.ReadString('HOSTNAME');
-  S:=reg.ReadString('DATABASE');
-	EdtDatabase.Text:=reg.ReadString('DATABASE');
-  S:=reg.ReadString('PROTOCOL');
-	CBProtocol.Text:=reg.ReadString('PROTOCOL');
-  K:=reg.ReadInteger('ISSERVER');
-  if reg.ReadInteger('ISSERVER')=0 then F_IsServer:=false;
-  if reg.ReadInteger('ISSERVER')=1 then F_IsServer:=true;
-	F_Chipered:=reg.ReadInteger('CHIPERED');
-  S:=reg.ReadString('USERNAME');
-	EdtUser.Text:=reg.ReadString('USERNAME');
-  S:=reg.ReadString('PASSWORD');
-	EdtPassword.Text:=reg.ReadString('PASSWORD');
-  K:=reg.ReadInteger('SETPARAM');
-	F_ParametersCorrect:=reg.ReadInteger('SETPARAM');
-
-//	Res:=Res and ReadRegisterDWORD(K,RegisterBranchMetallica,'SETPARAM');
-//	F_ParametersCorrect:=K;
-//	Res:=Res and ReadRegisterStr(S,RegisterBranchMetallica,'HOSTNAME');
-//	EdtHostName.Text:=S;
-//	Res:=Res and ReadRegisterStr(S,RegisterBranchMetallica,'DATABASE');
-//	EdtDatabase.Text:=S;
-//	Res:=Res and ReadRegisterStr(S,RegisterBranchMetallica,'PROTOCOL');
-//	CBProtocol.Text:=S;
+	//F_ParametersCorrect=0 если данные неверные =1 Если данные верные в зависимости от версии параметров
+	Res:=Res and ReadRegisterDWORD(K,RegisterBranchMetallica,'SETPARAM');
+	F_ParametersCorrect:=K;
+	Res:=Res and ReadRegisterStr(S,RegisterBranchMetallica,'HOSTNAME');
+	EdtHostName.Text:=S;
+	Res:=Res and ReadRegisterStr(S,RegisterBranchMetallica,'DATABASE');
+	EdtDatabase.Text:=S;
+	Res:=Res and ReadRegisterStr(S,RegisterBranchMetallica,'PROTOCOL');
+	CBProtocol.Text:=S;
 	//0 если пароли не шифруются, >0 если шифруются в зависимости от вида шифрования
-//	Res:=Res and ReadRegisterDWORD(K,RegisterBranchMetallica,'CHIPERED');
-//	F_Chipered:=K;
+	Res:=Res and ReadRegisterDWORD(K,RegisterBranchMetallica,'CHIPERED');
+	F_Chipered:=K;
 	{ TODO : Дописать расшифрование (чтение) пароля по XOR }
-//	Res:=Res and ReadRegisterStr(S,RegisterBranchMetallica,'USERNAME');
-//	EdtUser.Text:=S;
-//	Res:=Res and ReadRegisterStr(S,RegisterBranchMetallica,'PASSWORD');
-//	EdtPassword.Text:=S;
+	Res:=Res and ReadRegisterStr(S,RegisterBranchMetallica,'USERNAME');
+	EdtUser.Text:=S;
+	Res:=Res and ReadRegisterStr(S,RegisterBranchMetallica,'PASSWORD');
+	EdtPassword.Text:=S;
 	except on E:Exception do
 		F_ParametersCorrect:=-1;
 	end;
