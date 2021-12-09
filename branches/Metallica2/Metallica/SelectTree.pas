@@ -5,7 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
   Dialogs, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, 
-  Grids, DBGrids, DBGridEh, ComCtrls, Mask, DBCtrlsEh, DataModule;
+  Grids, DBGrids, DBGridEh, ComCtrls, Mask, DBCtrlsEh, DataModule, sLabel, sEdit, sCheckBox, sMaskEdit, sComboBox, sMemo, sDialogs, sSpeedButton,
+  sBitBtn, sTreeView;
 
 type
   TFormSelectTree = class(TForm)
@@ -96,4 +97,4 @@ begin
 FormNewPriceList.SelectedTreeID:=0;
 end;
 
-end.
+end.

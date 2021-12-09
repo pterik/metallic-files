@@ -1,9 +1,9 @@
 object FormNewPriceList: TFormNewPriceList
   Left = 258
   Top = 200
-  Width = 800
-  Height = 497
   Caption = #1053#1086#1074#1099#1081' '#1087#1088#1072#1081#1089'-'#1083#1080#1089#1090
+  ClientHeight = 458
+  ClientWidth = 784
   Color = clBtnFace
   Constraints.MinHeight = 250
   Constraints.MinWidth = 790
@@ -19,8 +19,8 @@ object FormNewPriceList: TFormNewPriceList
   OnKeyDown = FormKeyDown
   OnKeyUp = FormKeyUp
   DesignSize = (
-    792
-    470)
+    784
+    458)
   PixelsPerInch = 96
   TextHeight = 13
   object LabelComp: TsLabel
@@ -46,9 +46,6 @@ object FormNewPriceList: TFormNewPriceList
     Cancel = True
     Caption = #1047#1072#1082#1088#1099#1090#1100
     Default = True
-    ModalResult = 1
-    TabOrder = 0
-    OnClick = BitBtnCloseClick
     Glyph.Data = {
       DE010000424DDE01000000000000760000002800000024000000120000000100
       0400000000006801000000000000000000001000000000000000000000000000
@@ -66,7 +63,10 @@ object FormNewPriceList: TFormNewPriceList
       8888333F00003333330000003333333333333FFFFFF3333F00003333330AAAA0
       333333333333888888F3333F00003333330000003333333333338FFFF8F3333F
       0000}
+    ModalResult = 1
     NumGlyphs = 2
+    TabOrder = 0
+    OnClick = BitBtnCloseClick
   end
   object Grid: TDBGridEh
     Left = 216
@@ -75,99 +75,117 @@ object FormNewPriceList: TFormNewPriceList
     Height = 417
     Anchors = [akLeft, akTop, akRight, akBottom]
     DataSource = DSData
-    FooterColor = clWindow
-    FooterFont.Charset = DEFAULT_CHARSET
-    FooterFont.Color = clWindowText
-    FooterFont.Height = -11
-    FooterFont.Name = 'MS Sans Serif'
-    FooterFont.Style = []
+    DynProps = <>
+    FooterParams.Color = clWindow
+    GridLineParams.VertEmptySpaceStyle = dessNonEh
     Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-    OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghDblClickOptimizeColWidth, dghDialogFind]
+    OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghDblClickOptimizeColWidth, dghDialogFind, dghColumnResize, dghColumnMove]
     ReadOnly = True
     RowSizingAllowed = True
     TabOrder = 1
-    TitleFont.Charset = DEFAULT_CHARSET
-    TitleFont.Color = clWindowText
-    TitleFont.Height = -11
-    TitleFont.Name = 'MS Sans Serif'
-    TitleFont.Style = []
-    UseMultiTitle = True
+    TitleParams.MultiTitle = True
     OnCellClick = GridCellClick
     OnDblClick = GridDblClick
     OnTitleClick = GridTitleClick
     Columns = <
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'CM_NAME'
         Footers = <>
         Width = 100
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_DATE_UPDATE'
         Footers = <>
         Width = 80
       end
       item
+        CellButtons = <>
         DisplayFormat = '#0.00'
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_PRICE'
         Footers = <>
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_VALUE1'
         Footers = <>
         Width = 100
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_VALUE2'
         Footers = <>
         Width = 100
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_VALUE3'
         Footers = <>
         Width = 100
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_VALUE4'
         Footers = <>
         Width = 100
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_VALUE5'
         Footers = <>
         Width = 100
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_VALUE6'
         Footers = <>
         Width = 100
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_VALUE7'
         Footers = <>
         Width = 100
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_VALUE8'
         Footers = <>
         Width = 100
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_VALUE9'
         Footers = <>
         Width = 100
       end>
+    object RowDetailData: TRowDetailPanelControlEh
+    end
   end
   object Tree: TsTreeView
     Left = 8
@@ -181,24 +199,19 @@ object FormNewPriceList: TFormNewPriceList
     TabOrder = 2
     OnChange = TreeChange
     OnExpanding = TreeExpanding
-    Items.Data = {
-      020000001F0000000000000000000000FFFFFFFFFFFFFFFF0000000001000000
-      06546573746F31210000000000000000000000FFFFFFFFFFFFFFFF0000000000
-      00000008546573746F2031321D0000000000000000000000FFFFFFFFFFFFFFFF
-      000000000100000004CAF0F3E3200000000000000000000000FFFFFFFFFFFFFF
-      FF000000000000000007CAF0F3E3203130}
+    Items.NodeData = {
+      03020000002A0000000000000000000000FFFFFFFFFFFFFFFF00000000000000
+      0001000000010654006500730074006F0031002E0000000000000000000000FF
+      FFFFFFFFFFFFFF000000000000000000000000010854006500730074006F0020
+      0031003200260000000000000000000000FFFFFFFFFFFFFFFF00000000000000
+      000100000001041A044004430433042C0000000000000000000000FFFFFFFFFF
+      FFFFFF00000000000000000000000001071A04400443043304200031003000}
   end
   object EditCompany: TsEdit
     Left = 8
     Top = 24
     Width = 201
     Height = 21
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -11
-    Font.Name = 'MS Sans Serif'
-    Font.Style = []
-    ParentFont = False
     ReadOnly = True
     TabOrder = 3
     Text = 'EditCompany'
@@ -208,12 +221,6 @@ object FormNewPriceList: TFormNewPriceList
     Top = 56
     Width = 129
     Height = 21
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -11
-    Font.Name = 'MS Sans Serif'
-    Font.Style = []
-    ParentFont = False
     ReadOnly = True
     TabOrder = 4
     Text = 'EditCity'
@@ -226,6 +233,7 @@ object FormNewPriceList: TFormNewPriceList
     Anchors = [akLeft, akBottom]
     DataField = 'PL_PRICE'
     DataSource = DSData
+    DynProps = <>
     EditButtons = <>
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clGray
@@ -254,8 +262,6 @@ object FormNewPriceList: TFormNewPriceList
     Height = 25
     Anchors = [akLeft, akBottom]
     Caption = #1056#1091#1073#1088#1080#1082#1072#1090#1086#1088
-    TabOrder = 7
-    OnClick = BitBtnNewTreeClick
     Glyph.Data = {
       76010000424D7601000000000000760000002800000020000000100000000100
       04000000000000010000130B0000130B00001000000000000000000000000000
@@ -270,6 +276,8 @@ object FormNewPriceList: TFormNewPriceList
       333333333333333333FF33333333333330003333333333333777333333333333
       3000333333333333377733333333333333333333333333333333}
     NumGlyphs = 2
+    TabOrder = 7
+    OnClick = BitBtnNewTreeClick
   end
   object BitBtnUpdate: TsBitBtn
     Left = 208
@@ -278,8 +286,6 @@ object FormNewPriceList: TFormNewPriceList
     Height = 25
     Anchors = [akLeft, akBottom]
     Caption = #1048#1089#1087#1088#1072#1074#1080#1090#1100' (F4)'
-    TabOrder = 8
-    OnClick = BitBtnUpdateClick
     Glyph.Data = {
       36050000424D3605000000000000360400002800000010000000100000000100
       0800000000000001000000000000000000000001000000010000000000000000
@@ -323,6 +329,8 @@ object FormNewPriceList: TFormNewPriceList
       F5100CAEA3121E1EF5E5E5E5E5E5E5E5E5F511AD1D1E19191DF5E5E5E5E5E5E5
       E5E5F5A31E192A1C1DF5E5E5E5E5E5E5E5E5E5F51A181C1C1EF5E5E5E5E5E5E5
       E5E5E5E5F51D1C1EF5E5E5E5E5E5E5E5E5E5E5E5E5F5F5F5E5E5}
+    TabOrder = 8
+    OnClick = BitBtnUpdateClick
   end
   object BitBtnNewRow: TsBitBtn
     Left = 116
@@ -331,8 +339,6 @@ object FormNewPriceList: TFormNewPriceList
     Height = 25
     Anchors = [akLeft, akBottom]
     Caption = #1044#1086#1073#1072#1074#1080#1090#1100
-    TabOrder = 9
-    OnClick = BitBtnNewRowClick
     Glyph.Data = {
       36050000424D3605000000000000360400002800000010000000100000000100
       0800000000000001000000000000000000000001000000010000000000003232
@@ -376,6 +382,8 @@ object FormNewPriceList: TFormNewPriceList
       100408090A0B0E110201282828030C0D0C040708090A0B0E0201282828280303
       0405060708090A0B020128282828280102020202020202020201282828282801
       0101010101010101010128282828282828282828282828282828}
+    TabOrder = 9
+    OnClick = BitBtnNewRowClick
   end
   object BitBtnSave: TsBitBtn
     Left = 600
@@ -384,8 +392,6 @@ object FormNewPriceList: TFormNewPriceList
     Height = 25
     Anchors = [akLeft, akBottom]
     Caption = '('#1072#1074#1090#1086#1079#1072#1087#1080#1089#1100')'
-    TabOrder = 10
-    OnClick = BitBtnSaveClick
     Glyph.Data = {
       76010000424D7601000000000000760000002800000020000000100000000100
       04000000000000010000120B0000120B00001000000000000000000000000000
@@ -400,6 +406,8 @@ object FormNewPriceList: TFormNewPriceList
       00037F7F333333337F7F000FFFFFFFFF07037F7F33333333777F000FFFFFFFFF
       0003737FFFFFFFFF7F7330099999999900333777777777777733}
     NumGlyphs = 2
+    TabOrder = 10
+    OnClick = BitBtnSaveClick
   end
   object StaticTextX: TStaticText
     Left = 480
@@ -417,8 +425,6 @@ object FormNewPriceList: TFormNewPriceList
     Top = 54
     Width = 33
     Height = 25
-    TabOrder = 12
-    OnClick = BitBtnStoreClick
     Glyph.Data = {
       76010000424D7601000000000000760000002800000020000000100000000100
       04000000000000010000120B0000120B00001000000000000000000000000000
@@ -433,6 +439,8 @@ object FormNewPriceList: TFormNewPriceList
       7333333373F77733733333333088888033333333373FFFF73333333333000003
       3333333333777773333333333333333333333333333333333333}
     NumGlyphs = 2
+    TabOrder = 12
+    OnClick = BitBtnStoreClick
   end
   object BitBtnDelete: TsBitBtn
     Left = 320
@@ -441,8 +449,6 @@ object FormNewPriceList: TFormNewPriceList
     Height = 25
     Anchors = [akLeft, akBottom]
     Caption = #1059#1076#1072#1083#1080#1090#1100
-    TabOrder = 13
-    OnClick = BitBtnDeleteClick
     Glyph.Data = {
       36050000424D3605000000000000360400002800000010000000100000000100
       0800000000000001000000000000000000000001000000010000000000003232
@@ -486,6 +492,8 @@ object FormNewPriceList: TFormNewPriceList
       1A1B0B07080C0D1502010A0E0F113B1113140B0607090C0D02013B0A0A3B3B01
       0B0B05050607080902013B3B3B3B3B01020202020202020202013B3B3B3B3B01
       010101010101010101013B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B}
+    TabOrder = 13
+    OnClick = BitBtnDeleteClick
   end
   object ButtonLeft: TsButton
     Left = 152
@@ -506,7 +514,6 @@ object FormNewPriceList: TFormNewPriceList
     OnClick = ButtonRightClick
   end
   object qDataView: TZReadOnlyQuery
-    Connection = FormMain.ZC
     SQL.Strings = (
       'select pl_id, pl_headerid, pl.pl_treeid, pl_price,'
       
@@ -642,7 +649,6 @@ object FormNewPriceList: TFormNewPriceList
     Top = 120
   end
   object QCompany: TZQuery
-    Connection = FormMain.ZC
     SQL.Strings = (
       'SELECT cm_id as COMPANYID, cm_city, cm_name, c.cm_comment '
       'FROM company c'
@@ -682,7 +688,6 @@ object FormNewPriceList: TFormNewPriceList
     end
   end
   object qRowInsert: TZQuery
-    Connection = FormMain.ZC
     SQL.Strings = (
       'INSERT INTO PRICE_LINES (PL_HEADERID, PL_TREEID, PL_PRICE,'
       'PL_ORDERBY, PL_DATE_UPDATE, PL_ISCLOSED)'
@@ -725,7 +730,6 @@ object FormNewPriceList: TFormNewPriceList
       end>
   end
   object qRowMaxOrder: TZReadOnlyQuery
-    Connection = FormMain.ZC
     SQL.Strings = (
       'SELECT MAX(pl_orderby)+1 AS maxpos FROM price_lines pt'
       'WHERE pl_headerid =:headerid and pl_treeid =:treeid'
@@ -760,7 +764,6 @@ object FormNewPriceList: TFormNewPriceList
     end
   end
   object qRowExists: TZQuery
-    Connection = FormMain.ZC
     SQL.Strings = (
       'SELECT COUNT(pl_orderby) AS cntr FROM price_lines pt'
       'WHERE pl_headerid =:headerid AND pl_treeid =:treeid'
@@ -797,7 +800,6 @@ object FormNewPriceList: TFormNewPriceList
     end
   end
   object qPriceUpdate: TZQuery
-    Connection = FormMain.ZC
     SQL.Strings = (
       'update price_lines'
       'set pl_price = :price,'
@@ -845,7 +847,6 @@ object FormNewPriceList: TFormNewPriceList
     end
   end
   object qRowUpdate: TZQuery
-    Connection = FormMain.ZC
     SQL.Strings = (
       'UPDATE PRICE_LINES'
       'SET PL_ISCLOSED=1,'
@@ -879,7 +880,6 @@ object FormNewPriceList: TFormNewPriceList
       end>
   end
   object qPLisFinished: TZQuery
-    Connection = FormMain.ZC
     SQL.Strings = (
       'update PRICE_HEADERS'
       'set ph_isfinished =:finished'
@@ -915,4 +915,4 @@ object FormNewPriceList: TFormNewPriceList
       ReadOnly = True
     end
   end
-end
+end

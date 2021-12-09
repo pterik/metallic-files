@@ -41,6 +41,10 @@ object FormAbout: TFormAbout
     ReadOnly = True
     ScrollBars = ssVertical
     TabOrder = 0
+    Text = 
+      #1055#1088#1086#1075#1088#1072#1084#1084#1072' Metallica Version 3.1'#13#10#1045#1089#1090#1100' '#1074#1086#1087#1088#1086#1089#1099' '#1087#1086' '#1087#1088#1086#1075#1088#1072#1084#1084#1077'?'#13#10#1047#1074#1086 +
+      #1085#1080#1090#1077' '#1087#1086' '#1090#1077#1083'. +38(067)220-79-76'#13#10#1069#1083#1077#1082#1090#1088#1086#1085#1085#1072#1103' '#1087#1086#1095#1090#1072' vitaly.makhaev' +
+      '@gmail.com'#13#10
   end
   object BitBtnClose: TsBitBtn
     Left = 301
@@ -72,4 +76,4 @@ object FormAbout: TFormAbout
     NumGlyphs = 2
     TabOrder = 1
   end
-end
+end

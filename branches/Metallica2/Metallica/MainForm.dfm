@@ -42,12 +42,12 @@ object FormMain: TFormMain
     Width = 71
     Height = 16
     Caption = #1057#1086#1090#1088#1091#1076#1085#1080#1082
+    ParentFont = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlack
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    ParentFont = False
   end
   object lbl1: TsLabel
     Left = 264
@@ -55,12 +55,12 @@ object FormMain: TFormMain
     Width = 80
     Height = 16
     Caption = #1055#1086#1089#1090#1072#1074#1097#1080#1082#1080
+    ParentFont = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlack
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    ParentFont = False
   end
   object lbl2: TsLabel
     Left = 520
@@ -68,12 +68,12 @@ object FormMain: TFormMain
     Width = 119
     Height = 16
     Caption = #1042#1080#1076' '#1076#1077#1103#1090#1077#1083#1100#1085#1086#1089#1090#1080
+    ParentFont = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlack
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    ParentFont = False
   end
   object BitBtnClose: TsBitBtn
     Left = 810
@@ -441,7 +441,6 @@ object FormMain: TFormMain
       'controls_cp=GET_ACP'
       'codepage=WIN1251')
     TransactIsolationLevel = tiReadCommitted
-    Connected = True
     DesignConnection = True
     HostName = 'localhost'
     Port = 0
@@ -455,9 +454,9 @@ object FormMain: TFormMain
     Left = 56
     Top = 176
   end
-  object QViewUsers: TZQuery
+  object QViewUsers2: TZQuery
     Connection = ZC2
-    OnCalcFields = QViewUsersCalcFields
+    OnCalcFields = QViewUsers2CalcFields
     SQL.Strings = (
       'SELECT '
       'U_LOGIN,U_FIO,U_COMMENT, U_ID, '
@@ -473,8 +472,8 @@ object FormMain: TFormMain
       end>
     WhereMode = wmWhereAll
     Options = []
-    Left = 272
-    Top = 160
+    Left = 680
+    Top = 112
     ParamData = <
       item
         DataType = ftInteger
@@ -482,48 +481,47 @@ object FormMain: TFormMain
         ParamType = ptUnknown
         Value = 4
       end>
-    object QViewUsersU_LOGIN: TStringField
+    object QViewUsers2U_LOGIN: TStringField
       FieldName = 'U_LOGIN'
       Size = 30
     end
-    object QViewUsersU_FIO: TStringField
+    object QViewUsers2U_FIO: TStringField
       FieldName = 'U_FIO'
       Size = 50
     end
-    object QViewUsersU_COMMENT: TStringField
+    object QViewUsers2U_COMMENT: TStringField
       FieldName = 'U_COMMENT'
       Size = 50
     end
-    object QViewUsersU_ID: TIntegerField
+    object QViewUsers2U_ID: TIntegerField
       FieldName = 'U_ID'
       Required = True
     end
-    object QViewUsersU_ISCLOSED: TSmallintField
+    object QViewUsers2U_ISCLOSED: TSmallintField
       FieldName = 'U_ISCLOSED'
       Required = True
     end
-    object QViewUsersU_ISBOSS: TIntegerField
+    object QViewUsers2U_ISBOSS: TIntegerField
       FieldName = 'U_ISBOSS'
     end
-    object QViewUsersU_FIO_PLUS_BOSS: TStringField
+    object QViewUsers2U_FIO_PLUS_BOSS: TStringField
       FieldKind = fkCalculated
       FieldName = 'U_FIO_PLUS_BOSS'
       Size = 50
       Calculated = True
     end
-    object QViewUsersU_EDIT_PRICES: TSmallintField
+    object QViewUsers2U_EDIT_PRICES: TSmallintField
       FieldName = 'U_EDIT_PRICES'
       Required = True
     end
   end
-  object DSData: TDataSource
-    DataSet = qData
-    Left = 488
-    Top = 368
+  object DSData2: TDataSource
+    DataSet = qData2
+    Left = 688
+    Top = 184
   end
-  object qData: TZReadOnlyQuery
+  object qData2: TZReadOnlyQuery
     Connection = ZC2
-    Active = True
     SQL.Strings = (
       'SELECT pl_id, pl_headerid, pl.pl_treeid, pl_price,'
       'cast(:node as varchar(200)) as pl_parent,'
@@ -587,8 +585,8 @@ object FormMain: TFormMain
         ParamType = ptInput
         Size = 100
       end>
-    Left = 536
-    Top = 368
+    Left = 736
+    Top = 320
     ParamData = <
       item
         DataType = ftString
@@ -617,6 +615,225 @@ object FormMain: TFormMain
         ParamType = ptInput
         Size = 100
       end>
+    object qData2PL_ID: TIntegerField
+      FieldName = 'PL_ID'
+      Required = True
+    end
+    object qData2PL_HEADERID: TIntegerField
+      FieldName = 'PL_HEADERID'
+      Required = True
+    end
+    object qData2PL_TREEID: TIntegerField
+      FieldName = 'PL_TREEID'
+    end
+    object qData2CM_NAME: TStringField
+      FieldName = 'CM_NAME'
+      Size = 100
+    end
+    object qData2CM_CITY: TStringField
+      FieldName = 'CM_CITY'
+      Size = 100
+    end
+    object qData2CM_ID: TIntegerField
+      FieldName = 'CM_ID'
+      Required = True
+    end
+    object qData2CM_BUSINESS: TStringField
+      FieldName = 'CM_BUSINESS'
+      Required = True
+      Size = 100
+    end
+    object qData2PL_VALUE1: TStringField
+      FieldName = 'PL_VALUE1'
+      Size = 200
+    end
+    object qData2PL_VALUE2: TStringField
+      FieldName = 'PL_VALUE2'
+      Size = 200
+    end
+    object qData2PL_VALUE3: TStringField
+      FieldName = 'PL_VALUE3'
+      Size = 200
+    end
+    object qData2PL_VALUE4: TStringField
+      FieldName = 'PL_VALUE4'
+      Size = 200
+    end
+    object qData2PL_VALUE5: TStringField
+      FieldName = 'PL_VALUE5'
+      Size = 200
+    end
+    object qData2PL_VALUE6: TStringField
+      FieldName = 'PL_VALUE6'
+      Size = 200
+    end
+    object qData2PL_VALUE7: TStringField
+      FieldName = 'PL_VALUE7'
+      Size = 200
+    end
+    object qData2PL_VALUE8: TStringField
+      FieldName = 'PL_VALUE8'
+      Size = 200
+    end
+    object qData2PL_VALUE9: TStringField
+      FieldName = 'PL_VALUE9'
+      Size = 200
+    end
+    object qData2PL_ORDERBY: TIntegerField
+      FieldName = 'PL_ORDERBY'
+    end
+    object qData2PL_DATE_UPDATE: TDateTimeField
+      FieldName = 'PL_DATE_UPDATE'
+    end
+    object qData2PL_ISCLOSED: TSmallintField
+      FieldName = 'PL_ISCLOSED'
+      Required = True
+    end
+    object qData2PL_PARENT: TStringField
+      FieldName = 'PL_PARENT'
+      ReadOnly = True
+      Size = 200
+    end
+    object qData2PT_VALUE: TStringField
+      FieldName = 'PT_VALUE'
+      ReadOnly = True
+      Size = 100
+    end
+    object qData2TL_COLOR: TIntegerField
+      FieldName = 'TL_COLOR'
+      Required = True
+    end
+    object qData2PL_PRICE: TSingleField
+      FieldName = 'PL_PRICE'
+      ReadOnly = True
+    end
+  end
+  object ZC: TUniConnection
+    ProviderName = 'InterBase'
+    Database = 
+      'D:\Projects\GitHub\metallic-files\branches\Metallica2\Database\D' +
+      'ATABASE_ODS11.FDB'
+    Username = 'SYSDBA'
+    Server = 'localhost'
+    Connected = True
+    LoginPrompt = False
+    Left = 48
+    Top = 256
+    EncryptedPassword = '92FF9EFF8CFF8BFF9AFF8DFF94FF9AFF86FF'
+  end
+  object QViewUsers: TUniQuery
+    Connection = ZC
+    SQL.Strings = (
+      'SELECT '
+      'U_LOGIN,U_FIO,U_COMMENT, U_ID, '
+      'U_ISCLOSED, U_ISBOSS, U_EDIT_PRICES'
+      'FROM USERS U'
+      'where U_ID=:U_ID')
+    Left = 240
+    Top = 136
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'U_ID'
+        ParamType = ptInput
+        Value = nil
+      end>
+    object QViewUsersU_LOGIN: TStringField
+      FieldName = 'U_LOGIN'
+      Size = 30
+    end
+    object QViewUsersU_FIO: TStringField
+      FieldName = 'U_FIO'
+      Size = 50
+    end
+    object QViewUsersU_COMMENT: TStringField
+      FieldName = 'U_COMMENT'
+      Size = 50
+    end
+    object QViewUsersU_ID: TIntegerField
+      FieldName = 'U_ID'
+      Required = True
+    end
+    object QViewUsersU_ISCLOSED: TSmallintField
+      FieldName = 'U_ISCLOSED'
+      Required = True
+    end
+    object QViewUsersU_ISBOSS: TIntegerField
+      FieldName = 'U_ISBOSS'
+    end
+    object QViewUsersU_EDIT_PRICES: TSmallintField
+      FieldName = 'U_EDIT_PRICES'
+      Required = True
+    end
+    object QViewUsersU_FIO_PLUS_BOSS: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'U_FIO_PLUS_BOSS'
+      Calculated = True
+    end
+  end
+  object qData: TUniQuery
+    Connection = ZC
+    SQL.Strings = (
+      'SELECT pl_id, pl_headerid, pl.pl_treeid, pl_price,'
+      'cast(:node as varchar(200)) as pl_parent,'
+      
+        '(select pt_value from prices_tree pt where pt.pt_id = pl.pl_tree' +
+        'id'
+      'and pt_isclosed =0) pt_value,'
+      'cm.cm_name, cm.cm_id,  cm.cm_city, cm.cm_business,'
+      'pl_value1, pl_value2, pl_value3,'
+      'pl_value4, pl_value5, pl_value6,'
+      'pl_value7, pl_value8, pl_value9,'
+      'pl_orderby, pl_date_update,'
+      'tl_color, '
+      'pl_isclosed'
+      'FROM price_lines pl, price_headers ph , company cm'
+      'left join TRUSTLEVEL tl on tl.tl_id = cm.cm_trust'
+      'WHERE ((pl.pl_treeid = :treeid)'
+      'OR (pl.pl_treeid IN ('
+      '    SELECT pt_id FROM prices_tree'
+      '    WHERE pt_parentid =:treeid'
+      '    and pt_isclosed = 0'
+      '    )))'
+      'AND ph.ph_id = pl.pl_headerid'
+      'AND cm.cm_id = ph.ph_companyid'
+      'AND cm.cm_isclosed = 0'
+      'AND ph.ph_isclosed = 0'
+      'AND pl.pl_isclosed = 0'
+      
+        'and ((upper(cm_name COLLATE WIN1251) like '#39'%'#39'||upper(:company)||' +
+        #39'%'#39') or (cast(:company as varchar(100)) ='#39#39') )'
+      
+        'and ((UPPER(cm_business COLLATE WIN1251) like '#39'%'#39'||upper(:busine' +
+        'ss)||'#39'%'#39' ) or (cast(:business as varchar(100)) ='#39#39') )'
+      'ORDER BY ph.ph_date_insert, pl_orderby ')
+    Left = 240
+    Top = 216
+    ParamData = <
+      item
+        DataType = ftString
+        Name = 'node'
+        ParamType = ptInput
+        Value = nil
+      end
+      item
+        DataType = ftInteger
+        Name = 'treeid'
+        ParamType = ptInput
+        Value = nil
+      end
+      item
+        DataType = ftString
+        Name = 'company'
+        ParamType = ptInput
+        Value = nil
+      end
+      item
+        DataType = ftString
+        Name = 'business'
+        ParamType = ptInput
+        Value = nil
+      end>
     object qDataPL_ID: TIntegerField
       FieldName = 'PL_ID'
       Required = True
@@ -630,18 +847,23 @@ object FormMain: TFormMain
     end
     object qDataCM_NAME: TStringField
       FieldName = 'CM_NAME'
+      ReadOnly = True
       Size = 100
     end
     object qDataCM_CITY: TStringField
       FieldName = 'CM_CITY'
+      ReadOnly = True
+      Required = True
       Size = 100
     end
     object qDataCM_ID: TIntegerField
       FieldName = 'CM_ID'
+      ReadOnly = True
       Required = True
     end
     object qDataCM_BUSINESS: TStringField
       FieldName = 'CM_BUSINESS'
+      ReadOnly = True
       Required = True
       Size = 100
     end
@@ -683,6 +905,7 @@ object FormMain: TFormMain
     end
     object qDataPL_ORDERBY: TIntegerField
       FieldName = 'PL_ORDERBY'
+      Required = True
     end
     object qDataPL_DATE_UPDATE: TDateTimeField
       FieldName = 'PL_DATE_UPDATE'
@@ -703,24 +926,16 @@ object FormMain: TFormMain
     end
     object qDataTL_COLOR: TIntegerField
       FieldName = 'TL_COLOR'
-      Required = True
-    end
-    object qDataPL_PRICE: TSingleField
-      FieldName = 'PL_PRICE'
       ReadOnly = True
     end
+    object qDataPL_PRICE: TFloatField
+      FieldName = 'PL_PRICE'
+      Required = True
+    end
   end
-  object ZC: TUniConnection
-    ProviderName = 'InterBase'
-    Database = 
-      'D:\Projects\GitHub\metallic-files\branches\Metallica2\Database\D' +
-      'ATABASE_ODS11.FDB'
-    Username = 'SYSDBA'
-    Server = 'localhost'
-    Connected = True
-    LoginPrompt = False
-    Left = 48
-    Top = 256
-    EncryptedPassword = '92FF9EFF8CFF8BFF9AFF8DFF94FF9AFF86FF'
+  object DSData: TUniDataSource
+    DataSet = qData
+    Left = 240
+    Top = 312
   end
-end
+end

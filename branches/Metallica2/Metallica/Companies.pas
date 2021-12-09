@@ -7,7 +7,7 @@ uses
   Dialogs, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, 
   Grids, DBGrids, DBGridEh, Mask, DBCtrlsEh, DBLookupEh, ExtCtrls, ImgList, 
   DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, EhLibVCL, GridsEh, 
-  DBAxisGridsEh, MemDS, DBAccess, Uni;
+  DBAxisGridsEh, MemDS, DBAccess, Uni, sBitBtn, sLabel, sEdit, sCheckBox;
 
 type
   TFormCompanies = class(TForm)
@@ -293,13 +293,15 @@ procedure TFormCompanies.DBGridCompaniesTitleClick(Column: TColumnEh);
 begin
   if F_LastSorted = Column.FieldName then
   begin
-    QCompanies.SortedFields := Column.FieldName;
-    QCompanies.SortType := stDescending;
+    //QCompanies.SortedFields := Column.FieldName;
+    //QCompanies.SortType := stDescending;
+    QCompanies.IndexFieldNames:=Column.FieldName+' DESC';
   end
   else
   begin
-    QCompanies.SortedFields := Column.FieldName;
-    QCompanies.SortType := stAscending;
+    //QCompanies.SortedFields := Column.FieldName;
+    //QCompanies.SortType := stAscending;
+    QCompanies.IndexFieldNames:=Column.FieldName+' ASC';
   end;
   F_LastSorted := Column.FieldName;
 end;
@@ -401,4 +403,4 @@ begin
 end;
 
 end.
-
+

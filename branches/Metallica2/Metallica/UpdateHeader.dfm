@@ -1,9 +1,9 @@
 object FormUpdateHeader: TFormUpdateHeader
   Left = 408
   Top = 267
-  Width = 281
-  Height = 351
   Caption = #1047#1072#1076#1072#1090#1100' '#1087#1072#1088#1072#1084#1077#1090#1088#1099' '#1079#1072#1075#1086#1083#1086#1074#1086#1082#1072
+  ClientHeight = 312
+  ClientWidth = 265
   Color = clBtnFace
   Constraints.MinHeight = 100
   Constraints.MinWidth = 100
@@ -18,8 +18,8 @@ object FormUpdateHeader: TFormUpdateHeader
   OnDestroy = FormDestroy
   OnKeyUp = FormKeyUp
   DesignSize = (
-    273
-    324)
+    265
+    312)
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TsLabel
@@ -28,12 +28,12 @@ object FormUpdateHeader: TFormUpdateHeader
     Width = 110
     Height = 16
     Caption = #1058#1077#1082#1089#1090' '#1079#1072#1075#1086#1083#1086#1074#1082#1072
+    ParentFont = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    ParentFont = False
   end
   object Label2: TsLabel
     Left = 16
@@ -41,12 +41,12 @@ object FormUpdateHeader: TFormUpdateHeader
     Width = 124
     Height = 16
     Caption = #1056#1072#1079#1084#1077#1088' '#1074' '#1087#1080#1082#1089#1077#1083#1072#1093
+    ParentFont = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    ParentFont = False
   end
   object Label3: TsLabel
     Left = 16
@@ -54,12 +54,12 @@ object FormUpdateHeader: TFormUpdateHeader
     Width = 73
     Height = 16
     Caption = #1057#1090#1086#1083#1073#1077#1094' '#8470
+    ParentFont = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    ParentFont = False
   end
   object BitBtnCancel: TsBitBtn
     Left = 16
@@ -69,8 +69,6 @@ object FormUpdateHeader: TFormUpdateHeader
     Anchors = [akLeft, akBottom]
     Cancel = True
     Caption = #1054#1090#1084#1077#1085#1072
-    ModalResult = 2
-    TabOrder = 5
     Glyph.Data = {
       DE010000424DDE01000000000000760000002800000024000000120000000100
       0400000000006801000000000000000000001000000000000000000000000000
@@ -88,7 +86,9 @@ object FormUpdateHeader: TFormUpdateHeader
       38F338F300003333333333333919333333388333338FFF830000333333333333
       3333333333333333333888330000333333333333333333333333333333333333
       0000}
+    ModalResult = 2
     NumGlyphs = 2
+    TabOrder = 5
   end
   object BitBtnSave: TsBitBtn
     Left = 153
@@ -98,9 +98,6 @@ object FormUpdateHeader: TFormUpdateHeader
     Anchors = [akRight, akBottom]
     Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' (F2)'
     Default = True
-    ModalResult = 1
-    TabOrder = 4
-    OnClick = BitBtnSaveClick
     Glyph.Data = {
       76010000424D7601000000000000760000002800000020000000100000000100
       04000000000000010000120B0000120B00001000000000000000000000000000
@@ -114,7 +111,10 @@ object FormUpdateHeader: TFormUpdateHeader
       00037F7F333333337F7F000FFFFFFFFF00037F7F333333337F7F000FFFFFFFFF
       00037F7F333333337F7F000FFFFFFFFF07037F7F33333333777F000FFFFFFFFF
       0003737FFFFFFFFF7F7330099999999900333777777777777733}
+    ModalResult = 1
     NumGlyphs = 2
+    TabOrder = 4
+    OnClick = BitBtnSaveClick
   end
   object EditHeader: TsEdit
     Left = 16
@@ -209,4 +209,4 @@ object FormUpdateHeader: TFormUpdateHeader
     TabOrder = 9
     Visible = False
   end
-end
+end

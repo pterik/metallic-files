@@ -1,9 +1,9 @@
 object FormSelectCompany: TFormSelectCompany
   Left = 234
   Top = 207
-  Width = 790
-  Height = 497
   Caption = #1042#1099#1073#1077#1088#1080#1090#1077' '#1082#1086#1084#1087#1072#1085#1080#1102' '#1076#1074#1086#1081#1085#1099#1084' '#1097#1077#1083#1095#1082#1086#1084' '#1080#1079' '#1089#1087#1080#1089#1082#1072' '#1087#1086#1089#1090#1072#1074#1097#1080#1082#1086#1074
+  ClientHeight = 458
+  ClientWidth = 774
   Color = clBtnFace
   Constraints.MinHeight = 250
   Constraints.MinWidth = 790
@@ -15,8 +15,8 @@ object FormSelectCompany: TFormSelectCompany
   KeyPreview = True
   OldCreateOrder = False
   DesignSize = (
-    782
-    463)
+    774
+    458)
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TsLabel
@@ -25,12 +25,12 @@ object FormSelectCompany: TFormSelectCompany
     Width = 491
     Height = 24
     Caption = #1042#1099#1073#1077#1088#1080#1090#1077' '#1085#1091#1078#1085#1091#1102' '#1082#1086#1084#1087#1072#1085#1080#1102' '#1076#1074#1086#1081#1085#1099#1084' '#1097#1077#1083#1095#1082#1086#1084' '#1085#1072' '#1085#1077#1081
+    ParentFont = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -19
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    ParentFont = False
   end
   object DBGridCompanies: TDBGridEh
     Left = 0
@@ -39,24 +39,18 @@ object FormSelectCompany: TFormSelectCompany
     Height = 409
     Anchors = [akLeft, akTop, akRight, akBottom]
     DataSource = DSCompanies
-    FooterColor = clWindow
-    FooterFont.Charset = DEFAULT_CHARSET
-    FooterFont.Color = clWindowText
-    FooterFont.Height = -11
-    FooterFont.Name = 'MS Sans Serif'
-    FooterFont.Style = []
+    DynProps = <>
+    FooterParams.Color = clWindow
+    IndicatorOptions = []
     Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgConfirmDelete, dgCancelOnExit]
     TabOrder = 0
-    TitleFont.Charset = DEFAULT_CHARSET
-    TitleFont.Color = clWindowText
-    TitleFont.Height = -11
-    TitleFont.Name = 'MS Sans Serif'
-    TitleFont.Style = []
-    TitleLines = 2
+    TitleParams.RowLines = 2
     OnDblClick = DBGridCompaniesDblClick
     OnTitleClick = DBGridCompaniesTitleClick
     Columns = <
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'CM_NAME'
         Footers = <>
@@ -64,6 +58,8 @@ object FormSelectCompany: TFormSelectCompany
         Width = 227
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'SISFINISHED'
         Footers = <>
@@ -71,6 +67,8 @@ object FormSelectCompany: TFormSelectCompany
         Width = 99
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'CM_CITY'
         Footers = <>
@@ -78,12 +76,16 @@ object FormSelectCompany: TFormSelectCompany
         Width = 100
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'CM_TRUNC_COMMENT'
         Footers = <>
         Title.Caption = #1040#1076#1088#1077#1089
         Width = 231
       end>
+    object RowDetailData: TRowDetailPanelControlEh
+    end
   end
   object BitBtnCancel: TsBitBtn
     Left = 632
@@ -93,9 +95,6 @@ object FormSelectCompany: TFormSelectCompany
     Anchors = [akRight, akBottom]
     Cancel = True
     Caption = #1054#1090#1084#1077#1085#1072
-    ModalResult = 2
-    TabOrder = 1
-    OnClick = BitBtnCancelClick
     Glyph.Data = {
       DE010000424DDE01000000000000760000002800000024000000120000000100
       0400000000006801000000000000000000001000000000000000000000000000
@@ -113,12 +112,13 @@ object FormSelectCompany: TFormSelectCompany
       38F338F300003333333333333919333333388333338FFF830000333333333333
       3333333333333333333888330000333333333333333333333333333333333333
       0000}
+    ModalResult = 2
     NumGlyphs = 2
+    TabOrder = 1
+    OnClick = BitBtnCancelClick
   end
   object QCompany: TZQuery
-    Connection = FormMain.ZC
     OnCalcFields = QCompanyCalcFields
-    Active = True
     SQL.Strings = (
       'SELECT fn.*,'
       '    (SELECT ph_isfinished FROM price_headers cm'
@@ -179,7 +179,6 @@ object FormSelectCompany: TFormSelectCompany
     Top = 120
   end
   object qPriceHeader: TZReadOnlyQuery
-    Connection = FormMain.ZC
     SQL.Strings = (
       'select max(ph_id) ph_id from price_headers'
       'where ph_companyid=:companyid'
@@ -204,7 +203,6 @@ object FormSelectCompany: TFormSelectCompany
     end
   end
   object QNewHeader: TZQuery
-    Connection = FormMain.ZC
     SQL.Strings = (
       
         'INSERT INTO PRICE_HEADERS (PH_COMPANYID, PH_DATE_INSERT, PH_ISCL' +
@@ -235,4 +233,4 @@ object FormSelectCompany: TFormSelectCompany
         ParamType = ptUnknown
       end>
   end
-end
+end

@@ -1,9 +1,9 @@
 object FormUpdateCompany: TFormUpdateCompany
   Left = 390
   Top = 279
-  Width = 374
-  Height = 542
   Caption = #1048#1079#1084#1077#1085#1077#1085#1080#1077' '#1076#1072#1085#1085#1099#1093' '#1086' '#1082#1086#1084#1087#1072#1085#1080#1080
+  ClientHeight = 503
+  ClientWidth = 358
   Color = clBtnFace
   Constraints.MinHeight = 315
   Constraints.MinWidth = 332
@@ -17,7 +17,7 @@ object FormUpdateCompany: TFormUpdateCompany
   OnKeyUp = FormKeyUp
   DesignSize = (
     358
-    504)
+    503)
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TsLabel
@@ -26,12 +26,12 @@ object FormUpdateCompany: TFormUpdateCompany
     Width = 64
     Height = 16
     Caption = #1050#1086#1084#1087#1072#1085#1080#1103
+    ParentFont = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    ParentFont = False
   end
   object Label2: TsLabel
     Left = 8
@@ -39,12 +39,12 @@ object FormUpdateCompany: TFormUpdateCompany
     Width = 39
     Height = 16
     Caption = #1043#1086#1088#1086#1076
+    ParentFont = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    ParentFont = False
   end
   object Label4: TsLabel
     Left = 8
@@ -69,26 +69,26 @@ object FormUpdateCompany: TFormUpdateCompany
     Height = 16
     Anchors = [akLeft, akBottom]
     Caption = 'LabelisClosed'
+    ParentFont = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    ParentFont = False
   end
   object Label6: TsLabel
     Left = 10
     Top = 383
-    Width = 251
+    Width = 248
     Height = 13
     Anchors = [akLeft, akRight]
     Caption = #1050#1086#1085#1090#1072#1082#1090#1085#1099#1077' '#1090#1077#1083#1077#1092#1086#1085#1099' '#1082#1086#1084#1087#1072#1085#1080#1081' '#1091#1082#1072#1079#1099#1074#1072#1102#1090#1089#1103' '#1074
+    ParentFont = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    ParentFont = False
   end
   object Label7: TsLabel
     Left = 10
@@ -97,12 +97,12 @@ object FormUpdateCompany: TFormUpdateCompany
     Height = 13
     Anchors = [akLeft, akBottom]
     Caption = #1086#1090#1076#1077#1083#1100#1085#1086#1084' '#1086#1082#1085#1077', '#1082#1085#1086#1087#1082#1072' "'#1058#1077#1083#1077#1092#1086#1085#1099'"'
+    ParentFont = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    ParentFont = False
   end
   object Label3: TsLabel
     Left = 8
@@ -110,12 +110,12 @@ object FormUpdateCompany: TFormUpdateCompany
     Width = 255
     Height = 16
     Caption = #1040#1076#1088#1077#1089', '#1076#1088#1091#1075#1072#1103' '#1080#1085#1092#1086#1088#1084#1072#1094#1080#1103' '#1086' '#1082#1086#1084#1087#1072#1085#1080#1080
+    ParentFont = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    ParentFont = False
   end
   object Label8: TsLabel
     Left = 8
@@ -123,12 +123,12 @@ object FormUpdateCompany: TFormUpdateCompany
     Width = 57
     Height = 16
     Caption = #1044#1086#1074#1077#1088#1080#1077
+    ParentFont = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    ParentFont = False
   end
   object Label9: TsLabel
     Left = 8
@@ -136,12 +136,12 @@ object FormUpdateCompany: TFormUpdateCompany
     Width = 75
     Height = 16
     Caption = #1055#1088#1072#1081#1089'-'#1083#1080#1089#1090
+    ParentFont = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    ParentFont = False
   end
   object btnSelectPrice: TsSpeedButton
     Left = 328
@@ -157,12 +157,12 @@ object FormUpdateCompany: TFormUpdateCompany
     Width = 230
     Height = 16
     Caption = #1042#1080#1076#1099' '#1076#1077#1103#1090#1077#1083#1100#1085#1086#1089#1090#1080' '#1095#1077#1088#1077#1079' '#1079#1072#1087#1103#1090#1091#1102
+    ParentFont = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    ParentFont = False
   end
   object EditCompany: TsEdit
     Left = 8
@@ -191,6 +191,7 @@ object FormUpdateCompany: TFormUpdateCompany
     ReadOnly = True
     TabOrder = 6
     Text = ' '
+    CheckOnExit = True
   end
   object BitBtnCancel: TsBitBtn
     Left = 24
@@ -201,9 +202,6 @@ object FormUpdateCompany: TFormUpdateCompany
     Cancel = True
     Caption = #1054#1090#1084#1077#1085#1072
     Default = True
-    ModalResult = 2
-    TabOrder = 7
-    OnClick = BitBtnCancelClick
     Glyph.Data = {
       DE010000424DDE01000000000000760000002800000024000000120000000100
       0400000000006801000000000000000000001000000000000000000000000000
@@ -221,7 +219,10 @@ object FormUpdateCompany: TFormUpdateCompany
       38F338F300003333333333333919333333388333338FFF830000333333333333
       3333333333333333333888330000333333333333333333333333333333333333
       0000}
+    ModalResult = 2
     NumGlyphs = 2
+    TabOrder = 7
+    OnClick = BitBtnCancelClick
   end
   object EditComment: TsMemo
     Left = 8
@@ -239,6 +240,7 @@ object FormUpdateCompany: TFormUpdateCompany
     ParentFont = False
     ScrollBars = ssVertical
     TabOrder = 5
+    Text = 'EditComment'#13#10
   end
   object BitBtnSave: TsBitBtn
     Left = 244
@@ -247,9 +249,6 @@ object FormUpdateCompany: TFormUpdateCompany
     Height = 25
     Anchors = [akRight, akBottom]
     Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' (F2)'
-    ModalResult = 1
-    TabOrder = 8
-    OnClick = BitBtnSaveClick
     Glyph.Data = {
       76010000424D7601000000000000760000002800000020000000100000000100
       04000000000000010000120B0000120B00001000000000000000000000000000
@@ -263,7 +262,10 @@ object FormUpdateCompany: TFormUpdateCompany
       00037F7F333333337F7F000FFFFFFFFF00037F7F333333337F7F000FFFFFFFFF
       00037F7F333333337F7F000FFFFFFFFF07037F7F33333333777F000FFFFFFFFF
       0003737FFFFFFFFF7F7330099999999900333777777777777733}
+    ModalResult = 1
     NumGlyphs = 2
+    TabOrder = 8
+    OnClick = BitBtnSaveClick
   end
   object EditCity: TsEdit
     Left = 8
@@ -290,8 +292,8 @@ object FormUpdateCompany: TFormUpdateCompany
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    ItemHeight = 16
     ParentFont = False
+    ItemIndex = -1
     TabOrder = 3
     Text = 'CBTrustLevel'
   end
@@ -326,7 +328,6 @@ object FormUpdateCompany: TFormUpdateCompany
     TabOrder = 2
   end
   object QCompany: TZQuery
-    Connection = FormMain.ZC
     SQL.Strings = (
       
         'SELECT cm_id, cm_city, cm_name, cm_trust, cm_comment, cm_isclose' +
@@ -387,7 +388,6 @@ object FormUpdateCompany: TFormUpdateCompany
     Top = 136
   end
   object QTrustLevel: TZReadOnlyQuery
-    Connection = FormMain.ZC
     SQL.Strings = (
       'select TL_ID, TL_LEVEL, TL_COLOR, TL_NAME'
       'from TRUSTLEVEL'
@@ -418,4 +418,4 @@ object FormUpdateCompany: TFormUpdateCompany
     Left = 176
     Top = 216
   end
-end
+end

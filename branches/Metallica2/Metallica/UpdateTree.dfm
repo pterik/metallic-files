@@ -1,9 +1,9 @@
 object FormUpdateTree: TFormUpdateTree
   Left = 215
   Top = 212
-  Width = 401
-  Height = 497
   Caption = #1044#1086#1073#1072#1074#1080#1090#1100' '#1089#1090#1088#1086#1082#1080' '#1074' '#1088#1091#1073#1088#1080#1082#1072#1090#1086#1088
+  ClientHeight = 458
+  ClientWidth = 385
   Color = clBtnFace
   Constraints.MinHeight = 250
   Constraints.MinWidth = 400
@@ -17,8 +17,8 @@ object FormUpdateTree: TFormUpdateTree
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   DesignSize = (
-    393
-    463)
+    385
+    458)
   PixelsPerInch = 96
   TextHeight = 13
   object BitBtnClose: TsBitBtn
@@ -30,8 +30,6 @@ object FormUpdateTree: TFormUpdateTree
     Cancel = True
     Caption = #1047#1072#1082#1088#1099#1090#1100
     Default = True
-    ModalResult = 1
-    TabOrder = 0
     Glyph.Data = {
       DE010000424DDE01000000000000760000002800000024000000120000000100
       0400000000006801000000000000000000001000000000000000000000000000
@@ -49,7 +47,9 @@ object FormUpdateTree: TFormUpdateTree
       8888333F00003333330000003333333333333FFFFFF3333F00003333330AAAA0
       333333333333888888F3333F00003333330000003333333333338FFFF8F3333F
       0000}
+    ModalResult = 1
     NumGlyphs = 2
+    TabOrder = 0
   end
   object Tree: TsTreeView
     Left = 8
@@ -62,12 +62,13 @@ object FormUpdateTree: TFormUpdateTree
     TabOrder = 1
     OnChange = TreeChange
     OnExpanding = TreeExpanding
-    Items.Data = {
-      020000001F0000000000000000000000FFFFFFFFFFFFFFFF0000000001000000
-      06546573746F31210000000000000000000000FFFFFFFFFFFFFFFF0000000000
-      00000008546573746F2031321D0000000000000000000000FFFFFFFFFFFFFFFF
-      000000000100000004CAF0F3E3200000000000000000000000FFFFFFFFFFFFFF
-      FF000000000000000007CAF0F3E3203130}
+    Items.NodeData = {
+      03020000002A0000000000000000000000FFFFFFFFFFFFFFFF00000000000000
+      0001000000010654006500730074006F0031002E0000000000000000000000FF
+      FFFFFFFFFFFFFF000000000000000000000000010854006500730074006F0020
+      0031003200260000000000000000000000FFFFFFFFFFFFFFFF00000000000000
+      000100000001041A044004430433042C0000000000000000000000FFFFFFFFFF
+      FFFFFF00000000000000000000000001071A04400443043304200031003000}
   end
   object BitBtnSameNode: TsBitBtn
     Left = 104
@@ -96,8 +97,6 @@ object FormUpdateTree: TFormUpdateTree
     Height = 25
     Anchors = [akLeft, akBottom]
     Caption = #1059#1076#1072#1083#1080#1090#1100' '
-    TabOrder = 4
-    OnClick = BitBtnDeleteClick
     Glyph.Data = {
       36050000424D3605000000000000360400002800000010000000100000000100
       0800000000000001000000000000000000000001000000010000000000003232
@@ -141,9 +140,10 @@ object FormUpdateTree: TFormUpdateTree
       1A1B0B07080C0D1502010A0E0F113B1113140B0607090C0D02013B0A0A3B3B01
       0B0B05050607080902013B3B3B3B3B01020202020202020202013B3B3B3B3B01
       010101010101010101013B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B}
+    TabOrder = 4
+    OnClick = BitBtnDeleteClick
   end
   object qTreeDelete: TZQuery
-    Connection = FormMain.ZC
     SQL.Strings = (
       'UPDATE prices_tree'
       'SET pt_isclosed =1, pt_date = :ptdate'
@@ -177,7 +177,6 @@ object FormUpdateTree: TFormUpdateTree
       end>
   end
   object qLinesDelete: TZQuery
-    Connection = FormMain.ZC
     SQL.Strings = (
       'UPDATE price_lines'
       'SET pl_isclosed =1, pl_date_update = :ptdate'
@@ -212,7 +211,6 @@ object FormUpdateTree: TFormUpdateTree
       end>
   end
   object qSubTreeExists: TZQuery
-    Connection = FormMain.ZC
     SQL.Strings = (
       'SELECT COUNT(pt_id) AS cntr FROM prices_tree pt'
       'WHERE pt_parentid =:parentid'
@@ -239,7 +237,6 @@ object FormUpdateTree: TFormUpdateTree
     end
   end
   object QTreeClose: TZQuery
-    Connection = FormMain.ZC
     SQL.Strings = (
       'update prices_tree pt'
       'set pt_isclosed = 1, pt_date = :cdate'
@@ -272,4 +269,4 @@ object FormUpdateTree: TFormUpdateTree
         ParamType = ptUnknown
       end>
   end
-end
+end

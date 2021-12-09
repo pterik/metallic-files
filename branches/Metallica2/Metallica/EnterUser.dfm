@@ -24,12 +24,12 @@ object FormEnterUser: TFormEnterUser
     Width = 39
     Height = 16
     Caption = #1051#1086#1075#1080#1085
+    ParentFont = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlack
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    ParentFont = False
   end
   object Label2: TsLabel
     Left = 56
@@ -37,12 +37,12 @@ object FormEnterUser: TFormEnterUser
     Width = 49
     Height = 16
     Caption = #1055#1072#1088#1086#1083#1100
+    ParentFont = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlack
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    ParentFont = False
   end
   object Label4: TsLabel
     Left = 8
@@ -50,12 +50,12 @@ object FormEnterUser: TFormEnterUser
     Width = 95
     Height = 16
     Caption = #1055#1086#1083#1100#1079#1086#1074#1072#1090#1077#1083#1100
+    ParentFont = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    ParentFont = False
   end
   object BitBtnCancel: TsBitBtn
     Left = 72
@@ -210,4 +210,4 @@ object FormEnterUser: TFormEnterUser
         Value = ''
       end>
   end
-end
+end

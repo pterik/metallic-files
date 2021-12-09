@@ -1,9 +1,9 @@
 object FormSettings: TFormSettings
   Left = 438
   Top = 257
-  Width = 237
-  Height = 195
   Caption = #1044#1088#1091#1075#1080#1077' '#1085#1072#1089#1090#1088#1086#1081#1082#1080
+  ClientHeight = 156
+  ClientWidth = 221
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -12,8 +12,8 @@ object FormSettings: TFormSettings
   Font.Style = []
   OldCreateOrder = False
   DesignSize = (
-    229
-    161)
+    221
+    156)
   PixelsPerInch = 96
   TextHeight = 13
   object BitBtnCancel: TsBitBtn
@@ -25,8 +25,6 @@ object FormSettings: TFormSettings
     Cancel = True
     Caption = #1054#1090#1084#1077#1085#1072
     Default = True
-    ModalResult = 2
-    TabOrder = 2
     Glyph.Data = {
       DE010000424DDE01000000000000760000002800000024000000120000000100
       0400000000006801000000000000000000001000000000000000000000000000
@@ -44,7 +42,9 @@ object FormSettings: TFormSettings
       38F338F300003333333333333919333333388333338FFF830000333333333333
       3333333333333333333888330000333333333333333333333333333333333333
       0000}
+    ModalResult = 2
     NumGlyphs = 2
+    TabOrder = 2
   end
   object BitBtnSave: TsBitBtn
     Left = 113
@@ -53,9 +53,6 @@ object FormSettings: TFormSettings
     Height = 25
     Anchors = [akRight, akBottom]
     Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' (F2)'
-    ModalResult = 1
-    TabOrder = 3
-    OnClick = BitBtnSaveClick
     Glyph.Data = {
       76010000424D7601000000000000760000002800000020000000100000000100
       04000000000000010000120B0000120B00001000000000000000000000000000
@@ -69,7 +66,10 @@ object FormSettings: TFormSettings
       00037F7F333333337F7F000FFFFFFFFF00037F7F333333337F7F000FFFFFFFFF
       00037F7F333333337F7F000FFFFFFFFF07037F7F33333333777F000FFFFFFFFF
       0003737FFFFFFFFF7F7330099999999900333777777777777733}
+    ModalResult = 1
     NumGlyphs = 2
+    TabOrder = 3
+    OnClick = BitBtnSaveClick
   end
   object MESearch: TsMaskEdit
     Left = 178
@@ -80,6 +80,7 @@ object FormSettings: TFormSettings
     MaxLength = 1
     TabOrder = 0
     Text = ' '
+    CheckOnExit = True
   end
   object StaticText1: TStaticText
     Left = 8
@@ -112,5 +113,6 @@ object FormSettings: TFormSettings
     MaxLength = 2
     TabOrder = 1
     Text = '  '
+    CheckOnExit = True
   end
-end
+end

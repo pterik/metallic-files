@@ -1,9 +1,9 @@
 object FormForBoss: TFormForBoss
   Left = 416
   Top = 289
-  Width = 241
-  Height = 209
   Caption = #1042#1086#1079#1084#1086#1078#1085#1086#1089#1090#1080' '#1076#1083#1103' BOSS'#1072
+  ClientHeight = 170
+  ClientWidth = 225
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -12,8 +12,8 @@ object FormForBoss: TFormForBoss
   Font.Style = []
   OldCreateOrder = False
   DesignSize = (
-    233
-    182)
+    225
+    170)
   PixelsPerInch = 96
   TextHeight = 13
   object BitBtnClose: TsBitBtn
@@ -25,8 +25,6 @@ object FormForBoss: TFormForBoss
     Cancel = True
     Caption = #1047#1072#1082#1088#1099#1090#1100
     Default = True
-    ModalResult = 1
-    TabOrder = 2
     Glyph.Data = {
       DE010000424DDE01000000000000760000002800000024000000120000000100
       0400000000006801000000000000000000001000000000000000000000000000
@@ -44,7 +42,9 @@ object FormForBoss: TFormForBoss
       8888333F00003333330000003333333333333FFFFFF3333F00003333330AAAA0
       333333333333888888F3333F00003333330000003333333333338FFFF8F3333F
       0000}
+    ModalResult = 1
     NumGlyphs = 2
+    TabOrder = 2
   end
   object BitBtnAdditional: TsBitBtn
     Left = 15
@@ -52,9 +52,9 @@ object FormForBoss: TFormForBoss
     Width = 202
     Height = 25
     Caption = #1044#1086#1087#1086#1083#1085#1080#1090#1077#1083#1100#1085#1099#1077' '#1085#1072#1089#1090#1088#1086#1081#1082#1080
+    NumGlyphs = 2
     TabOrder = 1
     OnClick = BitBtnAdditionalClick
-    NumGlyphs = 2
   end
   object BitBtnUpdateTree: TsBitBtn
     Left = 15
@@ -62,9 +62,9 @@ object FormForBoss: TFormForBoss
     Width = 202
     Height = 25
     Caption = #1048#1079#1084#1077#1085#1080#1090#1100' '#1088#1091#1073#1088#1080#1082#1072#1090#1086#1088
+    NumGlyphs = 2
     TabOrder = 0
     OnClick = BitBtnUpdateTreeClick
-    NumGlyphs = 2
   end
   object BitBtn1: TsBitBtn
     Left = 15
@@ -72,12 +72,11 @@ object FormForBoss: TFormForBoss
     Width = 202
     Height = 25
     Caption = #1056#1072#1079#1084#1077#1088#1099' '#1087#1086#1083#1077#1081' "'#1087#1086' '#1091#1084#1086#1083#1095#1072#1085#1080#1102'"'
+    NumGlyphs = 2
     TabOrder = 3
     OnClick = BitBtn1Click
-    NumGlyphs = 2
   end
   object qGlobDelete: TZQuery
-    Connection = FormMain.ZC
     SQL.Strings = (
       'delete FROM grid_show'
       'WHERE (gs_treeid IS NULL)')
@@ -92,7 +91,6 @@ object FormForBoss: TFormForBoss
     end
   end
   object qGlobInsert: TZQuery
-    Connection = FormMain.ZC
     SQL.Strings = (
       'INSERT INTO GRID_SHOW (GS_TREEID, GS_FIELD, GS_HEADER, GS_SHOW,'
       'GS_SIZE, GS_DISPLAYFORMAT, GS_ORDERBY)'
@@ -165,4 +163,4 @@ object FormForBoss: TFormForBoss
         ParamType = ptUnknown
       end>
   end
-end
+end

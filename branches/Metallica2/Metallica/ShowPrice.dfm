@@ -1,9 +1,9 @@
 object FormPriceShow: TFormPriceShow
   Left = 218
   Top = 220
-  Width = 800
-  Height = 497
   Caption = #1055#1086#1079#1080#1094#1080#1080' '#1087#1088#1072#1081#1089'-'#1083#1080#1089#1090#1072
+  ClientHeight = 458
+  ClientWidth = 784
   Color = clBtnFace
   Constraints.MinHeight = 250
   Constraints.MinWidth = 790
@@ -17,8 +17,8 @@ object FormPriceShow: TFormPriceShow
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   DesignSize = (
-    792
-    463)
+    784
+    458)
   PixelsPerInch = 96
   TextHeight = 13
   object BitBtnClose: TsBitBtn
@@ -30,8 +30,6 @@ object FormPriceShow: TFormPriceShow
     Cancel = True
     Caption = #1047#1072#1082#1088#1099#1090#1100
     Default = True
-    ModalResult = 1
-    TabOrder = 0
     Glyph.Data = {
       DE010000424DDE01000000000000760000002800000024000000120000000100
       0400000000006801000000000000000000001000000000000000000000000000
@@ -49,7 +47,9 @@ object FormPriceShow: TFormPriceShow
       8888333F00003333330000003333333333333FFFFFF3333F00003333330AAAA0
       333333333333888888F3333F00003333330000003333333333338FFFF8F3333F
       0000}
+    ModalResult = 1
     NumGlyphs = 2
+    TabOrder = 0
   end
   object Grid: TDBGridEh
     Left = 7
@@ -58,102 +58,121 @@ object FormPriceShow: TFormPriceShow
     Height = 417
     Anchors = [akLeft, akTop, akRight, akBottom]
     DataSource = DSData
-    FooterColor = clWindow
-    FooterFont.Charset = DEFAULT_CHARSET
-    FooterFont.Color = clWindowText
-    FooterFont.Height = -11
-    FooterFont.Name = 'MS Sans Serif'
-    FooterFont.Style = []
-    HorzScrollBar.Visible = False
+    DynProps = <>
+    FooterParams.Color = clWindow
+    GridLineParams.VertEmptySpaceStyle = dessNonEh
+    HorzScrollBar.VisibleMode = sbNeverShowEh
+    IndicatorOptions = []
     Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-    OptionsEh = [dghFixed3D, dghResizeWholeRightPart, dghHighlightFocus, dghClearSelection, dghDblClickOptimizeColWidth, dghDialogFind]
+    OptionsEh = [dghFixed3D, dghResizeWholeRightPart, dghHighlightFocus, dghClearSelection, dghDblClickOptimizeColWidth, dghDialogFind, dghColumnResize, dghColumnMove]
     ReadOnly = True
     RowLines = 3
     RowSizingAllowed = True
     TabOrder = 1
-    TitleFont.Charset = DEFAULT_CHARSET
-    TitleFont.Color = clWindowText
-    TitleFont.Height = -11
-    TitleFont.Name = 'MS Sans Serif'
-    TitleFont.Style = []
-    UseMultiTitle = True
+    TitleParams.MultiTitle = True
     VertScrollBar.VisibleMode = sbNeverShowEh
     OnCellClick = GridCellClick
     OnDblClick = GridDblClick
     OnTitleClick = GridTitleClick
     Columns = <
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'CM_NAME'
         Footers = <>
         Width = 100
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_DATE_UPDATE'
         Footers = <>
         Width = 80
       end
       item
+        CellButtons = <>
         DisplayFormat = '#0.00'
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_PRICE'
         Footers = <>
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_VALUE1'
         Footers = <>
         Width = 100
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_VALUE2'
         Footers = <>
         Width = 100
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_VALUE3'
         Footers = <>
         Width = 100
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_VALUE4'
         Footers = <>
         Width = 100
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_VALUE5'
         Footers = <>
         Width = 100
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_VALUE6'
         Footers = <>
         Width = 100
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_VALUE7'
         Footers = <>
         Width = 100
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_VALUE8'
         Footers = <>
         Width = 100
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'PL_VALUE9'
         Footers = <>
         Width = 100
       end>
+    object RowDetailData: TRowDetailPanelControlEh
+    end
   end
   object BitBtnCompanies: TsBitBtn
     Left = 16
@@ -162,8 +181,6 @@ object FormPriceShow: TFormPriceShow
     Height = 25
     Anchors = [akLeft, akBottom]
     Caption = #1050#1086#1084#1087#1072#1085#1080#1103' ('#1044#1074#1086#1081#1085#1086#1081' '#1097#1077#1083#1095#1086#1082')'
-    TabOrder = 2
-    OnClick = BitBtnCompaniesClick
     Glyph.Data = {
       76010000424D7601000000000000760000002800000020000000100000000100
       04000000000000010000120B0000120B00001000000000000000000000000000
@@ -178,9 +195,10 @@ object FormPriceShow: TFormPriceShow
       3333333373FF7333333333333000333333333333377733333333333333333333
       3333333333333333333333333333333333333333333333333333}
     NumGlyphs = 2
+    TabOrder = 2
+    OnClick = BitBtnCompaniesClick
   end
   object qData: TZReadOnlyQuery
-    Connection = FormMain.ZC
     SQL.Strings = (
       'SELECT pl_id, pl_headerid, pl.pl_treeid, pl_price,'
       'cast(:node as varchar(200)) as pl_parent,'
@@ -322,4 +340,4 @@ object FormPriceShow: TFormPriceShow
     Left = 96
     Top = 64
   end
-end
+end

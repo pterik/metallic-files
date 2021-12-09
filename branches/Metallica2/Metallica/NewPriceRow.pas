@@ -7,7 +7,8 @@ uses
   Dialogs, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, 
   Grids, DBGrids, DBGridEh, ComCtrls, Mask, DBCtrlsEh, ZAbstractTable, //DBTables, 
   DataModule, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, 
-  EhLibVCL, GridsEh, DBAxisGridsEh;
+  EhLibVCL, GridsEh, DBAxisGridsEh, sLabel, sEdit, sCheckBox, sMaskEdit, sComboBox, sMemo, sDialogs, sSpeedButton,
+  sBitBtn;
 
 type
   TFormNewPriceRow = class(TForm)
@@ -159,4 +160,4 @@ begin
 MyNode.Destroy;
 end;
 
-end.
+end.

@@ -1,9 +1,9 @@
 object FormNewSubItem: TFormNewSubItem
   Left = 449
   Top = 259
-  Width = 242
-  Height = 185
   Caption = #1042#1074#1077#1076#1080#1090#1077' '#1085#1072#1080#1084#1077#1085#1086#1074#1072#1085#1080#1077' '#1088#1072#1079#1076#1077#1083#1072
+  ClientHeight = 146
+  ClientWidth = 226
   Color = clBtnFace
   Constraints.MinHeight = 100
   Constraints.MinWidth = 100
@@ -16,8 +16,8 @@ object FormNewSubItem: TFormNewSubItem
   OldCreateOrder = False
   OnKeyUp = FormKeyUp
   DesignSize = (
-    234
-    151)
+    226
+    146)
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TsLabel
@@ -26,12 +26,12 @@ object FormNewSubItem: TFormNewSubItem
     Width = 184
     Height = 16
     Caption = #1048#1084#1103' '#1076#1083#1103' '#1085#1086#1074#1086#1075#1086' '#1087#1086#1076#1088#1072#1079#1076#1077#1083#1072
+    ParentFont = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    ParentFont = False
   end
   object Label2: TsLabel
     Left = 16
@@ -39,12 +39,12 @@ object FormNewSubItem: TFormNewSubItem
     Width = 121
     Height = 16
     Caption = #1056#1072#1079#1076#1077#1083' - '#1088#1086#1076#1080#1090#1077#1083#1100
+    ParentFont = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    ParentFont = False
   end
   object BitBtnCancel: TsBitBtn
     Left = 16
@@ -54,8 +54,6 @@ object FormNewSubItem: TFormNewSubItem
     Anchors = [akLeft, akBottom]
     Cancel = True
     Caption = #1054#1090#1084#1077#1085#1072
-    ModalResult = 2
-    TabOrder = 2
     Glyph.Data = {
       DE010000424DDE01000000000000760000002800000024000000120000000100
       0400000000006801000000000000000000001000000000000000000000000000
@@ -73,7 +71,9 @@ object FormNewSubItem: TFormNewSubItem
       38F338F300003333333333333919333333388333338FFF830000333333333333
       3333333333333333333888330000333333333333333333333333333333333333
       0000}
+    ModalResult = 2
     NumGlyphs = 2
+    TabOrder = 2
   end
   object BitBtnSave: TsBitBtn
     Left = 114
@@ -83,9 +83,6 @@ object FormNewSubItem: TFormNewSubItem
     Anchors = [akRight, akBottom]
     Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' (F2)'
     Default = True
-    ModalResult = 1
-    TabOrder = 1
-    OnClick = BitBtnSaveClick
     Glyph.Data = {
       76010000424D7601000000000000760000002800000020000000100000000100
       04000000000000010000120B0000120B00001000000000000000000000000000
@@ -99,7 +96,10 @@ object FormNewSubItem: TFormNewSubItem
       00037F7F333333337F7F000FFFFFFFFF00037F7F333333337F7F000FFFFFFFFF
       00037F7F333333337F7F000FFFFFFFFF07037F7F33333333777F000FFFFFFFFF
       0003737FFFFFFFFF7F7330099999999900333777777777777733}
+    ModalResult = 1
     NumGlyphs = 2
+    TabOrder = 1
+    OnClick = BitBtnSaveClick
   end
   object EditTree: TsEdit
     Left = 16
@@ -119,7 +119,6 @@ object FormNewSubItem: TFormNewSubItem
     Text = 'EditParent'
   end
   object QTreeInsert: TZQuery
-    Connection = FormMain.ZC
     SQL.Strings = (
       
         'insert into PRICES_TREE (PT_PARENTID, PT_VALUE, PT_ORDERBY, PT_D' +
@@ -171,7 +170,6 @@ object FormNewSubItem: TFormNewSubItem
       end>
   end
   object qMaxParentPos: TZReadOnlyQuery
-    Connection = FormMain.ZC
     SQL.Strings = (
       'SELECT MAX(pt_orderby)+1 AS maxpos FROM prices_tree pt'
       'WHERE pt_parentid =:parentid')
@@ -194,4 +192,4 @@ object FormNewSubItem: TFormNewSubItem
       ReadOnly = True
     end
   end
-end
+end

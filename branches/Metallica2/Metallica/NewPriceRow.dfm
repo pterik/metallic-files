@@ -49,12 +49,12 @@ object FormNewPriceRow: TFormNewPriceRow
     Width = 189
     Height = 20
     Caption = #1057#1090#1072#1088#1099#1077' '#1079#1085#1072#1095#1077#1085#1080#1103' '#1089#1090#1088#1086#1082#1080
+    ParentFont = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -16
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    ParentFont = False
   end
   object Label3: TsLabel
     Left = 8
@@ -62,12 +62,12 @@ object FormNewPriceRow: TFormNewPriceRow
     Width = 181
     Height = 20
     Caption = #1053#1086#1074#1099#1077' '#1079#1085#1072#1095#1077#1085#1080#1103' '#1089#1090#1088#1086#1082#1080
+    ParentFont = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -16
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    ParentFont = False
   end
   object Label4: TsLabel
     Left = 432
@@ -202,12 +202,6 @@ object FormNewPriceRow: TFormNewPriceRow
     Top = 8
     Width = 209
     Height = 21
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -11
-    Font.Name = 'MS Sans Serif'
-    Font.Style = []
-    ParentFont = False
     ReadOnly = True
     TabOrder = 3
     Text = 'EditCompany'
@@ -217,12 +211,6 @@ object FormNewPriceRow: TFormNewPriceRow
     Top = 8
     Width = 201
     Height = 21
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -11
-    Font.Name = 'MS Sans Serif'
-    Font.Style = []
-    ParentFont = False
     ReadOnly = True
     TabOrder = 4
     Text = 'EditAddress'
@@ -288,12 +276,6 @@ object FormNewPriceRow: TFormNewPriceRow
     Top = 32
     Width = 353
     Height = 21
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -11
-    Font.Name = 'MS Sans Serif'
-    Font.Style = []
-    ParentFont = False
     ReadOnly = True
     TabOrder = 5
     Text = 'EditNodeValue'
@@ -419,18 +401,11 @@ object FormNewPriceRow: TFormNewPriceRow
     Top = 8
     Width = 97
     Height = 21
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -11
-    Font.Name = 'MS Sans Serif'
-    Font.Style = []
-    ParentFont = False
     ReadOnly = True
     TabOrder = 7
     Text = 'EditCity'
   end
   object qDataView: TZReadOnlyQuery
-    Connection = FormMain.ZC
     SQL.Strings = (
       'select * from PRICE_LINES'
       'where pl_id = :line_id')
@@ -516,7 +491,6 @@ object FormNewPriceRow: TFormNewPriceRow
     Top = 344
   end
   object qDisplay: TZReadOnlyQuery
-    Connection = FormMain.ZC
     SQL.Strings = (
       'select gs_field, gs_header, gs_show,'
       'gs_size, gs_displayformat from grid_show'
@@ -558,7 +532,6 @@ object FormNewPriceRow: TFormNewPriceRow
     end
   end
   object QCompany: TZQuery
-    Connection = FormMain.ZC
     SQL.Strings = (
       'SELECT cm_id as COMPANYID, cm_city, cm_name, c.cm_comment '
       'FROM company c'
@@ -598,7 +571,6 @@ object FormNewPriceRow: TFormNewPriceRow
     end
   end
   object ZTableEdit: TZTable
-    Connection = FormMain.ZC
     Filtered = True
     TableName = 'PRICE_LINES'
     Left = 56
@@ -609,4 +581,4 @@ object FormNewPriceRow: TFormNewPriceRow
     Left = 136
     Top = 144
   end
-end
+end

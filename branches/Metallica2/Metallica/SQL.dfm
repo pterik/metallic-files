@@ -135,7 +135,6 @@ object FormSQL: TFormSQL
     Top = 296
   end
   object ZQuery: TZQuery
-    Connection = FormMain.ZC
     CachedUpdates = True
     Params = <>
     Left = 128
@@ -147,4 +146,4 @@ object FormSQL: TFormSQL
     Left = 200
     Top = 80
   end
-end
+end

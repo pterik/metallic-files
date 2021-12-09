@@ -26,12 +26,12 @@ object FormCompanies: TFormCompanies
     Width = 80
     Height = 16
     Caption = #1055#1086#1089#1090#1072#1074#1097#1080#1082#1080
+    ParentFont = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlack
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    ParentFont = False
   end
   object lbl2: TsLabel
     Left = 248
@@ -39,12 +39,12 @@ object FormCompanies: TFormCompanies
     Width = 119
     Height = 16
     Caption = #1042#1080#1076' '#1076#1077#1103#1090#1077#1083#1100#1085#1086#1089#1090#1080
+    ParentFont = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlack
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    ParentFont = False
   end
   object lbl3: TsLabel
     Left = 488
@@ -52,22 +52,22 @@ object FormCompanies: TFormCompanies
     Width = 39
     Height = 16
     Caption = #1043#1086#1088#1086#1076
+    ParentFont = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlack
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    ParentFont = False
   end
   object CBActive: TsCheckBox
     Left = 691
     Top = 8
-    Width = 249
+    Width = 242
     Height = 20
+    Caption = #1058#1086#1083#1100#1082#1086' '#1085#1077#1091#1076#1072#1083#1077#1085#1085#1099#1077' '#1087#1086#1089#1090#1072#1074#1097#1080#1082#1080
     Alignment = taLeftJustify
     Anchors = [akTop, akRight]
     BiDiMode = bdLeftToRight
-    Caption = #1058#1086#1083#1100#1082#1086' '#1085#1077#1091#1076#1072#1083#1077#1085#1085#1099#1077' '#1087#1086#1089#1090#1072#1074#1097#1080#1082#1080
     Checked = True
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -87,6 +87,11 @@ object FormCompanies: TFormCompanies
     Height = 25
     Anchors = [akLeft, akBottom]
     Caption = #1053#1086#1074#1099#1081' '#1087#1086#1089#1090#1072#1074#1097#1080#1082' (F3)'
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
     Glyph.Data = {
       36050000424D3605000000000000360400002800000010000000100000000100
       0800000000000001000000000000000000000001000000010000000000003232
@@ -130,6 +135,7 @@ object FormCompanies: TFormCompanies
       100408090A0B0E110201282828030C0D0C040708090A0B0E0201282828280303
       0405060708090A0B020128282828280102020202020202020201282828282801
       0101010101010101010128282828282828282828282828282828}
+    ParentFont = False
     TabOrder = 3
     OnClick = BitBtnInsertClick
   end
@@ -270,8 +276,8 @@ object FormCompanies: TFormCompanies
     TabOrder = 6
   end
   object DBGridCompanies: TDBGridEh
-    Left = 8
-    Top = 40
+    Left = 9
+    Top = 34
     Width = 685
     Height = 377
     Anchors = [akLeft, akTop, akRight, akBottom]
@@ -534,7 +540,7 @@ object FormCompanies: TFormCompanies
     OnClick = BitBtnClosePhoneClick
   end
   object btnShowPrice: TsBitBtn
-    Left = 708
+    Left = 716
     Top = 436
     Width = 105
     Height = 25
@@ -646,8 +652,8 @@ object FormCompanies: TFormCompanies
       end>
     WhereMode = wmWhereAll
     Options = []
-    Left = 96
-    Top = 120
+    Left = 40
+    Top = 336
     ParamData = <
       item
         DataType = ftUnknown
@@ -730,8 +736,8 @@ object FormCompanies: TFormCompanies
   end
   object DSCompanies2: TDataSource
     DataSet = QCompanies
-    Left = 176
-    Top = 120
+    Left = 120
+    Top = 336
   end
   object QPhones2: TZQuery
     OnCalcFields = QPhones2CalcFields
@@ -751,8 +757,8 @@ object FormCompanies: TFormCompanies
       end>
     WhereMode = wmWhereAll
     Options = []
-    Left = 536
-    Top = 104
+    Left = 208
+    Top = 336
     ParamData = <
       item
         DataType = ftUnknown
@@ -798,8 +804,8 @@ object FormCompanies: TFormCompanies
   object DSPhones2: TDataSource
     AutoEdit = False
     DataSet = QPhones
-    Left = 624
-    Top = 104
+    Left = 296
+    Top = 344
   end
   object QCompanies: TUniQuery
     SQL.Strings = (
@@ -821,8 +827,8 @@ object FormCompanies: TFormCompanies
         'ss)||'#39'%'#39' ) or (cast(:business as varchar(100)) ='#39#39') )'
       'order by c.cm_name')
     UniDirectional = True
-    Left = 304
-    Top = 248
+    Left = 72
+    Top = 96
     ParamData = <
       item
         DataType = ftInteger
@@ -864,8 +870,8 @@ object FormCompanies: TFormCompanies
       'and u.u_id=pc.pc_uid'
       'and pc.pc_company=:COMPANYID'
       'order by p.ph_isclosed, p.ph_id')
-    Left = 432
-    Top = 272
+    Left = 184
+    Top = 96
     ParamData = <
       item
         DataType = ftInteger
@@ -875,11 +881,11 @@ object FormCompanies: TFormCompanies
       end>
   end
   object DSCompanies: TUniDataSource
-    Left = 272
-    Top = 120
+    Left = 296
+    Top = 104
   end
   object DSPhones: TUniDataSource
-    Left = 568
-    Top = 200
+    Left = 392
+    Top = 112
   end
-end
+end

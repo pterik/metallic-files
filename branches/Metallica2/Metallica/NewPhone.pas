@@ -4,7 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
-  Dialogs, StdCtrls, Buttons, ComCtrls, Mask;
+  Dialogs, StdCtrls, Buttons, ComCtrls, Mask, sLabel, sEdit, sCheckBox, sMaskEdit, sComboBox, sMemo, sDialogs, sSpeedButton,
+  sBitBtn;
 
 type
   TFormNewPhone = class(TForm)
@@ -120,4 +121,4 @@ begin
 FocusControl(EditCompany);
 end;
 
-end.
+end.

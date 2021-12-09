@@ -5,7 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
   Dialogs, ComCtrls, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset, 
-  ZDataset, DBCtrls, Grids, DBGrids, DBLookupEh, Mask, DBCtrlsEh, DBGridEh;
+  ZDataset, DBCtrls, Grids, DBGrids, DBLookupEh, Mask, DBCtrlsEh, DBGridEh, sLabel, sEdit, sCheckBox, sMaskEdit, sComboBox, sMemo, sDialogs, sSpeedButton,
+  sBitBtn;
 
 type
 	TFormNewSubItem = class(TForm)
@@ -94,4 +95,4 @@ if VarIsNull(qMaxParentPos['MAXPOS'])
   else Result:=qMaxParentPos['MAXPOS'];
 end;
 
-end.
+end.

@@ -25,12 +25,12 @@ object FormCompaniesShow: TFormCompaniesShow
     Width = 80
     Height = 16
     Caption = #1055#1086#1089#1090#1072#1074#1097#1080#1082#1080
+    ParentFont = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlack
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    ParentFont = False
   end
   object lbl2: TsLabel
     Left = 248
@@ -38,12 +38,12 @@ object FormCompaniesShow: TFormCompaniesShow
     Width = 119
     Height = 16
     Caption = #1042#1080#1076' '#1076#1077#1103#1090#1077#1083#1100#1085#1086#1089#1090#1080
+    ParentFont = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlack
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    ParentFont = False
   end
   object lbl3: TsLabel
     Left = 520
@@ -51,22 +51,22 @@ object FormCompaniesShow: TFormCompaniesShow
     Width = 39
     Height = 16
     Caption = #1043#1086#1088#1086#1076
+    ParentFont = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlack
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    ParentFont = False
   end
   object CBActive: TsCheckBox
     Left = 744
     Top = 8
     Width = 221
     Height = 20
+    Caption = #1058#1086#1083#1100#1082#1086' '#1074#1099#1073#1088#1072#1085#1085#1099#1081' '#1087#1086#1089#1090#1072#1074#1097#1080#1082
     Alignment = taLeftJustify
     Anchors = [akTop, akRight]
     BiDiMode = bdLeftToRight
-    Caption = #1058#1086#1083#1100#1082#1086' '#1074#1099#1073#1088#1072#1085#1085#1099#1081' '#1087#1086#1089#1090#1072#1074#1097#1080#1082
     Checked = True
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -289,7 +289,6 @@ object FormCompaniesShow: TFormCompaniesShow
     OnExit = edtCityExit
   end
   object QCompany: TZQuery
-    Connection = FormMain.ZC
     AfterScroll = QCompanyAfterScroll
     OnCalcFields = QCompanyCalcFields
     SQL.Strings = (
@@ -415,7 +414,6 @@ object FormCompaniesShow: TFormCompaniesShow
     Top = 120
   end
   object QPhones: TZQuery
-    Connection = FormMain.ZC
     OnCalcFields = QPhonesCalcFields
     SQL.Strings = (
       'select p.ph_id, p.ph_comment, p.ph_isclosed,'
@@ -483,4 +481,4 @@ object FormCompaniesShow: TFormCompaniesShow
     Left = 624
     Top = 104
   end
-end
+end

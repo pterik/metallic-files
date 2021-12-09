@@ -8,7 +8,8 @@ uses
   ZAbstractRODataset, ZDbcMySQL, ZDbcPostgreSQL, ZSqlUpdate, ComCtrls, ZAbstractDataset, 
   ExtCtrls, AppEvnts, Mask, DBCtrlsEh, DBGridEh, DBLookupEh, ADODB, DataModule, 
   DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, ZAbstractConnection, 
-  EhLibVCL, GridsEh, DBAxisGridsEh, DBAccess, Uni;
+  EhLibVCL, GridsEh, DBAxisGridsEh, DBAccess, Uni, sBitBtn, sTreeView, sEdit,
+  sLabel, MemDS;
 
 type
   TFormMain = class(TForm)
@@ -17,24 +18,72 @@ type
     ZC2: TZConnection;
     BitBtnCompanies: TsBitBtn;
     BitBtnUsers: TsBitBtn;
-    QViewUsers: TZQuery;
+    QViewUsers2: TZQuery;
+    QViewUsers2U_LOGIN: TStringField;
+    QViewUsers2U_FIO: TStringField;
+    QViewUsers2U_COMMENT: TStringField;
+    QViewUsers2U_ID: TIntegerField;
+    QViewUsers2U_ISCLOSED: TSmallintField;
+    QViewUsers2U_ISBOSS: TIntegerField;
+    QViewUsers2U_FIO_PLUS_BOSS: TStringField;
+    EditMyName: TsEdit;
+    Label1: TsLabel;
+    BitBtnForBoss: TsBitBtn;
+    Tree: TsTreeView;
+    Grid: TDBGridEh;
+    DSData2: TDataSource;
+    qData2: TZReadOnlyQuery;
+    qData2PL_ID: TIntegerField;
+    qData2CM_NAME: TStringField;
+    qData2CM_ID: TIntegerField;
+    qData2PL_VALUE1: TStringField;
+    qData2PL_VALUE2: TStringField;
+    qData2PL_VALUE3: TStringField;
+    qData2PL_VALUE4: TStringField;
+    qData2PL_VALUE5: TStringField;
+    qData2PL_VALUE6: TStringField;
+    qData2PL_VALUE7: TStringField;
+    qData2PL_VALUE8: TStringField;
+    qData2PL_VALUE9: TStringField;
+    qData2PL_ORDERBY: TIntegerField;
+    qData2PL_DATE_UPDATE: TDateTimeField;
+    qData2PL_ISCLOSED: TSmallintField;
+    qData2PL_HEADERID: TIntegerField;
+    BitBtnNewPrice: TsBitBtn;
+    QViewUsers2U_EDIT_PRICES: TSmallintField;
+    qData2PL_PARENT: TStringField;
+    qData2PT_VALUE: TStringField;
+    qData2CM_CITY: TStringField;
+    qData2TL_COLOR: TIntegerField;
+    lbl1: TsLabel;
+    edtCompany: TsEdit;
+    lbl2: TsLabel;
+    edtBusiness: TsEdit;
+    qData2PL_TREEID: TIntegerField;
+    qData2CM_BUSINESS: TStringField;
+    qData2PL_PRICE: TSingleField;
+    ZC: TUniConnection;
+    QViewUsers: TUniQuery;
+    qData: TUniQuery;
+    DSData: TUniDataSource;
     QViewUsersU_LOGIN: TStringField;
     QViewUsersU_FIO: TStringField;
     QViewUsersU_COMMENT: TStringField;
     QViewUsersU_ID: TIntegerField;
     QViewUsersU_ISCLOSED: TSmallintField;
     QViewUsersU_ISBOSS: TIntegerField;
+    QViewUsersU_EDIT_PRICES: TSmallintField;
     QViewUsersU_FIO_PLUS_BOSS: TStringField;
-    EditMyName: TsEdit;
-    Label1: TsLabel;
-    BitBtnForBoss: TsBitBtn;
-    Tree: TsTreeView;
-    Grid: TDBGridEh;
-    DSData: TDataSource;
-    qData: TZReadOnlyQuery;
     qDataPL_ID: TIntegerField;
+    qDataPL_HEADERID: TIntegerField;
+    qDataPL_TREEID: TIntegerField;
+    qDataPL_PRICE: TFloatField;
+    qDataPL_PARENT: TStringField;
+    qDataPT_VALUE: TStringField;
     qDataCM_NAME: TStringField;
     qDataCM_ID: TIntegerField;
+    qDataCM_CITY: TStringField;
+    qDataCM_BUSINESS: TStringField;
     qDataPL_VALUE1: TStringField;
     qDataPL_VALUE2: TStringField;
     qDataPL_VALUE3: TStringField;
@@ -46,22 +95,8 @@ type
     qDataPL_VALUE9: TStringField;
     qDataPL_ORDERBY: TIntegerField;
     qDataPL_DATE_UPDATE: TDateTimeField;
-    qDataPL_ISCLOSED: TSmallintField;
-    qDataPL_HEADERID: TIntegerField;
-    BitBtnNewPrice: TsBitBtn;
-    QViewUsersU_EDIT_PRICES: TSmallintField;
-    qDataPL_PARENT: TStringField;
-    qDataPT_VALUE: TStringField;
-    qDataCM_CITY: TStringField;
     qDataTL_COLOR: TIntegerField;
-    lbl1: TsLabel;
-    edtCompany: TsEdit;
-    lbl2: TsLabel;
-    edtBusiness: TsEdit;
-    qDataPL_TREEID: TIntegerField;
-    qDataCM_BUSINESS: TStringField;
-    qDataPL_PRICE: TSingleField;
-    ZC: TUniConnection;
+    qDataPL_ISCLOSED: TSmallintField;
     procedure FileExit1Execute(Sender: TObject);
     procedure BitBtnAboutClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -71,7 +106,7 @@ type
     procedure BitBtnCompaniesClick(Sender: TObject);
     procedure FormKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
-    procedure QViewUsersCalcFields(DataSet: TDataSet);
+    procedure QViewUsers2CalcFields(DataSet: TDataSet);
     procedure FormKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure BitBtnForBossClick(Sender: TObject);
@@ -341,7 +376,7 @@ begin
   end; // case
 end;
 
-procedure TFormMain.QViewUsersCalcFields(DataSet: TDataSet);
+procedure TFormMain.QViewUsers2CalcFields(DataSet: TDataSet);
 begin
   if QViewUsers['U_ISBOSS'] = 1 then
     QViewUsers['U_FIO_PLUS_BOSS'] := QViewUsers['U_FIO'] + ' BOSS';
@@ -557,4 +592,4 @@ begin
 end;
 
 end.
-
+

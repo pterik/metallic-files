@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
-  Dialogs, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset;
+  Dialogs, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, sLabel, sEdit, sBitBtn, sCheckBox;
 
 type
   TFormUserInsert = class(TForm)
@@ -116,4 +116,4 @@ while not QBosses.EOF do
 FocusControl(EditFIO);
 end;
 
-end.
+end.

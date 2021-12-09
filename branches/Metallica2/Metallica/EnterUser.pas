@@ -5,7 +5,8 @@ interface
 uses
   	Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
   	Dialogs, StdCtrls, Buttons, ExtCtrls, DB, ZAbstractRODataset, 	ZAbstractDataset, 
-  ZDataset, ZConnection, Mask, DBCtrlsEh, DBLookupEh, DBGridEh, MemDS, DBAccess, Uni;
+  ZDataset, ZConnection, Mask, DBCtrlsEh, DBLookupEh, DBGridEh, MemDS, DBAccess, Uni,
+  sEdit, sBitBtn, sLabel;
 
 type
 	TFormEnterUser = class(TForm)
@@ -38,7 +39,7 @@ type
 	private
     F_HostName, F_Database, F_Protocol, F_User, F_Password, F_LastUser:string;
     F_ValidUser:boolean;
-		function LoadRegister:boolean;
+		function LoadByRegister:boolean;
 	public
 		procedure ConnectToDatabase;
 	end;
@@ -59,7 +60,7 @@ end;
 
 procedure TFormEnterUser.ConnectToDatabase;
 begin
-if not LoadRegister then
+if not LoadByRegister then
 	begin
 	BitBtnEnter.Enabled:=false;
 	exit;
@@ -142,7 +143,7 @@ Top:=(Screen.Height-Height) div 2;
 FormEnterUser.F_ValidUser:=false;
 end;
 
-function TFormEnterUser.LoadRegister:boolean;
+function TFormEnterUser.LoadByRegister:boolean;
 var
 //KAccess:LongWord;
 reg : TRegistry;
@@ -221,4 +222,4 @@ begin
 if not F_ValidUser then halt(2);
 end;
 
-end.
+end.

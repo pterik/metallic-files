@@ -1,9 +1,9 @@
 object FormNewPhone: TFormNewPhone
   Left = 388
   Top = 290
-  Width = 250
-  Height = 250
   Caption = #1042#1074#1086#1076' '#1085#1086#1074#1086#1075#1086' '#1090#1077#1083#1077#1092#1086#1085#1072
+  ClientHeight = 211
+  ClientWidth = 234
   Color = clBtnFace
   Constraints.MinHeight = 250
   Constraints.MinWidth = 250
@@ -16,8 +16,8 @@ object FormNewPhone: TFormNewPhone
   OldCreateOrder = False
   OnKeyUp = FormKeyUp
   DesignSize = (
-    242
-    216)
+    234
+    211)
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TsLabel
@@ -26,12 +26,12 @@ object FormNewPhone: TFormNewPhone
     Width = 60
     Height = 16
     Caption = #1058#1077#1083#1077#1092#1086#1085
+    ParentFont = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    ParentFont = False
   end
   object Label2: TsLabel
     Left = 8
@@ -39,12 +39,12 @@ object FormNewPhone: TFormNewPhone
     Width = 64
     Height = 16
     Caption = #1050#1086#1084#1087#1072#1085#1080#1103
+    ParentFont = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    ParentFont = False
   end
   object BitBtnCancel: TsBitBtn
     Left = 8
@@ -55,9 +55,6 @@ object FormNewPhone: TFormNewPhone
     Cancel = True
     Caption = #1054#1090#1084#1077#1085#1072
     Default = True
-    ModalResult = 2
-    TabOrder = 5
-    OnClick = BitBtnCancelClick
     Glyph.Data = {
       DE010000424DDE01000000000000760000002800000024000000120000000100
       0400000000006801000000000000000000001000000000000000000000000000
@@ -75,7 +72,10 @@ object FormNewPhone: TFormNewPhone
       38F338F300003333333333333919333333388333338FFF830000333333333333
       3333333333333333333888330000333333333333333333333333333333333333
       0000}
+    ModalResult = 2
     NumGlyphs = 2
+    TabOrder = 5
+    OnClick = BitBtnCancelClick
   end
   object MEditPref1: TsMaskEdit
     Left = 80
@@ -92,6 +92,7 @@ object FormNewPhone: TFormNewPhone
     ParentFont = False
     TabOrder = 1
     Text = '  '
+    CheckOnExit = True
   end
   object MEditPhone1: TsMaskEdit
     Left = 112
@@ -108,14 +109,15 @@ object FormNewPhone: TFormNewPhone
     ParentFont = False
     TabOrder = 2
     Text = '   -  -  '
+    CheckOnExit = True
   end
   object DT: TDateTimePicker
     Left = 8
     Top = 152
     Width = 121
     Height = 24
-    Date = 39069.710792199080000000
-    Time = 39069.710792199080000000
+    Date = 39069.000000000000000000
+    Time = 0.710792199082789000
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
@@ -193,9 +195,6 @@ object FormNewPhone: TFormNewPhone
     Height = 25
     Anchors = [akRight, akBottom]
     Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' (F2)'
-    ModalResult = 1
-    TabOrder = 6
-    OnClick = BitBtnSaveClick
     Glyph.Data = {
       76010000424D7601000000000000760000002800000020000000100000000100
       04000000000000010000120B0000120B00001000000000000000000000000000
@@ -209,6 +208,9 @@ object FormNewPhone: TFormNewPhone
       00037F7F333333337F7F000FFFFFFFFF00037F7F333333337F7F000FFFFFFFFF
       00037F7F333333337F7F000FFFFFFFFF07037F7F33333333777F000FFFFFFFFF
       0003737FFFFFFFFF7F7330099999999900333777777777777733}
+    ModalResult = 1
     NumGlyphs = 2
+    TabOrder = 6
+    OnClick = BitBtnSaveClick
   end
-end
+end

@@ -5,7 +5,9 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
   Dialogs, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, 
-  Grids, DBGrids, DBGridEh, DataModule, Mask, DBCtrlsEh, DBLookupEh;
+  Grids, DBGrids, DBGridEh, DataModule, Mask, DBCtrlsEh, DBLookupEh, sLabel, sEdit, sCheckBox, sMaskEdit, sComboBox, sMemo, sDialogs, sSpeedButton,
+  DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, EhLibVCL,
+  GridsEh, DBAxisGridsEh, sBitBtn;
 
 type
   TFormPriceShow = class(TForm)
@@ -139,4 +141,4 @@ begin
 end;
 
 end.
-
+

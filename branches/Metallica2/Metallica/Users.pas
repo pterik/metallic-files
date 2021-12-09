@@ -5,7 +5,7 @@ interface
 uses
   	Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
   	Dialogs, StdCtrls, Buttons, Grids, DBGrids, DB, ZAbstractRODataset, 
-  ZAbstractDataset, ZDataset, DBGridEh;
+  ZAbstractDataset, ZDataset, DBGridEh, sBitBtn, sCheckBox;
 
 type
 	TFormUsers = class(TForm)
@@ -267,4 +267,4 @@ end;    // case
 
 end;
 
-end.
+end.

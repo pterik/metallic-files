@@ -1,9 +1,9 @@
 object FormSelectTree: TFormSelectTree
   Left = 283
   Top = 202
-  Width = 400
-  Height = 497
   Caption = #1042#1099#1073#1088#1072#1090#1100' '#1080#1079' '#1088#1091#1073#1088#1080#1082#1072#1090#1086#1088#1072
+  ClientHeight = 458
+  ClientWidth = 384
   Color = clBtnFace
   Constraints.MinHeight = 250
   Constraints.MinWidth = 400
@@ -17,8 +17,8 @@ object FormSelectTree: TFormSelectTree
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   DesignSize = (
-    392
-    463)
+    384
+    458)
   PixelsPerInch = 96
   TextHeight = 13
   object Tree: TsTreeView
@@ -30,17 +30,17 @@ object FormSelectTree: TFormSelectTree
     Indent = 19
     ReadOnly = True
     RightClickSelect = True
-    RowSelect = True
     TabOrder = 0
     OnChange = TreeChange
     OnDblClick = TreeDblClick
     OnExpanding = TreeExpanding
-    Items.Data = {
-      020000001F0000000000000000000000FFFFFFFFFFFFFFFF0000000001000000
-      06546573746F31210000000000000000000000FFFFFFFFFFFFFFFF0000000000
-      00000008546573746F2031321D0000000000000000000000FFFFFFFFFFFFFFFF
-      000000000100000004CAF0F3E3200000000000000000000000FFFFFFFFFFFFFF
-      FF000000000000000007CAF0F3E3203130}
+    Items.NodeData = {
+      03020000002A0000000000000000000000FFFFFFFFFFFFFFFF00000000000000
+      0001000000010654006500730074006F0031002E0000000000000000000000FF
+      FFFFFFFFFFFFFF000000000000000000000000010854006500730074006F0020
+      0031003200260000000000000000000000FFFFFFFFFFFFFFFF00000000000000
+      000100000001041A044004430433042C0000000000000000000000FFFFFFFFFF
+      FFFFFF00000000000000000000000001071A04400443043304200031003000}
   end
   object BitBtnCancel: TsBitBtn
     Left = 281
@@ -50,9 +50,6 @@ object FormSelectTree: TFormSelectTree
     Anchors = [akRight, akBottom]
     Cancel = True
     Caption = #1054#1090#1084#1077#1085#1072
-    ModalResult = 2
-    TabOrder = 1
-    OnClick = BitBtnCancelClick
     Glyph.Data = {
       DE010000424DDE01000000000000760000002800000024000000120000000100
       0400000000006801000000000000000000001000000000000000000000000000
@@ -70,7 +67,10 @@ object FormSelectTree: TFormSelectTree
       38F338F300003333333333333919333333388333338FFF830000333333333333
       3333333333333333333888330000333333333333333333333333333333333333
       0000}
+    ModalResult = 2
     NumGlyphs = 2
+    TabOrder = 1
+    OnClick = BitBtnCancelClick
   end
   object StaticText1: TStaticText
     Left = 16
@@ -88,4 +88,4 @@ object FormSelectTree: TFormSelectTree
     ParentFont = False
     TabOrder = 2
   end
-end
+end

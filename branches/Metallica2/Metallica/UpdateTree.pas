@@ -5,7 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
   Dialogs, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, 
-  Grids, DBGrids, DBGridEh, ComCtrls, Mask, DBCtrlsEh, DataModule;
+  Grids, DBGrids, DBGridEh, ComCtrls, Mask, DBCtrlsEh, DataModule, sLabel, sEdit, sCheckBox, sMaskEdit, sComboBox, sMemo, sDialogs, sSpeedButton,
+  sTreeView, sBitBtn;
 
 type
   TFormUpdateTree = class(TForm)
@@ -159,4 +160,4 @@ else
 DM.TreeFulFill(Tree, true,0);
 end;
 
-end.
+end.

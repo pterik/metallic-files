@@ -6,7 +6,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
   Dialogs, StdCtrls, Buttons, Grids, DBGrids, DB, ZAbstractRODataset, 
   ZAbstractDataset, ZDataset, DBGridEh, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, 
-  DynVarsEh, EhLibVCL, GridsEh, DBAxisGridsEh;
+  DynVarsEh, EhLibVCL, GridsEh, DBAxisGridsEh, sLabel, sEdit, sCheckBox, sMaskEdit, sComboBox, sMemo, sDialogs, sSpeedButton,
+  sButton, sBitBtn;
 
 type
   TFormSQL = class(TForm)
@@ -90,4 +91,4 @@ end;    // case
 
 end;
 
-end.
+end.

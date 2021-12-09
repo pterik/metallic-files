@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
-  Dialogs, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset;
+  Dialogs, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, sBitBtn, sLabel, sEdit, sCheckBox;
 
 type
   TFormUserUpdate = class(TForm)
@@ -96,4 +96,4 @@ begin
 FocusControl(EditFIO);
 end;
 
-end.
+end.

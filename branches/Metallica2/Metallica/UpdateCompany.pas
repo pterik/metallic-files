@@ -5,7 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
   Dialogs, StdCtrls, Buttons, Mask, DB, ZAbstractRODataset, ZAbstractDataset, 
-  ZDataset, DBCtrlsEh, DBLookupEh, DBGridEh;
+  ZDataset, DBCtrlsEh, DBLookupEh, DBGridEh, sLabel, sEdit, sCheckBox, sMaskEdit, sComboBox, sMemo,
+  sDialogs, sSpeedButton, sBitBtn;
 
 type
   TFormUpdateCompany = class(TForm)
@@ -173,4 +174,4 @@ begin
 end;
 
 end.
-
+

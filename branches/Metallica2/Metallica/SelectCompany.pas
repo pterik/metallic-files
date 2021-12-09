@@ -5,7 +5,9 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
   Dialogs, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, 
-  Grids, DBGrids, DBGridEh;
+  Grids, DBGrids, DBGridEh, sLabel, sEdit, sCheckBox, sMaskEdit, sComboBox, sMemo, sDialogs, sSpeedButton,
+  DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, sBitBtn,
+  EhLibVCL, GridsEh, DBAxisGridsEh;
 
 type
   TFormSelectCompany = class(TForm)
@@ -119,4 +121,4 @@ else
 F_LastSorted:=Column.FieldName;
 end;
 
-end.
+end.

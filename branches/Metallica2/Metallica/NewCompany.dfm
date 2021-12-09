@@ -26,12 +26,12 @@ object FormNewCompany: TFormNewCompany
     Width = 226
     Height = 13
     Caption = #1053#1072#1079#1074#1072#1085#1080#1077' '#1073#1077#1079' '#1091#1082#1072#1079#1072#1085#1080#1103' '#1090#1080#1087#1072' '#1089#1086#1073#1089#1090#1074#1077#1085#1085#1086#1089#1090#1080
+    ParentFont = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    ParentFont = False
   end
   object Label2: TsLabel
     Left = 8
@@ -39,12 +39,12 @@ object FormNewCompany: TFormNewCompany
     Width = 263
     Height = 16
     Caption = #1040#1076#1088#1077#1089' '#1080' '#1076#1088#1091#1075#1072#1103' '#1080#1085#1092#1086#1088#1084#1072#1094#1080#1103' '#1086' '#1082#1086#1084#1087#1072#1085#1080#1080
+    ParentFont = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    ParentFont = False
   end
   object Label4: TsLabel
     Left = 8
@@ -52,12 +52,12 @@ object FormNewCompany: TFormNewCompany
     Width = 227
     Height = 13
     Caption = #1042' '#1087#1086#1080#1089#1082#1077' '#1087#1086#1093#1086#1078#1080#1093' '#1080#1084#1077#1085' '#1082#1086#1084#1087#1072#1085#1080#1081' '#1091#1095#1072#1089#1090#1074#1091#1102#1090
+    ParentFont = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    ParentFont = False
   end
   object Label5: TsLabel
     Left = 34
@@ -65,12 +65,12 @@ object FormNewCompany: TFormNewCompany
     Width = 239
     Height = 13
     Caption = #1089#1080#1084#1074#1086#1083#1072'('#1086#1074'). '#1050#1086#1085#1090#1072#1082#1090#1085#1099#1077' '#1090#1077#1083#1077#1092#1086#1085#1099' '#1082#1086#1084#1087#1072#1085#1080#1081' '
+    ParentFont = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    ParentFont = False
   end
   object Label6: TsLabel
     Left = 8
@@ -78,12 +78,12 @@ object FormNewCompany: TFormNewCompany
     Width = 127
     Height = 16
     Caption = #1058#1080#1087' '#1089#1086#1073#1089#1090#1074#1077#1085#1085#1086#1089#1090#1080
+    ParentFont = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    ParentFont = False
   end
   object Label7: TsLabel
     Left = 10
@@ -91,12 +91,12 @@ object FormNewCompany: TFormNewCompany
     Width = 270
     Height = 13
     Caption = #1091#1082#1072#1079#1099#1074#1072#1102#1090#1089#1103' '#1074' '#1086#1090#1076#1077#1083#1100#1085#1086#1084' '#1086#1082#1085#1077', '#1082#1085#1086#1087#1082#1072' "'#1058#1077#1083#1077#1092#1086#1085#1099'"'
+    ParentFont = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    ParentFont = False
   end
   object Label8: TsLabel
     Left = 10
@@ -104,12 +104,12 @@ object FormNewCompany: TFormNewCompany
     Width = 291
     Height = 13
     Caption = #1076#1086#1073#1072#1074#1083#1103#1077#1090#1089#1103' '#1072#1074#1090#1086#1084#1072#1090#1080#1095#1077#1089#1082#1080' '#1074' '#1082#1086#1085#1094#1077' '#1085#1072#1079#1074#1072#1085#1080#1103' '#1082#1086#1084#1087#1072#1085#1080#1080
+    ParentFont = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    ParentFont = False
   end
   object Label3: TsLabel
     Left = 8
@@ -117,12 +117,12 @@ object FormNewCompany: TFormNewCompany
     Width = 30
     Height = 13
     Caption = #1043#1086#1088#1086#1076
+    ParentFont = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    ParentFont = False
   end
   object Label9: TsLabel
     Left = 8
@@ -130,12 +130,12 @@ object FormNewCompany: TFormNewCompany
     Width = 57
     Height = 16
     Caption = #1044#1086#1074#1077#1088#1080#1077
+    ParentFont = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    ParentFont = False
   end
   object Label10: TsLabel
     Left = 8
@@ -143,12 +143,12 @@ object FormNewCompany: TFormNewCompany
     Width = 75
     Height = 16
     Caption = #1055#1088#1072#1081#1089'-'#1083#1080#1089#1090
+    ParentFont = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    ParentFont = False
   end
   object btnSelectPrice: TsSpeedButton
     Left = 296
@@ -164,12 +164,12 @@ object FormNewCompany: TFormNewCompany
     Width = 230
     Height = 16
     Caption = #1042#1080#1076#1099' '#1076#1077#1103#1090#1077#1083#1100#1085#1086#1089#1090#1080' '#1095#1077#1088#1077#1079' '#1079#1072#1087#1103#1090#1091#1102
+    ParentFont = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    ParentFont = False
   end
   object BitBtnCancel: TsBitBtn
     Left = 24
@@ -227,6 +227,7 @@ object FormNewCompany: TFormNewCompany
     ReadOnly = True
     TabOrder = 1
     Text = ' '
+    CheckOnExit = True
   end
   object CBCompanyNameType: TsComboBox
     Left = 152
@@ -239,6 +240,7 @@ object FormNewCompany: TFormNewCompany
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     ParentFont = False
+    ItemIndex = -1
     TabOrder = 5
     Text = 'CBCompanyNameType'
   end
@@ -260,6 +262,7 @@ object FormNewCompany: TFormNewCompany
     ScrollBars = ssVertical
     ShowHint = False
     TabOrder = 7
+    Text = 'MemoComment'#13#10
   end
   object BitBtnSave: TsBitBtn
     Left = 220
@@ -311,6 +314,7 @@ object FormNewCompany: TFormNewCompany
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     ParentFont = False
+    ItemIndex = -1
     TabOrder = 4
     Text = 'CBTrustLevel'
   end
@@ -345,7 +349,6 @@ object FormNewCompany: TFormNewCompany
     TabOrder = 3
   end
   object QCompanyNameType: TZReadOnlyQuery
-    Connection = FormMain.ZC
     SQL.Strings = (
       'select CNT_ID, CNT_NAME from companynametypes'
       'order by CNT_CNTR')
@@ -368,7 +371,6 @@ object FormNewCompany: TFormNewCompany
     Top = 56
   end
   object QTrustLevel: TZReadOnlyQuery
-    Connection = FormMain.ZC
     SQL.Strings = (
       'select TL_ID, TL_LEVEL, TL_COLOR, TL_NAME'
       'from TRUSTLEVEL'
@@ -404,4 +406,4 @@ object FormNewCompany: TFormNewCompany
     Left = 176
     Top = 248
   end
-end
+end

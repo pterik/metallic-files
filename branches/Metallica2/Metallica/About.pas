@@ -3,8 +3,8 @@ unit About;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
-  Dialogs, StdCtrls, Buttons;
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, Buttons, sMemo, sBitBtn;
 
 type
   TFormAbout = class(TForm)
@@ -41,4 +41,4 @@ Stext:=Stext+'Ёлектронна€ почта vitaly.makhaev@gmail.com'+chr(13)+chr(10);
 Memo1.Text:=Stext;
 end;
 
-end.
+end.
