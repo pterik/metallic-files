@@ -886,6 +886,6 @@ object FormCompanies: TFormCompanies
   end
   object DSPhones: TUniDataSource
     Left = 392
-    Top = 112
+    Top = 104
   end
 end
