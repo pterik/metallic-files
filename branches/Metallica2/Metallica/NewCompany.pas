@@ -6,7 +6,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
   Dialogs, StdCtrls, Buttons, DBCtrls, DB, Grids, DBGrids, Mask, ZAbstractRODataset, 
   ZDataset, DBCtrlsEh, DBLookupEh, DBGridEh, sBitBtn, sLabel, sEdit, sCheckBox, sMaskEdit, sComboBox, sMemo,
-  sDialogs, sSpeedButton;
+  sDialogs, sSpeedButton, MemDS, DBAccess, Uni, sCustomComboEdit, sSkinProvider,
+  sSkinManager;
 
 type
   TFormNewCompany = class(TForm)
@@ -18,10 +19,6 @@ type
     MEChars: TsMaskEdit;
     Label5: TsLabel;
     Label6: TsLabel;
-    QCompanyNameType: TZReadOnlyQuery;
-    DSCompanyNameType: TDataSource;
-    QCompanyNameTypeCNT_ID: TIntegerField;
-    QCompanyNameTypeCNT_NAME: TStringField;
     CBCompanyNameType: TsComboBox;
     MemoComment: TsMemo;
     Label7: TsLabel;
@@ -30,19 +27,25 @@ type
     Label3: TsLabel;
     EditCity: TsEdit;
     Label9: TsLabel;
-    QTrustLevel: TZReadOnlyQuery;
-    QTrustLevelTL_ID: TIntegerField;
-    DSTrust: TDataSource;
     CBTrustLevel: TsComboBox;
-    QTrustLevelTL_LEVEL: TIntegerField;
-    QTrustLevelTL_COLOR: TIntegerField;
-    QTrustLevelTL_NAME: TStringField;
     Label10: TsLabel;
     txtPriceList: TsEdit;
     btnSelectPrice: TsSpeedButton;
     SelectPriceDialog: TsOpenDialog;
     lblBusiness: TsLabel;
     mmoBusiness: TsMemo;
+    DSCompanyNameType: TUniDataSource;
+    DSTrust: TUniDataSource;
+    QCompanyNameType: TUniQuery;
+    QTrustLevel: TUniQuery;
+    QCompanyNameTypeCNT_ID: TIntegerField;
+    QCompanyNameTypeCNT_NAME: TStringField;
+    QTrustLevelTL_ID: TIntegerField;
+    QTrustLevelTL_LEVEL: TIntegerField;
+    QTrustLevelTL_COLOR: TIntegerField;
+    QTrustLevelTL_NAME: TStringField;
+    sSkinManager1: TsSkinManager;
+    sSkinProvider1: TsSkinProvider;
     procedure BitBtnCancelClick(Sender: TObject);
     procedure FormKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
@@ -63,7 +66,7 @@ implementation
 {$R *.dfm}
 
 uses
-  DataModule, MainForm, Companies, CommonUnit;
+  System.UITypes, DataModule, MainForm, Companies, CommonUnit;
 
 const
   isReloadList: Boolean = True;

@@ -2,7 +2,7 @@ object FormUpdateCompany: TFormUpdateCompany
   Left = 390
   Top = 279
   Caption = #1048#1079#1084#1077#1085#1077#1085#1080#1077' '#1076#1072#1085#1085#1099#1093' '#1086' '#1082#1086#1084#1087#1072#1085#1080#1080
-  ClientHeight = 503
+  ClientHeight = 513
   ClientWidth = 358
   Color = clBtnFace
   Constraints.MinHeight = 315
@@ -17,7 +17,7 @@ object FormUpdateCompany: TFormUpdateCompany
   OnKeyUp = FormKeyUp
   DesignSize = (
     358
-    503)
+    513)
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TsLabel
@@ -48,7 +48,7 @@ object FormUpdateCompany: TFormUpdateCompany
   end
   object Label4: TsLabel
     Left = 8
-    Top = 430
+    Top = 431
     Width = 174
     Height = 13
     Anchors = [akLeft, akBottom]
@@ -56,7 +56,7 @@ object FormUpdateCompany: TFormUpdateCompany
   end
   object Label5: TsLabel
     Left = 210
-    Top = 430
+    Top = 431
     Width = 65
     Height = 13
     Anchors = [akLeft, akBottom]
@@ -64,7 +64,7 @@ object FormUpdateCompany: TFormUpdateCompany
   end
   object LabelisClosed: TsLabel
     Left = 8
-    Top = 456
+    Top = 457
     Width = 87
     Height = 16
     Anchors = [akLeft, akBottom]
@@ -78,7 +78,7 @@ object FormUpdateCompany: TFormUpdateCompany
   end
   object Label6: TsLabel
     Left = 10
-    Top = 383
+    Top = 382
     Width = 248
     Height = 13
     Anchors = [akLeft, akRight]
@@ -92,7 +92,7 @@ object FormUpdateCompany: TFormUpdateCompany
   end
   object Label7: TsLabel
     Left = 10
-    Top = 405
+    Top = 406
     Width = 190
     Height = 13
     Anchors = [akLeft, akBottom]
@@ -171,7 +171,7 @@ object FormUpdateCompany: TFormUpdateCompany
     Height = 24
     Anchors = [akLeft, akTop, akRight]
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
+    Font.Color = clBlack
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = []
@@ -181,21 +181,21 @@ object FormUpdateCompany: TFormUpdateCompany
   end
   object MEChars: TsMaskEdit
     Left = 186
-    Top = 427
+    Top = 428
     Width = 18
     Height = 21
     TabStop = False
     Anchors = [akLeft, akBottom]
-    EditMask = '9;1;_'
     MaxLength = 1
-    ReadOnly = True
     TabOrder = 6
-    Text = ' '
     CheckOnExit = True
+    EditMask = '9;1;_'
+    Text = ' '
+    ReadOnly = True
   end
   object BitBtnCancel: TsBitBtn
     Left = 24
-    Top = 479
+    Top = 480
     Width = 75
     Height = 25
     Anchors = [akLeft, akBottom]
@@ -231,7 +231,7 @@ object FormUpdateCompany: TFormUpdateCompany
     Height = 81
     Anchors = [akLeft, akTop, akRight]
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
+    Font.Color = clBlack
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = []
@@ -243,8 +243,8 @@ object FormUpdateCompany: TFormUpdateCompany
     Text = 'EditComment'#13#10
   end
   object BitBtnSave: TsBitBtn
-    Left = 244
-    Top = 479
+    Left = 245
+    Top = 480
     Width = 105
     Height = 25
     Anchors = [akRight, akBottom]
@@ -274,7 +274,7 @@ object FormUpdateCompany: TFormUpdateCompany
     Height = 24
     Anchors = [akLeft, akTop, akRight]
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
+    Font.Color = clBlack
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = []
@@ -287,14 +287,13 @@ object FormUpdateCompany: TFormUpdateCompany
     Top = 192
     Width = 265
     Height = 24
+    TabOrder = 3
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
+    Font.Color = clBlack
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     ParentFont = False
-    ItemIndex = -1
-    TabOrder = 3
     Text = 'CBTrustLevel'
   end
   object txtPriceList: TsEdit
@@ -303,7 +302,7 @@ object FormUpdateCompany: TFormUpdateCompany
     Width = 321
     Height = 24
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
+    Font.Color = clBlack
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = []
@@ -314,10 +313,10 @@ object FormUpdateCompany: TFormUpdateCompany
     Left = 8
     Top = 120
     Width = 337
-    Height = 65
+    Height = 75
     Anchors = [akLeft, akTop, akRight, akBottom]
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
+    Font.Color = clBlack
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = []
@@ -327,75 +326,21 @@ object FormUpdateCompany: TFormUpdateCompany
     ShowHint = False
     TabOrder = 2
   end
-  object QCompany: TZQuery
-    SQL.Strings = (
-      
-        'SELECT cm_id, cm_city, cm_name, cm_trust, cm_comment, cm_isclose' +
-        'd, '
-      'CM_HYPERLINK, CM_BUSINESS'
-      'FROM company'
-      'WHERE cm_id=:COMPANYID')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'COMPANYID'
-        ParamType = ptUnknown
-      end>
-    Options = []
-    Left = 112
-    Top = 80
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'COMPANYID'
-        ParamType = ptUnknown
-      end>
-    object QCompanyCM_ID: TIntegerField
-      FieldName = 'CM_ID'
-      Required = True
-    end
-    object QCompanyCM_NAME: TStringField
-      FieldName = 'CM_NAME'
-      Size = 100
-    end
-    object QCompanyCM_COMMENT: TStringField
-      FieldName = 'CM_COMMENT'
-      Size = 255
-    end
-    object QCompanyCM_TRUST: TSmallintField
-      FieldName = 'CM_TRUST'
-    end
-    object QCompanyCM_CITY: TStringField
-      FieldName = 'CM_CITY'
-      Size = 100
-    end
-    object QCompanyCM_ISCLOSED: TIntegerField
-      FieldName = 'CM_ISCLOSED'
-    end
-    object QCompanyCM_HYPERLINK: TStringField
-      DisplayWidth = 1000
-      FieldName = 'CM_HYPERLINK'
-      Size = 1000
-    end
-    object strngfldQCompanyCM_BUSINESS: TStringField
-      FieldName = 'CM_BUSINESS'
-      Size = 1000
-    end
+  object SelectPriceDialog: TsOpenDialog
+    Filter = 'Excel|*.xls;*xlsx|All|*.*'
+    Options = [ofHideReadOnly, ofPathMustExist, ofFileMustExist, ofEnableSizing]
+    Left = 176
+    Top = 216
   end
-  object DSTrust: TDataSource
-    DataSet = QTrustLevel
-    Left = 208
-    Top = 136
-  end
-  object QTrustLevel: TZReadOnlyQuery
+  object QTrustLevel: TUniQuery
+    Connection = FormMain.ZC
     SQL.Strings = (
       'select TL_ID, TL_LEVEL, TL_COLOR, TL_NAME'
       'from TRUSTLEVEL'
       'where TL_ISCLOSED = 0'
       'order by TL_ORDERBY')
-    Params = <>
     Left = 288
-    Top = 152
+    Top = 224
     object QTrustLevelTL_ID: TIntegerField
       FieldName = 'TL_ID'
       Required = True
@@ -412,10 +357,105 @@ object FormUpdateCompany: TFormUpdateCompany
       Size = 100
     end
   end
-  object SelectPriceDialog: TsOpenDialog
-    Filter = 'Excel|*.xls;*xlsx|All|*.*'
-    Options = [ofHideReadOnly, ofPathMustExist, ofFileMustExist, ofEnableSizing]
-    Left = 176
-    Top = 216
+  object QCompany: TUniQuery
+    Connection = FormMain.ZC
+    SQL.Strings = (
+      
+        'SELECT cm_id, cm_city, cm_name, cm_trust, cm_comment, cm_isclose' +
+        'd, '
+      'CM_HYPERLINK, CM_BUSINESS'
+      'FROM company'
+      'WHERE cm_id=:COMPANYID')
+    Left = 112
+    Top = 152
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'COMPANYID'
+        ParamType = ptInput
+        Value = nil
+      end>
+    object QCompanyCM_ID: TIntegerField
+      FieldName = 'CM_ID'
+      Required = True
+    end
+    object QCompanyCM_CITY: TStringField
+      FieldName = 'CM_CITY'
+      Required = True
+      Size = 100
+    end
+    object QCompanyCM_NAME: TStringField
+      FieldName = 'CM_NAME'
+      Size = 100
+    end
+    object QCompanyCM_TRUST: TIntegerField
+      FieldName = 'CM_TRUST'
+      Required = True
+    end
+    object QCompanyCM_COMMENT: TStringField
+      FieldName = 'CM_COMMENT'
+      Size = 255
+    end
+    object QCompanyCM_ISCLOSED: TIntegerField
+      FieldName = 'CM_ISCLOSED'
+    end
+    object QCompanyCM_HYPERLINK: TStringField
+      FieldName = 'CM_HYPERLINK'
+      Size = 1000
+    end
+    object QCompanyCM_BUSINESS: TStringField
+      FieldName = 'CM_BUSINESS'
+      Required = True
+      Size = 100
+    end
+  end
+  object DSTrust: TUniDataSource
+    DataSet = QTrustLevel
+    Left = 224
+    Top = 208
+  end
+  object sSkinManager1: TsSkinManager
+    ButtonsOptions.OldGlyphsMode = True
+    IsDefault = False
+    InternalSkins = <>
+    SkinDirectory = 'c:\Skins'
+    SkinName = 'AlterMetro'
+    SkinInfo = '15'
+    ThirdParty.ThirdEdits = ' '
+    ThirdParty.ThirdButtons = 'TButton'
+    ThirdParty.ThirdBitBtns = ' '
+    ThirdParty.ThirdCheckBoxes = ' '
+    ThirdParty.ThirdGroupBoxes = ' '
+    ThirdParty.ThirdListViews = ' '
+    ThirdParty.ThirdPanels = ' '
+    ThirdParty.ThirdGrids = ' '
+    ThirdParty.ThirdTreeViews = ' '
+    ThirdParty.ThirdComboBoxes = ' '
+    ThirdParty.ThirdWWEdits = ' '
+    ThirdParty.ThirdVirtualTrees = ' '
+    ThirdParty.ThirdGridEh = ' '
+    ThirdParty.ThirdPageControl = ' '
+    ThirdParty.ThirdTabControl = ' '
+    ThirdParty.ThirdToolBar = ' '
+    ThirdParty.ThirdStatusBar = ' '
+    ThirdParty.ThirdSpeedButton = ' '
+    ThirdParty.ThirdScrollControl = ' '
+    ThirdParty.ThirdUpDown = ' '
+    ThirdParty.ThirdScrollBar = ' '
+    ThirdParty.ThirdStaticText = ' '
+    ThirdParty.ThirdNativePaint = ' '
+    Left = 24
+    Top = 8
+  end
+  object sSkinProvider1: TsSkinProvider
+    AddedTitle.Font.Charset = DEFAULT_CHARSET
+    AddedTitle.Font.Color = clNone
+    AddedTitle.Font.Height = -11
+    AddedTitle.Font.Name = 'Tahoma'
+    AddedTitle.Font.Style = []
+    SkinData.SkinSection = 'FORM'
+    TitleButtons = <>
+    Left = 72
+    Top = 8
   end
 end

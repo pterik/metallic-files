@@ -1,103 +1,97 @@
 object FormUserInsert: TFormUserInsert
-  Left = 308
-  Top = 210
-  Width = 220
-  Height = 315
+  Left = 0
+  Top = 0
   Caption = #1042#1074#1077#1076#1080#1090#1077' '#1085#1086#1074#1086#1075#1086' '#1087#1086#1083#1100#1079#1086#1074#1072#1090#1077#1083#1103
+  ClientHeight = 276
+  ClientWidth = 218
   Color = clBtnFace
-  Constraints.MinHeight = 250
-  Constraints.MinWidth = 220
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
-  Font.Name = 'MS Sans Serif'
+  Font.Name = 'Tahoma'
   Font.Style = []
-  KeyPreview = True
   OldCreateOrder = False
-  OnKeyUp = FormKeyUp
+  Position = poDesigned
   DesignSize = (
-    212
-    281)
+    218
+    276)
   PixelsPerInch = 96
   TextHeight = 13
-  object Label1: TsLabel
-    Left = 16
-    Top = 48
+  object sLabel1: TsLabel
+    Left = 14
+    Top = 8
     Width = 192
     Height = 16
     Caption = #1051#1086#1075#1080#1085' '#1076#1083#1103' '#1074#1093#1086#1076#1072' '#1074' '#1087#1088#1086#1075#1088#1072#1084#1084#1091
-    Font.Charset = DEFAULT_CHARSET
+    ParentFont = False
+    Font.Charset = RUSSIAN_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    ParentFont = False
   end
-  object Label2: TsLabel
+  object sLabel2: TsLabel
     Left = 16
-    Top = 104
+    Top = 60
     Width = 49
     Height = 16
     Caption = #1055#1072#1088#1086#1083#1100
-    Font.Charset = DEFAULT_CHARSET
+    ParentFont = False
+    Font.Charset = RUSSIAN_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    ParentFont = False
   end
-  object Label3: TsLabel
+  object sLabel3: TsLabel
     Left = 16
-    Top = 0
+    Top = 112
     Width = 150
     Height = 16
     Caption = #1060#1072#1084#1080#1083#1080#1103' '#1080#1084#1103' '#1086#1090#1095#1077#1089#1090#1074#1086
-    Font.Charset = DEFAULT_CHARSET
+    ParentFont = False
+    Font.Charset = RUSSIAN_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    ParentFont = False
   end
-  object Label4: TsLabel
+  object sLabel4: TsLabel
     Left = 16
-    Top = 152
-    Width = 71
+    Top = 164
+    Width = 89
     Height = 16
-    Caption = #1044#1086#1083#1078#1085#1086#1089#1090#1100
-    Font.Charset = DEFAULT_CHARSET
+    Caption = #1050#1086#1084#1084#1077#1085#1090#1072#1088#1080#1081
+    ParentFont = False
+    Font.Charset = RUSSIAN_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    ParentFont = False
   end
   object EditLogin: TsEdit
     Left = 16
-    Top = 64
-    Width = 179
+    Top = 30
+    Width = 177
     Height = 24
-    Anchors = [akLeft, akTop, akRight]
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = clBlack
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     ParentFont = False
-    TabOrder = 1
+    TabOrder = 0
     Text = 'EditLogin'
   end
   object BitBtnCancel: TsBitBtn
-    Left = 16
-    Top = 240
+    Left = 8
+    Top = 243
     Width = 75
     Height = 25
     Anchors = [akLeft, akBottom]
     Cancel = True
     Caption = #1054#1090#1084#1077#1085#1072
-    ModalResult = 2
-    TabOrder = 5
-    OnClick = BitBtnCancelClick
+    Default = True
     Glyph.Data = {
       DE010000424DDE01000000000000760000002800000024000000120000000100
       0400000000006801000000000000000000001000000000000000000000000000
@@ -115,63 +109,19 @@ object FormUserInsert: TFormUserInsert
       38F338F300003333333333333919333333388333338FFF830000333333333333
       3333333333333333333888330000333333333333333333333333333333333333
       0000}
+    ModalResult = 2
     NumGlyphs = 2
-  end
-  object EditPWD: TsEdit
-    Left = 16
-    Top = 120
-    Width = 179
-    Height = 24
-    Anchors = [akLeft, akTop, akRight]
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -13
-    Font.Name = 'MS Sans Serif'
-    Font.Style = []
-    ParentFont = False
-    TabOrder = 2
-    Text = 'EditPWD'
-  end
-  object EditFIO: TsEdit
-    Left = 16
-    Top = 16
-    Width = 179
-    Height = 24
-    Anchors = [akLeft, akTop, akRight]
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -13
-    Font.Name = 'MS Sans Serif'
-    Font.Style = []
-    ParentFont = False
-    TabOrder = 0
-    Text = 'EditFIO'
-  end
-  object EditComment: TsEdit
-    Left = 16
-    Top = 168
-    Width = 179
-    Height = 24
-    Anchors = [akLeft, akTop, akRight]
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -13
-    Font.Name = 'MS Sans Serif'
-    Font.Style = []
-    ParentFont = False
-    TabOrder = 3
-    Text = 'EditComment'
+    TabOrder = 1
+    OnClick = BitBtnCancelClick
+    OnKeyUp = BitBtnCancelKeyUp
   end
   object BitBtnSave: TsBitBtn
-    Left = 99
-    Top = 240
+    Left = 105
+    Top = 243
     Width = 105
     Height = 25
     Anchors = [akRight, akBottom]
     Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' (F2)'
-    ModalResult = 1
-    TabOrder = 6
-    OnClick = BitBtnSaveClick
     Glyph.Data = {
       76010000424D7601000000000000760000002800000020000000100000000100
       04000000000000010000120B0000120B00001000000000000000000000000000
@@ -185,32 +135,117 @@ object FormUserInsert: TFormUserInsert
       00037F7F333333337F7F000FFFFFFFFF00037F7F333333337F7F000FFFFFFFFF
       00037F7F333333337F7F000FFFFFFFFF07037F7F33333333777F000FFFFFFFFF
       0003737FFFFFFFFF7F7330099999999900333777777777777733}
+    ModalResult = 1
     NumGlyphs = 2
+    TabOrder = 2
+    OnClick = BitBtnSaveClick
+    ExplicitLeft = 101
   end
-  object CBEditPrices: TsCheckBox
-    Left = 8
-    Top = 208
-    Width = 201
-    Height = 17
-    Caption = #1056#1077#1076#1072#1082#1090#1080#1088#1091#1077#1090' '#1087#1088#1072#1081#1089'-'#1083#1080#1089#1090#1099
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
+  object EditPWD: TsEdit
+    Left = 16
+    Top = 82
+    Width = 177
+    Height = 24
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = clBlack
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 3
+    Text = 'EditPWD'
+  end
+  object EditFIO: TsEdit
+    Left = 16
+    Top = 134
+    Width = 177
+    Height = 24
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = clBlack
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     ParentFont = False
     TabOrder = 4
+    Text = 'EditFIO'
   end
-  object QMaxUserID: TZQuery
+  object EditComment: TsEdit
+    Left = 16
+    Top = 186
+    Width = 177
+    Height = 24
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = clBlack
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 5
+    Text = 'EditComment'
+  end
+  object CBEditPrices: TsCheckBox
+    Left = 8
+    Top = 220
+    Width = 209
+    Height = 17
+    Caption = #1056#1072#1079#1088#1077#1096#1077#1085#1080#1077' '#1088#1077#1076#1072#1082#1090#1080#1088#1086#1074#1072#1090#1100' '#1087#1088#1072#1081#1089#1099
+    TabOrder = 6
+  end
+  object QMaxUserID: TUniQuery
     Connection = FormMain.ZC
     SQL.Strings = (
       'SELECT MAX(U_ID)  AS MAXID FROM USERS')
-    Params = <>
-    Options = []
-    Left = 176
-    Top = 96
+    Left = 144
+    Top = 216
+    object QMaxUserIDMAXID: TIntegerField
+      FieldName = 'MAXID'
+      ReadOnly = True
+    end
   end
-  object QInsertUser: TZQuery
+  object sSkinManager1: TsSkinManager
+    ButtonsOptions.OldGlyphsMode = True
+    InternalSkins = <>
+    SkinDirectory = 'c:\Skins'
+    SkinName = 'AlterMetro'
+    SkinInfo = '15'
+    ThirdParty.ThirdEdits = ' '
+    ThirdParty.ThirdButtons = 'TButton'
+    ThirdParty.ThirdBitBtns = ' '
+    ThirdParty.ThirdCheckBoxes = ' '
+    ThirdParty.ThirdGroupBoxes = ' '
+    ThirdParty.ThirdListViews = ' '
+    ThirdParty.ThirdPanels = ' '
+    ThirdParty.ThirdGrids = ' '
+    ThirdParty.ThirdTreeViews = ' '
+    ThirdParty.ThirdComboBoxes = ' '
+    ThirdParty.ThirdWWEdits = ' '
+    ThirdParty.ThirdVirtualTrees = ' '
+    ThirdParty.ThirdGridEh = ' '
+    ThirdParty.ThirdPageControl = ' '
+    ThirdParty.ThirdTabControl = ' '
+    ThirdParty.ThirdToolBar = ' '
+    ThirdParty.ThirdStatusBar = ' '
+    ThirdParty.ThirdSpeedButton = ' '
+    ThirdParty.ThirdScrollControl = ' '
+    ThirdParty.ThirdUpDown = ' '
+    ThirdParty.ThirdScrollBar = ' '
+    ThirdParty.ThirdStaticText = ' '
+    ThirdParty.ThirdNativePaint = ' '
+    Left = 104
+    Top = 208
+  end
+  object sSkinProvider1: TsSkinProvider
+    AddedTitle.Font.Charset = DEFAULT_CHARSET
+    AddedTitle.Font.Color = clNone
+    AddedTitle.Font.Height = -11
+    AddedTitle.Font.Name = 'Tahoma'
+    AddedTitle.Font.Style = []
+    SkinData.SkinSection = 'FORM'
+    TitleButtons = <>
+    Left = 64
+    Top = 208
+  end
+  object QInsertUser: TUniSQL
     Connection = FormMain.ZC
     SQL.Strings = (
       
@@ -219,81 +254,56 @@ object FormUserInsert: TFormUserInsert
       
         'VALUES (:U_ID, :U_LOGIN, :U_PASSWORD, 0, :U_FIO, :U_COMMENT, :U_' +
         'EDIT_PRICES)')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'U_ID'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'U_LOGIN'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'U_PASSWORD'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'U_FIO'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'U_COMMENT'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'U_EDIT_PRICES'
-        ParamType = ptUnknown
-      end>
-    Options = []
-    Left = 176
-    Top = 56
+    Left = 144
+    Top = 176
     ParamData = <
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'U_ID'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'U_LOGIN'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'U_PASSWORD'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'U_FIO'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'U_COMMENT'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end
       item
-        DataType = ftUnknown
+        DataType = ftSmallint
         Name = 'U_EDIT_PRICES'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end>
   end
-  object QBOSSES: TZQuery
+  object QBOSSES: TUniQuery
     Connection = FormMain.ZC
     SQL.Strings = (
-      'SELECT * FROM USERS '
-      'WHERE U_ISBOSS=1')
-    Params = <>
-    Options = []
-    Left = 80
-    Top = 56
+      'SELECT * FROM USERS WHERE U_ISBOSS=1')
+    Left = 144
+    Top = 136
+    object QBOSSESU_ID: TIntegerField
+      FieldName = 'U_ID'
+      Required = True
+    end
     object QBOSSESU_LOGIN: TStringField
       FieldName = 'U_LOGIN'
       Size = 30
@@ -301,6 +311,9 @@ object FormUserInsert: TFormUserInsert
     object QBOSSESU_PASSWORD: TStringField
       FieldName = 'U_PASSWORD'
       Size = 10
+    end
+    object QBOSSESU_ISBOSS: TIntegerField
+      FieldName = 'U_ISBOSS'
     end
     object QBOSSESU_FIO: TStringField
       FieldName = 'U_FIO'
@@ -310,47 +323,38 @@ object FormUserInsert: TFormUserInsert
       FieldName = 'U_COMMENT'
       Size = 50
     end
-    object QBOSSESU_ID: TIntegerField
-      FieldName = 'U_ID'
+    object QBOSSESU_EDIT_OWN_JOBS: TSmallintField
+      FieldName = 'U_EDIT_OWN_JOBS'
       Required = True
     end
-    object QBOSSESU_ISBOSS: TIntegerField
-      FieldName = 'U_ISBOSS'
+    object QBOSSESU_EDIT_PRICES: TSmallintField
+      FieldName = 'U_EDIT_PRICES'
+      Required = True
     end
     object QBOSSESU_ISCLOSED: TSmallintField
       FieldName = 'U_ISCLOSED'
       Required = True
     end
   end
-  object QInsertBOSS: TZQuery
+  object QInsertBOSS: TUniSQL
     Connection = FormMain.ZC
     SQL.Strings = (
       'INSERT INTO USERSFORBOSS (UB_USERID,UB_VIEWERID)'
       'VALUES (:UB_USERID, :UB_VIEWERID)')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'UB_USERID'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'UB_VIEWERID'
-        ParamType = ptUnknown
-      end>
-    Options = []
-    Left = 128
-    Top = 56
+    Left = 136
+    Top = 88
     ParamData = <
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'UB_USERID'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'UB_VIEWERID'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end>
   end
-end
+end

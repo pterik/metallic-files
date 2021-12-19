@@ -3,7 +3,7 @@ object FormUpdateTree: TFormUpdateTree
   Top = 212
   Caption = #1044#1086#1073#1072#1074#1080#1090#1100' '#1089#1090#1088#1086#1082#1080' '#1074' '#1088#1091#1073#1088#1080#1082#1072#1090#1086#1088
   ClientHeight = 458
-  ClientWidth = 385
+  ClientWidth = 397
   Color = clBtnFace
   Constraints.MinHeight = 250
   Constraints.MinWidth = 400
@@ -17,13 +17,13 @@ object FormUpdateTree: TFormUpdateTree
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   DesignSize = (
-    385
+    397
     458)
   PixelsPerInch = 96
   TextHeight = 13
   object BitBtnClose: TsBitBtn
-    Left = 309
-    Top = 432
+    Left = 312
+    Top = 427
     Width = 77
     Height = 25
     Anchors = [akRight, akBottom]
@@ -54,8 +54,8 @@ object FormUpdateTree: TFormUpdateTree
   object Tree: TsTreeView
     Left = 8
     Top = 8
-    Width = 377
-    Height = 417
+    Width = 389
+    Height = 409
     Anchors = [akLeft, akTop, akRight, akBottom]
     Indent = 19
     ReadOnly = True
@@ -72,7 +72,7 @@ object FormUpdateTree: TFormUpdateTree
   end
   object BitBtnSameNode: TsBitBtn
     Left = 104
-    Top = 430
+    Top = 425
     Width = 105
     Height = 25
     Anchors = [akLeft, akBottom]
@@ -82,7 +82,7 @@ object FormUpdateTree: TFormUpdateTree
   end
   object BitBtnNewNode: TsBitBtn
     Left = 8
-    Top = 430
+    Top = 425
     Width = 89
     Height = 25
     Anchors = [akLeft, akBottom]
@@ -92,7 +92,7 @@ object FormUpdateTree: TFormUpdateTree
   end
   object BitBtnDelete: TsBitBtn
     Left = 215
-    Top = 432
+    Top = 427
     Width = 82
     Height = 25
     Anchors = [akLeft, akBottom]
@@ -143,130 +143,138 @@ object FormUpdateTree: TFormUpdateTree
     TabOrder = 4
     OnClick = BitBtnDeleteClick
   end
-  object qTreeDelete: TZQuery
+  object qSubTreeExists: TUniQuery
+    Connection = FormMain.ZC
     SQL.Strings = (
-      'UPDATE prices_tree'
-      'SET pt_isclosed =1, pt_date = :ptdate'
-      'WHERE (pt_id = :id)'
-      'or (pt_parentid = :id)')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'ptdate'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'id'
-        ParamType = ptUnknown
-      end>
-    WhereMode = wmWhereAll
-    Options = []
-    Left = 192
-    Top = 72
+      'SELECT COUNT(pt_id) AS cntr FROM prices_tree pt'
+      'WHERE pt_parentid =:parentid'
+      'and pt_isclosed =0')
+    Left = 184
+    Top = 104
     ParamData = <
       item
-        DataType = ftUnknown
-        Name = 'ptdate'
-        ParamType = ptUnknown
+        DataType = ftInteger
+        Name = 'parentid'
+        ParamType = ptInput
+        Value = nil
+      end>
+    object qSubTreeExistsCNTR: TIntegerField
+      FieldName = 'CNTR'
+      ReadOnly = True
+    end
+  end
+  object QTreeClose: TUniSQL
+    Connection = FormMain.ZC
+    SQL.Strings = (
+      'update prices_tree pt'
+      'set pt_isclosed = 1, pt_date = :cdate'
+      'WHERE pt_id =:id'
+      'and pt_isclosed =0')
+    Left = 280
+    Top = 112
+    ParamData = <
+      item
+        DataType = ftDateTime
+        Name = 'cdate'
+        ParamType = ptInput
+        Value = nil
       end
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'id'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end>
   end
-  object qLinesDelete: TZQuery
+  object qLinesDelete: TUniSQL
+    Connection = FormMain.ZC
     SQL.Strings = (
       'UPDATE price_lines'
       'SET pl_isclosed =1, pl_date_update = :ptdate'
       'WHERE (pl_treeid = :id)'
       'or pl_treeid  in (select pt_id from prices_tree'
       'WHERE pt_parentid = :id)')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'ptdate'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'id'
-        ParamType = ptUnknown
-      end>
-    WhereMode = wmWhereAll
-    Options = []
-    Left = 272
-    Top = 72
+    Left = 280
+    Top = 32
     ParamData = <
       item
-        DataType = ftUnknown
+        DataType = ftDateTime
         Name = 'ptdate'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'id'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end>
   end
-  object qSubTreeExists: TZQuery
+  object qTreeDelete: TUniSQL
+    Connection = FormMain.ZC
     SQL.Strings = (
-      'SELECT COUNT(pt_id) AS cntr FROM prices_tree pt'
-      'WHERE pt_parentid =:parentid'
-      'and pt_isclosed =0')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'parentid'
-        ParamType = ptUnknown
-      end>
-    WhereMode = wmWhereAll
-    Options = []
-    Left = 128
-    Top = 144
+      'UPDATE prices_tree'
+      'SET pt_isclosed =1, pt_date = :ptdate'
+      'WHERE (pt_id = :id)'
+      'or (pt_parentid = :id)')
+    Left = 192
+    Top = 24
     ParamData = <
       item
-        DataType = ftUnknown
-        Name = 'parentid'
-        ParamType = ptUnknown
+        DataType = ftDateTime
+        Name = 'ptdate'
+        ParamType = ptInput
+        Value = nil
+      end
+      item
+        DataType = ftInteger
+        Name = 'id'
+        ParamType = ptInput
+        Value = nil
       end>
-    object IntegerField2: TIntegerField
-      FieldName = 'CNTR'
-      ReadOnly = True
-    end
   end
-  object QTreeClose: TZQuery
-    SQL.Strings = (
-      'update prices_tree pt'
-      'set pt_isclosed = 1, pt_date = :cdate'
-      'WHERE pt_id =:id'
-      'and pt_isclosed =0')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'cdate'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'id'
-        ParamType = ptUnknown
-      end>
-    WhereMode = wmWhereAll
-    Options = []
-    Left = 216
-    Top = 144
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'cdate'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'id'
-        ParamType = ptUnknown
-      end>
+  object sSkinManager1: TsSkinManager
+    ButtonsOptions.OldGlyphsMode = True
+    IsDefault = False
+    InternalSkins = <>
+    SkinDirectory = 'c:\Skins'
+    SkinName = 'AlterMetro'
+    SkinInfo = '15'
+    ThirdParty.ThirdEdits = ' '
+    ThirdParty.ThirdButtons = 'TButton'
+    ThirdParty.ThirdBitBtns = ' '
+    ThirdParty.ThirdCheckBoxes = ' '
+    ThirdParty.ThirdGroupBoxes = ' '
+    ThirdParty.ThirdListViews = ' '
+    ThirdParty.ThirdPanels = ' '
+    ThirdParty.ThirdGrids = ' '
+    ThirdParty.ThirdTreeViews = ' '
+    ThirdParty.ThirdComboBoxes = ' '
+    ThirdParty.ThirdWWEdits = ' '
+    ThirdParty.ThirdVirtualTrees = ' '
+    ThirdParty.ThirdGridEh = ' '
+    ThirdParty.ThirdPageControl = ' '
+    ThirdParty.ThirdTabControl = ' '
+    ThirdParty.ThirdToolBar = ' '
+    ThirdParty.ThirdStatusBar = ' '
+    ThirdParty.ThirdSpeedButton = ' '
+    ThirdParty.ThirdScrollControl = ' '
+    ThirdParty.ThirdUpDown = ' '
+    ThirdParty.ThirdScrollBar = ' '
+    ThirdParty.ThirdStaticText = ' '
+    ThirdParty.ThirdNativePaint = ' '
+    Left = 24
+    Top = 8
+  end
+  object sSkinProvider1: TsSkinProvider
+    AddedTitle.Font.Charset = DEFAULT_CHARSET
+    AddedTitle.Font.Color = clNone
+    AddedTitle.Font.Height = -11
+    AddedTitle.Font.Name = 'Tahoma'
+    AddedTitle.Font.Style = []
+    SkinData.SkinSection = 'FORM'
+    TitleButtons = <>
+    Left = 72
+    Top = 8
   end
 end

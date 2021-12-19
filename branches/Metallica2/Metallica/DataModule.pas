@@ -5,7 +5,7 @@ interface
 uses
   SysUtils, Classes, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, 
   DateUtils, Controls, ComCtrls, DBGridEh, sTreeView, sBitBtn, sLabel, sEdit, sCheckBox,
-  MemDS, DBAccess, Uni;
+  MemDS, DBAccess, Uni, DASQLMonitor, UniSQLMonitor;
   
 const
   ShiftLeft = 30;
@@ -37,79 +37,6 @@ type
   end;
   
   TDM = class(TDataModule)
-    QIPhone2: TZQuery;
-    QFindPhone2: TZQuery;
-    QUPhoneDT_Com2: TZQuery;
-    QMaxCompany2: TZQuery;
-    QICompany2: TZQuery;
-    QSCompanyNames2: TZQuery;
-    QIPhoneCompany2: TZQuery;
-    QCntrPhoneCompany2: TZQuery;
-    QUsersOrdered2: TZQuery;
-    QUsersOrdered2USER_NAME: TStringField;
-    QUContactsByOwner2: TZQuery;
-    QUUserbyID2: TZQuery;
-    QUCompanyByID2: TZQuery;
-    QUContactByComp2: TZQuery;
-    QUCompany2: TZQuery;
-    QDelJobsForBoss2: TZQuery;
-    QDelContactsViews2: TZQuery;
-    QDelUsersForBoss2: TZQuery;
-    QUsersOrdered2ORDERBY: TIntegerField;
-    QUsersOrdered2U_ID: TIntegerField;
-    QIContact2: TZQuery;
-    QMaxContact2: TZQuery;
-    QDContact2: TZQuery;
-    QDPhone2: TZQuery;
-    QIComNT2: TZQuery;
-    QCntrComNT2: TZQuery;
-    QCntrComNT2CNTR: TIntegerField;
-    QFindComNT2: TZQuery;
-    IntegerField1: TIntegerField;
-    QUComNT2: TZQuery;
-    IntegerField2: TIntegerField;
-    QUContactByID2: TZQuery;
-    QUContactAuto2: TZQuery;
-    QShortcut2: TZQuery;
-    QSettings2: TZQuery;
-    QUSettings2: TZQuery;
-    QUPhoneDT2: TZQuery;
-    QUPhoneCompany2: TZQuery;
-    qFindParent2: TZReadOnlyQuery;
-    qFindParent2PT_VALUE: TStringField;
-    qFindParent2PARENTID: TIntegerField;
-    qFindParent2PARENTVALUE: TStringField;
-    qFindParent2PT_ID: TIntegerField;
-    qTreeParent2: TZReadOnlyQuery;
-    qTreeParent2PT_ID: TIntegerField;
-    qTreeParent2PT_VALUE: TStringField;
-    qTreeParent2PT_DATE: TDateField;
-    qTreeParent2PT_ISCLOSED: TSmallintField;
-    qTreeParent2PT_ORDERBY: TIntegerField;
-    qTreeChild2: TZReadOnlyQuery;
-    IntegerField9: TIntegerField;
-    StringField3: TStringField;
-    DateField3: TDateField;
-    SmallintField1: TSmallintField;
-    IntegerField10: TIntegerField;
-    qTreeChild2CNTR: TIntegerField;
-    qTreeChild2PT_PARENTID: TIntegerField;
-    qHdrGlobExists2: TZQuery;
-    qHdrGlobInsert2: TZQuery;
-    qHdrExists2: TZQuery;
-    qHdrInsert2: TZQuery;
-    qDisplay2: TZReadOnlyQuery;
-    qDisplay2GS_FIELD: TStringField;
-    qDisplay2GS_HEADER: TStringField;
-    qDisplay2GS_SHOW: TSmallintField;
-    qDisplay2GS_SIZE: TIntegerField;
-    qDisplay2GS_DISPLAYFORMAT: TStringField;
-    qDisplay2GS_TREEID: TIntegerField;
-    qDisplay2GS_ORDERBY: TIntegerField;
-    qHdrGlobExists2CNTR: TIntegerField;
-    qHdrGlobUpdate2: TZQuery;
-    qHdrUpdate2: TZQuery;
-    qHdrExists2CNTR: TIntegerField;
     QICompany: TUniSQL;
     QUCompany: TUniSQL;
     QMaxCompany: TUniQuery;
@@ -154,18 +81,11 @@ type
     QIPhone: TUniSQL;
     qHdrGlobExists: TUniQuery;
     qHdrGlobInsert: TUniSQL;
-    UniSQL1: TUniSQL;
-    UniQuery1: TUniQuery;
-    UniQuery2: TUniQuery;
-    UniSQL2: TUniSQL;
-    UniQuery3: TUniQuery;
-    UniSQL3: TUniSQL;
-    UniQuery4: TUniQuery;
     qHdrUpdate: TUniSQL;
-    UniQuery5: TUniQuery;
     qHdrInsert: TUniSQL;
     qHdrExists: TUniQuery;
     qHdrGlobUpdate: TUniSQL;
+    UniSQLMonitor1: TUniSQLMonitor;
   private
     function CompanyDeleteBadNames(S: string; NChars: Integer): string;
     function CompanyNTMaxID: Integer;

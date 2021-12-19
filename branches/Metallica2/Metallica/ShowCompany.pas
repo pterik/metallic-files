@@ -7,38 +7,14 @@ uses
   Dialogs, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, 
   Grids, DBGrids, DBGridEh, ExtCtrls, DBGridEhGrouping, ToolCtrlsEh, 
   DBGridEhToolCtrls, DynVarsEh, EhLibVCL, GridsEh, DBAxisGridsEh, sLabel, sEdit, sCheckBox, sMaskEdit, sComboBox, sMemo, sDialogs, sSpeedButton,
-  sBitBtn;
+  sBitBtn, DBAccess, Uni, MemDS, sSkinProvider, sSkinManager;
 
 type
   TFormCompaniesShow = class(TForm)
     CBActive: TsCheckBox;
     BitBtnClose: TsBitBtn;
-    QCompany: TZQuery;
-    DSCompanies: TDataSource;
-    QCompanySISCLOSED: TStringField;
-    QPhones: TZQuery;
-    DSPhones: TDataSource;
-    QPhonesPH_COMMENT: TStringField;
-    QPhonesPH_DATEBEGIN: TDateField;
-    QPhonesUSERNAME: TStringField;
-    QCompanyCM_NAME: TStringField;
-    QCompanyCM_COMMENT: TStringField;
-    QCompanyCM_ISCLOSED: TIntegerField;
-    QPhonesPH_ID: TLargeintField;
-    QPhonesPH_STR: TStringField;
-    QPhonesWHO_WHERE: TStringField;
     DBGridCompanies: TDBGridEh;
     DBGridPhones: TDBGridEh;
-    QPhonesPH_ISCLOSED: TSmallintField;
-    QPhonesSISCLOSED: TStringField;
-    QCompanyCM_OWNER: TIntegerField;
-    QCompanyCM_TRUNC_COMMENT: TStringField;
-    QCompanyCOMPANYID: TIntegerField;
-    QCompanyCM_CITY: TStringField;
-    QCompanyTL_LEVEL: TIntegerField;
-    QCompanyTL_COLOR: TIntegerField;
-    QCompanyTL_NAME: TStringField;
-    QCompanyCM_HYPERLINK: TStringField;
     btnShowPrice: TsBitBtn;
     lbl1: TsLabel;
     edtCompany: TsEdit;
@@ -46,10 +22,36 @@ type
     edtBusiness: TsEdit;
     lbl3: TsLabel;
     edtCity: TsEdit;
-    procedure QCompanyCalcFields(DataSet: TDataSet);
-    procedure QPhonesCalcFields(DataSet: TDataSet);
+    QPhones: TUniQuery;
+    QCompany: TUniQuery;
+    DSCompanies: TUniDataSource;
+    DSPhones: TUniDataSource;
+    QCompanyCOMPANYID: TIntegerField;
+    QCompanyCM_NAME: TStringField;
+    QCompanyCM_CITY: TStringField;
+    QCompanyCM_COMMENT: TStringField;
+    QCompanyCM_ISCLOSED: TIntegerField;
+    QCompanyCM_HYPERLINK: TStringField;
+    QCompanyCM_OWNER: TIntegerField;
+    QCompanyTL_LEVEL: TIntegerField;
+    QCompanyTL_COLOR: TIntegerField;
+    QCompanyTL_NAME: TStringField;
+    QCompanySISCLOSED: TStringField;
+    QCompanyCM_TRUNC_COMMENT: TStringField;
+    QPhonesPH_ID: TFloatField;
+    QPhonesPH_COMMENT: TStringField;
+    QPhonesPH_ISCLOSED: TSmallintField;
+    QPhonesPH_DATEBEGIN: TDateField;
+    QPhonesUSERNAME: TStringField;
+    QPhonesPH_STR: TStringField;
+    QPhonesWHO_WHERE: TStringField;
+    QPhonesSISCLOSED: TStringField;
+    sSkinManager1: TsSkinManager;
+    sSkinProvider1: TsSkinProvider;
+    procedure QCompany2CalcFields(DataSet: TDataSet);
+    procedure QPhones2CalcFields(DataSet: TDataSet);
     procedure CBActiveClick(Sender: TObject);
-    procedure QCompanyAfterScroll(DataSet: TDataSet);
+    procedure QCompany2AfterScroll(DataSet: TDataSet);
     procedure DBGridCompaniesTitleClick(Column: TColumnEh);
     procedure DBGridCompaniesDrawColumnCell(Sender: TObject;
       const Rect: TRect; DataCol: Integer; Column: TColumnEh;
@@ -101,7 +103,7 @@ begin
   //if DM.CompanyMaxID>100 then FormMain.IsBigDemoLimit:=true;
 end;
 
-procedure TFormCompaniesShow.QCompanyCalcFields(DataSet: TDataSet);
+procedure TFormCompaniesShow.QCompany2CalcFields(DataSet: TDataSet);
 begin
   if QCompany['CM_ISCLOSED'] = 1 then
     QCompany['SISCLOSED']:= 'мер';
@@ -110,7 +112,7 @@ begin
   QCompany['CM_TRUNC_COMMENT']:= DeleteReturns(QCompany['CM_COMMENT']);
 end;
 
-procedure TFormCompaniesShow.QPhonesCalcFields(DataSet: TDataSet);
+procedure TFormCompaniesShow.QPhones2CalcFields(DataSet: TDataSet);
 begin
   if not VarIsNull(QPhones['PH_DATEBEGIN']) then
     QPhones['WHO_WHERE']:= DateToStr(QPhones['PH_DATEBEGIN']);
@@ -174,14 +176,14 @@ begin
   RefreshPhones;
 end;
 
-procedure TFormCompaniesShow.QCompanyAfterScroll(DataSet: TDataSet);
+procedure TFormCompaniesShow.QCompany2AfterScroll(DataSet: TDataSet);
 begin
   RefreshPhones;
 end;
 
 procedure TFormCompaniesShow.DBGridCompaniesTitleClick(Column: TColumnEh);
 begin
-  QCompany.SortedFields:= Column.FieldName;
+  QCompany.IndexFieldNames:= Column.FieldName;
 end;
 
 procedure TFormCompaniesShow.DBGridCompaniesDrawColumnCell(Sender: TObject;

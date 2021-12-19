@@ -1,4 +1,4 @@
-unit EnterUser;
+п»їunit EnterUser;
 
 interface
 
@@ -6,42 +6,51 @@ uses
   	Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
   	Dialogs, StdCtrls, Buttons, ExtCtrls, DB, ZAbstractRODataset, 	ZAbstractDataset, 
   ZDataset, ZConnection, Mask, DBCtrlsEh, DBLookupEh, DBGridEh, MemDS, DBAccess, Uni,
-  sEdit, sBitBtn, sLabel;
+  sEdit, sBitBtn, sLabel, sSkinProvider, sSkinManager, sMemo, sMaskEdit,
+  sCustomComboEdit, sComboBox, DASQLMonitor, UniSQLMonitor, UniProvider,
+  InterBaseUniProvider, Vcl.DBCtrls, sDBComboBox, acDBComboBoxEx,
+  sDBLookupComboBox, acDBComboEdit;
 
 type
 	TFormEnterUser = class(TForm)
 		Label3: TsLabel;
-		BitBtnCancel: TsBitBtn;
 		BitBtnEnter: TsBitBtn;
-    QUsers2: TZQuery;
     EPWD: TsEdit;
     Label2: TsLabel;
     Label4: TsLabel;
-    DBUsers: TDBLookupComboboxEh;
-    DSUsers: TDataSource;
-    EFIO: TsEdit;
     QUsers: TUniQuery;
-    QUsers2U_ID: TIntegerField;
-    QUsers2U_LOGIN: TStringField;
-    QUsers2U_PASSWORD: TStringField;
-    QUsers2U_ISBOSS: TIntegerField;
-    QUsers2U_FIO: TStringField;
-    QUsers2U_COMMENT: TStringField;
-    QUsers2U_EDIT_OWN_JOBS: TSmallintField;
-    QUsers2U_EDIT_PRICES: TSmallintField;
-    QUsers2U_ISCLOSED: TSmallintField;
-		procedure BitBtnConnectClick(Sender: TObject);
+    DSUsers: TUniDataSource;
+    sSkinManager1: TsSkinManager;
+    sSkinProvider1: TsSkinProvider;
+    BitBtnCancel: TsBitBtn;
+    ZCEnter: TUniConnection;
+    InterBaseUniProvider1: TInterBaseUniProvider;
+    UniSQLMonitor1: TUniSQLMonitor;
+    QUsersU_ID: TIntegerField;
+    QUsersU_LOGIN: TStringField;
+    QUsersU_PASSWORD: TStringField;
+    QUsersU_ISBOSS: TIntegerField;
+    QUsersU_FIO: TStringField;
+    QUsersU_COMMENT: TStringField;
+    QUsersU_EDIT_OWN_JOBS: TSmallintField;
+    QUsersU_EDIT_PRICES: TSmallintField;
+    QUsersU_ISCLOSED: TSmallintField;
+    EFIO: TsEdit;
+    sComboBox: TsComboBox;
+    Memo1: TMemo;
 		procedure BitBtnCancelClick(Sender: TObject);
 		procedure BitBtnEnterClick(Sender: TObject);
 		procedure FormCreate(Sender: TObject);
-    procedure DBUsersChange(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure sComboBoxChange(Sender: TObject);
 	private
-    F_HostName, F_Database, F_Protocol, F_User, F_Password, F_LastUser:string;
-    F_ValidUser:boolean;
+    F_HostName, F_Database, F_DBUser, F_DBPassword, F_ProviderName, F_AppLastUser:string;
+    F_AppPassword, F_AppUser:string;
 		function LoadByRegister:boolean;
+    function LoadByIniFile: boolean;
 	public
-		procedure ConnectToDatabase;
+    ErrorConnectionMessage:string;
+		function ConnectToDatabase:boolean;
 	end;
 
 var
@@ -49,50 +58,50 @@ var
 
 implementation
 
-uses DataModule, MainForm, CommonUnit, System.Win.Registry;
+uses System.UITypes, System.Win.Registry, System.INIFiles, DataModule, MainForm, CommonUnit;
 
 {$R *.dfm}
 
-procedure TFormEnterUser.BitBtnConnectClick(Sender: TObject);
-begin
-ConnectToDatabase;
-end;
-
-procedure TFormEnterUser.ConnectToDatabase;
+function TFormEnterUser.ConnectToDatabase:boolean;
 begin
 if not LoadByRegister then
 	begin
-	BitBtnEnter.Enabled:=false;
-	exit;
-	end;
-ShowMessage(F_Database);
-exit;
-FormMain.ZC.Database:=F_Database;
-FormMain.ZC.ProviderName:='Interbase';
-FormMain.ZC.Server:=F_HostName;
-FormMain.ZC.UserName:=F_User;
-FormMain.ZC.Password:=F_Password;
-FormMain.ZC.LoginPrompt:=false;
-try
-FormMain.ZC.Connect;
-except on E:Exception do
-	begin
-	MessageDlg('Возникла ошибка. Возможная причина - отсутствие файла '+chr(10)+chr(13)+E.Message,mtError,[mbOK],0);
-  BitBtnEnter.Enabled:=false;
+  //ValidSettings:=false;
+  Result:=false;
   exit;
 	end;
+ZCEnter.Database:=F_Database;
+ZCEnter.ProviderName:=F_ProviderName;
+ZCEnter.Server:=F_HostName;
+ZCEnter.UserName:=F_DBUser;
+ZCEnter.Password:=F_DBPassword;
+ZCEnter.LoginPrompt:=false;
+try
+ZCEnter.Connect;
+except on E:Exception do
+	begin
+  Result:=false;
+  exit;
+  end;
 end;
+if ZCEnter.Connected then FormMain.SetDBCredentials(F_HostName,F_ProviderName, F_Database, F_DBUser,F_DBPassword);
 QUsers.Close;
-QUsers.ParamByName('U_LOGIN').Asstring:=F_LastUser;
+QUsers.ParamByName('U_LOGIN').Asstring:=F_AppLastUser;
 QUsers.Open;
-QUsers.First;
-DBUsers.Text:=QUsers['U_LOGIN'];
-FormMain.Visible:=false;
-FormEnterUser.ShowModal;
+sComboBox.Text:=QUsers['U_LOGIN'];
+EFIO.Text:=QUsers['U_FIO'];
+if VarIsNull(QUsers['U_PASSWORD']) then F_AppPassword:='' else F_AppPassword:=AnsiUpperCase(trim(QUsers['U_PASSWORD']));
+while not qUsers.EOF do
+  begin
+    sComboBox.Items.Add(QUsers['U_LOGIN']);
+    qUsers.next;
+  end;
+Result:=true;
 end;
 
 procedure TFormEnterUser.BitBtnCancelClick(Sender: TObject);
 begin
+ZCEnter.Connected:=false;
 if not (FormMain=nil) then
   begin
   FormMain.ConfirmClose:=false;
@@ -102,124 +111,81 @@ Close;
 end;
 
 procedure TFormEnterUser.BitBtnEnterClick(Sender: TObject);
-var IsValidPassword:boolean;
-Password:string;
 begin
-if FormMain.ZC.Connected=false then
-	begin
-		MessageDlg('Нет подключения к базе данных',mtError,[mbOK],0);
-		exit;
-	end;
-if VarIsNull(QUsers['U_PASSWORD']) then Password:='' else Password:=AnsiUpperCase(trim(QUsers['U_PASSWORD']));
-IsValidPassword:=(AnsiUpperCase(trim(EPWD.Text))=AnsiUpperCase(Password));
-//Это место уязвимое для взлома паролей, оператор =
-if not IsValidPassword then
+Memo1.Lines.Add(AnsiUpperCase(trim(EPWD.Text)));
+Memo1.Lines.Add(AnsiUpperCase(F_AppPassword));
+if not (AnsiUpperCase(trim(EPWD.Text))=AnsiUpperCase(F_AppPassword)) then
     begin
-    MessageDlg('Введен неверный пароль',mtWarning,[mbOK],0);
+    MessageDlg('Р’РІРµРґРµРЅ РЅРµРІРµСЂРЅС‹Р№ РїР°СЂРѕР»СЊ',mtWarning,[mbOK],0);
     EPWD.Clear;
-    ModalResult:=mrNone;
     FocusControl(EPwd);
+    exit;
     end;
-if IsValidPassword then
-	begin
-	//Пользователь корректно ввёл пароль
-//if FormClock=nil then Application.CreateForm(TFormClock, FormClock);
-//  FormClock.SetPosition(Self.Left,Self.Top);
-//  FormClock.SetClock;
-//  FormClock.Show;
-  FormMain.SetMainForm(QUsers['U_ID'],QUsers['U_LOGIN'],QUsers['U_FIO'],QUsers['U_ISBOSS']);
-//  FormClock.StopClock;
-//  FormClock.Close;
-	FormMain.Show;
-  F_ValidUser:=true;
-	FormEnterUser.Close;
-	end;
+FormMain.SetMainForm(QUsers['U_ID'],QUsers['U_LOGIN'],QUsers['U_FIO'],QUsers['U_ISBOSS']);
+FormMain.Visible:=true;
+end;
+
+procedure TFormEnterUser.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+if ZCEnter.Connected then ZCEnter.Close;
 end;
 
 procedure TFormEnterUser.FormCreate(Sender: TObject);
 begin
 Left:=(Screen.Width-Width) div 2;
 Top:=(Screen.Height-Height) div 2;
-FormEnterUser.F_ValidUser:=false;
+end;
+
+
+function TFormEnterUser.LoadByIniFile:boolean;
+var Ini: TIniFile;
+begin
+if FileExists(ExtractFilePath(ParamStr(0))+'\database.ini') then
+  begin
+  Ini := TIniFile.Create(ExtractFilePath(ParamStr(0))+'\database.ini');
+	F_HostName:=Ini.ReadString( 'Connect Parameters', 'HOSTNAME', 'localhost' );
+	F_Database:=Ini.ReadString( 'Connect Parameters','DATABASE', 'c:\Projects\Metallica\Database\DATABASE.FDB');
+	F_DBUser:=Ini.ReadString( 'Connect Parameters','USERNAME', 'SYSDBA');
+ 	F_ProviderName:=Ini.ReadString( 'Connect Parameters','PROTOCOL', 'interbase');
+	F_DBPassword:=Ini.ReadString( 'Connect Parameters','PASSWORD','masterkey');
+  F_AppLastUser:='BOSS';
+  Result:=true;
+  end
+else Result:=false;
 end;
 
 function TFormEnterUser.LoadByRegister:boolean;
-var
-//KAccess:LongWord;
-reg : TRegistry;
-Res:boolean;
-//ReadBranch:boolean;
-ParametersCorrect:integer; // хранит набор параметров
-openResult:boolean;
-Chipered:integer;          // шифрование пароля
 begin
 Result:=true;
-//Сначала читаем только ветку есть ли она
-//ReadBranch:=RegisterRecordExists(RegisterBranchMetallica);
-//ReadBranch:=ReadOnlyBranch(RegisterBranchMetallica, KAccess);
-	reg := TRegistry.Create(KEY_READ);
-	reg.RootKey := HKEY_CURRENT_USER;
-	openResult := reg.OpenKey('SOFTWARE\PterikSoft\Metallica',False);
-  F_HostName:=reg.ReadString('HOSTNAME');
-//ReadBranch:=ReadOnlyBranch(RegisterBranchCalendar, KAccess);
-if not openResult then
-	begin
-	MessageDlg('Информация о расположении Базы Данных отсутствует. Необходимо запустит программу CheckCom.exe, сообщите системному администратору',mtError,[mbOK],0);
-	Result:=false;
-	exit;
-	end;
-	Res:=true;
+begin
 	try
-	//F_ParametersCorrect=0 если данные неверные, >0 если верные в зависимости от версии параметров
-	// Все версии параметров фиксируются в техдокументации
-//	Res:=Res and ReadRegisterDWORD(ParametersCorrect,RegisterBranchMetallica,'SETPARAM');
-//	Res:=Res and ReadRegisterStr(F_HostName,RegisterBranchMetallica,'HOSTNAME');
-//	Res:=Res and ReadRegisterStr(F_Database,RegisterBranchMetallica,'DATABASE');
-//	Res:=Res and ReadRegisterStr(F_Protocol,RegisterBranchMetallica,'PROTOCOL');
-	//0 если пароли не шифруются, >0 если шифруются в зависимости от вида шифрования
-//	Res:=Res and ReadRegisterDWORD(Chipered,RegisterBranchMetallica,'CHIPERED');
-	{ TODO : Дописать расшифрование (чтение) пароля по XOR }
-//	Res:=Res and ReadRegisterStr(F_User,RegisterBranchMetallica,'USERNAME');
-//	Res:=Res and ReadRegisterStr(F_Password,RegisterBranchMetallica,'PASSWORD');
-//	Res:=Res and ReadRegisterStr(F_LastUser,RegisterBranchMetallica,'LASTDBUSER');
-  reg := TRegistry.Create(KEY_READ);
-	reg.RootKey := HKEY_CURRENT_USER;
-  F_HostName:=reg.ReadString('HOSTNAME');
-	F_Database:=reg.ReadString('DATABASE');
-	F_Protocol:=reg.ReadString('PROTOCOL');
-//  if reg.ReadInteger('ISSERVER')=0 then F_IsServer:=false;
-//  if reg.ReadInteger('ISSERVER')=1 then F_IsServer:=true;
-//	Chipered:=reg.ReadInteger('CHIPERED');
-	F_User:=reg.ReadString('USERNAME');
-	F_Password:=reg.ReadString('PASSWORD');
-	//F_ParametersCorrect:=reg.ReadInteger('SETPARAM');
-	F_LastUser:=reg.ReadString('LASTDBUSER');
-	finally
-	reg.CloseKey();
-	reg.Free;
-	if not Res then
-  	begin
-	  if MessageDlg('Информация в реестре о расположении Базы Данных неверая, сообщите об этом системному администратору'+chr(13)+chr(10)+
-             'Он запустит программу CheckCom.exe и исправит ошибку'+chr(13)+chr(10)+
-             'Возможны сбои в работе программы. Продолжать?',mtWarning,[mbYes,mbNo],0)=mrYes
-    then Result:=true
-    else
-      begin
-      Result:=false;
-      end;
-  	end;
+	//Result:=Result and ReadRegisterDWORD(F_ParametersCorrect,RegisterBranchMetallica,'SETPARAM');
+	Result:=Result and ReadRegisterStr(F_HostName,RegisterBranchMetallica,'HOSTNAME');
+	Result:=Result and ReadRegisterStr(F_Database,RegisterBranchMetallica,'DATABASE');
+	Result:=Result and ReadRegisterStr(F_ProviderName,RegisterBranchMetallica,'PROTOCOL');
+	//0 РµСЃР»Рё РїР°СЂРѕР»Рё РЅРµ С€РёС„СЂСѓСЋС‚СЃСЏ, >0 РµСЃР»Рё С€РёС„СЂСѓСЋС‚СЃСЏ РІ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё РѕС‚ РІРёРґР° С€РёС„СЂРѕРІР°РЅРёСЏ
+	//Result:=Result and ReadRegisterDWORD(K,RegisterBranchMetallica,'CHIPERED');
+//F_Chipered:=K;
+	{ TODO : Р”РѕРїРёСЃР°С‚СЊ СЂР°СЃС€РёС„СЂРѕРІР°РЅРёРµ (С‡С‚РµРЅРёРµ) РїР°СЂРѕР»СЏ РїРѕ XOR }
+	Result:=Result and ReadRegisterStr(F_DBUser,RegisterBranchMetallica,'USERNAME');
+	Result:=Result and ReadRegisterStr(F_DBPassword,RegisterBranchMetallica,'PASSWORD');
+  ReadRegisterStr(F_AppLastUser,RegisterBranchMetallica,'LASTDBUSER');
+	except on E:Exception do
+    begin
+    Result:=false;
+    end;
 	end;
 end;
-
-procedure TFormEnterUser.DBUsersChange(Sender: TObject);
-begin
-if not VarIsNull(QUsers['U_FIO']) then EFIO.Text:=QUsers['U_FIO'];
 end;
 
-procedure TFormEnterUser.FormClose(Sender: TObject;
-  var Action: TCloseAction);
+procedure TFormEnterUser.sComboBoxChange(Sender: TObject);
 begin
-if not F_ValidUser then halt(2);
+Memo1.Lines.Add('User='+sComboBox.Text);
+QUsers.Close;
+QUsers.ParamByName('U_LOGIN').Asstring:=sComboBox.Text;
+QUsers.Open;
+if VarIsNull(QUsers['U_FIO']) then EFIO.Text:='' else EFIO.Text:=QUsers['U_FIO'];
+if VarIsNull(QUsers['U_PASSWORD']) then F_AppPassword:='' else F_AppPassword:=AnsiUpperCase(trim(QUsers['U_PASSWORD']));
 end;
 
 end.

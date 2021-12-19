@@ -159,8 +159,8 @@ object FormUpdateHeader: TFormUpdateHeader
   object CBSaveGlobally: TsCheckBox
     Left = 16
     Top = 248
-    Width = 249
-    Height = 17
+    Width = 250
+    Height = 20
     Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1076#1083#1103' '#1074#1089#1077#1075#1086' '#1088#1091#1073#1088#1080#1082#1072#1090#1086#1088#1072
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -197,8 +197,8 @@ object FormUpdateHeader: TFormUpdateHeader
   object CBHideField: TsCheckBox
     Left = 16
     Top = 224
-    Width = 249
-    Height = 17
+    Width = 221
+    Height = 20
     Caption = #1055#1086#1083#1077' '#1085#1077#1074#1080#1076#1080#1084#1086' '#1074' '#1087#1086#1076#1088#1091#1073#1088#1080#1082#1077
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -208,5 +208,49 @@ object FormUpdateHeader: TFormUpdateHeader
     ParentFont = False
     TabOrder = 9
     Visible = False
+  end
+  object sSkinManager1: TsSkinManager
+    ButtonsOptions.OldGlyphsMode = True
+    IsDefault = False
+    InternalSkins = <>
+    SkinDirectory = 'c:\Skins'
+    SkinName = 'AlterMetro'
+    SkinInfo = '15'
+    ThirdParty.ThirdEdits = ' '
+    ThirdParty.ThirdButtons = 'TButton'
+    ThirdParty.ThirdBitBtns = ' '
+    ThirdParty.ThirdCheckBoxes = ' '
+    ThirdParty.ThirdGroupBoxes = ' '
+    ThirdParty.ThirdListViews = ' '
+    ThirdParty.ThirdPanels = ' '
+    ThirdParty.ThirdGrids = ' '
+    ThirdParty.ThirdTreeViews = ' '
+    ThirdParty.ThirdComboBoxes = ' '
+    ThirdParty.ThirdWWEdits = ' '
+    ThirdParty.ThirdVirtualTrees = ' '
+    ThirdParty.ThirdGridEh = ' '
+    ThirdParty.ThirdPageControl = ' '
+    ThirdParty.ThirdTabControl = ' '
+    ThirdParty.ThirdToolBar = ' '
+    ThirdParty.ThirdStatusBar = ' '
+    ThirdParty.ThirdSpeedButton = ' '
+    ThirdParty.ThirdScrollControl = ' '
+    ThirdParty.ThirdUpDown = ' '
+    ThirdParty.ThirdScrollBar = ' '
+    ThirdParty.ThirdStaticText = ' '
+    ThirdParty.ThirdNativePaint = ' '
+    Left = 24
+    Top = 8
+  end
+  object sSkinProvider1: TsSkinProvider
+    AddedTitle.Font.Charset = DEFAULT_CHARSET
+    AddedTitle.Font.Color = clNone
+    AddedTitle.Font.Height = -11
+    AddedTitle.Font.Name = 'Tahoma'
+    AddedTitle.Font.Style = []
+    SkinData.SkinSection = 'FORM'
+    TitleButtons = <>
+    Left = 72
+    Top = 8
   end
 end

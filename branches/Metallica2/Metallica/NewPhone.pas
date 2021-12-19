@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
   Dialogs, StdCtrls, Buttons, ComCtrls, Mask, sLabel, sEdit, sCheckBox, sMaskEdit, sComboBox, sMemo, sDialogs, sSpeedButton,
-  sBitBtn;
+  sBitBtn, sSkinProvider, sSkinManager;
 
 type
   TFormNewPhone = class(TForm)
@@ -20,6 +20,8 @@ type
     EditContacter: TsEdit;
     StaticText2: TStaticText;
     BitBtnSave: TsBitBtn;
+    sSkinManager1: TsSkinManager;
+    sSkinProvider1: TsSkinProvider;
     procedure BitBtnSaveClick(Sender: TObject);
     procedure FormKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);

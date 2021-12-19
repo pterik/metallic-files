@@ -26,7 +26,7 @@ object FormConnection: TFormConnection
     Left = 0
     Top = 0
     Width = 409
-    Height = 417
+    Height = 424
     Anchors = [akLeft, akTop, akRight]
     TabOrder = 0
     object Label1: TsLabel
@@ -98,7 +98,7 @@ object FormConnection: TFormConnection
       Top = 116
       Width = 238
       Height = 21
-      TabOrder = 1
+      TabOrder = 4
       OnChange = edtDatabaseChange
     end
     object edtUser: TsEdit
@@ -106,7 +106,7 @@ object FormConnection: TFormConnection
       Top = 142
       Width = 193
       Height = 21
-      TabOrder = 2
+      TabOrder = 6
       OnChange = edtUserChange
     end
     object edtPassword: TsEdit
@@ -114,7 +114,7 @@ object FormConnection: TFormConnection
       Top = 168
       Width = 193
       Height = 21
-      TabOrder = 3
+      TabOrder = 7
       OnChange = edtPasswordChange
     end
     object MemoInfo: TsMemo
@@ -122,10 +122,9 @@ object FormConnection: TFormConnection
       Top = 201
       Width = 385
       Height = 153
-      Color = clWhite
       Ctl3D = False
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
+      Font.Color = clBlack
       Font.Height = -13
       Font.Name = 'MS Sans Serif'
       Font.Style = []
@@ -133,7 +132,7 @@ object FormConnection: TFormConnection
       ParentFont = False
       ReadOnly = True
       ScrollBars = ssVertical
-      TabOrder = 4
+      TabOrder = 8
     end
     object BitBtnPing: TsBitBtn
       Left = 264
@@ -155,7 +154,7 @@ object FormConnection: TFormConnection
         FFF07F3737F7FFFFFFF70FFFF030000000007FFFF7F777777777000000333333
         3333777777333333333333333333333333333333333333333333}
       NumGlyphs = 2
-      TabOrder = 5
+      TabOrder = 1
       OnClick = BitBtnPingClick
     end
     object CBProtocol: TsComboBox
@@ -163,8 +162,7 @@ object FormConnection: TFormConnection
       Top = 91
       Width = 191
       Height = 21
-      ItemIndex = -1
-      TabOrder = 6
+      TabOrder = 3
       Items.Strings = (
         'interbase')
     end
@@ -174,7 +172,7 @@ object FormConnection: TFormConnection
       Width = 25
       Height = 17
       Caption = '...'
-      TabOrder = 7
+      TabOrder = 5
       OnClick = ButtonSetDBClick
     end
     object StaticText1: TStaticText
@@ -185,20 +183,20 @@ object FormConnection: TFormConnection
       AutoSize = False
       Caption = 
         #1045#1089#1083#1080' '#1085#1077' '#1087#1086#1083#1091#1095#1072#1077#1090#1089#1103' '#1085#1072#1089#1090#1088#1086#1080#1090#1100' '#1087#1086#1076#1082#1083#1102#1095#1077#1085#1080#1077' '#1082' '#1073#1072#1079#1077' '#1076#1072#1085#1085#1099#1093', '#1087#1088#1086#1095#1080#1090#1072#1081 +
-        #1090#1077' '#1092#1072#1081#1083' '#1087#1086#1084#1086#1097#1080' (F1). '#1042#1089#1077' '#1085#1072#1089#1090#1088#1086#1081#1082#1080' '#1089#1086#1093#1088#1072#1085#1103#1102#1090#1089#1103' '#1074' '#1088#1077#1077#1089#1090#1077' '#1082#1085#1086#1087#1082#1086#1081' ' +
-        '"'#1057#1086#1093#1088#1072#1085#1080#1090#1100'"'
+        #1090#1077' '#1092#1072#1081#1083' '#1087#1086#1084#1086#1097#1080' (F1). '#1042#1089#1077' '#1085#1072#1089#1090#1088#1086#1081#1082#1080' '#1089#1086#1093#1088#1072#1085#1103#1102#1090#1089#1103' '#1074' '#1088#1077#1077#1089#1090#1077' Windows ' +
+        ' '#1082#1085#1086#1087#1082#1086#1081' "'#1057#1086#1093#1088#1072#1085#1080#1090#1100'"'
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -13
       Font.Name = 'MS Sans Serif'
       Font.Style = []
       ParentFont = False
-      TabOrder = 8
+      TabOrder = 9
     end
     object CheckBox1: TsCheckBox
       Left = 80
       Top = 64
-      Width = 232
+      Width = 236
       Height = 17
       Caption = #1042' '#1080#1084#1077#1085#1080' '#1089#1077#1088#1074#1077#1088#1072' '#1091#1082#1072#1079#1072#1085' '#1101#1090#1086#1090' '#1082#1086#1084#1087#1100#1102#1090#1077#1088
       Font.Charset = DEFAULT_CHARSET
@@ -207,7 +205,7 @@ object FormConnection: TFormConnection
       Font.Name = 'MS Sans Serif'
       Font.Style = []
       ParentFont = False
-      TabOrder = 9
+      TabOrder = 2
       OnClick = CheckBox1Click
     end
   end
@@ -245,7 +243,7 @@ object FormConnection: TFormConnection
       0003737FFFFFFFFF7F7330099999999900333777777777777733}
     ModalResult = 1
     NumGlyphs = 2
-    TabOrder = 2
+    TabOrder = 4
     OnClick = BitBtnSaveClick
   end
   object BitBtnConnect: TsBitBtn
@@ -269,7 +267,7 @@ object FormConnection: TFormConnection
       3333333337FFFF7F333333333000000333333333377777733333333333077033
       33333333337FF7F3333333333300003333333333337777333333}
     NumGlyphs = 2
-    TabOrder = 3
+    TabOrder = 2
     OnClick = BitBtnConnectClick
   end
   object BitBtnExport: TsBitBtn
@@ -294,7 +292,7 @@ object FormConnection: TFormConnection
       3333777777333333333333333333333333333333333333333333}
     ModalResult = 1
     NumGlyphs = 2
-    TabOrder = 4
+    TabOrder = 3
     OnClick = BitBtnExportClick
   end
   object IdIcmpClient: TIdIcmpClient
@@ -335,5 +333,49 @@ object FormConnection: TFormConnection
   object InterBaseUniProvider1: TInterBaseUniProvider
     Left = 200
     Top = 256
+  end
+  object sSkinManager1: TsSkinManager
+    ButtonsOptions.OldGlyphsMode = True
+    IsDefault = False
+    InternalSkins = <>
+    SkinDirectory = 'c:\Skins'
+    SkinName = 'AlterMetro'
+    SkinInfo = '15'
+    ThirdParty.ThirdEdits = ' '
+    ThirdParty.ThirdButtons = 'TButton'
+    ThirdParty.ThirdBitBtns = ' '
+    ThirdParty.ThirdCheckBoxes = ' '
+    ThirdParty.ThirdGroupBoxes = ' '
+    ThirdParty.ThirdListViews = ' '
+    ThirdParty.ThirdPanels = ' '
+    ThirdParty.ThirdGrids = ' '
+    ThirdParty.ThirdTreeViews = ' '
+    ThirdParty.ThirdComboBoxes = ' '
+    ThirdParty.ThirdWWEdits = ' '
+    ThirdParty.ThirdVirtualTrees = ' '
+    ThirdParty.ThirdGridEh = ' '
+    ThirdParty.ThirdPageControl = ' '
+    ThirdParty.ThirdTabControl = ' '
+    ThirdParty.ThirdToolBar = ' '
+    ThirdParty.ThirdStatusBar = ' '
+    ThirdParty.ThirdSpeedButton = ' '
+    ThirdParty.ThirdScrollControl = ' '
+    ThirdParty.ThirdUpDown = ' '
+    ThirdParty.ThirdScrollBar = ' '
+    ThirdParty.ThirdStaticText = ' '
+    ThirdParty.ThirdNativePaint = ' '
+    Left = 136
+    Top = 112
+  end
+  object sSkinProvider1: TsSkinProvider
+    AddedTitle.Font.Charset = DEFAULT_CHARSET
+    AddedTitle.Font.Color = clNone
+    AddedTitle.Font.Height = -11
+    AddedTitle.Font.Name = 'Tahoma'
+    AddedTitle.Font.Style = []
+    SkinData.SkinSection = 'FORM'
+    TitleButtons = <>
+    Left = 192
+    Top = 112
   end
 end

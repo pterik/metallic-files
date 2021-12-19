@@ -15,7 +15,7 @@ object FormExport: TFormExport
   TextHeight = 13
   object BitBtnLoad: TsBitBtn
     Left = 8
-    Top = 258
+    Top = 261
     Width = 129
     Height = 25
     Caption = #1055#1088#1086#1095#1077#1089#1090#1100' '#1080#1079' INI'
@@ -37,8 +37,8 @@ object FormExport: TFormExport
     OnClick = BitBtnLoadClick
   end
   object BitBtnSave: TsBitBtn
-    Left = 168
-    Top = 258
+    Left = 152
+    Top = 261
     Width = 137
     Height = 25
     Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1082#1072#1082' INI'
@@ -60,8 +60,8 @@ object FormExport: TFormExport
     OnClick = BitBtnSaveClick
   end
   object BitBtnClose: TsBitBtn
-    Left = 328
-    Top = 258
+    Left = 312
+    Top = 261
     Width = 105
     Height = 25
     Cancel = True
@@ -94,7 +94,7 @@ object FormExport: TFormExport
     Width = 425
     Height = 177
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
+    Font.Color = clBlack
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = []
@@ -127,5 +127,49 @@ object FormExport: TFormExport
     Options = [ofHideReadOnly, ofExtensionDifferent, ofEnableSizing]
     Left = 264
     Top = 136
+  end
+  object sSkinManager1: TsSkinManager
+    ButtonsOptions.OldGlyphsMode = True
+    IsDefault = False
+    InternalSkins = <>
+    SkinDirectory = 'c:\Skins'
+    SkinName = 'AlterMetro'
+    SkinInfo = '15'
+    ThirdParty.ThirdEdits = ' '
+    ThirdParty.ThirdButtons = 'TButton'
+    ThirdParty.ThirdBitBtns = ' '
+    ThirdParty.ThirdCheckBoxes = ' '
+    ThirdParty.ThirdGroupBoxes = ' '
+    ThirdParty.ThirdListViews = ' '
+    ThirdParty.ThirdPanels = ' '
+    ThirdParty.ThirdGrids = ' '
+    ThirdParty.ThirdTreeViews = ' '
+    ThirdParty.ThirdComboBoxes = ' '
+    ThirdParty.ThirdWWEdits = ' '
+    ThirdParty.ThirdVirtualTrees = ' '
+    ThirdParty.ThirdGridEh = ' '
+    ThirdParty.ThirdPageControl = ' '
+    ThirdParty.ThirdTabControl = ' '
+    ThirdParty.ThirdToolBar = ' '
+    ThirdParty.ThirdStatusBar = ' '
+    ThirdParty.ThirdSpeedButton = ' '
+    ThirdParty.ThirdScrollControl = ' '
+    ThirdParty.ThirdUpDown = ' '
+    ThirdParty.ThirdScrollBar = ' '
+    ThirdParty.ThirdStaticText = ' '
+    ThirdParty.ThirdNativePaint = ' '
+    Left = 136
+    Top = 112
+  end
+  object sSkinProvider1: TsSkinProvider
+    AddedTitle.Font.Charset = DEFAULT_CHARSET
+    AddedTitle.Font.Color = clNone
+    AddedTitle.Font.Height = -11
+    AddedTitle.Font.Name = 'Tahoma'
+    AddedTitle.Font.Style = []
+    SkinData.SkinSection = 'FORM'
+    TitleButtons = <>
+    Left = 192
+    Top = 112
   end
 end

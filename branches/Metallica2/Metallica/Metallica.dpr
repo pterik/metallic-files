@@ -1,13 +1,12 @@
 program Metallica;
 
 uses
+  Vcl.Dialogs,
   Forms,
   MainForm in 'MainForm.pas' {FormMain},
-  About in 'About.pas' {FormAbout},
   EnterUser in 'EnterUser.pas' {FormEnterUser},
   Users in 'Users.pas' {FormUsers},
   UserUpdate in 'UserUpdate.pas' {FormUserUpdate},
-  UserInsert in 'UserInsert.pas' {FormUserInsert},
   Splash in 'Splash.pas' {SplashForm},
   DataModule in 'DataModule.pas' {DM: TDataModule},
   NewCompany in 'NewCompany.pas' {FormNewCompany},
@@ -26,25 +25,35 @@ uses
   NewPriceRow in 'NewPriceRow.pas' {FormNewPriceRow},
   UpdateTree in 'UpdateTree.pas' {FormUpdateTree},
   UpdateHeader in 'UpdateHeader.pas' {FormUpdateHeader},
+  NewPriceList in 'NewPriceList.pas' {FormNewPriceList},
   NewItem in 'NewItem.pas' {FormNewItem},
-  NewPriceList in 'NewPriceList.pas' {FormNewPriceList};
+  UserInsert in 'UserInsert.pas' {FormUserInsert},
+  DBErrorExit in 'DBErrorExit.pas' {FormDBErrorExit};
 
 {$R *.RES}
+var R:boolean;
 begin
   Application.Initialize;
-  SplashForm:=TSplashForm.Create(Application);
-  SplashForm.Show;
-  SplashForm.Update;
   Application.Title := 'Редактирование прайсов';
+  Application.CreateForm(TSplashForm, SplashForm);
+  SplashForm.Show;
   Application.CreateForm(TFormMain, FormMain);
+  FormMain.Visible:=false;
+  Application.CreateForm(TFormDBErrorExit, FormDBErrorExit);
   Application.CreateForm(TFormEnterUser, FormEnterUser);
   Application.CreateForm(TDM, DM);
-  Application.CreateForm(TFormUpdateHeader, FormUpdateHeader);
-  Application.CreateForm(TFormNewItem, FormNewItem);
-  Application.CreateForm(TFormNewPriceList, FormNewPriceList);
+  SplashForm.Update;
   SplashForm.Hide;
-  FormEnterUser.ConnectToDatabase;
+  FormDBErrorExit.Hide;
+  //R:=FormEnterUser.ConnectToDatabase;
+  //if R
+  //	then FormEnterUser.ShowModal
+  //  else
+  //  	begin
+  //    FormDBErrorExit.SetPosition(100,100);
+  //    FormDBErrorExit.ShowModal;
+  //    end;
+  //if R then FormMain.ShowModal;
   SplashForm.Close;
-  SplashForm.Free;
 	Application.Run;
 end.

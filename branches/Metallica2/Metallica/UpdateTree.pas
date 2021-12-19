@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
   Dialogs, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, 
   Grids, DBGrids, DBGridEh, ComCtrls, Mask, DBCtrlsEh, DataModule, sLabel, sEdit, sCheckBox, sMaskEdit, sComboBox, sMemo, sDialogs, sSpeedButton,
-  sTreeView, sBitBtn;
+  sTreeView, sBitBtn, MemDS, DBAccess, Uni, sSkinProvider, sSkinManager;
 
 type
   TFormUpdateTree = class(TForm)
@@ -15,11 +15,13 @@ type
     BitBtnSameNode: TsBitBtn;
     BitBtnNewNode: TsBitBtn;
     BitBtnDelete: TsBitBtn;
-    qTreeDelete: TZQuery;
-    qLinesDelete: TZQuery;
-    qSubTreeExists: TZQuery;
-    IntegerField2: TIntegerField;
-    QTreeClose: TZQuery;
+    qSubTreeExists: TUniQuery;
+    qSubTreeExistsCNTR: TIntegerField;
+    QTreeClose: TUniSQL;
+    qLinesDelete: TUniSQL;
+    qTreeDelete: TUniSQL;
+    sSkinManager1: TsSkinManager;
+    sSkinProvider1: TsSkinProvider;
     procedure TreeChange(Sender: TObject; Node: TTreeNode);
     procedure TreeExpanding(Sender: TObject; Node: TTreeNode;
       var AllowExpansion: Boolean);
@@ -41,7 +43,7 @@ var
 
 implementation
 
-uses MainForm, ShowCompany, CommonUnit, NewItem, NewSubItem;
+uses MainForm, ShowCompany, CommonUnit, NewItem, NewSubItem, System.UITypes;
 
 {$R *.dfm}
 
@@ -70,7 +72,6 @@ MyNode.ID:=Integer(Tree.Selected.Data);
 end;
 
 procedure TFormUpdateTree.BitBtnSameNodeClick(Sender: TObject);
-var i:integer;
 begin
 if Tree.SelectionCount=0 then
   begin
@@ -139,25 +140,23 @@ if MyNode.ParentID=0 then
     MessageDlg('У раздела есть активные подразделы, удалите их',mtError, [mbYes],0);
     exit;
     end;
-  QTreeClose.Close;
   QTreeClose.ParamByName('ID').AsInteger:=MyNode.ID;
   QTreeClose.ParamByName('CDATE').AsDate:=Now();
-  QTreeClose.ExecSQL;
+  QTreeClose.Execute;
   end
 else
   begin
   if MessageDlg('Подтверждаете удаление (под)раздела '+MyNode.Value+'?'+chr(10)+chr(13)
                 +'Все строки из прайс-листов также будут удалены.',mtConfirmation,[mbNo,mbYes],0)=mrNo then exit;
-  qLinesDelete.Close;
   qLInesDelete.ParamByName('ID').AsInteger:=MyNode.ID;
   qLInesDelete.ParamByName('PTDATE').AsDateTime:=Now();
-  qLInesDelete.ExecSQL;
-  qTreeDelete.Close;
+  qLInesDelete.Execute;
   qTreeDelete.ParamByName('ID').AsInteger:=MyNode.ID;
   qTReeDelete.ParamByName('PTDATE').AsDateTime:=Now();
-  qTReeDelete.ExecSQL;
+  qTReeDelete.Execute;
   end;
 DM.TreeFulFill(Tree, true,0);
 end;
 
 end.
+

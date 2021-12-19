@@ -7,36 +7,18 @@ uses
   Dialogs, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, 
   Grids, DBGrids, DBGridEh, DataModule, Mask, DBCtrlsEh, DBLookupEh, sLabel, sEdit, sCheckBox, sMaskEdit, sComboBox, sMemo, sDialogs, sSpeedButton,
   DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, EhLibVCL,
-  GridsEh, DBAxisGridsEh, sBitBtn;
+  GridsEh, DBAxisGridsEh, sBitBtn, DBAccess, Uni, MemDS, sSkinProvider,
+  sSkinManager;
 
 type
   TFormPriceShow = class(TForm)
     BitBtnClose: TsBitBtn;
     Grid: TDBGridEh;
-    qData: TZReadOnlyQuery;
-    qDataPL_ID: TIntegerField;
-    qDataPL_HEADERID: TIntegerField;
-    qDataPL_TREEID: TIntegerField;
-    qDataCM_NAME: TStringField;
-    qDataCM_ID: TIntegerField;
-    qDataPL_VALUE1: TStringField;
-    qDataPL_VALUE2: TStringField;
-    qDataPL_VALUE3: TStringField;
-    qDataPL_VALUE4: TStringField;
-    qDataPL_VALUE5: TStringField;
-    qDataPL_VALUE6: TStringField;
-    qDataPL_VALUE7: TStringField;
-    qDataPL_VALUE8: TStringField;
-    qDataPL_VALUE9: TStringField;
-    qDataPL_ORDERBY: TIntegerField;
-    qDataPL_DATE_UPDATE: TDateTimeField;
-    qDataPL_ISCLOSED: TSmallintField;
-    DSData: TDataSource;
     BitBtnCompanies: TsBitBtn;
-    qDataPL_PRICE: TFloatField;
-    qDataPL_PARENT: TStringField;
-    qDataPT_VALUE: TStringField;
-    qDataCM_CITY: TStringField;
+    qData: TUniQuery;
+    DSData: TUniDataSource;
+    sSkinManager1: TsSkinManager;
+    sSkinProvider1: TsSkinProvider;
     procedure GridCellClick(Column: TColumnEh);
     procedure GridDblClick(Sender: TObject);
     procedure BitBtnCompaniesClick(Sender: TObject);
@@ -130,12 +112,14 @@ end;
 procedure TFormPriceShow.GridTitleClick(Column: TColumnEh);
 begin
   if F_LastSorted = Column.FieldName then begin
-    QData.SortedFields:= Column.FieldName;
-    QData.SortType:= stDescending;
+    //QData.SortedFields:= Column.FieldName;
+    //QData.SortType:= stDescending;
+    QData.IndexFieldNames:= Column.FieldName+' DESC';
   end
   else begin
-    QData.SortedFields:= Column.FieldName;
-    QData.SortType:= stAscending;
+    //QData.SortedFields:= Column.FieldName;
+    //QData.SortType:= stAscending;
+    QData.IndexFieldNames:= Column.FieldName+' AC';
   end;
   F_LastSorted:= Column.FieldName;
 end;

@@ -109,7 +109,7 @@ object FormUserUpdate: TFormUserUpdate
     Height = 24
     Anchors = [akLeft, akTop, akRight]
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
+    Font.Color = clBlack
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = []
@@ -125,7 +125,7 @@ object FormUserUpdate: TFormUserUpdate
     Anchors = [akLeft, akTop, akRight]
     Enabled = False
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
+    Font.Color = clBlack
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = []
@@ -141,7 +141,7 @@ object FormUserUpdate: TFormUserUpdate
     Height = 24
     Anchors = [akLeft, akTop, akRight]
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
+    Font.Color = clBlack
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = []
@@ -156,7 +156,7 @@ object FormUserUpdate: TFormUserUpdate
     Height = 24
     Anchors = [akLeft, akTop, akRight]
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
+    Font.Color = clBlack
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = []
@@ -192,8 +192,8 @@ object FormUserUpdate: TFormUserUpdate
   object CBEditPrices: TsCheckBox
     Left = 8
     Top = 208
-    Width = 201
-    Height = 17
+    Width = 197
+    Height = 20
     Caption = #1056#1077#1076#1072#1082#1090#1080#1088#1091#1077#1090' '#1087#1088#1072#1081#1089'-'#1083#1080#1089#1090#1099
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -203,7 +203,7 @@ object FormUserUpdate: TFormUserUpdate
     ParentFont = False
     TabOrder = 4
   end
-  object QUpdateUser: TZQuery
+  object QUpdateUser: TUniSQL
     Connection = FormMain.ZC
     SQL.Strings = (
       'UPDATE USERS'
@@ -212,60 +212,81 @@ object FormUserUpdate: TFormUserUpdate
       '    U_COMMENT=:U_COMMENT, '
       '    U_EDIT_PRICES=:U_EDIT_PRICES'
       'WHERE U_ID= :U_ID')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'U_FIO'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'U_PASSWORD'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'U_COMMENT'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'U_EDIT_PRICES'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'U_ID'
-        ParamType = ptUnknown
-      end>
-    Options = []
     Left = 136
-    Top = 16
+    Top = 120
     ParamData = <
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'U_FIO'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'U_PASSWORD'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'U_COMMENT'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'U_EDIT_PRICES'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end
       item
         DataType = ftUnknown
         Name = 'U_ID'
-        ParamType = ptUnknown
+        Value = nil
       end>
+  end
+  object sSkinProvider1: TsSkinProvider
+    AddedTitle.Font.Charset = DEFAULT_CHARSET
+    AddedTitle.Font.Color = clNone
+    AddedTitle.Font.Height = -11
+    AddedTitle.Font.Name = 'Tahoma'
+    AddedTitle.Font.Style = []
+    SkinData.SkinSection = 'FORM'
+    TitleButtons = <>
+    Left = 72
+    Top = 8
+  end
+  object sSkinManager2: TsSkinManager
+    ButtonsOptions.OldGlyphsMode = True
+    IsDefault = False
+    InternalSkins = <>
+    SkinDirectory = 'c:\Skins'
+    SkinName = 'AlterMetro'
+    SkinInfo = '15'
+    ThirdParty.ThirdEdits = ' '
+    ThirdParty.ThirdButtons = 'TButton'
+    ThirdParty.ThirdBitBtns = ' '
+    ThirdParty.ThirdCheckBoxes = ' '
+    ThirdParty.ThirdGroupBoxes = ' '
+    ThirdParty.ThirdListViews = ' '
+    ThirdParty.ThirdPanels = ' '
+    ThirdParty.ThirdGrids = ' '
+    ThirdParty.ThirdTreeViews = ' '
+    ThirdParty.ThirdComboBoxes = ' '
+    ThirdParty.ThirdWWEdits = ' '
+    ThirdParty.ThirdVirtualTrees = ' '
+    ThirdParty.ThirdGridEh = ' '
+    ThirdParty.ThirdPageControl = ' '
+    ThirdParty.ThirdTabControl = ' '
+    ThirdParty.ThirdToolBar = ' '
+    ThirdParty.ThirdStatusBar = ' '
+    ThirdParty.ThirdSpeedButton = ' '
+    ThirdParty.ThirdScrollControl = ' '
+    ThirdParty.ThirdUpDown = ' '
+    ThirdParty.ThirdScrollBar = ' '
+    ThirdParty.ThirdStaticText = ' '
+    ThirdParty.ThirdNativePaint = ' '
+    Left = 24
+    Top = 8
   end
 end

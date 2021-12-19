@@ -4,12 +4,14 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Buttons, sMemo, sBitBtn;
+  Dialogs, StdCtrls, Buttons, sMemo, sBitBtn, sSkinProvider, sSkinManager;
 
 type
   TFormAbout = class(TForm)
     Memo1: TsMemo;
     BitBtnClose: TsBitBtn;
+    sSkinManager1: TsSkinManager;
+    sSkinProvider1: TsSkinProvider;
   private
     { Private declarations }
   public

@@ -4,14 +4,14 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
-  Dialogs, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, sBitBtn, sLabel, sEdit, sCheckBox;
+  Dialogs, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, sBitBtn, sLabel, sEdit, sCheckBox,
+  DBAccess, Uni, sSkinProvider, sSkinManager;
 
 type
   TFormUserUpdate = class(TForm)
     BitBtnCancel: TsBitBtn;
     Label1: TsLabel;
     EditFIO: TsEdit;
-    QUpdateUser: TZQuery;
     Label2: TsLabel;
     EditLogin: TsEdit;
     Label3: TsLabel;
@@ -20,6 +20,9 @@ type
     EditComment: TsEdit;
     BitBtnSave: TsBitBtn;
     CBEditPrices: TsCheckBox;
+    QUpdateUser: TUniSQL;
+    sSkinProvider1: TsSkinProvider;
+    sSkinManager2: TsSkinManager;
     procedure FormKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
 		procedure BitBtnSaveClick(Sender: TObject);
@@ -79,7 +82,6 @@ if not FormMain.ReadEnteredUserIsBoss then
 	MessageDlg('Только BOSS может изменить данные по другому пользователю',mtWarning,[mbOK],0);
 	exit;
 	end;
-QUpdateUser.Close;
 QUpdateUser.ParamByName('U_ID').AsInteger:=F_UserID;
 QUpdateUser.ParamByName('U_FIO').AsString:=EditFIO.Text;
 QUpdateUser.ParamByName('U_PASSWORD').AsString:=AnsiUppercase(EditPWD.Text);
@@ -87,7 +89,7 @@ QUpdateUser.ParamByName('U_COMMENT').AsString:=EditComment.Text;
 if CBEditPrices.Checked
 then QUpdateUser.ParamByName('U_EDIT_PRICES').AsInteger:=1
 else QUpdateUser.ParamByName('U_EDIT_PRICES').AsInteger:=0;
-QUpdateUser.ExecSQL;
+QUpdateUser.Execute;
 FocusControl(EditFIO);
 end;
 

@@ -208,7 +208,7 @@ object FormNewCompany: TFormNewCompany
     Width = 281
     Height = 24
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
+    Font.Color = clBlack
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = []
@@ -222,26 +222,25 @@ object FormNewCompany: TFormNewCompany
     Width = 18
     Height = 21
     TabStop = False
-    EditMask = '9;1;_'
     MaxLength = 1
-    ReadOnly = True
     TabOrder = 1
-    Text = ' '
     CheckOnExit = True
+    EditMask = '9;1;_'
+    Text = ' '
+    ReadOnly = True
   end
   object CBCompanyNameType: TsComboBox
     Left = 152
     Top = 296
     Width = 105
     Height = 24
+    TabOrder = 5
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
+    Font.Color = clBlack
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     ParentFont = False
-    ItemIndex = -1
-    TabOrder = 5
     Text = 'CBCompanyNameType'
   end
   object MemoComment: TsMemo
@@ -251,7 +250,7 @@ object FormNewCompany: TFormNewCompany
     Height = 49
     Anchors = [akLeft, akTop, akRight, akBottom]
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
+    Font.Color = clBlack
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = []
@@ -295,7 +294,7 @@ object FormNewCompany: TFormNewCompany
     Width = 281
     Height = 24
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
+    Font.Color = clBlack
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = []
@@ -308,14 +307,13 @@ object FormNewCompany: TFormNewCompany
     Top = 264
     Width = 225
     Height = 24
+    TabOrder = 4
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
+    Font.Color = clBlack
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = []
     ParentFont = False
-    ItemIndex = -1
-    TabOrder = 4
     Text = 'CBTrustLevel'
   end
   object txtPriceList: TsEdit
@@ -324,7 +322,7 @@ object FormNewCompany: TFormNewCompany
     Width = 289
     Height = 24
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
+    Font.Color = clBlack
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = []
@@ -338,7 +336,7 @@ object FormNewCompany: TFormNewCompany
     Height = 65
     Anchors = [akLeft, akTop, akRight, akBottom]
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
+    Font.Color = clBlack
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = []
@@ -348,13 +346,29 @@ object FormNewCompany: TFormNewCompany
     ShowHint = False
     TabOrder = 3
   end
-  object QCompanyNameType: TZReadOnlyQuery
+  object SelectPriceDialog: TsOpenDialog
+    Filter = 'Excel|*.xls;*xlsx|All|*.*'
+    Options = [ofHideReadOnly, ofPathMustExist, ofFileMustExist, ofEnableSizing]
+    Left = 176
+    Top = 248
+  end
+  object DSCompanyNameType: TUniDataSource
+    DataSet = QCompanyNameType
+    Left = 184
+    Top = 120
+  end
+  object DSTrust: TUniDataSource
+    DataSet = QTrustLevel
+    Left = 280
+    Top = 248
+  end
+  object QCompanyNameType: TUniQuery
+    Connection = FormMain.ZC
     SQL.Strings = (
       'select CNT_ID, CNT_NAME from companynametypes'
       'order by CNT_CNTR')
-    Params = <>
-    Left = 256
-    Top = 48
+    Left = 136
+    Top = 200
     object QCompanyNameTypeCNT_ID: TIntegerField
       FieldName = 'CNT_ID'
       Required = True
@@ -365,20 +379,15 @@ object FormNewCompany: TFormNewCompany
       Size = 50
     end
   end
-  object DSCompanyNameType: TDataSource
-    DataSet = QCompanyNameType
-    Left = 184
-    Top = 56
-  end
-  object QTrustLevel: TZReadOnlyQuery
+  object QTrustLevel: TUniQuery
+    Connection = FormMain.ZC
     SQL.Strings = (
       'select TL_ID, TL_LEVEL, TL_COLOR, TL_NAME'
       'from TRUSTLEVEL'
       'where TL_ISCLOSED = 0'
       'order by TL_ORDERBY')
-    Params = <>
-    Left = 280
-    Top = 112
+    Left = 56
+    Top = 200
     object QTrustLevelTL_ID: TIntegerField
       FieldName = 'TL_ID'
       Required = True
@@ -395,15 +404,48 @@ object FormNewCompany: TFormNewCompany
       Size = 100
     end
   end
-  object DSTrust: TDataSource
-    DataSet = QTrustLevel
-    Left = 280
-    Top = 168
+  object sSkinManager1: TsSkinManager
+    ButtonsOptions.OldGlyphsMode = True
+    IsDefault = False
+    InternalSkins = <>
+    SkinDirectory = 'c:\Skins'
+    SkinName = 'AlterMetro'
+    SkinInfo = '15'
+    ThirdParty.ThirdEdits = ' '
+    ThirdParty.ThirdButtons = 'TButton'
+    ThirdParty.ThirdBitBtns = ' '
+    ThirdParty.ThirdCheckBoxes = ' '
+    ThirdParty.ThirdGroupBoxes = ' '
+    ThirdParty.ThirdListViews = ' '
+    ThirdParty.ThirdPanels = ' '
+    ThirdParty.ThirdGrids = ' '
+    ThirdParty.ThirdTreeViews = ' '
+    ThirdParty.ThirdComboBoxes = ' '
+    ThirdParty.ThirdWWEdits = ' '
+    ThirdParty.ThirdVirtualTrees = ' '
+    ThirdParty.ThirdGridEh = ' '
+    ThirdParty.ThirdPageControl = ' '
+    ThirdParty.ThirdTabControl = ' '
+    ThirdParty.ThirdToolBar = ' '
+    ThirdParty.ThirdStatusBar = ' '
+    ThirdParty.ThirdSpeedButton = ' '
+    ThirdParty.ThirdScrollControl = ' '
+    ThirdParty.ThirdUpDown = ' '
+    ThirdParty.ThirdScrollBar = ' '
+    ThirdParty.ThirdStaticText = ' '
+    ThirdParty.ThirdNativePaint = ' '
+    Left = 24
+    Top = 8
   end
-  object SelectPriceDialog: TsOpenDialog
-    Filter = 'Excel|*.xls;*xlsx|All|*.*'
-    Options = [ofHideReadOnly, ofPathMustExist, ofFileMustExist, ofEnableSizing]
-    Left = 176
-    Top = 248
+  object sSkinProvider1: TsSkinProvider
+    AddedTitle.Font.Charset = DEFAULT_CHARSET
+    AddedTitle.Font.Color = clNone
+    AddedTitle.Font.Height = -11
+    AddedTitle.Font.Name = 'Tahoma'
+    AddedTitle.Font.Style = []
+    SkinData.SkinSection = 'FORM'
+    TitleButtons = <>
+    Left = 72
+    Top = 8
   end
 end

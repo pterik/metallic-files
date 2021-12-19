@@ -48,7 +48,7 @@ object FormNewPhone: TFormNewPhone
   end
   object BitBtnCancel: TsBitBtn
     Left = 8
-    Top = 183
+    Top = 182
     Width = 75
     Height = 25
     Anchors = [akLeft, akBottom]
@@ -82,34 +82,34 @@ object FormNewPhone: TFormNewPhone
     Top = 40
     Width = 30
     Height = 24
-    EditMask = '00;1;_'
+    MaxLength = 2
+    TabOrder = 1
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
+    Font.Color = clBlack
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    MaxLength = 2
     ParentFont = False
-    TabOrder = 1
-    Text = '  '
     CheckOnExit = True
+    EditMask = '00;1;_'
+    Text = '  '
   end
   object MEditPhone1: TsMaskEdit
     Left = 112
     Top = 40
     Width = 73
     Height = 24
-    EditMask = '000\-00\-00;1;_'
+    MaxLength = 9
+    TabOrder = 2
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
+    Font.Color = clBlack
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    MaxLength = 9
     ParentFont = False
-    TabOrder = 2
-    Text = '   -  -  '
     CheckOnExit = True
+    EditMask = '000\-00\-00;1;_'
+    Text = '   -  -  '
   end
   object DT: TDateTimePicker
     Left = 8
@@ -149,7 +149,7 @@ object FormNewPhone: TFormNewPhone
     TabStop = False
     Anchors = [akLeft, akTop, akRight]
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
+    Font.Color = clBlack
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = []
@@ -165,7 +165,7 @@ object FormNewPhone: TFormNewPhone
     Height = 24
     Anchors = [akLeft, akTop, akRight]
     Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
+    Font.Color = clBlack
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = []
@@ -189,8 +189,8 @@ object FormNewPhone: TFormNewPhone
     TabOrder = 8
   end
   object BitBtnSave: TsBitBtn
-    Left = 129
-    Top = 183
+    Left = 121
+    Top = 182
     Width = 105
     Height = 25
     Anchors = [akRight, akBottom]
@@ -212,5 +212,49 @@ object FormNewPhone: TFormNewPhone
     NumGlyphs = 2
     TabOrder = 6
     OnClick = BitBtnSaveClick
+  end
+  object sSkinManager1: TsSkinManager
+    ButtonsOptions.OldGlyphsMode = True
+    IsDefault = False
+    InternalSkins = <>
+    SkinDirectory = 'c:\Skins'
+    SkinName = 'AlterMetro'
+    SkinInfo = '15'
+    ThirdParty.ThirdEdits = ' '
+    ThirdParty.ThirdButtons = 'TButton'
+    ThirdParty.ThirdBitBtns = ' '
+    ThirdParty.ThirdCheckBoxes = ' '
+    ThirdParty.ThirdGroupBoxes = ' '
+    ThirdParty.ThirdListViews = ' '
+    ThirdParty.ThirdPanels = ' '
+    ThirdParty.ThirdGrids = ' '
+    ThirdParty.ThirdTreeViews = ' '
+    ThirdParty.ThirdComboBoxes = ' '
+    ThirdParty.ThirdWWEdits = ' '
+    ThirdParty.ThirdVirtualTrees = ' '
+    ThirdParty.ThirdGridEh = ' '
+    ThirdParty.ThirdPageControl = ' '
+    ThirdParty.ThirdTabControl = ' '
+    ThirdParty.ThirdToolBar = ' '
+    ThirdParty.ThirdStatusBar = ' '
+    ThirdParty.ThirdSpeedButton = ' '
+    ThirdParty.ThirdScrollControl = ' '
+    ThirdParty.ThirdUpDown = ' '
+    ThirdParty.ThirdScrollBar = ' '
+    ThirdParty.ThirdStaticText = ' '
+    ThirdParty.ThirdNativePaint = ' '
+    Left = 24
+    Top = 8
+  end
+  object sSkinProvider1: TsSkinProvider
+    AddedTitle.Font.Charset = DEFAULT_CHARSET
+    AddedTitle.Font.Color = clNone
+    AddedTitle.Font.Height = -11
+    AddedTitle.Font.Name = 'Tahoma'
+    AddedTitle.Font.Style = []
+    SkinData.SkinSection = 'FORM'
+    TitleButtons = <>
+    Left = 72
+    Top = 8
   end
 end

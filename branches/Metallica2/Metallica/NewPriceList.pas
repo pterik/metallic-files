@@ -7,65 +7,40 @@ uses
   Dialogs, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, 
   Grids, DBGrids, DBGridEh, ComCtrls, Mask, DBCtrlsEh, DataModule, sLabel, sEdit, sCheckBox, sMaskEdit, sComboBox, sMemo, sDialogs, sSpeedButton,
   DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, sButton,
-  sTreeView, EhLibVCL, GridsEh, DBAxisGridsEh, sBitBtn;
+  sTreeView, EhLibVCL, GridsEh, DBAxisGridsEh, sBitBtn, DBAccess, Uni, MemDS,
+  sSkinProvider, sSkinManager;
 
 type
   TFormNewPriceList = class(TForm)
     BitBtnClose: TsBitBtn;
     Grid: TDBGridEh;
-    qDataView: TZReadOnlyQuery;
-    qDataViewPL_ID: TIntegerField;
-    qDataViewPL_HEADERID: TIntegerField;
-    qDataViewPL_TREEID: TIntegerField;
-    qDataViewCM_NAME: TStringField;
-    qDataViewCM_ID: TIntegerField;
-    qDataViewPL_VALUE1: TStringField;
-    qDataViewPL_VALUE2: TStringField;
-    qDataViewPL_VALUE3: TStringField;
-    qDataViewPL_VALUE4: TStringField;
-    qDataViewPL_VALUE5: TStringField;
-    qDataViewPL_VALUE6: TStringField;
-    qDataViewPL_VALUE7: TStringField;
-    qDataViewPL_VALUE8: TStringField;
-    qDataViewPL_VALUE9: TStringField;
-    qDataViewPL_ORDERBY: TIntegerField;
-    qDataViewPL_DATE_UPDATE: TDateTimeField;
-    qDataViewPL_ISCLOSED: TSmallintField;
-    DSData: TDataSource;
-    qDataViewPL_PRICE: TFloatField;
     Tree: TsTreeView;
     EditCompany: TsEdit;
     LabelComp: TsLabel;
     LabelCity: TsLabel;
     EditCity: TsEdit;
-    QCompany: TZQuery;
-    QCompanyCOMPANYID: TIntegerField;
-    QCompanyCM_NAME: TStringField;
-    QCompanyCM_COMMENT: TStringField;
     DBPrice: TDBEditEh;
     EditNewPrice: TsEdit;
     BitBtnNewTree: TsBitBtn;
     BitBtnUpdate: TsBitBtn;
     BitBtnNewRow: TsBitBtn;
-    qRowInsert: TZQuery;
-    qRowMaxOrder: TZReadOnlyQuery;
-    qRowMaxOrderMAXPOS: TLargeintField;
-    qRowExists: TZQuery;
-    qRowExistsCNTR: TIntegerField;
-    qPriceUpdate: TZQuery;
-    IntegerField1: TIntegerField;
     BitBtnSave: TsBitBtn;
     StaticTextX: TStaticText;
     BitBtnStore: TsBitBtn;
-    QCompanyCM_CITY: TStringField;
     BitBtnDelete: TsBitBtn;
-    qRowUpdate: TZQuery;
-    qDataViewPL_NODE: TStringField;
-    qPLisFinished: TZQuery;
-    IntegerField2: TIntegerField;
-    qDataViewCM_CITY: TStringField;
     ButtonLeft: TsButton;
     ButtonRight: TsButton;
+    qRowExists: TUniQuery;
+    DSData: TUniDataSource;
+    qRowUpdate: TUniSQL;
+    qPriceUpdate: TUniSQL;
+    qRowInsert: TUniSQL;
+    qDataView: TUniQuery;
+    QCompany: TUniQuery;
+    qPLisFinished: TUniSQL;
+    qRowMaxOrder: TUniQuery;
+    sSkinManager1: TsSkinManager;
+    sSkinProvider1: TsSkinProvider;
     procedure TreeChange(Sender: TObject; Node: TTreeNode);
     procedure TreeExpanding(Sender: TObject; Node: TTreeNode;
       var AllowExpansion: Boolean);
@@ -77,7 +52,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure BitBtnNewRowClick(Sender: TObject);
-    procedure DSDataDataChange(Sender: TObject; Field: TField);
+    procedure DSData2DataChange(Sender: TObject; Field: TField);
     procedure FormKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure BitBtnStoreClick(Sender: TObject);
@@ -90,11 +65,9 @@ type
     procedure ButtonRightClick(Sender: TObject);
   private
     F_CompanyID, F_LineID, F_HeaderID:integer;
-    F_CurrentField:string;
     F_CurrentFieldNumber:integer;
     F_ShiftState:boolean;
     MyNode:TNodeValue;
-    F_EditPrices:integer;
     procedure RefreshPrices;
     function RowMaxOrderby(HeaderID, TreeID: integer): integer;
     function isRowExists(HeaderID, TreeID: integer): boolean;
@@ -113,7 +86,7 @@ var
 implementation
 
 uses MainForm, ShowCompany, CommonUnit, NewItem, NewPriceRow, SelectTree,
-  UpdateHeader;
+  UpdateHeader, System.UITypes;
 
 {$R *.dfm}
 
@@ -136,15 +109,13 @@ EditCompany.Text:=QCompany['CM_NAME'];
 EditCity.Text:=QCompany['CM_CITY'];
 F_HeaderID:=HeaderID;
 DM.TreeFulFill(Tree, false, F_HeaderID);
-qPLisFinished.Close;
 QPLisFinished.ParamByName('HEADERID').AsInteger:=F_HeaderID;
 QPLisFinished.ParamByName('FINISHED').AsInteger:=0;
-QPLIsFinished.ExecSQL;
+QPLIsFinished.Execute;
 RefreshPrices;
 end;
 
 procedure TFormNewPriceList.RefreshPrices;
-var i:integer;
 begin
 Grid.Visible:=false;
 qDataView.Close;
@@ -222,11 +193,10 @@ if SelectedTreeID<>0 then
 //    MessageDlg('Подстрока уже внесена в прайс',mtWarning, [mbOK],0);
     exit;
     end;
-  QRowInsert.Close;
   QRowInsert.ParamByName('HEADERID').AsInteger:=F_HeaderID;
   QRowInsert.ParamByName('TREEID').AsInteger:=MyNode.ID;
   QRowInsert.ParamByName('ORDERBY').AsInteger:=RowMaxOrderby(F_HeaderID, MyNode.ID);
-  QRowInsert.ExecSQL;
+  QRowInsert.Execute;
   end;
 //Tree.Items.Clear;
 //ExpandLevel(nil);
@@ -304,11 +274,10 @@ if MyNode.ParentID=0 then
   MessageDlg('Выберите подстроку рубрикатора, а не основную строку',mtWarning, [mbOK],0);
   exit;
   end;
-QRowInsert.Close;
 QRowInsert.ParamByName('HEADERID').AsInteger:=F_HeaderID;
 QRowInsert.ParamByName('TREEID').AsInteger:=MyNode.ID;
 QRowInsert.ParamByName('ORDERBY').AsInteger:=RowMaxOrderby(F_HeaderID, MyNode.ID);
-QRowInsert.ExecSQL;
+QRowInsert.Execute;
 RefreshPrices;
 end;
 
@@ -331,11 +300,10 @@ except on E: EConvertError do
   exit;
   end;
 end;
-qPriceUpdate.Close;
 QPriceUpdate.ParamByName('ID').AsInteger:=Line_ID;
 QPriceUpdate.ParamByName('PRICE').AsFloat:=StrToFloat(EditNewPrice.Text);
 QPriceUpdate.ParamByName('CDATE').AsDate:=Now();
-qPriceUpdate.ExecSQL;
+qPriceUpdate.Execute;
 end;
 procedure TFormNewPriceList.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
@@ -387,7 +355,7 @@ if QDataView.BookmarkValid(B) then
   end;
 end;
 
-procedure TFormNewPriceList.DSDataDataChange(Sender: TObject;
+procedure TFormNewPriceList.DSData2DataChange(Sender: TObject;
   Field: TField);
 begin
 GetNewRowPrice;
@@ -464,10 +432,9 @@ if VarIsNull(qDataView['PL_ID']) then
   MessageDlg('Выберите удаляемую строку',mtError, [mbOK],0);
   exit;
   end;
-QRowUpdate.Close;
 QRowUpdate.ParamByName('ID').AsInteger:=qDataView['PL_ID'];
 QRowUpdate.ParamByName('CDATE').AsDate:=Now();
-QRowUpdate.ExecSQL;
+QRowUpdate.Execute;
 RefreshPrices;
 end;
 
@@ -476,10 +443,9 @@ begin
 if MessageDlg('Прайс-лист уже заполнен?',mtConfirmation,[mbYes,mbNo],0)=mrYes
 then
   begin
-  qPLisFinished.Close;
   QPLisFinished.ParamByName('HEADERID').AsInteger:=F_HeaderID;
   QPLisFinished.ParamByName('FINISHED').AsInteger:=1;
-  QPLIsFinished.ExecSQL;
+  QPLIsFinished.Execute;
   end;
 end;
 

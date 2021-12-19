@@ -1,9 +1,9 @@
 object FormUsers: TFormUsers
   Left = 288
   Top = 305
-  Width = 640
-  Height = 354
   Caption = #1055#1086#1083#1100#1079#1086#1074#1072#1090#1077#1083#1080
+  ClientHeight = 321
+  ClientWidth = 624
   Color = clBtnFace
   Constraints.MinHeight = 340
   Constraints.MinWidth = 570
@@ -16,19 +16,17 @@ object FormUsers: TFormUsers
   OldCreateOrder = False
   OnKeyUp = FormKeyUp
   DesignSize = (
-    632
-    320)
+    624
+    321)
   PixelsPerInch = 96
   TextHeight = 13
   object BitBtnInsert: TsBitBtn
     Left = 4
-    Top = 294
+    Top = 287
     Width = 85
     Height = 25
     Anchors = [akLeft, akBottom]
     Caption = #1053#1086#1074#1099#1081' (F3)'
-    TabOrder = 2
-    OnClick = BitBtnInsertClick
     Glyph.Data = {
       36050000424D3605000000000000360400002800000010000000100000000100
       0800000000000001000000000000000000000001000000010000000000003232
@@ -72,16 +70,16 @@ object FormUsers: TFormUsers
       100408090A0B0E110201282828030C0D0C040708090A0B0E0201282828280303
       0405060708090A0B020128282828280102020202020202020201282828282801
       0101010101010101010128282828282828282828282828282828}
+    TabOrder = 2
+    OnClick = BitBtnInsertClick
   end
   object BitBtnUpdate: TsBitBtn
     Left = 102
-    Top = 294
+    Top = 287
     Width = 107
     Height = 25
     Anchors = [akLeft, akBottom]
     Caption = #1048#1079#1084#1077#1085#1080#1090#1100'(F4)'
-    TabOrder = 3
-    OnClick = BitBtnUpdateClick
     Glyph.Data = {
       36050000424D3605000000000000360400002800000010000000100000000100
       0800000000000001000000000000000000000001000000010000000000000000
@@ -125,16 +123,16 @@ object FormUsers: TFormUsers
       F5100CAEA3121E1EF5E5E5E5E5E5E5E5E5F511AD1D1E19191DF5E5E5E5E5E5E5
       E5E5F5A31E192A1C1DF5E5E5E5E5E5E5E5E5E5F51A181C1C1EF5E5E5E5E5E5E5
       E5E5E5E5F51D1C1EF5E5E5E5E5E5E5E5E5E5E5E5E5F5F5F5E5E5}
+    TabOrder = 3
+    OnClick = BitBtnUpdateClick
   end
   object BitBtnDelete: TsBitBtn
-    Left = 448
-    Top = 294
+    Left = 440
+    Top = 288
     Width = 86
     Height = 25
     Anchors = [akLeft, akBottom]
     Caption = #1059#1074#1086#1083#1080#1090#1100
-    TabOrder = 5
-    OnClick = BitBtnDeleteClick
     Glyph.Data = {
       36050000424D3605000000000000360400002800000010000000100000000100
       0800000000000001000000000000000000000001000000010000000000003232
@@ -178,18 +176,18 @@ object FormUsers: TFormUsers
       1A1B0B07080C0D1502010A0E0F113B1113140B0607090C0D02013B0A0A3B3B01
       0B0B05050607080902013B3B3B3B3B01020202020202020202013B3B3B3B3B01
       010101010101010101013B3B3B3B3B3B3B3B3B3B3B3B3B3B3B3B}
+    TabOrder = 5
+    OnClick = BitBtnDeleteClick
   end
   object BitBtnClose: TsBitBtn
-    Left = 548
-    Top = 294
+    Left = 540
+    Top = 288
     Width = 77
     Height = 25
     Anchors = [akLeft, akBottom]
     Cancel = True
     Caption = #1047#1072#1082#1088#1099#1090#1100
     Default = True
-    ModalResult = 1
-    TabOrder = 6
     Glyph.Data = {
       DE010000424DDE01000000000000760000002800000024000000120000000100
       0400000000006801000000000000000000001000000000000000000000000000
@@ -207,26 +205,28 @@ object FormUsers: TFormUsers
       8888333F00003333330000003333333333333FFFFFF3333F00003333330AAAA0
       333333333333888888F3333F00003333330000003333333333338FFFF8F3333F
       0000}
+    ModalResult = 1
     NumGlyphs = 2
+    TabOrder = 6
   end
   object BitBtnRights: TsBitBtn
     Left = 218
-    Top = 294
+    Top = 287
     Width = 81
     Height = 25
     Anchors = [akLeft, akBottom]
     Caption = #1055#1088#1072#1074#1072' BOSS'#1072
+    NumGlyphs = 2
     TabOrder = 4
     OnClick = BitBtnRightsClick
-    NumGlyphs = 2
   end
   object CBOnlyWorkers: TsCheckBox
     Left = 294
     Top = 8
-    Width = 265
-    Height = 17
-    Anchors = [akTop, akRight]
+    Width = 255
+    Height = 20
     Caption = #1058#1086#1083#1100#1082#1086' '#1088#1072#1073#1086#1090#1072#1102#1097#1080#1077' '#1087#1086#1083#1100#1079#1086#1074#1072#1090#1077#1083#1080
+    Anchors = [akTop, akRight]
     Checked = True
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -242,28 +242,20 @@ object FormUsers: TFormUsers
     Left = 8
     Top = 32
     Width = 623
-    Height = 257
+    Height = 249
     Anchors = [akLeft, akTop, akRight, akBottom]
     DataSource = DSUsers
-    FooterColor = clWindow
-    FooterFont.Charset = DEFAULT_CHARSET
-    FooterFont.Color = clWindowText
-    FooterFont.Height = -11
-    FooterFont.Name = 'MS Sans Serif'
-    FooterFont.Style = []
-    HorzScrollBar.Tracking = True
+    DynProps = <>
+    FooterParams.Color = clWindow
+    IndicatorOptions = []
     Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgConfirmDelete, dgCancelOnExit]
     TabOrder = 0
-    TitleFont.Charset = DEFAULT_CHARSET
-    TitleFont.Color = clWindowText
-    TitleFont.Height = -11
-    TitleFont.Name = 'MS Sans Serif'
-    TitleFont.Style = []
-    VertScrollBar.Tracking = True
     OnDblClick = DBUsersDblClick
     OnTitleClick = DBUsersTitleClick
     Columns = <
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'U_ID'
         Footers = <>
@@ -271,6 +263,8 @@ object FormUsers: TFormUsers
         Width = 44
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'U_FIO'
         Footers = <>
@@ -278,6 +272,8 @@ object FormUsers: TFormUsers
         Width = 133
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'U_COMMENT'
         Footers = <>
@@ -285,6 +281,8 @@ object FormUsers: TFormUsers
         Width = 145
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'SISCLOSED'
         Footers = <>
@@ -292,6 +290,8 @@ object FormUsers: TFormUsers
         Width = 63
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'SISBOSS'
         Footers = <>
@@ -299,40 +299,73 @@ object FormUsers: TFormUsers
         Width = 80
       end
       item
+        CellButtons = <>
+        DynProps = <>
         EditButtons = <>
         FieldName = 'SIS_EDIT_PRICES'
         Footers = <>
         Title.Caption = #1056#1077#1076#1072#1082#1090#1080#1088#1091#1077#1090' '#1087#1088#1072#1081#1089#1099
         Width = 126
       end>
+    object RowDetailData: TRowDetailPanelControlEh
+    end
   end
-  object DSUsers: TDataSource
+  object QUsersWOMe: TUniQuery
+    SQL.Strings = (
+      'SELECT * FROM USERS'
+      'WHERE U_ID<>:U_ID')
+    Left = 168
+    Top = 208
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'U_ID'
+        ParamType = ptInput
+        Value = nil
+      end>
+  end
+  object DSUsers: TUniDataSource
     DataSet = QViewFormUsers
     Left = 40
-    Top = 144
+    Top = 200
   end
-  object QViewFormUsers: TZQuery
+  object QUserTitles: TUniQuery
     Connection = FormMain.ZC
-    OnCalcFields = QViewFormUsersCalcFields
+    SQL.Strings = (
+      'SELECT J_ID AS ID FROM JOBS'
+      'WHERE J_USERID=:USERID'
+      'UNION ALL'
+      'SELECT CM_ID AS ID FROM COMPANY'
+      'WHERE CM_OWNER=:USERID')
+    Left = 112
+    Top = 152
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'USERID'
+        ParamType = ptInput
+        Value = nil
+      end>
+    object QUserTitlesID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+  end
+  object QViewFormUsers: TUniQuery
+    Connection = FormMain.ZC
     SQL.Strings = (
       'SELECT * FROM USERS'
       'WHERE (U_ISCLOSED=:U_ISCLOSED) OR (:U_ISCLOSED=-1)'
       'ORDER BY U_ID')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'U_ISCLOSED'
-        ParamType = ptUnknown
-      end>
-    WhereMode = wmWhereAll
-    Options = []
-    Left = 40
-    Top = 88
+    Active = True
+    Left = 32
+    Top = 152
     ParamData = <
       item
-        DataType = ftUnknown
+        DataType = ftSmallint
         Name = 'U_ISCLOSED'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = -1
       end>
     object QViewFormUsersU_LOGIN: TStringField
       FieldName = 'U_LOGIN'
@@ -355,7 +388,7 @@ object FormUsers: TFormUsers
       FieldName = 'SISBOSS'
       Calculated = True
     end
-    object QViewFormUsersSISACTIVE: TStringField
+    object QViewFormUsersSISCLOSED: TStringField
       FieldKind = fkCalculated
       FieldName = 'SISCLOSED'
       Calculated = True
@@ -375,280 +408,186 @@ object FormUsers: TFormUsers
       FieldName = 'U_EDIT_PRICES'
       Required = True
     end
+    object QViewFormUsersU_EDIT_OWN_JOBS: TSmallintField
+      FieldName = 'U_EDIT_OWN_JOBS'
+      Required = True
+    end
     object QViewFormUsersSIS_EDIT_PRICES: TStringField
       FieldKind = fkCalculated
       FieldName = 'SIS_EDIT_PRICES'
       Calculated = True
     end
   end
-  object QGrantBoss: TZQuery
-    Connection = FormMain.ZC
-    SQL.Strings = (
-      'UPDATE USERS'
-      'SET U_ISBOSS=:U_ISBOSS'
-      'WHERE U_ID=:U_ID')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'U_ISBOSS'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'U_ID'
-        ParamType = ptUnknown
-      end>
-    WhereMode = wmWhereAll
-    Options = []
-    Left = 104
-    Top = 144
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'U_ISBOSS'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'U_ID'
-        ParamType = ptUnknown
-      end>
-  end
-  object QInsertGrant: TZQuery
+  object QInsertGrant: TUniSQL
     Connection = FormMain.ZC
     SQL.Strings = (
       'INSERT INTO USERSFORBOSS (UB_USERID,UB_VIEWERID) '
       'VALUES (:UB_USERID,:UB_VIEWERID) '
       '')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'UB_USERID'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'UB_VIEWERID'
-        ParamType = ptUnknown
-      end>
-    WhereMode = wmWhereAll
-    Options = []
     Left = 240
-    Top = 144
+    Top = 208
     ParamData = <
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'UB_USERID'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'UB_VIEWERID'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end>
   end
-  object QUsersWOMe: TZQuery
-    Connection = FormMain.ZC
-    SQL.Strings = (
-      'SELECT * FROM USERS'
-      'WHERE U_ID<>:U_ID')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'U_ID'
-        ParamType = ptUnknown
-      end>
-    WhereMode = wmWhereAll
-    Options = []
-    Left = 168
-    Top = 144
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'U_ID'
-        ParamType = ptUnknown
-      end>
-  end
-  object QDeleteGrantV: TZQuery
-    Connection = FormMain.ZC
-    SQL.Strings = (
-      'DELETE FROM  USERSFORBOSS '
-      'WHERE UB_VIEWERID=:UB_VIEWERID')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'UB_VIEWERID'
-        ParamType = ptUnknown
-      end>
-    WhereMode = wmWhereAll
-    Options = []
-    Left = 232
-    Top = 96
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'UB_VIEWERID'
-        ParamType = ptUnknown
-      end>
-  end
-  object QUserTitles: TZQuery
-    Connection = FormMain.ZC
-    SQL.Strings = (
-      'SELECT J_ID AS ID FROM JOBS'
-      'WHERE J_USERID=:USERID'
-      'UNION ALL'
-      'SELECT CM_ID AS ID FROM COMPANY'
-      'WHERE CM_OWNER=:USERID')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'USERID'
-        ParamType = ptUnknown
-      end>
-    WhereMode = wmWhereAll
-    Options = []
-    Left = 120
-    Top = 88
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'USERID'
-        ParamType = ptUnknown
-      end>
-  end
-  object QMoveCom: TZQuery
-    Connection = FormMain.ZC
-    SQL.Strings = (
-      'update company'
-      'set cm_owner=:UserTO'
-      'where cm_owner=:userfrom'
-      'and cm_isclosed=0')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'UserTO'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'userfrom'
-        ParamType = ptUnknown
-      end>
-    WhereMode = wmWhereAll
-    Options = []
-    Left = 424
-    Top = 80
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'UserTO'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'userfrom'
-        ParamType = ptUnknown
-      end>
-    object IntegerField1: TIntegerField
-      FieldName = 'CNTR'
-      ReadOnly = True
-      Required = True
-    end
-    object StringField1: TStringField
-      FieldName = 'COMENT'
-      ReadOnly = True
-      Required = True
-      Size = 7
-    end
-  end
-  object QMoveCon_Own: TZQuery
+  object QMoveCon_Own: TUniSQL
     Connection = FormMain.ZC
     SQL.Strings = (
       'update contacts '
       'set cn_owner=:UserTO'
       'where cn_owner=:userfrom'
       'and cn_isclosed=0')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'UserTO'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'userfrom'
-        ParamType = ptUnknown
-      end>
-    WhereMode = wmWhereAll
-    Options = []
     Left = 328
-    Top = 136
+    Top = 208
     ParamData = <
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'UserTO'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'userfrom'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end>
-    object IntegerField2: TIntegerField
-      FieldName = 'CNTR'
-      ReadOnly = True
-      Required = True
-    end
-    object StringField2: TStringField
-      FieldName = 'COMENT'
-      ReadOnly = True
-      Required = True
-      Size = 7
-    end
   end
-  object QMoveCon_Man: TZQuery
+  object QGrantBoss: TUniSQL
+    Connection = FormMain.ZC
+    SQL.Strings = (
+      'UPDATE USERS'
+      'SET U_ISBOSS=:U_ISBOSS'
+      'WHERE U_ID=:U_ID')
+    Left = 104
+    Top = 208
+    ParamData = <
+      item
+        DataType = ftSmallint
+        Name = 'U_ISBOSS'
+        ParamType = ptInput
+        Value = nil
+      end
+      item
+        DataType = ftInteger
+        Name = 'U_ID'
+        ParamType = ptInput
+        Value = nil
+      end>
+  end
+  object QMoveCom: TUniSQL
+    Connection = FormMain.ZC
+    SQL.Strings = (
+      'update company'
+      'set cm_owner=:UserTO'
+      'where cm_owner=:userfrom'
+      'and cm_isclosed=0')
+    Left = 312
+    Top = 152
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'UserTO'
+        ParamType = ptInput
+        Value = nil
+      end
+      item
+        DataType = ftInteger
+        Name = 'userfrom'
+        ParamType = ptInput
+        Value = nil
+      end>
+  end
+  object QDeleteGrantV: TUniSQL
+    Connection = FormMain.ZC
+    SQL.Strings = (
+      'DELETE FROM  USERSFORBOSS '
+      'WHERE UB_VIEWERID=:UB_VIEWERID')
+    Left = 216
+    Top = 152
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'UB_VIEWERID'
+        ParamType = ptInput
+        Value = nil
+      end>
+  end
+  object QMoveCon_Man: TUniSQL
     Connection = FormMain.ZC
     SQL.Strings = (
       'update contacts '
       'set cn_manager=:UserTO'
       'where cn_manager=:UserFrom'
       'and cn_isclosed=0')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'UserTO'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'userfrom'
-        ParamType = ptUnknown
-      end>
-    WhereMode = wmWhereAll
-    Options = []
     Left = 424
-    Top = 136
+    Top = 208
     ParamData = <
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'UserTO'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end
       item
-        DataType = ftUnknown
-        Name = 'userfrom'
-        ParamType = ptUnknown
+        DataType = ftInteger
+        Name = 'UserFrom'
+        ParamType = ptInput
+        Value = nil
       end>
-    object IntegerField3: TIntegerField
-      FieldName = 'CNTR'
-      ReadOnly = True
-      Required = True
-    end
-    object StringField3: TStringField
-      FieldName = 'COMENT'
-      ReadOnly = True
-      Required = True
-      Size = 7
-    end
   end
-end
+  object sSkinManager1: TsSkinManager
+    ButtonsOptions.OldGlyphsMode = True
+    IsDefault = False
+    InternalSkins = <>
+    SkinDirectory = 'c:\Skins'
+    SkinName = 'AlterMetro 2016'
+    SkinInfo = '15'
+    ThirdParty.ThirdEdits = ' '
+    ThirdParty.ThirdButtons = 'TButton'
+    ThirdParty.ThirdBitBtns = ' '
+    ThirdParty.ThirdCheckBoxes = ' '
+    ThirdParty.ThirdGroupBoxes = ' '
+    ThirdParty.ThirdListViews = ' '
+    ThirdParty.ThirdPanels = ' '
+    ThirdParty.ThirdGrids = ' '
+    ThirdParty.ThirdTreeViews = ' '
+    ThirdParty.ThirdComboBoxes = ' '
+    ThirdParty.ThirdWWEdits = ' '
+    ThirdParty.ThirdVirtualTrees = ' '
+    ThirdParty.ThirdGridEh = ' '
+    ThirdParty.ThirdPageControl = ' '
+    ThirdParty.ThirdTabControl = ' '
+    ThirdParty.ThirdToolBar = ' '
+    ThirdParty.ThirdStatusBar = ' '
+    ThirdParty.ThirdSpeedButton = ' '
+    ThirdParty.ThirdScrollControl = ' '
+    ThirdParty.ThirdUpDown = ' '
+    ThirdParty.ThirdScrollBar = ' '
+    ThirdParty.ThirdStaticText = ' '
+    ThirdParty.ThirdNativePaint = ' '
+    Left = 336
+    Top = 88
+  end
+  object sSkinProvider1: TsSkinProvider
+    AddedTitle.Font.Charset = DEFAULT_CHARSET
+    AddedTitle.Font.Color = clNone
+    AddedTitle.Font.Height = -11
+    AddedTitle.Font.Name = 'Tahoma'
+    AddedTitle.Font.Style = []
+    SkinData.SkinSection = 'FORM'
+    TitleButtons = <>
+    Left = 424
+    Top = 88
+  end
+end

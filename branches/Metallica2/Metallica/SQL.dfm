@@ -2,7 +2,7 @@ object FormSQL: TFormSQL
   Left = 372
   Top = 311
   Caption = #1042#1099#1087#1086#1083#1085#1077#1085#1080#1077' '#1087#1088#1086#1080#1079#1074#1086#1083#1100#1085#1086#1075#1086' SQL '#1079#1072#1087#1088#1086#1089#1072
-  ClientHeight = 407
+  ClientHeight = 419
   ClientWidth = 350
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -15,7 +15,7 @@ object FormSQL: TFormSQL
   OnKeyUp = FormKeyUp
   DesignSize = (
     350
-    407)
+    419)
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TsLabel
@@ -82,7 +82,7 @@ object FormSQL: TFormSQL
   object CBExecute: TsCheckBox
     Left = 16
     Top = 232
-    Width = 209
+    Width = 197
     Height = 17
     Caption = #1047#1072#1087#1088#1086#1089' '#1085#1077' '#1074#1086#1079#1074#1088#1072#1097#1072#1077#1090' '#1088#1077#1079#1091#1083#1100#1090#1072#1090
     TabOrder = 3
@@ -101,7 +101,7 @@ object FormSQL: TFormSQL
   end
   object BitBtnCancel: TsBitBtn
     Left = 8
-    Top = 386
+    Top = 390
     Width = 75
     Height = 25
     Anchors = [akLeft, akBottom]
@@ -129,21 +129,63 @@ object FormSQL: TFormSQL
     NumGlyphs = 2
     TabOrder = 6
   end
-  object DSQuery: TDataSource
-    DataSet = ZQuery
-    Left = 232
-    Top = 296
-  end
-  object ZQuery: TZQuery
-    CachedUpdates = True
-    Params = <>
-    Left = 128
-    Top = 288
-  end
   object SDSQL: TsSaveDialog
     DefaultExt = 'Text files|*.txt'
     Filter = 'SQL file|*.sql|Any file|*.*'
     Left = 200
     Top = 80
+  end
+  object ZQuery: TUniQuery
+    Left = 128
+    Top = 344
+  end
+  object DSQuery: TUniDataSource
+    DataSet = ZQuery
+    Left = 216
+    Top = 344
+  end
+  object sSkinManager1: TsSkinManager
+    ButtonsOptions.OldGlyphsMode = True
+    IsDefault = False
+    InternalSkins = <>
+    SkinDirectory = 'c:\Skins'
+    SkinName = 'AlterMetro'
+    SkinInfo = '15'
+    ThirdParty.ThirdEdits = ' '
+    ThirdParty.ThirdButtons = 'TButton'
+    ThirdParty.ThirdBitBtns = ' '
+    ThirdParty.ThirdCheckBoxes = ' '
+    ThirdParty.ThirdGroupBoxes = ' '
+    ThirdParty.ThirdListViews = ' '
+    ThirdParty.ThirdPanels = ' '
+    ThirdParty.ThirdGrids = ' '
+    ThirdParty.ThirdTreeViews = ' '
+    ThirdParty.ThirdComboBoxes = ' '
+    ThirdParty.ThirdWWEdits = ' '
+    ThirdParty.ThirdVirtualTrees = ' '
+    ThirdParty.ThirdGridEh = ' '
+    ThirdParty.ThirdPageControl = ' '
+    ThirdParty.ThirdTabControl = ' '
+    ThirdParty.ThirdToolBar = ' '
+    ThirdParty.ThirdStatusBar = ' '
+    ThirdParty.ThirdSpeedButton = ' '
+    ThirdParty.ThirdScrollControl = ' '
+    ThirdParty.ThirdUpDown = ' '
+    ThirdParty.ThirdScrollBar = ' '
+    ThirdParty.ThirdStaticText = ' '
+    ThirdParty.ThirdNativePaint = ' '
+    Left = 24
+    Top = 8
+  end
+  object sSkinProvider1: TsSkinProvider
+    AddedTitle.Font.Charset = DEFAULT_CHARSET
+    AddedTitle.Font.Color = clNone
+    AddedTitle.Font.Height = -11
+    AddedTitle.Font.Name = 'Tahoma'
+    AddedTitle.Font.Style = []
+    SkinData.SkinSection = 'FORM'
+    TitleButtons = <>
+    Left = 72
+    Top = 8
   end
 end

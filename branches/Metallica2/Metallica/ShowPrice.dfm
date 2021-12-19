@@ -198,7 +198,8 @@ object FormPriceShow: TFormPriceShow
     TabOrder = 2
     OnClick = BitBtnCompaniesClick
   end
-  object qData: TZReadOnlyQuery
+  object qData: TUniQuery
+    Connection = FormMain.ZC
     SQL.Strings = (
       'SELECT pl_id, pl_headerid, pl.pl_treeid, pl_price,'
       'cast(:node as varchar(200)) as pl_parent,'
@@ -224,120 +225,69 @@ object FormPriceShow: TFormPriceShow
       'AND ph.ph_isclosed = 0'
       'AND pl.pl_isclosed = 0'
       'ORDER BY ph.ph_date_insert, pl_orderby')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'node'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftString
-        Name = 'treeid'
-        ParamType = ptUnknown
-        Value = '8'
-      end>
     Left = 32
-    Top = 64
+    Top = 136
     ParamData = <
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'node'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end
       item
-        DataType = ftString
+        DataType = ftInteger
         Name = 'treeid'
-        ParamType = ptUnknown
-        Value = '8'
+        ParamType = ptInput
+        Value = nil
       end>
-    object qDataPL_ID: TIntegerField
-      FieldName = 'PL_ID'
-      Required = True
-    end
-    object qDataPL_HEADERID: TIntegerField
-      FieldName = 'PL_HEADERID'
-      Required = True
-    end
-    object qDataPL_TREEID: TIntegerField
-      FieldName = 'PL_TREEID'
-    end
-    object qDataCM_NAME: TStringField
-      FieldName = 'CM_NAME'
-      Size = 100
-    end
-    object qDataCM_CITY: TStringField
-      FieldName = 'CM_CITY'
-      Required = True
-      Size = 100
-    end
-    object qDataCM_ID: TIntegerField
-      FieldName = 'CM_ID'
-      Required = True
-    end
-    object qDataPL_PRICE: TFloatField
-      FieldName = 'PL_PRICE'
-      Required = True
-    end
-    object qDataPL_VALUE1: TStringField
-      FieldName = 'PL_VALUE1'
-      Size = 200
-    end
-    object qDataPL_VALUE2: TStringField
-      FieldName = 'PL_VALUE2'
-      Size = 200
-    end
-    object qDataPL_VALUE3: TStringField
-      FieldName = 'PL_VALUE3'
-      Size = 200
-    end
-    object qDataPL_VALUE4: TStringField
-      FieldName = 'PL_VALUE4'
-      Size = 200
-    end
-    object qDataPL_VALUE5: TStringField
-      FieldName = 'PL_VALUE5'
-      Size = 200
-    end
-    object qDataPL_VALUE6: TStringField
-      FieldName = 'PL_VALUE6'
-      Size = 200
-    end
-    object qDataPL_VALUE7: TStringField
-      FieldName = 'PL_VALUE7'
-      Size = 200
-    end
-    object qDataPL_VALUE8: TStringField
-      FieldName = 'PL_VALUE8'
-      Size = 200
-    end
-    object qDataPL_VALUE9: TStringField
-      FieldName = 'PL_VALUE9'
-      Size = 200
-    end
-    object qDataPL_ORDERBY: TIntegerField
-      FieldName = 'PL_ORDERBY'
-    end
-    object qDataPL_DATE_UPDATE: TDateTimeField
-      FieldName = 'PL_DATE_UPDATE'
-    end
-    object qDataPL_ISCLOSED: TSmallintField
-      FieldName = 'PL_ISCLOSED'
-      Required = True
-    end
-    object qDataPL_PARENT: TStringField
-      FieldName = 'PL_PARENT'
-      ReadOnly = True
-      Size = 200
-    end
-    object qDataPT_VALUE: TStringField
-      FieldName = 'PT_VALUE'
-      ReadOnly = True
-      Size = 100
-    end
   end
-  object DSData: TDataSource
+  object DSData: TUniDataSource
     DataSet = qData
     Left = 96
-    Top = 64
+    Top = 136
+  end
+  object sSkinManager1: TsSkinManager
+    ButtonsOptions.OldGlyphsMode = True
+    IsDefault = False
+    InternalSkins = <>
+    SkinDirectory = 'c:\Skins'
+    SkinName = 'AlterMetro'
+    SkinInfo = '15'
+    ThirdParty.ThirdEdits = ' '
+    ThirdParty.ThirdButtons = 'TButton'
+    ThirdParty.ThirdBitBtns = ' '
+    ThirdParty.ThirdCheckBoxes = ' '
+    ThirdParty.ThirdGroupBoxes = ' '
+    ThirdParty.ThirdListViews = ' '
+    ThirdParty.ThirdPanels = ' '
+    ThirdParty.ThirdGrids = ' '
+    ThirdParty.ThirdTreeViews = ' '
+    ThirdParty.ThirdComboBoxes = ' '
+    ThirdParty.ThirdWWEdits = ' '
+    ThirdParty.ThirdVirtualTrees = ' '
+    ThirdParty.ThirdGridEh = ' '
+    ThirdParty.ThirdPageControl = ' '
+    ThirdParty.ThirdTabControl = ' '
+    ThirdParty.ThirdToolBar = ' '
+    ThirdParty.ThirdStatusBar = ' '
+    ThirdParty.ThirdSpeedButton = ' '
+    ThirdParty.ThirdScrollControl = ' '
+    ThirdParty.ThirdUpDown = ' '
+    ThirdParty.ThirdScrollBar = ' '
+    ThirdParty.ThirdStaticText = ' '
+    ThirdParty.ThirdNativePaint = ' '
+    Left = 24
+    Top = 8
+  end
+  object sSkinProvider1: TsSkinProvider
+    AddedTitle.Font.Charset = DEFAULT_CHARSET
+    AddedTitle.Font.Color = clNone
+    AddedTitle.Font.Height = -11
+    AddedTitle.Font.Name = 'Tahoma'
+    AddedTitle.Font.Style = []
+    SkinData.SkinSection = 'FORM'
+    TitleButtons = <>
+    Left = 72
+    Top = 8
   end
 end

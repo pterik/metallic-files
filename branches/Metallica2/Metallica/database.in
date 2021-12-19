@@ -1,6 +1,0 @@
-//Этот INI файл автоматически создан программой CheckCom.exe
-HOSTNAME=localhost
-DATABASE=C:\Projects\Calendar\DATABASE.FDB
-PROTOCOL=firebird-2.0
-USERNAME=sysdba
-PASSWORD=masterkey

@@ -5,17 +5,20 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
   Dialogs, ComCtrls, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset, 
-  ZDataset, DBCtrls, Grids, DBGrids, DBLookupEh, Mask, DBCtrlsEh, DBGridEh, sBitBtn, sLabel, sEdit, sCheckBox;
+  ZDataset, DBCtrls, Grids, DBGrids, DBLookupEh, Mask, DBCtrlsEh, DBGridEh, sBitBtn, sLabel, sEdit, sCheckBox,
+  DBAccess, Uni, MemDS, sSkinProvider, sSkinManager;
 
 type
 	TFormNewItem = class(TForm)
-    BitBtnCancel: TsBitBtn;
-		Label1: TsLabel;
-    BitBtnSave: TsBitBtn;
-    EditTree: TsEdit;
-    qMaxParentPos: TZReadOnlyQuery;
+    EditTree: TEdit;
+    qMaxParentPos: TUniQuery;
+    qTreeInsertParent: TUniSQL;
+    sSkinManager1: TsSkinManager;
+    sSkinProvider1: TsSkinProvider;
+    sLabel1: TsLabel;
     qMaxParentPosMAXPOS: TLargeintField;
-    qTreeInsertParent: TZQuery;
+    BitBtnCancel: TsBitBtn;
+    BitBtnSave: TsBitBtn;
     procedure FormKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure BitBtnSaveClick(Sender: TObject);
@@ -71,11 +74,10 @@ end;
 
 procedure TFormNewItem.SaveTreeItem;
 begin
-qTreeInsertParent.Close;
 qTreeInsertParent.ParamByName('PT_VALUE').AsString:=EditTree.Text;
 qTreeInsertParent.ParamByName('PT_ORDERBY').AsInteger:=MaximalPos();
 qTreeInsertParent.ParamByName('PT_DATE').AsDateTime:=Now();
-qTreeInsertParent.ExecSQL;
+qTreeInsertParent.Execute;
 end;
 
 function TFormNewItem.MaximalPos: integer;

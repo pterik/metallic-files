@@ -3,16 +3,16 @@ unit Connection;
 interface
 
 uses
-  	Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
-  	Dialogs, StdCtrls, Buttons, ExtCtrls, DB, ZAbstractRODataset, 	ZAbstractDataset, 
-  ZDataset, ZConnection, Mask, DBCtrlsEh, DBLookupEh, 	IdBaseComponent, 
-  IdComponent, IdRawBase, IdRawClient, IdIcmpClient, IdTCPConnection, IdTCPClient, 
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, Buttons, ExtCtrls, DB, Mask, DBCtrlsEh, DBLookupEh, 	IdBaseComponent,
+  IdComponent, IdRawBase, IdRawClient, IdIcmpClient, IdTCPConnection, IdTCPClient,
   IdWhois, IdIPWatch, ZAbstractConnection, DBAccess, Uni, MemDS, UniProvider, InterBaseUniProvider,
-  sDialogs, sCheckBox, sButton, sComboBox, sBitBtn, sMemo, sEdit, sLabel, sPanel;
+  sDialogs, sCheckBox, sButton, sComboBox, sBitBtn, sMemo, sEdit, sLabel, sPanel,
+  sMaskEdit, sCustomComboEdit, sSkinProvider, sSkinManager;
 
 // const IniName='database.ini';
  const RegisterBranchMetallica='SOFTWARE\PterikSoft\Metallica';
-       ParameterVersion=1;
+       ParameterVersion=2;
 
 type
 	TFormConnection = class(TForm)
@@ -44,6 +44,8 @@ type
     Label3: TsLabel;
     ZC: TUniConnection;
     InterBaseUniProvider1: TInterBaseUniProvider;
+    sSkinManager1: TsSkinManager;
+    sSkinProvider1: TsSkinProvider;
 		procedure BitBtnConnectClick(Sender: TObject);
 		procedure BitBtnEnterClick(Sender: TObject);
 		procedure FormCreate(Sender: TObject);
@@ -178,23 +180,12 @@ openResult:boolean;
 KAccess:LongWord;
 Res:boolean;
 ReadBranch:boolean;
-reg : TRegistry;
+//reg : TRegistry;
 begin
-//Res:=true;
+Res:=true;
 //—начала читаем только ветку есть ли она
-//if (not reg.KeyExists('SOFTWARE\PterikSoft')) then
-ReadBranch:=ReadOnlyBranch(RegisterBranchMetallica, KAccess);
-if not ReadBranch then
-	begin
-	F_ParametersCorrect:=-1;
-	EdtHostName.Text:='';
-	EdtDatabase.Text:='';
-	CBProtocol.Text:='';
-	F_Chipered:=0;
-	EdtUser.Text:='';
-	EdtPassword.Text:='';
-	end
-else
+
+if RegisterRecordExists('SOFTWARE\PterikSoft') and ReadOnlyBranch(RegisterBranchMetallica, KAccess) then
 	begin
 	try
 	//F_ParametersCorrect=0 если данные неверные =1 ≈сли данные верные в зависимости от версии параметров
@@ -217,10 +208,20 @@ else
 	except on E:Exception do
 		F_ParametersCorrect:=-1;
 	end;
-end;//else
+end
+else
+	begin
+	F_ParametersCorrect:=-1;
+	EdtHostName.Text:='';
+	EdtDatabase.Text:='';
+	CBProtocol.Text:='';
+	F_Chipered:=0;
+	EdtUser.Text:='';
+	EdtPassword.Text:='';
+	end;
 if not Res then
   begin
-  MemoInfo.Lines.Add('ƒанные о подключении не удалось прочитать реестра');
+  MemoInfo.Lines.Add('ƒанные о подключении не удалось прочитать из реестра Windows');
   exit;
   end;
 

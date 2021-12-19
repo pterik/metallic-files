@@ -405,23 +405,36 @@ object FormNewPriceRow: TFormNewPriceRow
     TabOrder = 7
     Text = 'EditCity'
   end
-  object qDataView: TZReadOnlyQuery
+  object QCompany: TUniQuery
+    Connection = FormMain.ZC
+    SQL.Strings = (
+      'SELECT cm_id as COMPANYID, cm_city, cm_name, c.cm_comment '
+      'FROM company c'
+      'WHERE CM_ISCLOSED= 0 '
+      'AND cm_id =:COMPANYID')
+    Left = 320
+    Top = 48
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'COMPANYID'
+        ParamType = ptInput
+        Value = nil
+      end>
+  end
+  object qDataView: TUniQuery
+    Connection = FormMain.ZC
     SQL.Strings = (
       'select * from PRICE_LINES'
       'where pl_id = :line_id')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'line_id'
-        ParamType = ptUnknown
-      end>
-    Left = 136
-    Top = 344
+    Left = 272
+    Top = 352
     ParamData = <
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'line_id'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end>
     object qDataViewPL_ID: TIntegerField
       FieldName = 'PL_ID'
@@ -476,6 +489,7 @@ object FormNewPriceRow: TFormNewPriceRow
     end
     object qDataViewPL_ORDERBY: TIntegerField
       FieldName = 'PL_ORDERBY'
+      Required = True
     end
     object qDataViewPL_DATE_UPDATE: TDateTimeField
       FieldName = 'PL_DATE_UPDATE'
@@ -485,100 +499,63 @@ object FormNewPriceRow: TFormNewPriceRow
       Required = True
     end
   end
-  object DSData: TDataSource
-    DataSet = qDataView
-    Left = 200
-    Top = 344
-  end
-  object qDisplay: TZReadOnlyQuery
-    SQL.Strings = (
-      'select gs_field, gs_header, gs_show,'
-      'gs_size, gs_displayformat from grid_show'
-      'where gs_form = :form'
-      'and gs_treeid is null'
-      'order by gs_orderby')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'form'
-        ParamType = ptUnknown
-      end>
-    Left = 216
-    Top = 240
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'form'
-        ParamType = ptUnknown
-      end>
-    object qDisplayGS_FIELD: TStringField
-      FieldName = 'GS_FIELD'
-      Size = 50
-    end
-    object qDisplayGS_HEADER: TStringField
-      FieldName = 'GS_HEADER'
-      Size = 50
-    end
-    object qDisplayGS_SHOW: TSmallintField
-      FieldName = 'GS_SHOW'
-      Required = True
-    end
-    object qDisplayGS_SIZE: TIntegerField
-      FieldName = 'GS_SIZE'
-      Required = True
-    end
-    object qDisplayGS_DISPLAYFORMAT: TStringField
-      FieldName = 'GS_DISPLAYFORMAT'
-    end
-  end
-  object QCompany: TZQuery
-    SQL.Strings = (
-      'SELECT cm_id as COMPANYID, cm_city, cm_name, c.cm_comment '
-      'FROM company c'
-      'WHERE CM_ISCLOSED= 0 '
-      'AND cm_id =:COMPANYID')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'COMPANYID'
-        ParamType = ptUnknown
-      end>
-    WhereMode = wmWhereAll
-    Options = []
-    Left = 240
-    Top = 40
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'COMPANYID'
-        ParamType = ptUnknown
-      end>
-    object QCompanyCOMPANYID: TIntegerField
-      FieldName = 'COMPANYID'
-      Required = True
-    end
-    object QCompanyCM_CITY: TStringField
-      FieldName = 'CM_CITY'
-      Size = 100
-    end
-    object QCompanyCM_NAME: TStringField
-      FieldName = 'CM_NAME'
-      Size = 100
-    end
-    object QCompanyCM_COMMENT: TStringField
-      FieldName = 'CM_COMMENT'
-      Size = 255
-    end
-  end
-  object ZTableEdit: TZTable
-    Filtered = True
-    TableName = 'PRICE_LINES'
-    Left = 56
-    Top = 136
-  end
-  object DSEdit: TDataSource
+  object DSEdit: TUniDataSource
     DataSet = ZTableEdit
     Left = 136
-    Top = 144
+    Top = 216
+  end
+  object DSData: TUniDataSource
+    DataSet = qDataView
+    Left = 360
+    Top = 352
+  end
+  object ZTableEdit: TUniTable
+    Connection = FormMain.ZC
+    Left = 56
+    Top = 208
+  end
+  object sSkinManager1: TsSkinManager
+    ButtonsOptions.OldGlyphsMode = True
+    IsDefault = False
+    InternalSkins = <>
+    SkinDirectory = 'c:\Skins'
+    SkinName = 'AlterMetro'
+    SkinInfo = '15'
+    ThirdParty.ThirdEdits = ' '
+    ThirdParty.ThirdButtons = 'TButton'
+    ThirdParty.ThirdBitBtns = ' '
+    ThirdParty.ThirdCheckBoxes = ' '
+    ThirdParty.ThirdGroupBoxes = ' '
+    ThirdParty.ThirdListViews = ' '
+    ThirdParty.ThirdPanels = ' '
+    ThirdParty.ThirdGrids = ' '
+    ThirdParty.ThirdTreeViews = ' '
+    ThirdParty.ThirdComboBoxes = ' '
+    ThirdParty.ThirdWWEdits = ' '
+    ThirdParty.ThirdVirtualTrees = ' '
+    ThirdParty.ThirdGridEh = ' '
+    ThirdParty.ThirdPageControl = ' '
+    ThirdParty.ThirdTabControl = ' '
+    ThirdParty.ThirdToolBar = ' '
+    ThirdParty.ThirdStatusBar = ' '
+    ThirdParty.ThirdSpeedButton = ' '
+    ThirdParty.ThirdScrollControl = ' '
+    ThirdParty.ThirdUpDown = ' '
+    ThirdParty.ThirdScrollBar = ' '
+    ThirdParty.ThirdStaticText = ' '
+    ThirdParty.ThirdNativePaint = ' '
+    Left = 24
+    Top = 8
+  end
+  object sSkinProvider1: TsSkinProvider
+    AddedTitle.Font.Charset = DEFAULT_CHARSET
+    AddedTitle.Font.Color = clNone
+    AddedTitle.Font.Height = -11
+    AddedTitle.Font.Name = 'Tahoma'
+    AddedTitle.Font.Style = []
+    SkinData.SkinSection = 'FORM'
+    TitleButtons = <>
+    Left = 80
+    Top = 16
   end
 end

@@ -76,91 +76,103 @@ object FormForBoss: TFormForBoss
     TabOrder = 3
     OnClick = BitBtn1Click
   end
-  object qGlobDelete: TZQuery
+  object qGlobDelete: TUniSQL
+    Connection = FormMain.ZC
     SQL.Strings = (
       'delete FROM grid_show'
       'WHERE (gs_treeid IS NULL)')
-    Params = <>
-    WhereMode = wmWhereAll
-    Options = []
-    Left = 40
-    Top = 56
-    object qGlobDeleteCNTR: TIntegerField
-      FieldName = 'CNTR'
-      ReadOnly = True
-    end
+    Left = 160
+    Top = 24
   end
-  object qGlobInsert: TZQuery
+  object qGlobInsert: TUniSQL
+    Connection = FormMain.ZC
     SQL.Strings = (
       'INSERT INTO GRID_SHOW (GS_TREEID, GS_FIELD, GS_HEADER, GS_SHOW,'
       'GS_SIZE, GS_DISPLAYFORMAT, GS_ORDERBY)'
       'VALUES (NULL, :FIELD, :HEADER, :SHOW,'
       ':SIZE, :DISPLAYFORMAT, :ORDERBY)')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'FIELD'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'HEADER'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'SHOW'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'SIZE'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'DISPLAYFORMAT'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'ORDERBY'
-        ParamType = ptUnknown
-      end>
-    WhereMode = wmWhereAll
-    Options = []
-    Left = 112
-    Top = 56
+    Left = 160
+    Top = 104
     ParamData = <
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'FIELD'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'HEADER'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end
       item
-        DataType = ftUnknown
+        DataType = ftSmallint
         Name = 'SHOW'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'SIZE'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'DISPLAYFORMAT'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'ORDERBY'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end>
+  end
+  object sSkinManager1: TsSkinManager
+    ButtonsOptions.OldGlyphsMode = True
+    IsDefault = False
+    InternalSkins = <>
+    SkinDirectory = 'c:\Skins'
+    SkinName = 'AlterMetro'
+    SkinInfo = '15'
+    ThirdParty.ThirdEdits = ' '
+    ThirdParty.ThirdButtons = 'TButton'
+    ThirdParty.ThirdBitBtns = ' '
+    ThirdParty.ThirdCheckBoxes = ' '
+    ThirdParty.ThirdGroupBoxes = ' '
+    ThirdParty.ThirdListViews = ' '
+    ThirdParty.ThirdPanels = ' '
+    ThirdParty.ThirdGrids = ' '
+    ThirdParty.ThirdTreeViews = ' '
+    ThirdParty.ThirdComboBoxes = ' '
+    ThirdParty.ThirdWWEdits = ' '
+    ThirdParty.ThirdVirtualTrees = ' '
+    ThirdParty.ThirdGridEh = ' '
+    ThirdParty.ThirdPageControl = ' '
+    ThirdParty.ThirdTabControl = ' '
+    ThirdParty.ThirdToolBar = ' '
+    ThirdParty.ThirdStatusBar = ' '
+    ThirdParty.ThirdSpeedButton = ' '
+    ThirdParty.ThirdScrollControl = ' '
+    ThirdParty.ThirdUpDown = ' '
+    ThirdParty.ThirdScrollBar = ' '
+    ThirdParty.ThirdStaticText = ' '
+    ThirdParty.ThirdNativePaint = ' '
+    Left = 24
+    Top = 8
+  end
+  object sSkinProvider1: TsSkinProvider
+    AddedTitle.Font.Charset = DEFAULT_CHARSET
+    AddedTitle.Font.Color = clNone
+    AddedTitle.Font.Height = -11
+    AddedTitle.Font.Name = 'Tahoma'
+    AddedTitle.Font.Style = []
+    SkinData.SkinSection = 'FORM'
+    TitleButtons = <>
+    Left = 72
+    Top = 8
   end
 end

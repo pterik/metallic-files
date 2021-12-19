@@ -1,9 +1,10 @@
 object FormMain: TFormMain
   Left = 491
   Top = 226
+  BorderWidth = 2
   Caption = #1055#1088#1072#1081#1089'-'#1083#1080#1089#1090#1099
-  ClientHeight = 617
-  ClientWidth = 934
+  ClientHeight = 613
+  ClientWidth = 930
   Color = clBtnFace
   Constraints.MinHeight = 460
   Constraints.MinWidth = 600
@@ -12,6 +13,7 @@ object FormMain: TFormMain
   Font.Height = -11
   Font.Name = 'Default'
   Font.Style = []
+  FormStyle = fsStayOnTop
   Icon.Data = {
     0000010001001010100000000000280100001600000028000000100000002000
     00000100040000000000C0000000000000000000000000000000000000000000
@@ -32,52 +34,52 @@ object FormMain: TFormMain
   OnKeyDown = FormKeyDown
   OnKeyUp = FormKeyUp
   DesignSize = (
-    934
-    617)
+    930
+    613)
   PixelsPerInch = 96
   TextHeight = 13
-  object Label1: TsLabel
-    Left = 8
-    Top = 8
-    Width = 71
-    Height = 16
-    Caption = #1057#1086#1090#1088#1091#1076#1085#1080#1082
-    ParentFont = False
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clBlack
-    Font.Height = -13
-    Font.Name = 'MS Sans Serif'
-    Font.Style = []
-  end
-  object lbl1: TsLabel
-    Left = 264
+  object sLabel1: TsLabel
+    Left = 266
     Top = 8
     Width = 80
     Height = 16
     Caption = #1055#1086#1089#1090#1072#1074#1097#1080#1082#1080
     ParentFont = False
-    Font.Charset = DEFAULT_CHARSET
+    Font.Charset = RUSSIAN_CHARSET
     Font.Color = clBlack
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = []
   end
-  object lbl2: TsLabel
-    Left = 520
+  object sLabel2: TsLabel
+    Left = 12
+    Top = 8
+    Width = 71
+    Height = 16
+    Caption = #1057#1086#1090#1088#1091#1076#1085#1080#1082
+    ParentFont = False
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = clBlack
+    Font.Height = -13
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+  end
+  object sLabel3: TsLabel
+    Left = 515
     Top = 8
     Width = 119
     Height = 16
     Caption = #1042#1080#1076' '#1076#1077#1103#1090#1077#1083#1100#1085#1086#1089#1090#1080
     ParentFont = False
-    Font.Charset = DEFAULT_CHARSET
+    Font.Charset = RUSSIAN_CHARSET
     Font.Color = clBlack
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = []
   end
   object BitBtnClose: TsBitBtn
-    Left = 810
-    Top = 589
+    Left = 806
+    Top = 580
     Width = 110
     Height = 25
     Anchors = [akRight, akBottom]
@@ -99,12 +101,13 @@ object FormMain: TFormMain
       8888333F00003333330000003333333333333FFFFFF3333F00003333330AAAA0
       333333333333888888F3333F00003333330000003333333333338FFFF8F3333F
       0000}
+    ModalResult = 8
     NumGlyphs = 2
     TabOrder = 6
     OnClick = BitBtnCloseClick
   end
   object BitBtnAbout: TsBitBtn
-    Left = 825
+    Left = 821
     Top = 2
     Width = 105
     Height = 25
@@ -117,8 +120,8 @@ object FormMain: TFormMain
     OnClick = BitBtnAboutClick
   end
   object BitBtnCompanies: TsBitBtn
-    Left = 564
-    Top = 589
+    Left = 560
+    Top = 580
     Width = 110
     Height = 25
     Anchors = [akRight, akBottom]
@@ -141,8 +144,8 @@ object FormMain: TFormMain
     OnClick = BitBtnCompaniesClick
   end
   object BitBtnUsers: TsBitBtn
-    Left = 686
-    Top = 589
+    Left = 682
+    Top = 580
     Width = 110
     Height = 25
     Anchors = [akRight, akBottom]
@@ -160,12 +163,11 @@ object FormMain: TFormMain
     OnClick = BitBtnUsersClick
   end
   object EditMyName: TsEdit
-    Left = 88
-    Top = 4
+    Left = 89
+    Top = 2
     Width = 169
     Height = 24
     TabStop = False
-    Color = cl3DLight
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlack
     Font.Height = -13
@@ -177,8 +179,8 @@ object FormMain: TFormMain
     Text = 'EditMyName'
   end
   object BitBtnForBoss: TsBitBtn
-    Left = 420
-    Top = 589
+    Left = 416
+    Top = 580
     Width = 130
     Height = 25
     Anchors = [akRight, akBottom]
@@ -204,7 +206,7 @@ object FormMain: TFormMain
     Left = 8
     Top = 32
     Width = 170
-    Height = 548
+    Height = 544
     Anchors = [akLeft, akTop, akBottom]
     Indent = 19
     ReadOnly = True
@@ -222,8 +224,8 @@ object FormMain: TFormMain
   object Grid: TDBGridEh
     Left = 184
     Top = 32
-    Width = 755
-    Height = 548
+    Width = 751
+    Height = 544
     Anchors = [akLeft, akTop, akRight, akBottom]
     DataSource = DSData
     DynProps = <>
@@ -353,8 +355,8 @@ object FormMain: TFormMain
     end
   end
   object BitBtnNewPrice: TsBitBtn
-    Left = 12
-    Top = 587
+    Left = 8
+    Top = 582
     Width = 101
     Height = 25
     Anchors = [akLeft, akBottom]
@@ -433,281 +435,6 @@ object FormMain: TFormMain
     TabOrder = 2
     OnExit = edtBusinessExit
   end
-  object ZC2: TZConnection
-    ControlsCodePage = cCP_UTF16
-    ClientCodepage = 'WIN1251'
-    Catalog = ''
-    Properties.Strings = (
-      'controls_cp=GET_ACP'
-      'codepage=WIN1251')
-    TransactIsolationLevel = tiReadCommitted
-    DesignConnection = True
-    HostName = 'localhost'
-    Port = 0
-    Database = 
-      'D:\Projects\GitHub\metallic-files\branches\Metallica2\Database\D' +
-      'ATABASE_ODS11.FDB'
-    User = 'SYSDBA'
-    Password = 'masterkey'
-    Protocol = 'firebird-2.0'
-    LibraryLocation = 'C:\Windows\GDS32.DLL'
-    Left = 56
-    Top = 176
-  end
-  object QViewUsers2: TZQuery
-    Connection = ZC2
-    OnCalcFields = QViewUsers2CalcFields
-    SQL.Strings = (
-      'SELECT '
-      'U_LOGIN,U_FIO,U_COMMENT, U_ID, '
-      'U_ISCLOSED, U_ISBOSS, U_EDIT_PRICES'
-      'FROM USERS U'
-      'where U_ID=:U_ID')
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'U_ID'
-        ParamType = ptUnknown
-        Value = 4
-      end>
-    WhereMode = wmWhereAll
-    Options = []
-    Left = 680
-    Top = 112
-    ParamData = <
-      item
-        DataType = ftInteger
-        Name = 'U_ID'
-        ParamType = ptUnknown
-        Value = 4
-      end>
-    object QViewUsers2U_LOGIN: TStringField
-      FieldName = 'U_LOGIN'
-      Size = 30
-    end
-    object QViewUsers2U_FIO: TStringField
-      FieldName = 'U_FIO'
-      Size = 50
-    end
-    object QViewUsers2U_COMMENT: TStringField
-      FieldName = 'U_COMMENT'
-      Size = 50
-    end
-    object QViewUsers2U_ID: TIntegerField
-      FieldName = 'U_ID'
-      Required = True
-    end
-    object QViewUsers2U_ISCLOSED: TSmallintField
-      FieldName = 'U_ISCLOSED'
-      Required = True
-    end
-    object QViewUsers2U_ISBOSS: TIntegerField
-      FieldName = 'U_ISBOSS'
-    end
-    object QViewUsers2U_FIO_PLUS_BOSS: TStringField
-      FieldKind = fkCalculated
-      FieldName = 'U_FIO_PLUS_BOSS'
-      Size = 50
-      Calculated = True
-    end
-    object QViewUsers2U_EDIT_PRICES: TSmallintField
-      FieldName = 'U_EDIT_PRICES'
-      Required = True
-    end
-  end
-  object DSData2: TDataSource
-    DataSet = qData2
-    Left = 688
-    Top = 184
-  end
-  object qData2: TZReadOnlyQuery
-    Connection = ZC2
-    SQL.Strings = (
-      'SELECT pl_id, pl_headerid, pl.pl_treeid, pl_price,'
-      'cast(:node as varchar(200)) as pl_parent,'
-      
-        '(select pt_value from prices_tree pt where pt.pt_id = pl.pl_tree' +
-        'id'
-      'and pt_isclosed =0) pt_value,'
-      'cm.cm_name, cm.cm_id,  cm.cm_city, cm.cm_business,'
-      'pl_value1, pl_value2, pl_value3,'
-      'pl_value4, pl_value5, pl_value6,'
-      'pl_value7, pl_value8, pl_value9,'
-      'pl_orderby, pl_date_update,'
-      'tl_color, '
-      'pl_isclosed'
-      'FROM price_lines pl, price_headers ph , company cm'
-      'left join TRUSTLEVEL tl on tl.tl_id = cm.cm_trust'
-      'WHERE ((pl.pl_treeid = :treeid)'
-      'OR (pl.pl_treeid IN ('
-      '    SELECT pt_id FROM prices_tree'
-      '    WHERE pt_parentid =:treeid'
-      '    and pt_isclosed = 0'
-      '    )))'
-      'AND ph.ph_id = pl.pl_headerid'
-      'AND cm.cm_id = ph.ph_companyid'
-      'AND cm.cm_isclosed = 0'
-      'AND ph.ph_isclosed = 0'
-      'AND pl.pl_isclosed = 0'
-      
-        'and ((upper(cm_name COLLATE WIN1251) like '#39'%'#39'||upper(:company)||' +
-        #39'%'#39') or (cast(:company as varchar(100)) ='#39#39') )'
-      
-        'and ((UPPER(cm_business COLLATE WIN1251) like '#39'%'#39'||upper(:busine' +
-        'ss)||'#39'%'#39' ) or (cast(:business as varchar(100)) ='#39#39') )'
-      'ORDER BY ph.ph_date_insert, pl_orderby '
-      ' ')
-    Params = <
-      item
-        DataType = ftString
-        Name = 'node'
-        ParamType = ptInput
-        Size = 100
-        Value = ''
-      end
-      item
-        DataType = ftInteger
-        Name = 'treeid'
-        ParamType = ptInput
-        Size = 6
-        Value = 174
-      end
-      item
-        DataType = ftString
-        Name = 'company'
-        ParamType = ptInput
-        Size = 100
-        Value = ''
-      end
-      item
-        DataType = ftString
-        Name = 'business'
-        ParamType = ptInput
-        Size = 100
-      end>
-    Left = 736
-    Top = 320
-    ParamData = <
-      item
-        DataType = ftString
-        Name = 'node'
-        ParamType = ptInput
-        Size = 100
-        Value = ''
-      end
-      item
-        DataType = ftInteger
-        Name = 'treeid'
-        ParamType = ptInput
-        Size = 6
-        Value = 174
-      end
-      item
-        DataType = ftString
-        Name = 'company'
-        ParamType = ptInput
-        Size = 100
-        Value = ''
-      end
-      item
-        DataType = ftString
-        Name = 'business'
-        ParamType = ptInput
-        Size = 100
-      end>
-    object qData2PL_ID: TIntegerField
-      FieldName = 'PL_ID'
-      Required = True
-    end
-    object qData2PL_HEADERID: TIntegerField
-      FieldName = 'PL_HEADERID'
-      Required = True
-    end
-    object qData2PL_TREEID: TIntegerField
-      FieldName = 'PL_TREEID'
-    end
-    object qData2CM_NAME: TStringField
-      FieldName = 'CM_NAME'
-      Size = 100
-    end
-    object qData2CM_CITY: TStringField
-      FieldName = 'CM_CITY'
-      Size = 100
-    end
-    object qData2CM_ID: TIntegerField
-      FieldName = 'CM_ID'
-      Required = True
-    end
-    object qData2CM_BUSINESS: TStringField
-      FieldName = 'CM_BUSINESS'
-      Required = True
-      Size = 100
-    end
-    object qData2PL_VALUE1: TStringField
-      FieldName = 'PL_VALUE1'
-      Size = 200
-    end
-    object qData2PL_VALUE2: TStringField
-      FieldName = 'PL_VALUE2'
-      Size = 200
-    end
-    object qData2PL_VALUE3: TStringField
-      FieldName = 'PL_VALUE3'
-      Size = 200
-    end
-    object qData2PL_VALUE4: TStringField
-      FieldName = 'PL_VALUE4'
-      Size = 200
-    end
-    object qData2PL_VALUE5: TStringField
-      FieldName = 'PL_VALUE5'
-      Size = 200
-    end
-    object qData2PL_VALUE6: TStringField
-      FieldName = 'PL_VALUE6'
-      Size = 200
-    end
-    object qData2PL_VALUE7: TStringField
-      FieldName = 'PL_VALUE7'
-      Size = 200
-    end
-    object qData2PL_VALUE8: TStringField
-      FieldName = 'PL_VALUE8'
-      Size = 200
-    end
-    object qData2PL_VALUE9: TStringField
-      FieldName = 'PL_VALUE9'
-      Size = 200
-    end
-    object qData2PL_ORDERBY: TIntegerField
-      FieldName = 'PL_ORDERBY'
-    end
-    object qData2PL_DATE_UPDATE: TDateTimeField
-      FieldName = 'PL_DATE_UPDATE'
-    end
-    object qData2PL_ISCLOSED: TSmallintField
-      FieldName = 'PL_ISCLOSED'
-      Required = True
-    end
-    object qData2PL_PARENT: TStringField
-      FieldName = 'PL_PARENT'
-      ReadOnly = True
-      Size = 200
-    end
-    object qData2PT_VALUE: TStringField
-      FieldName = 'PT_VALUE'
-      ReadOnly = True
-      Size = 100
-    end
-    object qData2TL_COLOR: TIntegerField
-      FieldName = 'TL_COLOR'
-      Required = True
-    end
-    object qData2PL_PRICE: TSingleField
-      FieldName = 'PL_PRICE'
-      ReadOnly = True
-    end
-  end
   object ZC: TUniConnection
     ProviderName = 'InterBase'
     Database = 
@@ -729,6 +456,7 @@ object FormMain: TFormMain
       'U_ISCLOSED, U_ISBOSS, U_EDIT_PRICES'
       'FROM USERS U'
       'where U_ID=:U_ID')
+    OnCalcFields = QViewUsersCalcFields
     Left = 240
     Top = 136
     ParamData = <
@@ -736,7 +464,7 @@ object FormMain: TFormMain
         DataType = ftInteger
         Name = 'U_ID'
         ParamType = ptInput
-        Value = nil
+        Value = -1
       end>
     object QViewUsersU_LOGIN: TStringField
       FieldName = 'U_LOGIN'
@@ -820,19 +548,19 @@ object FormMain: TFormMain
         DataType = ftInteger
         Name = 'treeid'
         ParamType = ptInput
-        Value = nil
+        Value = 165
       end
       item
         DataType = ftString
         Name = 'company'
         ParamType = ptInput
-        Value = nil
+        Value = ''
       end
       item
         DataType = ftString
         Name = 'business'
         ParamType = ptInput
-        Value = nil
+        Value = ''
       end>
     object qDataPL_ID: TIntegerField
       FieldName = 'PL_ID'
@@ -937,5 +665,57 @@ object FormMain: TFormMain
     DataSet = qData
     Left = 240
     Top = 312
+  end
+  object InterBaseUniProvider1: TInterBaseUniProvider
+    Left = 56
+    Top = 336
+  end
+  object UniSQLMonitor1: TUniSQLMonitor
+    Left = 440
+    Top = 240
+  end
+  object sSkinProvider1: TsSkinProvider
+    AddedTitle.Font.Charset = DEFAULT_CHARSET
+    AddedTitle.Font.Color = clNone
+    AddedTitle.Font.Height = -11
+    AddedTitle.Font.Name = 'Tahoma'
+    AddedTitle.Font.Style = []
+    SkinData.SkinManager = sSkinManager1
+    SkinData.SkinSection = 'FORM'
+    TitleButtons = <>
+    Left = 8
+    Top = 8
+  end
+  object sSkinManager1: TsSkinManager
+    ButtonsOptions.OldGlyphsMode = True
+    InternalSkins = <>
+    SkinDirectory = 'c:\Skins'
+    SkinName = 'AlterMetro'
+    SkinInfo = '15'
+    ThirdParty.ThirdEdits = ' '
+    ThirdParty.ThirdButtons = 'TButton'
+    ThirdParty.ThirdBitBtns = ' '
+    ThirdParty.ThirdCheckBoxes = ' '
+    ThirdParty.ThirdGroupBoxes = ' '
+    ThirdParty.ThirdListViews = ' '
+    ThirdParty.ThirdPanels = ' '
+    ThirdParty.ThirdGrids = ' '
+    ThirdParty.ThirdTreeViews = ' '
+    ThirdParty.ThirdComboBoxes = ' '
+    ThirdParty.ThirdWWEdits = ' '
+    ThirdParty.ThirdVirtualTrees = ' '
+    ThirdParty.ThirdGridEh = ' '
+    ThirdParty.ThirdPageControl = ' '
+    ThirdParty.ThirdTabControl = ' '
+    ThirdParty.ThirdToolBar = ' '
+    ThirdParty.ThirdStatusBar = ' '
+    ThirdParty.ThirdSpeedButton = ' '
+    ThirdParty.ThirdScrollControl = ' '
+    ThirdParty.ThirdUpDown = ' '
+    ThirdParty.ThirdScrollBar = ' '
+    ThirdParty.ThirdStaticText = ' '
+    ThirdParty.ThirdNativePaint = ' '
+    Left = 48
+    Top = 8
   end
 end

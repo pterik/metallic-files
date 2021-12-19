@@ -8,36 +8,28 @@ uses
   Grids, DBGrids, DBGridEh, ComCtrls, Mask, DBCtrlsEh, ZAbstractTable, //DBTables, 
   DataModule, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, 
   EhLibVCL, GridsEh, DBAxisGridsEh, sLabel, sEdit, sCheckBox, sMaskEdit, sComboBox, sMemo, sDialogs, sSpeedButton,
-  sBitBtn;
+  sBitBtn, DBAccess, Uni, MemDS, sSkinProvider, sSkinManager;
 
 type
   TFormNewPriceRow = class(TForm)
     GridView: TDBGridEh;
-    qDataView: TZReadOnlyQuery;
-    DSData: TDataSource;
-    qDisplay: TZReadOnlyQuery;
-    qDisplayGS_FIELD: TStringField;
-    qDisplayGS_HEADER: TStringField;
-    qDisplayGS_SHOW: TSmallintField;
-    qDisplayGS_SIZE: TIntegerField;
-    qDisplayGS_DISPLAYFORMAT: TStringField;
     EditCompany: TsEdit;
     LabelComp: TsLabel;
     LabelCity: TsLabel;
     EditAddress: TsEdit;
-    QCompany: TZQuery;
-    QCompanyCOMPANYID: TIntegerField;
-    QCompanyCM_NAME: TStringField;
-    QCompanyCM_COMMENT: TStringField;
     BitBtnCancel: TsBitBtn;
     BitBtnSave: TsBitBtn;
     Label1: TsLabel;
     EditNodeValue: TsEdit;
-    ZTableEdit: TZTable;
-    DSEdit: TDataSource;
     GridTable: TDBGridEh;
     Label2: TsLabel;
     Label3: TsLabel;
+    EditCity: TsEdit;
+    Label4: TsLabel;
+    QCompany: TUniQuery;
+    qDataView: TUniQuery;
+    DSEdit: TUniDataSource;
+    DSData: TUniDataSource;
     qDataViewPL_ID: TIntegerField;
     qDataViewPL_HEADERID: TIntegerField;
     qDataViewPL_TREEID: TIntegerField;
@@ -54,9 +46,9 @@ type
     qDataViewPL_ORDERBY: TIntegerField;
     qDataViewPL_DATE_UPDATE: TDateTimeField;
     qDataViewPL_ISCLOSED: TSmallintField;
-    QCompanyCM_CITY: TStringField;
-    EditCity: TsEdit;
-    Label4: TsLabel;
+    ZTableEdit: TUniTable;
+    sSkinManager1: TsSkinManager;
+    sSkinProvider1: TsSkinProvider;
     procedure FormKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure BitBtnSaveClick(Sender: TObject);

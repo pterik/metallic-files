@@ -6,7 +6,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
   Dialogs, StdCtrls, Buttons, Mask, DB, ZAbstractRODataset, ZAbstractDataset, 
   ZDataset, DBCtrlsEh, DBLookupEh, DBGridEh, sLabel, sEdit, sCheckBox, sMaskEdit, sComboBox, sMemo,
-  sDialogs, sSpeedButton, sBitBtn;
+  sDialogs, sSpeedButton, sBitBtn, MemDS, DBAccess, Uni, sSkinProvider,
+  sSkinManager, sCustomComboEdit;
 
 type
   TFormUpdateCompany = class(TForm)
@@ -20,33 +21,35 @@ type
     LabelisClosed: TsLabel;
     EditComment: TsMemo;
     BitBtnSave: TsBitBtn;
-    QCompany: TZQuery;
-    QCompanyCM_ID: TIntegerField;
-    QCompanyCM_NAME: TStringField;
-    QCompanyCM_COMMENT: TStringField;
-    QCompanyCM_ISCLOSED: TIntegerField;
-    QCompanyCM_HYPERLINK: TStringField;
     Label6: TsLabel;
     Label7: TsLabel;
     Label3: TsLabel;
     EditCity: TsEdit;
-    QCompanyCM_CITY: TStringField;
-    QCompanyCM_TRUST: TSmallintField;
     Label8: TsLabel;
     CBTrustLevel: TsComboBox;
-    DSTrust: TDataSource;
-    QTrustLevel: TZReadOnlyQuery;
-    QTrustLevelTL_ID: TIntegerField;
-    QTrustLevelTL_LEVEL: TIntegerField;
-    QTrustLevelTL_COLOR: TIntegerField;
-    QTrustLevelTL_NAME: TStringField;
     Label9: TsLabel;
     txtPriceList: TsEdit;
     btnSelectPrice: TsSpeedButton;
     SelectPriceDialog: TsOpenDialog;
     lblBusiness: TsLabel;
     mmoBusiness: TsMemo;
-    strngfldQCompanyCM_BUSINESS: TStringField;
+    QTrustLevel: TUniQuery;
+    QCompany: TUniQuery;
+    QCompanyCM_ID: TIntegerField;
+    QCompanyCM_CITY: TStringField;
+    QCompanyCM_NAME: TStringField;
+    QCompanyCM_TRUST: TIntegerField;
+    QCompanyCM_COMMENT: TStringField;
+    QCompanyCM_ISCLOSED: TIntegerField;
+    QCompanyCM_HYPERLINK: TStringField;
+    QCompanyCM_BUSINESS: TStringField;
+    QTrustLevelTL_ID: TIntegerField;
+    QTrustLevelTL_LEVEL: TIntegerField;
+    QTrustLevelTL_COLOR: TIntegerField;
+    QTrustLevelTL_NAME: TStringField;
+    DSTrust: TUniDataSource;
+    sSkinManager1: TsSkinManager;
+    sSkinProvider1: TsSkinProvider;
     procedure BitBtnCancelClick(Sender: TObject);
     procedure FormKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
@@ -67,7 +70,7 @@ implementation
 {$R *.dfm}
 
 uses
-  Companies, DataModule, MainForm, CommonUnit;
+  System.UiTypes, Companies, DataModule, MainForm, CommonUnit;
 
 procedure TFormUpdateCompany.SetPosition(L, T: Integer);
 begin

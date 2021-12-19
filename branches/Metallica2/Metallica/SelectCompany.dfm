@@ -117,8 +117,8 @@ object FormSelectCompany: TFormSelectCompany
     TabOrder = 1
     OnClick = BitBtnCancelClick
   end
-  object QCompany: TZQuery
-    OnCalcFields = QCompanyCalcFields
+  object QCompany: TUniQuery
+    Connection = FormMain.ZC
     SQL.Strings = (
       'SELECT fn.*,'
       '    (SELECT ph_isfinished FROM price_headers cm'
@@ -131,33 +131,31 @@ object FormSelectCompany: TFormSelectCompany
       'FROM company c'
       'WHERE cm_isclosed =0) fn'
       'ORDER BY cm_name')
-    Params = <>
-    WhereMode = wmWhereAll
-    Options = []
     Left = 80
-    Top = 112
+    Top = 240
     object QCompanyCM_NAME: TStringField
       FieldName = 'CM_NAME'
+      ReadOnly = True
       Size = 100
     end
     object QCompanyCM_CITY: TStringField
       FieldName = 'CM_CITY'
+      ReadOnly = True
       Size = 100
     end
     object QCompanyCM_COMMENT: TStringField
-      DisplayWidth = 1024
       FieldName = 'CM_COMMENT'
+      ReadOnly = True
       Size = 255
     end
     object QCompanyCM_TRUNC_COMMENT: TStringField
       FieldKind = fkCalculated
       FieldName = 'CM_TRUNC_COMMENT'
-      Size = 1024
       Calculated = True
     end
     object QCompanyCOMPANYID: TIntegerField
       FieldName = 'COMPANYID'
-      Required = True
+      ReadOnly = True
     end
     object QCompanyMAXPH_ID: TIntegerField
       FieldName = 'MAXPH_ID'
@@ -173,64 +171,96 @@ object FormSelectCompany: TFormSelectCompany
       Calculated = True
     end
   end
-  object DSCompanies: TDataSource
-    DataSet = QCompany
-    Left = 176
-    Top = 120
-  end
-  object qPriceHeader: TZReadOnlyQuery
+  object qPriceHeader: TUniQuery
+    Connection = FormMain.ZC
     SQL.Strings = (
       'select max(ph_id) ph_id from price_headers'
       'where ph_companyid=:companyid'
       'and ph_isclosed =0')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'companyid'
-        ParamType = ptUnknown
-      end>
     Left = 288
-    Top = 120
+    Top = 240
     ParamData = <
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'companyid'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end>
     object qPriceHeaderPH_ID: TIntegerField
       FieldName = 'PH_ID'
       ReadOnly = True
     end
   end
-  object QNewHeader: TZQuery
+  object QNewHeader: TUniSQL
+    Connection = FormMain.ZC
     SQL.Strings = (
       
         'INSERT INTO PRICE_HEADERS (PH_COMPANYID, PH_DATE_INSERT, PH_ISCL' +
         'OSED)'
       'VALUES (:COMPANYID, :DATE_INSERT, 0)')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'COMPANYID'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'DATE_INSERT'
-        ParamType = ptUnknown
-      end>
     Left = 376
-    Top = 120
+    Top = 240
     ParamData = <
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'COMPANYID'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end
       item
-        DataType = ftUnknown
+        DataType = ftDateTime
         Name = 'DATE_INSERT'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end>
+  end
+  object DSCompanies: TUniDataSource
+    DataSet = QCompany
+    Left = 176
+    Top = 248
+  end
+  object sSkinManager1: TsSkinManager
+    ButtonsOptions.OldGlyphsMode = True
+    IsDefault = False
+    InternalSkins = <>
+    SkinDirectory = 'c:\Skins'
+    SkinName = 'AlterMetro'
+    SkinInfo = '15'
+    ThirdParty.ThirdEdits = ' '
+    ThirdParty.ThirdButtons = 'TButton'
+    ThirdParty.ThirdBitBtns = ' '
+    ThirdParty.ThirdCheckBoxes = ' '
+    ThirdParty.ThirdGroupBoxes = ' '
+    ThirdParty.ThirdListViews = ' '
+    ThirdParty.ThirdPanels = ' '
+    ThirdParty.ThirdGrids = ' '
+    ThirdParty.ThirdTreeViews = ' '
+    ThirdParty.ThirdComboBoxes = ' '
+    ThirdParty.ThirdWWEdits = ' '
+    ThirdParty.ThirdVirtualTrees = ' '
+    ThirdParty.ThirdGridEh = ' '
+    ThirdParty.ThirdPageControl = ' '
+    ThirdParty.ThirdTabControl = ' '
+    ThirdParty.ThirdToolBar = ' '
+    ThirdParty.ThirdStatusBar = ' '
+    ThirdParty.ThirdSpeedButton = ' '
+    ThirdParty.ThirdScrollControl = ' '
+    ThirdParty.ThirdUpDown = ' '
+    ThirdParty.ThirdScrollBar = ' '
+    ThirdParty.ThirdStaticText = ' '
+    ThirdParty.ThirdNativePaint = ' '
+    Left = 24
+    Top = 8
+  end
+  object sSkinProvider1: TsSkinProvider
+    AddedTitle.Font.Charset = DEFAULT_CHARSET
+    AddedTitle.Font.Color = clNone
+    AddedTitle.Font.Height = -11
+    AddedTitle.Font.Name = 'Tahoma'
+    AddedTitle.Font.Style = []
+    SkinData.SkinSection = 'FORM'
+    TitleButtons = <>
+    Left = 72
+    Top = 8
   end
 end

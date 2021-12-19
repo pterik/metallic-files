@@ -1,9 +1,9 @@
 object FormNewItem: TFormNewItem
   Left = 449
   Top = 259
-  Width = 242
-  Height = 185
   Caption = #1042#1074#1077#1076#1080#1090#1077' '#1085#1072#1080#1084#1077#1085#1086#1074#1072#1085#1080#1077' '#1088#1072#1079#1076#1077#1083#1072
+  ClientHeight = 104
+  ClientWidth = 226
   Color = clBtnFace
   Constraints.MinHeight = 100
   Constraints.MinWidth = 100
@@ -16,33 +16,40 @@ object FormNewItem: TFormNewItem
   OldCreateOrder = False
   OnKeyUp = FormKeyUp
   DesignSize = (
-    234
-    151)
+    226
+    104)
   PixelsPerInch = 96
   TextHeight = 13
-  object Label1: TsLabel
+  object sLabel1: TsLabel
     Left = 8
-    Top = 0
+    Top = 8
     Width = 160
     Height = 16
     Caption = #1048#1084#1103' '#1076#1083#1103' '#1085#1086#1074#1086#1075#1086' '#1088#1072#1079#1076#1077#1083#1072
+    ParentFont = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    ParentFont = False
+  end
+  object EditTree: TEdit
+    Left = 8
+    Top = 30
+    Width = 210
+    Height = 21
+    TabOrder = 0
+    Text = 'EditTree'
   end
   object BitBtnCancel: TsBitBtn
-    Left = 16
-    Top = 114
+    Left = 8
+    Top = 71
     Width = 75
     Height = 25
     Anchors = [akLeft, akBottom]
     Cancel = True
     Caption = #1054#1090#1084#1077#1085#1072
-    ModalResult = 2
-    TabOrder = 2
+    Default = True
     Glyph.Data = {
       DE010000424DDE01000000000000760000002800000024000000120000000100
       0400000000006801000000000000000000001000000000000000000000000000
@@ -60,19 +67,18 @@ object FormNewItem: TFormNewItem
       38F338F300003333333333333919333333388333338FFF830000333333333333
       3333333333333333333888330000333333333333333333333333333333333333
       0000}
+    ModalResult = 2
     NumGlyphs = 2
+    TabOrder = 1
+    ExplicitTop = 113
   end
   object BitBtnSave: TsBitBtn
-    Left = 114
-    Top = 114
+    Left = 113
+    Top = 71
     Width = 105
     Height = 25
     Anchors = [akRight, akBottom]
     Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' (F2)'
-    Default = True
-    ModalResult = 1
-    TabOrder = 1
-    OnClick = BitBtnSaveClick
     Glyph.Data = {
       76010000424D7601000000000000760000002800000020000000100000000100
       04000000000000010000120B0000120B00001000000000000000000000000000
@@ -86,69 +92,94 @@ object FormNewItem: TFormNewItem
       00037F7F333333337F7F000FFFFFFFFF00037F7F333333337F7F000FFFFFFFFF
       00037F7F333333337F7F000FFFFFFFFF07037F7F33333333777F000FFFFFFFFF
       0003737FFFFFFFFF7F7330099999999900333777777777777733}
+    ModalResult = 1
     NumGlyphs = 2
+    TabOrder = 2
+    OnClick = BitBtnSaveClick
+    ExplicitTop = 113
   end
-  object EditTree: TsEdit
-    Left = 16
-    Top = 24
-    Width = 193
-    Height = 21
-    TabOrder = 0
-    Text = 'EditTree'
-  end
-  object qMaxParentPos: TZReadOnlyQuery
+  object qMaxParentPos: TUniQuery
     Connection = FormMain.ZC
     SQL.Strings = (
       'SELECT MAX(pt_orderby)+1 AS maxpos FROM prices_tree pt'
       'WHERE pt_parentid is null')
-    Params = <>
-    Left = 168
-    Top = 48
+    Left = 176
+    Top = 16
     object qMaxParentPosMAXPOS: TLargeintField
       FieldName = 'MAXPOS'
       ReadOnly = True
     end
   end
-  object qTreeInsertParent: TZQuery
+  object qTreeInsertParent: TUniSQL
     Connection = FormMain.ZC
     SQL.Strings = (
       
         'insert into PRICES_TREE (PT_PARENTID, PT_VALUE, PT_ORDERBY, PT_D' +
         'ATE, PT_ISCLOSED)'
       'values (null, :PT_VALUE, :PT_ORDERBY, :PT_DATE, 0)')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'PT_VALUE'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'PT_ORDERBY'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'PT_DATE'
-        ParamType = ptUnknown
-      end>
-    Left = 40
-    Top = 48
+    Left = 32
+    Top = 16
     ParamData = <
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'PT_VALUE'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'PT_ORDERBY'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end
       item
-        DataType = ftUnknown
+        DataType = ftDateTime
         Name = 'PT_DATE'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end>
   end
-end
+  object sSkinManager1: TsSkinManager
+    ButtonsOptions.OldGlyphsMode = True
+    IsDefault = False
+    InternalSkins = <>
+    SkinDirectory = 'c:\Skins'
+    SkinName = 'AlterMetro'
+    SkinInfo = '15'
+    ThirdParty.ThirdEdits = ' '
+    ThirdParty.ThirdButtons = 'TButton'
+    ThirdParty.ThirdBitBtns = ' '
+    ThirdParty.ThirdCheckBoxes = ' '
+    ThirdParty.ThirdGroupBoxes = ' '
+    ThirdParty.ThirdListViews = ' '
+    ThirdParty.ThirdPanels = ' '
+    ThirdParty.ThirdGrids = ' '
+    ThirdParty.ThirdTreeViews = ' '
+    ThirdParty.ThirdComboBoxes = ' '
+    ThirdParty.ThirdWWEdits = ' '
+    ThirdParty.ThirdVirtualTrees = ' '
+    ThirdParty.ThirdGridEh = ' '
+    ThirdParty.ThirdPageControl = ' '
+    ThirdParty.ThirdTabControl = ' '
+    ThirdParty.ThirdToolBar = ' '
+    ThirdParty.ThirdStatusBar = ' '
+    ThirdParty.ThirdSpeedButton = ' '
+    ThirdParty.ThirdScrollControl = ' '
+    ThirdParty.ThirdUpDown = ' '
+    ThirdParty.ThirdScrollBar = ' '
+    ThirdParty.ThirdStaticText = ' '
+    ThirdParty.ThirdNativePaint = ' '
+    Left = 64
+  end
+  object sSkinProvider1: TsSkinProvider
+    AddedTitle.Font.Charset = DEFAULT_CHARSET
+    AddedTitle.Font.Color = clNone
+    AddedTitle.Font.Height = -11
+    AddedTitle.Font.Name = 'Tahoma'
+    AddedTitle.Font.Style = []
+    SkinData.SkinSection = 'FORM'
+    TitleButtons = <>
+    Left = 112
+    Top = 8
+  end
+end

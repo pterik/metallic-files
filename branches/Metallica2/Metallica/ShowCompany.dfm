@@ -61,7 +61,7 @@ object FormCompaniesShow: TFormCompaniesShow
   object CBActive: TsCheckBox
     Left = 744
     Top = 8
-    Width = 221
+    Width = 223
     Height = 20
     Caption = #1058#1086#1083#1100#1082#1086' '#1074#1099#1073#1088#1072#1085#1085#1099#1081' '#1087#1086#1089#1090#1072#1074#1097#1080#1082
     Alignment = taLeftJustify
@@ -80,8 +80,8 @@ object FormCompaniesShow: TFormCompaniesShow
     OnClick = CBActiveClick
   end
   object BitBtnClose: TsBitBtn
-    Left = 937
-    Top = 587
+    Left = 928
+    Top = 580
     Width = 77
     Height = 25
     Anchors = [akRight, akBottom]
@@ -111,7 +111,7 @@ object FormCompaniesShow: TFormCompaniesShow
   end
   object DBGridCompanies: TDBGridEh
     Left = 8
-    Top = 32
+    Top = 28
     Width = 718
     Height = 580
     Anchors = [akLeft, akTop, akRight, akBottom]
@@ -187,7 +187,7 @@ object FormCompaniesShow: TFormCompaniesShow
     Left = 733
     Top = 32
     Width = 281
-    Height = 548
+    Height = 537
     Anchors = [akTop, akRight, akBottom]
     DataSource = DSPhones
     DynProps = <>
@@ -228,8 +228,8 @@ object FormCompaniesShow: TFormCompaniesShow
     end
   end
   object btnShowPrice: TsBitBtn
-    Left = 736
-    Top = 585
+    Left = 733
+    Top = 580
     Width = 105
     Height = 25
     Anchors = [akLeft, akBottom]
@@ -288,133 +288,8 @@ object FormCompaniesShow: TFormCompaniesShow
     TabOrder = 7
     OnExit = edtCityExit
   end
-  object QCompany: TZQuery
-    AfterScroll = QCompanyAfterScroll
-    OnCalcFields = QCompanyCalcFields
-    SQL.Strings = (
-      'SELECT cm_id as COMPANYID, cm_name, cm_city, c.cm_comment,'
-      
-        'c.cm_isclosed, c.CM_HYPERLINK, c.cm_owner, tl.tl_level, tl.tl_co' +
-        'lor , tl.tl_name'
-      'FROM company c left join TRUSTLEVEL tl on tl.tl_id = c.cm_trust'
-      
-        'WHERE (CM_ISCLOSED = 0) and ((cm_id = :COMPANYID) or (:COMPANYID' +
-        ' = -1) )'
-      
-        'and ((upper(cm_name COLLATE WIN1251) like '#39'%'#39'||upper(:company)||' +
-        #39'%'#39') or (cast(:company as varchar(100)) ='#39#39') )'
-      
-        'and (upper(cm_city) like upper('#39'%'#39'||:CITY||'#39'%'#39') or (cast(:CITY a' +
-        's varchar(100))  = '#39#39'))'
-      
-        'and ((UPPER(cm_business COLLATE WIN1251) like '#39'%'#39'||upper(:busine' +
-        'ss)||'#39'%'#39' ) or (cast(:business as varchar(100)) ='#39#39') )'
-      'order by c.cm_name'
-      ' '
-      ' ')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'COMPANYID'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'company'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'CITY'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'business'
-        ParamType = ptUnknown
-      end>
-    WhereMode = wmWhereAll
-    Options = []
-    Left = 96
-    Top = 120
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'COMPANYID'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'company'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'CITY'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'business'
-        ParamType = ptUnknown
-      end>
-    object QCompanySISCLOSED: TStringField
-      FieldKind = fkCalculated
-      FieldName = 'SISCLOSED'
-      Calculated = True
-    end
-    object QCompanyCM_NAME: TStringField
-      FieldName = 'CM_NAME'
-      Size = 100
-    end
-    object QCompanyCM_COMMENT: TStringField
-      DisplayWidth = 1024
-      FieldName = 'CM_COMMENT'
-      Size = 255
-    end
-    object QCompanyCM_ISCLOSED: TIntegerField
-      FieldName = 'CM_ISCLOSED'
-    end
-    object QCompanyCM_OWNER: TIntegerField
-      FieldName = 'CM_OWNER'
-    end
-    object QCompanyCM_TRUNC_COMMENT: TStringField
-      FieldKind = fkCalculated
-      FieldName = 'CM_TRUNC_COMMENT'
-      Size = 1024
-      Calculated = True
-    end
-    object QCompanyCOMPANYID: TIntegerField
-      FieldName = 'COMPANYID'
-      Required = True
-    end
-    object QCompanyCM_CITY: TStringField
-      FieldName = 'CM_CITY'
-      Size = 100
-    end
-    object QCompanyTL_LEVEL: TIntegerField
-      FieldName = 'TL_LEVEL'
-    end
-    object QCompanyTL_COLOR: TIntegerField
-      FieldName = 'TL_COLOR'
-      Required = True
-    end
-    object QCompanyTL_NAME: TStringField
-      FieldName = 'TL_NAME'
-      Size = 100
-    end
-    object QCompanyCM_HYPERLINK: TStringField
-      FieldName = 'CM_HYPERLINK'
-      Size = 256
-    end
-  end
-  object DSCompanies: TDataSource
-    DataSet = QCompany
-    Left = 176
-    Top = 120
-  end
-  object QPhones: TZQuery
-    OnCalcFields = QPhonesCalcFields
+  object QPhones: TUniQuery
+    Connection = FormMain.ZC
     SQL.Strings = (
       'select p.ph_id, p.ph_comment, p.ph_isclosed,'
       'p.ph_datebegin,u.u_login||'#39' '#39'||u.u_fio as username'
@@ -423,21 +298,15 @@ object FormCompaniesShow: TFormCompaniesShow
       'and u.u_id=pc.pc_uid'
       'and pc.pc_company=:COMPANYID'
       'order by p.ph_isclosed, p.ph_id')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'COMPANYID'
-        ParamType = ptUnknown
-      end>
-    WhereMode = wmWhereAll
-    Options = []
+    Active = True
     Left = 536
-    Top = 104
+    Top = 192
     ParamData = <
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'COMPANYID'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = 367
       end>
     object QPhonesPH_COMMENT: TStringField
       FieldName = 'PH_COMMENT'
@@ -451,7 +320,7 @@ object FormCompaniesShow: TFormCompaniesShow
       ReadOnly = True
       Size = 81
     end
-    object QPhonesPH_ID: TLargeintField
+    object QPhonesPH_ID: TFloatField
       FieldName = 'PH_ID'
       Required = True
     end
@@ -475,10 +344,162 @@ object FormCompaniesShow: TFormCompaniesShow
       Calculated = True
     end
   end
-  object DSPhones: TDataSource
+  object QCompany: TUniQuery
+    Connection = FormMain.ZC
+    SQL.Strings = (
+      'SELECT cm_id as COMPANYID, cm_name, cm_city, c.cm_comment,'
+      
+        'c.cm_isclosed, c.CM_HYPERLINK, c.cm_owner, tl.tl_level, tl.tl_co' +
+        'lor , tl.tl_name'
+      'FROM company c left join TRUSTLEVEL tl on tl.tl_id = c.cm_trust'
+      
+        'WHERE (CM_ISCLOSED = 0) and ((cm_id = :COMPANYID) or (:COMPANYID' +
+        ' = -1) )'
+      
+        'and ((upper(cm_name COLLATE WIN1251) like '#39'%'#39'||upper(:company)||' +
+        #39'%'#39') or (cast(:company as varchar(100)) ='#39#39') )'
+      
+        'and (upper(cm_city) like upper('#39'%'#39'||:CITY||'#39'%'#39') or (cast(:CITY a' +
+        's varchar(100))  = '#39#39'))'
+      
+        'and ((UPPER(cm_business COLLATE WIN1251) like '#39'%'#39'||upper(:busine' +
+        'ss)||'#39'%'#39' ) or (cast(:business as varchar(100)) ='#39#39') )'
+      'order by c.cm_name'
+      ' '
+      ' ')
+    Active = True
+    Left = 96
+    Top = 200
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'COMPANYID'
+        ParamType = ptInput
+        Value = -1
+      end
+      item
+        DataType = ftString
+        Name = 'company'
+        ParamType = ptInput
+        Value = ''
+      end
+      item
+        DataType = ftString
+        Name = 'CITY'
+        ParamType = ptInput
+        Value = ''
+      end
+      item
+        DataType = ftString
+        Name = 'business'
+        ParamType = ptInput
+        Value = ''
+      end>
+    object QCompanySISCLOSED: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'SISCLOSED'
+      Calculated = True
+    end
+    object QCompanyCM_NAME: TStringField
+      FieldName = 'CM_NAME'
+      Size = 100
+    end
+    object QCompanyCM_COMMENT: TStringField
+      FieldName = 'CM_COMMENT'
+      Size = 255
+    end
+    object QCompanyCM_ISCLOSED: TIntegerField
+      FieldName = 'CM_ISCLOSED'
+    end
+    object QCompanyCM_OWNER: TIntegerField
+      FieldName = 'CM_OWNER'
+      Required = True
+    end
+    object QCompanyCM_TRUNC_COMMENT: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'CM_TRUNC_COMMENT'
+      Calculated = True
+    end
+    object QCompanyCOMPANYID: TIntegerField
+      FieldName = 'COMPANYID'
+      Required = True
+    end
+    object QCompanyCM_CITY: TStringField
+      FieldName = 'CM_CITY'
+      Required = True
+      Size = 100
+    end
+    object QCompanyTL_LEVEL: TIntegerField
+      FieldName = 'TL_LEVEL'
+      ReadOnly = True
+    end
+    object QCompanyTL_COLOR: TIntegerField
+      FieldName = 'TL_COLOR'
+      ReadOnly = True
+    end
+    object QCompanyTL_NAME: TStringField
+      FieldName = 'TL_NAME'
+      ReadOnly = True
+      Size = 100
+    end
+    object QCompanyCM_HYPERLINK: TStringField
+      FieldName = 'CM_HYPERLINK'
+      Size = 1000
+    end
+  end
+  object DSCompanies: TUniDataSource
+    DataSet = QCompany
+    Left = 176
+    Top = 200
+  end
+  object DSPhones: TUniDataSource
     AutoEdit = False
     DataSet = QPhones
     Left = 624
-    Top = 104
+    Top = 192
+  end
+  object sSkinManager1: TsSkinManager
+    ButtonsOptions.OldGlyphsMode = True
+    IsDefault = False
+    InternalSkins = <>
+    SkinDirectory = 'c:\Skins'
+    SkinName = 'AlterMetro'
+    SkinInfo = '15'
+    ThirdParty.ThirdEdits = ' '
+    ThirdParty.ThirdButtons = 'TButton'
+    ThirdParty.ThirdBitBtns = ' '
+    ThirdParty.ThirdCheckBoxes = ' '
+    ThirdParty.ThirdGroupBoxes = ' '
+    ThirdParty.ThirdListViews = ' '
+    ThirdParty.ThirdPanels = ' '
+    ThirdParty.ThirdGrids = ' '
+    ThirdParty.ThirdTreeViews = ' '
+    ThirdParty.ThirdComboBoxes = ' '
+    ThirdParty.ThirdWWEdits = ' '
+    ThirdParty.ThirdVirtualTrees = ' '
+    ThirdParty.ThirdGridEh = ' '
+    ThirdParty.ThirdPageControl = ' '
+    ThirdParty.ThirdTabControl = ' '
+    ThirdParty.ThirdToolBar = ' '
+    ThirdParty.ThirdStatusBar = ' '
+    ThirdParty.ThirdSpeedButton = ' '
+    ThirdParty.ThirdScrollControl = ' '
+    ThirdParty.ThirdUpDown = ' '
+    ThirdParty.ThirdScrollBar = ' '
+    ThirdParty.ThirdStaticText = ' '
+    ThirdParty.ThirdNativePaint = ' '
+    Left = 192
+    Top = 328
+  end
+  object sSkinProvider1: TsSkinProvider
+    AddedTitle.Font.Charset = DEFAULT_CHARSET
+    AddedTitle.Font.Color = clNone
+    AddedTitle.Font.Height = -11
+    AddedTitle.Font.Name = 'Tahoma'
+    AddedTitle.Font.Style = []
+    SkinData.SkinSection = 'FORM'
+    TitleButtons = <>
+    Left = 352
+    Top = 344
   end
 end

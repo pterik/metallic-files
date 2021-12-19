@@ -6,7 +6,7 @@ uses
   Controls, Windows;
 
 const
-  params_default_file = 'params_default.ini';
+  params_default_file = 'database.ini';
 
 type
   ChooseLanguage = (Russian, English);

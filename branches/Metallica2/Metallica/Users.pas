@@ -5,7 +5,9 @@ interface
 uses
   	Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
   	Dialogs, StdCtrls, Buttons, Grids, DBGrids, DB, ZAbstractRODataset, 
-  ZAbstractDataset, ZDataset, DBGridEh, sBitBtn, sCheckBox;
+  ZAbstractDataset, ZDataset, DBGridEh, sBitBtn, sCheckBox, DBGridEhGrouping,
+  ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, EhLibVCL, GridsEh, DBAxisGridsEh,
+  DBAccess, Uni, MemDS, sSkinProvider, sSkinManager;
 
 type
 	TFormUsers = class(TForm)
@@ -13,41 +15,39 @@ type
 		BitBtnUpdate: TsBitBtn;
 		BitBtnDelete: TsBitBtn;
 		BitBtnClose: TsBitBtn;
-		DSUsers: TDataSource;
-    QViewFormUsers: TZQuery;
     BitBtnRights: TsBitBtn;
-    QGrantBoss: TZQuery;
-    QInsertGrant: TZQuery;
-    QUsersWOMe: TZQuery;
-    QDeleteGrantV: TZQuery;
-    QUserTitles: TZQuery;
+    CBOnlyWorkers: TsCheckBox;
+    DBUsers: TDBGridEh;
+    QUsersWOMe: TUniQuery;
+    DSUsers: TUniDataSource;
+    QUserTitles: TUniQuery;
+    QViewFormUsers: TUniQuery;
+    QInsertGrant: TUniSQL;
+    QMoveCon_Own: TUniSQL;
+    QGrantBoss: TUniSQL;
+    QMoveCom: TUniSQL;
+    QDeleteGrantV: TUniSQL;
+    QMoveCon_Man: TUniSQL;
+    QViewFormUsersU_ID: TIntegerField;
     QViewFormUsersU_LOGIN: TStringField;
     QViewFormUsersU_PASSWORD: TStringField;
+    QViewFormUsersU_ISBOSS: TIntegerField;
     QViewFormUsersU_FIO: TStringField;
     QViewFormUsersU_COMMENT: TStringField;
-    QViewFormUsersSISBOSS: TStringField;
-    QViewFormUsersSISACTIVE: TStringField;
-    CBOnlyWorkers: TsCheckBox;
-    QViewFormUsersU_ID: TIntegerField;
-    QViewFormUsersU_ISBOSS: TIntegerField;
-    QViewFormUsersU_ISCLOSED: TSmallintField;
-    DBUsers: TDBGridEh;
-    QMoveCom: TZQuery;
-    IntegerField1: TIntegerField;
-    StringField1: TStringField;
-    QMoveCon_Own: TZQuery;
-    IntegerField2: TIntegerField;
-    StringField2: TStringField;
-    QMoveCon_Man: TZQuery;
-    IntegerField3: TIntegerField;
-    StringField3: TStringField;
+    QViewFormUsersU_EDIT_OWN_JOBS: TSmallintField;
     QViewFormUsersU_EDIT_PRICES: TSmallintField;
+    QViewFormUsersU_ISCLOSED: TSmallintField;
+    QViewFormUsersSISBOSS: TStringField;
+    QViewFormUsersSISCLOSED: TStringField;
     QViewFormUsersSIS_EDIT_PRICES: TStringField;
+    QUserTitlesID: TIntegerField;
+    sSkinManager1: TsSkinManager;
+    sSkinProvider1: TsSkinProvider;
 		procedure BitBtnInsertClick(Sender: TObject);
 		procedure BitBtnUpdateClick(Sender: TObject);
 		procedure BitBtnDeleteClick(Sender: TObject);
     procedure BitBtnRightsClick(Sender: TObject);
-    procedure QViewFormUsersCalcFields(DataSet: TDataSet);
+    procedure QViewFormUsers2CalcFields(DataSet: TDataSet);
     procedure CBOnlyWorkersClick(Sender: TObject);
     procedure DBUsersDblClick(Sender: TObject);
     procedure DBUsersTitleClick(Column: TColumnEh);
@@ -66,7 +66,7 @@ var
 
 implementation
 
-uses MainForm, UserInsert, UserUpdate, EnterUser, DataModule;
+uses MainForm, UserInsert, UserUpdate, EnterUser, DataModule, System.UITypes;
 
 {$R *.dfm}
 procedure TFormUsers.SetPosition(L,T:integer);
@@ -100,8 +100,6 @@ end;
 
 procedure TFormUsers.BitBtnDeleteClick(Sender: TObject);
 const EOL=chr(13)+chr(10);
-var IsMustClose:boolean;
-SMessage:string;
 begin
 if VarIsNull(QViewFormUsers['U_ID']) then
 	begin
@@ -168,38 +166,34 @@ if QViewFormUsers['U_ISBOSS']=1
 		begin
 		if MessageDlg('Вы хотите забрать права у пользователя '+QViewFormUsers['U_LOGIN']+'?',mtConfirmation,[mbYes,mbNo],0)=mrNo then exit;
 		SetBossR:=0;
-		QGrantBoss.Close;
 		QGrantBoss.ParamByName('U_ID').AsInteger:=QViewFormUsers['U_ID'];
 		QGrantBoss.ParamByName('U_ISBOSS').AsInteger:=SetBossR;
-		QGrantBoss.ExecSQL;
-		QDeleteGrantV.Close;
+		QGrantBoss.Execute;
 		QDeleteGrantV.ParamByName('UB_VIEWERID').AsInteger:=QViewFormUsers['U_ID'];
-		QDeleteGrantV.ExecSQL;
+		QDeleteGrantV.Execute;
 		end
 	else
 		begin
 		SetBossR:=1;
 		if MessageDlg('Вы хотите выдать права пользователю '+QViewFormUsers['U_LOGIN']+'?',mtConfirmation,[mbYes,mbNo],0)=mrNo then exit;
-		QGrantBoss.Close;
 		QGrantBoss.ParamByName('U_ID').AsInteger:=QViewFormUsers['U_ID'];
 		QGrantBoss.ParamByName('U_ISBOSS').AsInteger:=SetBossR;
-		QGrantBoss.ExecSQL;
+		QGrantBoss.Execute;
 		QUsersWOMe.Close;
 		QUsersWOMe.ParamByName('U_ID').AsInteger:=QViewFormUsers['U_ID'];
 		QUsersWOMe.Open;
 		while not QUsersWOMe.EOF do
 			begin
-			QInsertGrant.Close;
 			QInsertGrant.ParamByName('UB_USERID').AsInteger:=QUsersWOMe['U_ID'];
 			QInsertGrant.ParamByName('UB_VIEWERID').AsInteger:=QViewFormUsers['U_ID'];
-			QInsertGrant.ExecSQL;
+			QInsertGrant.Execute;
 			QUsersWOMe.Next;
 			end;
 		end;
 RefreshViewFormUSers;
 end;
 
-procedure TFormUsers.QViewFormUsersCalcFields(DataSet: TDataSet);
+procedure TFormUsers.QViewFormUsers2CalcFields(DataSet: TDataSet);
 begin
 if QViewFormUsers['U_ISBOSS']=1 then QViewFormUsers['SISBOSS']:='ДА';
 if QViewFormUsers['U_ISBOSS']=0 then QViewFormUsers['SISBOSS']:='НЕТ';
@@ -254,7 +248,7 @@ end;
 
 procedure TFormUsers.DBUsersTitleClick(Column: TColumnEh);
 begin
-QViewFormUsers.SortedFields:=Column.FieldName;
+QViewFormUsers.IndexFieldNames:=Column.FieldName;
 end;
 
 procedure TFormUsers.FormKeyUp(Sender: TObject; var Key: Word;

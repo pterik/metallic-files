@@ -3,65 +3,28 @@ unit MainForm;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
-  Dialogs, StdCtrls, Buttons, ZConnection, Grids, DBGrids, DB, ZDataset, ZDbcCache, 
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, Buttons, ZConnection, Grids, DBGrids, DB, ZDataset, ZDbcCache,
   ZAbstractRODataset, ZDbcMySQL, ZDbcPostgreSQL, ZSqlUpdate, ComCtrls, ZAbstractDataset, 
   ExtCtrls, AppEvnts, Mask, DBCtrlsEh, DBGridEh, DBLookupEh, ADODB, DataModule, 
   DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, ZAbstractConnection, 
   EhLibVCL, GridsEh, DBAxisGridsEh, DBAccess, Uni, sBitBtn, sTreeView, sEdit,
-  sLabel, MemDS;
+  sLabel, MemDS, UniProvider, InterBaseUniProvider, sSkinProvider, sSkinManager,
+  DASQLMonitor, UniSQLMonitor;
 
 type
   TFormMain = class(TForm)
     BitBtnClose: TsBitBtn;
     BitBtnAbout: TsBitBtn;
-    ZC2: TZConnection;
     BitBtnCompanies: TsBitBtn;
     BitBtnUsers: TsBitBtn;
-    QViewUsers2: TZQuery;
-    QViewUsers2U_LOGIN: TStringField;
-    QViewUsers2U_FIO: TStringField;
-    QViewUsers2U_COMMENT: TStringField;
-    QViewUsers2U_ID: TIntegerField;
-    QViewUsers2U_ISCLOSED: TSmallintField;
-    QViewUsers2U_ISBOSS: TIntegerField;
-    QViewUsers2U_FIO_PLUS_BOSS: TStringField;
     EditMyName: TsEdit;
-    Label1: TsLabel;
     BitBtnForBoss: TsBitBtn;
     Tree: TsTreeView;
     Grid: TDBGridEh;
-    DSData2: TDataSource;
-    qData2: TZReadOnlyQuery;
-    qData2PL_ID: TIntegerField;
-    qData2CM_NAME: TStringField;
-    qData2CM_ID: TIntegerField;
-    qData2PL_VALUE1: TStringField;
-    qData2PL_VALUE2: TStringField;
-    qData2PL_VALUE3: TStringField;
-    qData2PL_VALUE4: TStringField;
-    qData2PL_VALUE5: TStringField;
-    qData2PL_VALUE6: TStringField;
-    qData2PL_VALUE7: TStringField;
-    qData2PL_VALUE8: TStringField;
-    qData2PL_VALUE9: TStringField;
-    qData2PL_ORDERBY: TIntegerField;
-    qData2PL_DATE_UPDATE: TDateTimeField;
-    qData2PL_ISCLOSED: TSmallintField;
-    qData2PL_HEADERID: TIntegerField;
     BitBtnNewPrice: TsBitBtn;
-    QViewUsers2U_EDIT_PRICES: TSmallintField;
-    qData2PL_PARENT: TStringField;
-    qData2PT_VALUE: TStringField;
-    qData2CM_CITY: TStringField;
-    qData2TL_COLOR: TIntegerField;
-    lbl1: TsLabel;
     edtCompany: TsEdit;
-    lbl2: TsLabel;
     edtBusiness: TsEdit;
-    qData2PL_TREEID: TIntegerField;
-    qData2CM_BUSINESS: TStringField;
-    qData2PL_PRICE: TSingleField;
     ZC: TUniConnection;
     QViewUsers: TUniQuery;
     qData: TUniQuery;
@@ -97,7 +60,13 @@ type
     qDataPL_DATE_UPDATE: TDateTimeField;
     qDataTL_COLOR: TIntegerField;
     qDataPL_ISCLOSED: TSmallintField;
-    procedure FileExit1Execute(Sender: TObject);
+    InterBaseUniProvider1: TInterBaseUniProvider;
+    sLabel1: TsLabel;
+    sLabel2: TsLabel;
+    sLabel3: TsLabel;
+    UniSQLMonitor1: TUniSQLMonitor;
+    sSkinProvider1: TsSkinProvider;
+    sSkinManager1: TsSkinManager;
     procedure BitBtnAboutClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -106,12 +75,10 @@ type
     procedure BitBtnCompaniesClick(Sender: TObject);
     procedure FormKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
-    procedure QViewUsers2CalcFields(DataSet: TDataSet);
     procedure FormKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure BitBtnForBossClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
-    procedure BitBtnCloseClick(Sender: TObject);
     procedure TreeChange(Sender: TObject; Node: TTreeNode);
     procedure TreeExpanding(Sender: TObject; Node: TTreeNode;
       var AllowExpansion: Boolean);
@@ -124,6 +91,8 @@ type
       DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
     procedure edtCompanyExit(Sender: TObject);
     procedure edtBusinessExit(Sender: TObject);
+    procedure QViewUsersCalcFields(DataSet: TDataSet);
+    procedure BitBtnCloseClick(Sender: TObject);
   private
     F_Ctrl: Boolean;
     F_IsBoss: Boolean;
@@ -153,8 +122,8 @@ type
     CommonManagerID, CommonOwnerID: Integer;
     //  property  IsDemoLimit:boolean read GetDemoLimit write SetDemoLimit;
     //  property  IsBigDemoLimit:boolean read GetBigDemoLimit write SetBigDemoLimit;
-    procedure SetMainForm(U_ID: Integer; const Login, UserFullName: string;
-      Boss: Integer);
+    procedure SetMainForm(User_ID: Integer; const User_Login, UserFullName: string; Boss: Integer);
+    procedure SetDBCredentials(F_HostName,F_Protocol, F_Database, F_User,F_Password:string);
     function ReadEnteredUserID: Integer;
     function ReadEnteredLogin: string;
     function ReadEnteredUserFullName: string;
@@ -171,12 +140,7 @@ implementation
 uses
   DateUtils, About, EnterUser, Users, CommonUnit,
   Companies, SQL, ForBOSS, ShowCompany, ShowPrice,
-  SelectCompany, NewPriceList, DbUtilsEh;
-
-procedure TFormMain.FileExit1Execute(Sender: TObject);
-begin
-  Close;
-end;
+  SelectCompany, NewPriceList, DbUtilsEh, System.UITypes;
 
 procedure TFormMain.BitBtnAboutClick(Sender: TObject);
 begin
@@ -198,6 +162,17 @@ end;
 
 procedure TFormMain.FormCreate(Sender: TObject);
 begin
+{Как запускаем формы
+Сначала отображаем MainForm
+Затем отображаем DBErrorExit
+Потом отображаем EnterUser
+Делаем проверку на подключение к базе данных.
+Если подключение успешное, то делаем запрашиваем ввода пароля и делаем проверку, верно ли он указан.
+Если подключение неуспешное, то закрываем EnterUser и отображаем DBErrorExt
+Если подключение успешное, то закрываем Enteruser и не отображаем DBErrorExt
+Если пароль введен успешно, то закрываем EnterUser, не отображаем DBErrorExit и возвращаемся в MainForm
+}
+	NullStrictConvert := false;
   Left := (Screen.Width - Width) div 2;
   Top := (Screen.Height - Height) div 2;
   F_Ctrl := False;
@@ -205,6 +180,7 @@ begin
   edtBusiness.Clear;
   ConfirmClose := True;
   MyNode := TNodeValue.Create;
+  BorderIcons:=[biSystemMenu,biMinimize,biMaximize];
 end;
 
 function TFormMain.ReadEnteredUserID: Integer;
@@ -222,29 +198,42 @@ begin
   Result := F_IsBoss;
 end;
 
-procedure TFormMain.SetMainForm(U_ID: Integer; const Login, UserFullname:
-  string; Boss:
-  Integer);
+procedure TFormMain.SetDBCredentials(F_HostName, F_Protocol, F_Database, F_User,
+  F_Password: string);
+begin
+ZC.Database:=F_Database;
+ZC.ProviderName:=F_Protocol;
+ZC.Server:=F_HostName;
+ZC.UserName:=F_User;
+ZC.Password:=F_Password;
+ZC.LoginPrompt:=false;
+try
+ZC.Connect;
+except on E:Exception do
+	begin
+  MessageDlg('Неожиданная ошибка при подключении к базе данных. Программа аварийно остановлена, обратитесь к разработчику.', mtError, [mbOK],0);
+  exit;
+  end;
+end;
+end;
+
+procedure TFormMain.SetMainForm(User_ID: Integer; const User_Login, UserFullname: string; Boss:Integer);
 var
   S: string;
 begin
-  //IsDemoLimit:=false;
   F_FieldName1 := '';
   F_FieldName2 := '';
-  //Tree.Items.Clear;
-  //ExpandLevel(nil);
-  //RepaintDataGrid(nil);
   DM.TreeFulFill(Tree, True, 0);
   if Boss = 1 then
     F_IsBoss := True
   else
     F_IsBoss := False;
-  F_EnteredUserID := U_ID;
-  F_EnteredLogin := Login;
+  F_EnteredUserID := User_ID;
+  F_EnteredLogin := User_Login;
   F_EnteredUserFullName := UserFullName;
   try
     QViewUsers.Close;
-    QViewUsers.ParamByName('U_ID').AsInteger := U_ID;
+    QViewUsers.ParamByName('U_ID').AsInteger := User_ID;
     QViewUsers.Open;
     EditMyname.Text := QViewUsers['U_FIO_PLUS_BOSS'];
     F_EditPrices := QViewUsers['U_EDIT_PRICES'];
@@ -300,14 +289,12 @@ end;
 procedure TFormMain.FormDestroy(Sender: TObject);
 begin
   MyNode.Destroy;
-  if FormMain.ZC.Connected then
-    FormMain.ZC.Disconnect;
+  if ZC.Connected then ZC.Close;
 end;
 
 procedure TFormMain.BitBtnUsersClick(Sender: TObject);
 begin
-  if FormUsers = nil then
-    Application.CreateForm(TFormUsers, FormUsers);
+  if FormUsers = nil then Application.CreateForm(TFormUsers, FormUsers);
   FormUsers.SetPosition(Self.Left, Self.Top);
   FormUsers.SetUsers;
   FormUsers.ShowModal;
@@ -321,6 +308,11 @@ begin
     Chr(13) +
     'Пожалуйста закройте программу и свяжитесь с разработчиком (кнопка "О программе")',
     mtError, [mbOK], 0);
+end;
+
+procedure TFormMain.BitBtnCloseClick(Sender: TObject);
+begin
+  Close;
 end;
 
 procedure TFormMain.BitBtnCompaniesClick(Sender: TObject);
@@ -376,16 +368,6 @@ begin
   end; // case
 end;
 
-procedure TFormMain.QViewUsers2CalcFields(DataSet: TDataSet);
-begin
-  if QViewUsers['U_ISBOSS'] = 1 then
-    QViewUsers['U_FIO_PLUS_BOSS'] := QViewUsers['U_FIO'] + ' BOSS';
-  if QViewUsers['U_ISBOSS'] = 0 then
-    QViewUsers['U_FIO_PLUS_BOSS'] := QViewUsers['U_FIO'];
-  if QViewUsers['U_ISCLOSED'] = 1 then
-    QViewUsers['U_FIO_PLUS_BOSS'] := QViewUsers['U_FIO_PLUS_BOSS'] + ' уволен';
-end;
-
 function TFormMain.ReadEnteredLogin: string;
 begin
   Result := F_EnteredLogin;
@@ -426,34 +408,9 @@ begin
     if MessageDlg('Закрыть программу?', mtConfirmation, [mbYes, mbNo], 0) = mrNo
       then
       CanClose := False
-    else
-      WriteRegisterStr(F_EnteredLogin, RegisterBranchMetallica, 'LASTDBUSER');
+    else ;
+      //WriteRegisterStr(F_EnteredLogin, RegisterBranchMetallica, 'LASTDBUSER');
 end;
-
-procedure TFormMain.BitBtnCloseClick(Sender: TObject);
-begin
-  FormMain.Close;
-end;
-
-//function TFormMain.GetDemoLimit: boolean;
-//begin
-//Result:=F_IsDemoLimit;
-//end;
-
-//procedure TFormMain.SetDemoLimit(B: boolean);
-//begin
-//F_IsDemoLimit:=B;
-//end;
-
-//function TFormMain.GetBigDemoLimit: boolean;
-//begin
-//Result:=F_IsBigDemoLimit;
-//end;
-
-//procedure TFormMain.SetBigDemoLimit(B: boolean);
-//begin
-//F_IsBigDemoLimit:=B;
-//end;
 
 procedure TFormMain.TreeChange(Sender: TObject; Node: TTreeNode);
 begin
@@ -507,8 +464,6 @@ begin
 end;
 
 procedure TFormMain.RefreshPrices;
-var
-  I: Integer;
 begin
   qData.Close;
   if Trim(edtCompany.Text) = ''
@@ -553,15 +508,27 @@ procedure TFormMain.GridTitleClick(Column: TColumnEh);
 begin
   if F_LastSorted = Column.FieldName then
   begin
-    qData.SortedFields := Column.FieldName;
-    qData.SortType := stDescending;
+    //qData.SortedFields := Column.FieldName;
+    //qData.SortType := stDescending;
+    qData.IndexFieldNames := Column.FieldName+' DESC';
   end
   else
   begin
-    qData.SortedFields := Column.FieldName;
-    qData.SortType := stAscending;
+    //qData.SortedFields := Column.FieldName;
+    //qData.SortType := stAscending;
+    qData.IndexFieldNames := Column.FieldName+' ASC';
   end;
   F_LastSorted := Column.FieldName;
+end;
+
+procedure TFormMain.QViewUsersCalcFields(DataSet: TDataSet);
+begin
+  if QViewUsers['U_ISBOSS'] = 1 then
+    QViewUsers['U_FIO_PLUS_BOSS'] := QViewUsers['U_FIO'] + ' BOSS';
+  if QViewUsers['U_ISBOSS'] = 0 then
+    QViewUsers['U_FIO_PLUS_BOSS'] := QViewUsers['U_FIO'];
+  if QViewUsers['U_ISCLOSED'] = 1 then
+    QViewUsers['U_FIO_PLUS_BOSS'] := QViewUsers['U_FIO_PLUS_BOSS'] + ' уволен';
 end;
 
 procedure TFormMain.GridDrawColumnCell(Sender: TObject; const Rect: TRect;

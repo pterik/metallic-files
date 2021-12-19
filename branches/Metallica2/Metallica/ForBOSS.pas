@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
   Dialogs, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
-  sBitBtn;
+  sBitBtn, DBAccess, Uni, sSkinProvider, sSkinManager;
 
 type
   Flds= record
@@ -17,9 +17,10 @@ type
     BitBtnAdditional: TsBitBtn;
     BitBtnUpdateTree: TsBitBtn;
     BitBtn1: TsBitBtn;
-    qGlobDelete: TZQuery;
-    qGlobDeleteCNTR: TIntegerField;
-    qGlobInsert: TZQuery;
+    qGlobDelete: TUniSQL;
+    qGlobInsert: TUniSQL;
+    sSkinManager1: TsSkinManager;
+    sSkinProvider1: TsSkinProvider;
     procedure BitBtnAdditionalClick(Sender: TObject);
     procedure BitBtnUpdateTreeClick(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
@@ -74,8 +75,7 @@ var
   I: Integer;
 begin
 if MessageDlg('Все 10 полей станут видны, их размеры будут изменены'+chr(10) +chr(13)+'на размеры по умолчанию. Согласны?',mtWarning, [mbYes,mbNo],0) =mrNo then exit;
-qGlobDelete.Close;
-qGlobDelete.ExecSQL;
+qGlobDelete.Execute;
 i:=0;
 Fld[i].Field:='PL_PARENT';Fld[i].Header:='Раздел';Fld[i].Size:=100;
 Fld[i].DisplayFormat:='';Fld[i].Show:= 1;Fld[i].Orderby:=i;
@@ -98,14 +98,13 @@ Fld[i+4].DisplayFormat:='';Fld[i+4].Show:= 1;Fld[i+4].Orderby:=i+4;
 end;
 for I := 0 to 13 do
   begin
-  qGlobInsert.Close;
   qGlobInsert.ParamByName('FIELD').AsString:=Fld[i].Field;
   qGlobInsert.ParamByName('SIZE').AsInteger:=Fld[i].Size;
   qGlobInsert.ParamByName('HEADER').AsString:=Fld[i].Header;
   qGlobInsert.ParamByName('SHOW').AsInteger:=Fld[i].Show;
   qGlobInsert.ParamByName('DISPLAYFORMAT').AsString:=Fld[i].DisplayFormat;
   qGlobInsert.ParamByName('ORDERBY').AsInteger:=Fld[i].Orderby;
-  qGlobInsert.ExecSQL;
+  qGlobInsert.Execute;
   end;
 end;
 

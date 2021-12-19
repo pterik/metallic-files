@@ -179,12 +179,11 @@ object FormPriceShow: TFormPriceShow
         Top = 4
         Width = 105
         Height = 21
-        ItemIndex = -1
         TabOrder = 0
-        Text = 'CBFields'
         OnSelect = CBFieldsSelect
         Items.Strings = (
           '11111')
+        Text = 'CBFields'
       end
       object BitBtnInsert: TsBitBtn
         Left = 160
@@ -200,7 +199,6 @@ object FormPriceShow: TFormPriceShow
         Top = 28
         Width = 105
         Height = 21
-        ItemIndex = -1
         TabOrder = 1
         Text = 'CBFilter'
       end
@@ -226,7 +224,7 @@ object FormPriceShow: TFormPriceShow
       object chk1: TsCheckBox
         Left = 1
         Top = 9
-        Width = 46
+        Width = 50
         Height = 17
         Caption = 'chk1'
         BiDiMode = bdRightToLeftNoAlign
@@ -240,7 +238,7 @@ object FormPriceShow: TFormPriceShow
       object chk2: TsCheckBox
         Left = 141
         Top = 10
-        Width = 46
+        Width = 50
         Height = 17
         Caption = 'chk2'
         BiDiMode = bdRightToLeftNoAlign
@@ -254,7 +252,7 @@ object FormPriceShow: TFormPriceShow
       object chk3: TsCheckBox
         Left = 280
         Top = 10
-        Width = 46
+        Width = 50
         Height = 17
         Caption = 'chk3'
         BiDiMode = bdRightToLeftNoAlign
@@ -268,7 +266,7 @@ object FormPriceShow: TFormPriceShow
       object chk4: TsCheckBox
         Left = 421
         Top = 10
-        Width = 46
+        Width = 50
         Height = 17
         Caption = 'chk4'
         BiDiMode = bdRightToLeftNoAlign
@@ -282,7 +280,7 @@ object FormPriceShow: TFormPriceShow
       object chk5: TsCheckBox
         Left = 561
         Top = 10
-        Width = 46
+        Width = 50
         Height = 17
         Caption = 'chk5'
         BiDiMode = bdRightToLeftNoAlign

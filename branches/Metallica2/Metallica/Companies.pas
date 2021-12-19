@@ -7,7 +7,8 @@ uses
   Dialogs, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, 
   Grids, DBGrids, DBGridEh, Mask, DBCtrlsEh, DBLookupEh, ExtCtrls, ImgList, 
   DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, EhLibVCL, GridsEh, 
-  DBAxisGridsEh, MemDS, DBAccess, Uni, sBitBtn, sLabel, sEdit, sCheckBox;
+  DBAxisGridsEh, MemDS, DBAccess, Uni, sBitBtn, sLabel, sEdit, sCheckBox,
+  sSkinProvider, sSkinManager;
 
 type
   TFormCompanies = class(TForm)
@@ -16,36 +17,11 @@ type
     BitBtnUpdate: TsBitBtn;
     BitBtnDelete: TsBitBtn;
     BitBtnClose: TsBitBtn;
-    QCompanies2: TZQuery;
-    DSCompanies2: TDataSource;
-    QCompanies2SISCLOSED: TStringField;
-    QPhones2: TZQuery;
-    DSPhones2: TDataSource;
-    QPhones2PH_COMMENT: TStringField;
-    QPhones2PH_DATEBEGIN: TDateField;
-    QPhones2USERNAME: TStringField;
-    QPhones2PH_ID: TLargeintField;
-    QPhones2PH_STR: TStringField;
-    QPhones2WHO_WHERE: TStringField;
     DBGridCompanies: TDBGridEh;
     DBGridPhones: TDBGridEh;
-    QPhones2PH_ISCLOSED: TSmallintField;
-    QPhones2SISCLOSED: TStringField;
-    QCompanies2CM_TRUNC_COMMENT: TStringField;
     BitBtnNewPhone: TsBitBtn;
     BitBtnClosePhone: TsBitBtn;
-    QCompanies2COMPANYID: TIntegerField;
-    QCompanies2CM_NAME: TStringField;
-    QCompanies2CM_HYPERLINK: TStringField;
-    QCompanies2CM_COMMENT: TStringField;
-    QCompanies2CM_ISCLOSED: TIntegerField;
-    QCompanies2CM_OWNER: TIntegerField;
-    QCompanies2CM_CITY: TStringField;
-    QCompanies2TL_LEVEL: TIntegerField;
-    QCompanies2TL_COLOR: TIntegerField;
-    QCompanies2TL_NAME: TStringField;
     btnShowPrice: TsBitBtn;
-    strngfldQCompaniesCM_BUSINESS: TStringField;
     lbl1: TsLabel;
     edtCompany: TsEdit;
     lbl2: TsLabel;
@@ -56,6 +32,8 @@ type
     QPhones: TUniQuery;
     DSCompanies: TUniDataSource;
     DSPhones: TUniDataSource;
+    sSkinManager1: TsSkinManager;
+    sSkinProvider1: TsSkinProvider;
     procedure QCompanies2CalcFields(DataSet: TDataSet);
     procedure QPhones2CalcFields(DataSet: TDataSet);
     procedure BitBtnInsertClick(Sender: TObject);
@@ -96,7 +74,7 @@ implementation
 
 uses
   MainForm, NewCompany, DataModule, UpdateCompany, CommonUnit, NewPhone,
-  DbUtilsEh;
+  DbUtilsEh, System.UiTypes;
 
 { TFormCompanies }
 

@@ -4,8 +4,6 @@
     <File Path="..\..\..\branches"/>
     <File Path="..\..\SharedRes"/>
     <File Path="..\..\SharedRes\CommonUnit.pas"/>
-    <File Path="About.pas"/>
-    <File Path="About.dfm"/>
     <File Path="Companies.pas"/>
     <File Path="Companies.dfm"/>
     <File Path="DataModule.pas"/>
@@ -48,11 +46,25 @@
     <File Path="UpdateHeader.dfm"/>
     <File Path="UpdateTree.pas"/>
     <File Path="UpdateTree.dfm"/>
-    <File Path="UserInsert.pas"/>
-    <File Path="UserInsert.dfm"/>
     <File Path="Users.pas"/>
     <File Path="Users.dfm"/>
     <File Path="UserUpdate.pas"/>
     <File Path="UserUpdate.dfm"/>
+    <File Path="UserInsert.pas"/>
+    <File Path="UserInsert.dfm"/>
+    <File Path="DBErrorExit.pas"/>
+    <File Path="DBErrorExit.dfm"/>
   </ProjectSortOrder>
+	<Transactions>
+    <Transaction>1899.12.30 00:00:00.000.660,=D:\Projects\GitHub\metallic-files\branches\Metallica2\Metallica\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.275,D:\Projects\GitHub\metallic-files\branches\Metallica2\Metallica\Unit1.dfm=D:\Projects\GitHub\metallic-files\branches\Metallica2\Metallica\UserInsert.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.032,D:\Projects\GitHub\metallic-files\branches\Metallica2\Metallica\UserInsert.pas=</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.688,=D:\Projects\GitHub\metallic-files\branches\Metallica2\Metallica\UserInsert.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.694,D:\Projects\GitHub\metallic-files\branches\Metallica2\Metallica\UserInsert.pas=</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.537,D:\Projects\GitHub\metallic-files\branches\Metallica2\Metallica\DBErrorExit.pas=D:\Projects\GitHub\metallic-files\branches\Metallica2\Metallica\About.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.537,D:\Projects\GitHub\metallic-files\branches\Metallica2\Metallica\DBErrorExit.dfm=D:\Projects\GitHub\metallic-files\branches\Metallica2\Metallica\About.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.381,D:\Projects\GitHub\metallic-files\branches\Metallica2\Metallica\NewItem.pas=</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.000,=D:\Projects\GitHub\metallic-files\branches\Metallica2\Metallica\NewItem.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.275,D:\Projects\GitHub\metallic-files\branches\Metallica2\Metallica\Unit1.pas=D:\Projects\GitHub\metallic-files\branches\Metallica2\Metallica\UserInsert.pas</Transaction>
+  </Transactions>
 </BorlandProject>

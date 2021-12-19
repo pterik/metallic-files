@@ -6,13 +6,15 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
   Dialogs, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, 
   Grids, DBGrids, DBGridEh, ComCtrls, Mask, DBCtrlsEh, DataModule, sLabel, sEdit, sCheckBox, sMaskEdit, sComboBox, sMemo, sDialogs, sSpeedButton,
-  sBitBtn, sTreeView;
+  sBitBtn, sTreeView, sSkinProvider, sSkinManager;
 
 type
   TFormSelectTree = class(TForm)
     Tree: TsTreeView;
     BitBtnCancel: TsBitBtn;
     StaticText1: TStaticText;
+    sSkinManager1: TsSkinManager;
+    sSkinProvider1: TsSkinProvider;
     procedure TreeChange(Sender: TObject; Node: TTreeNode);
     procedure TreeExpanding(Sender: TObject; Node: TTreeNode;
       var AllowExpansion: Boolean);
@@ -32,7 +34,7 @@ var
 
 implementation
 
-uses MainForm, ShowCompany, CommonUnit, NewItem, NewPriceList;
+uses MainForm, ShowCompany, CommonUnit, NewPriceList, NewItem;
 
 {$R *.dfm}
 

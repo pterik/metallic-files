@@ -69,7 +69,7 @@ object FormNewPriceList: TFormNewPriceList
     OnClick = BitBtnCloseClick
   end
   object Grid: TDBGridEh
-    Left = 216
+    Left = 215
     Top = 8
     Width = 569
     Height = 417
@@ -232,7 +232,6 @@ object FormNewPriceList: TFormNewPriceList
     Height = 21
     Anchors = [akLeft, akBottom]
     DataField = 'PL_PRICE'
-    DataSource = DSData
     DynProps = <>
     EditButtons = <>
     Font.Charset = DEFAULT_CHARSET
@@ -251,7 +250,6 @@ object FormNewPriceList: TFormNewPriceList
     Width = 57
     Height = 21
     Anchors = [akLeft, akBottom]
-    Color = clAqua
     TabOrder = 6
     Text = '0'
   end
@@ -513,7 +511,115 @@ object FormNewPriceList: TFormNewPriceList
     TabOrder = 15
     OnClick = ButtonRightClick
   end
-  object qDataView: TZReadOnlyQuery
+  object qRowExists: TUniQuery
+    Connection = FormMain.ZC
+    SQL.Strings = (
+      'SELECT COUNT(pl_orderby) AS cntr FROM price_lines pt'
+      'WHERE pl_headerid =:headerid AND pl_treeid =:treeid'
+      'and pl_isclosed =0')
+    Left = 408
+    Top = 248
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'headerid'
+        ParamType = ptInput
+        Value = nil
+      end
+      item
+        DataType = ftInteger
+        Name = 'treeid'
+        ParamType = ptInput
+        Value = nil
+      end>
+  end
+  object DSData: TUniDataSource
+    DataSet = qDataView
+    Left = 472
+    Top = 72
+  end
+  object qRowUpdate: TUniSQL
+    Connection = FormMain.ZC
+    SQL.Strings = (
+      'UPDATE PRICE_LINES'
+      'SET PL_ISCLOSED=1,'
+      'PL_DATE_UPDATE=:CDATE'
+      'WHERE PL_ID =:ID')
+    Left = 488
+    Top = 360
+    ParamData = <
+      item
+        DataType = ftDateTime
+        Name = 'CDATE'
+        ParamType = ptInput
+        Value = nil
+      end
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptInput
+        Value = nil
+      end>
+  end
+  object qPriceUpdate: TUniSQL
+    Connection = FormMain.ZC
+    SQL.Strings = (
+      'update price_lines'
+      'set pl_price = :price,'
+      'pl_date_update = :cdate'
+      'where pl_id = :id')
+    Left = 408
+    Top = 360
+    ParamData = <
+      item
+        DataType = ftFloat
+        Name = 'price'
+        ParamType = ptInput
+        Value = nil
+      end
+      item
+        DataType = ftDateTime
+        Name = 'cdate'
+        ParamType = ptInput
+        Value = nil
+      end
+      item
+        DataType = ftInteger
+        Name = 'id'
+        ParamType = ptInput
+        Value = nil
+      end>
+  end
+  object qRowInsert: TUniSQL
+    Connection = FormMain.ZC
+    SQL.Strings = (
+      'INSERT INTO PRICE_LINES (PL_HEADERID, PL_TREEID, PL_PRICE,'
+      'PL_ORDERBY, PL_DATE_UPDATE, PL_ISCLOSED)'
+      'VALUES (:HEADERID, :TREEID, 0, :ORDERBY, null, 0)')
+    Left = 472
+    Top = 248
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'HEADERID'
+        ParamType = ptInput
+        Value = nil
+      end
+      item
+        DataType = ftInteger
+        Name = 'TREEID'
+        ParamType = ptInput
+        Value = nil
+      end
+      item
+        DataType = ftInteger
+        Name = 'ORDERBY'
+        ParamType = ptInput
+        Value = nil
+      end>
+  end
+  object qDataView: TUniQuery
+    Connection = FormMain.ZC
     SQL.Strings = (
       'select pl_id, pl_headerid, pl.pl_treeid, pl_price,'
       
@@ -533,386 +639,125 @@ object FormNewPriceList: TFormNewPriceList
       'and ph.ph_isclosed = 0'
       'and pl.pl_isclosed = 0'
       'order by ph.ph_date_insert, pl_orderby')
-    Params = <
-      item
-        DataType = ftString
-        Name = 'treeid'
-        ParamType = ptUnknown
-        Value = '8'
-      end
-      item
-        DataType = ftString
-        Name = 'companyid'
-        ParamType = ptUnknown
-        Value = '1'
-      end>
     Left = 408
-    Top = 120
+    Top = 64
     ParamData = <
       item
-        DataType = ftString
+        DataType = ftInteger
         Name = 'treeid'
-        ParamType = ptUnknown
-        Value = '8'
+        ParamType = ptInput
+        Value = nil
       end
       item
-        DataType = ftString
+        DataType = ftInteger
         Name = 'companyid'
-        ParamType = ptUnknown
-        Value = '1'
+        ParamType = ptInput
+        Value = nil
       end>
-    object qDataViewPL_ID: TIntegerField
-      FieldName = 'PL_ID'
-      Required = True
-    end
-    object qDataViewPL_HEADERID: TIntegerField
-      FieldName = 'PL_HEADERID'
-      Required = True
-    end
-    object qDataViewPL_TREEID: TIntegerField
-      FieldName = 'PL_TREEID'
-    end
-    object qDataViewCM_NAME: TStringField
-      FieldName = 'CM_NAME'
-      Size = 100
-    end
-    object qDataViewCM_CITY: TStringField
-      FieldName = 'CM_CITY'
-      Required = True
-      Size = 100
-    end
-    object qDataViewCM_ID: TIntegerField
-      FieldName = 'CM_ID'
-      Required = True
-    end
-    object qDataViewPL_PRICE: TFloatField
-      FieldName = 'PL_PRICE'
-      Required = True
-      DisplayFormat = '#0.00'
-    end
-    object qDataViewPL_VALUE1: TStringField
-      FieldName = 'PL_VALUE1'
-      Size = 200
-    end
-    object qDataViewPL_VALUE2: TStringField
-      FieldName = 'PL_VALUE2'
-      Size = 200
-    end
-    object qDataViewPL_VALUE3: TStringField
-      FieldName = 'PL_VALUE3'
-      Size = 200
-    end
-    object qDataViewPL_VALUE4: TStringField
-      FieldName = 'PL_VALUE4'
-      Size = 200
-    end
-    object qDataViewPL_VALUE5: TStringField
-      FieldName = 'PL_VALUE5'
-      Size = 200
-    end
-    object qDataViewPL_VALUE6: TStringField
-      FieldName = 'PL_VALUE6'
-      Size = 200
-    end
-    object qDataViewPL_VALUE7: TStringField
-      FieldName = 'PL_VALUE7'
-      Size = 200
-    end
-    object qDataViewPL_VALUE8: TStringField
-      FieldName = 'PL_VALUE8'
-      Size = 200
-    end
-    object qDataViewPL_VALUE9: TStringField
-      FieldName = 'PL_VALUE9'
-      Size = 200
-    end
-    object qDataViewPL_ORDERBY: TIntegerField
-      FieldName = 'PL_ORDERBY'
-    end
-    object qDataViewPL_DATE_UPDATE: TDateTimeField
-      FieldName = 'PL_DATE_UPDATE'
-    end
-    object qDataViewPL_ISCLOSED: TSmallintField
-      FieldName = 'PL_ISCLOSED'
-      Required = True
-    end
-    object qDataViewPL_NODE: TStringField
-      FieldName = 'PL_NODE'
-      ReadOnly = True
-      Size = 100
-    end
   end
-  object DSData: TDataSource
-    DataSet = qDataView
-    OnDataChange = DSDataDataChange
-    Left = 472
-    Top = 120
-  end
-  object QCompany: TZQuery
+  object QCompany: TUniQuery
+    Connection = FormMain.ZC
     SQL.Strings = (
       'SELECT cm_id as COMPANYID, cm_city, cm_name, c.cm_comment '
       'FROM company c'
       'WHERE CM_ISCLOSED= 0 '
       'AND cm_id =:COMPANYID')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'COMPANYID'
-        ParamType = ptUnknown
-      end>
-    WhereMode = wmWhereAll
-    Options = []
     Left = 96
-    Top = 128
+    Top = 192
     ParamData = <
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'COMPANYID'
-        ParamType = ptUnknown
-      end>
-    object QCompanyCOMPANYID: TIntegerField
-      FieldName = 'COMPANYID'
-      Required = True
-    end
-    object QCompanyCM_NAME: TStringField
-      FieldName = 'CM_NAME'
-      Size = 100
-    end
-    object QCompanyCM_COMMENT: TStringField
-      FieldName = 'CM_COMMENT'
-      Size = 255
-    end
-    object QCompanyCM_CITY: TStringField
-      FieldName = 'CM_CITY'
-      Size = 100
-    end
-  end
-  object qRowInsert: TZQuery
-    SQL.Strings = (
-      'INSERT INTO PRICE_LINES (PL_HEADERID, PL_TREEID, PL_PRICE,'
-      'PL_ORDERBY, PL_DATE_UPDATE, PL_ISCLOSED)'
-      'VALUES (:HEADERID, :TREEID, 0, :ORDERBY, null, 0)')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'HEADERID'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'TREEID'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'ORDERBY'
-        ParamType = ptUnknown
-      end>
-    WhereMode = wmWhereAll
-    Options = []
-    Left = 472
-    Top = 184
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'HEADERID'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'TREEID'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'ORDERBY'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end>
   end
-  object qRowMaxOrder: TZReadOnlyQuery
-    SQL.Strings = (
-      'SELECT MAX(pl_orderby)+1 AS maxpos FROM price_lines pt'
-      'WHERE pl_headerid =:headerid and pl_treeid =:treeid'
-      'and pl_isclosed =0')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'headerid'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'treeid'
-        ParamType = ptUnknown
-      end>
-    Left = 544
-    Top = 184
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'headerid'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'treeid'
-        ParamType = ptUnknown
-      end>
-    object qRowMaxOrderMAXPOS: TLargeintField
-      FieldName = 'MAXPOS'
-      ReadOnly = True
-    end
-  end
-  object qRowExists: TZQuery
-    SQL.Strings = (
-      'SELECT COUNT(pl_orderby) AS cntr FROM price_lines pt'
-      'WHERE pl_headerid =:headerid AND pl_treeid =:treeid'
-      'and pl_isclosed =0')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'HEADERID'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'treeid'
-        ParamType = ptUnknown
-      end>
-    WhereMode = wmWhereAll
-    Options = []
-    Left = 408
-    Top = 184
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'HEADERID'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'treeid'
-        ParamType = ptUnknown
-      end>
-    object qRowExistsCNTR: TIntegerField
-      FieldName = 'CNTR'
-      ReadOnly = True
-    end
-  end
-  object qPriceUpdate: TZQuery
-    SQL.Strings = (
-      'update price_lines'
-      'set pl_price = :price,'
-      'pl_date_update = :cdate'
-      'where pl_id = :id')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'price'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'cdate'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'id'
-        ParamType = ptUnknown
-      end>
-    WhereMode = wmWhereAll
-    Options = []
-    Left = 408
-    Top = 248
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'price'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'cdate'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'id'
-        ParamType = ptUnknown
-      end>
-    object IntegerField1: TIntegerField
-      FieldName = 'CNTR'
-      ReadOnly = True
-    end
-  end
-  object qRowUpdate: TZQuery
-    SQL.Strings = (
-      'UPDATE PRICE_LINES'
-      'SET PL_ISCLOSED=1,'
-      'PL_DATE_UPDATE=:CDATE'
-      'WHERE PL_ID =:ID')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'CDATE'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'ID'
-        ParamType = ptUnknown
-      end>
-    WhereMode = wmWhereAll
-    Options = []
-    Left = 496
-    Top = 248
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'CDATE'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'ID'
-        ParamType = ptUnknown
-      end>
-  end
-  object qPLisFinished: TZQuery
+  object qPLisFinished: TUniSQL
+    Connection = FormMain.ZC
     SQL.Strings = (
       'update PRICE_HEADERS'
       'set ph_isfinished =:finished'
       'where ph_id = :headerid')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'finished'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'headerid'
-        ParamType = ptUnknown
-      end>
-    WhereMode = wmWhereAll
-    Options = []
-    Left = 264
-    Top = 104
+    Left = 288
+    Top = 192
     ParamData = <
       item
-        DataType = ftUnknown
+        DataType = ftSmallint
         Name = 'finished'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'headerid'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end>
-    object IntegerField2: TIntegerField
-      FieldName = 'CNTR'
-      ReadOnly = True
-    end
+  end
+  object qRowMaxOrder: TUniQuery
+    Connection = FormMain.ZC
+    SQL.Strings = (
+      'SELECT MAX(pl_orderby)+1 AS maxpos FROM price_lines pt'
+      'WHERE pl_headerid =:headerid and pl_treeid =:treeid'
+      'and pl_isclosed =0')
+    Left = 544
+    Top = 248
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'headerid'
+        ParamType = ptInput
+        Value = nil
+      end
+      item
+        DataType = ftInteger
+        Name = 'treeid'
+        ParamType = ptInput
+        Value = nil
+      end>
+  end
+  object sSkinManager1: TsSkinManager
+    ButtonsOptions.OldGlyphsMode = True
+    IsDefault = False
+    InternalSkins = <>
+    SkinDirectory = 'c:\Skins'
+    SkinName = 'AlterMetro'
+    SkinInfo = '15'
+    ThirdParty.ThirdEdits = ' '
+    ThirdParty.ThirdButtons = 'TButton'
+    ThirdParty.ThirdBitBtns = ' '
+    ThirdParty.ThirdCheckBoxes = ' '
+    ThirdParty.ThirdGroupBoxes = ' '
+    ThirdParty.ThirdListViews = ' '
+    ThirdParty.ThirdPanels = ' '
+    ThirdParty.ThirdGrids = ' '
+    ThirdParty.ThirdTreeViews = ' '
+    ThirdParty.ThirdComboBoxes = ' '
+    ThirdParty.ThirdWWEdits = ' '
+    ThirdParty.ThirdVirtualTrees = ' '
+    ThirdParty.ThirdGridEh = ' '
+    ThirdParty.ThirdPageControl = ' '
+    ThirdParty.ThirdTabControl = ' '
+    ThirdParty.ThirdToolBar = ' '
+    ThirdParty.ThirdStatusBar = ' '
+    ThirdParty.ThirdSpeedButton = ' '
+    ThirdParty.ThirdScrollControl = ' '
+    ThirdParty.ThirdUpDown = ' '
+    ThirdParty.ThirdScrollBar = ' '
+    ThirdParty.ThirdStaticText = ' '
+    ThirdParty.ThirdNativePaint = ' '
+    Left = 24
+    Top = 8
+  end
+  object sSkinProvider1: TsSkinProvider
+    AddedTitle.Font.Charset = DEFAULT_CHARSET
+    AddedTitle.Font.Color = clNone
+    AddedTitle.Font.Height = -11
+    AddedTitle.Font.Name = 'Tahoma'
+    AddedTitle.Font.Style = []
+    SkinData.SkinSection = 'FORM'
+    TitleButtons = <>
+    Left = 72
+    Top = 8
   end
 end

@@ -7,27 +7,30 @@ uses
   Dialogs, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, 
   Grids, DBGrids, DBGridEh, sLabel, sEdit, sCheckBox, sMaskEdit, sComboBox, sMemo, sDialogs, sSpeedButton,
   DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, sBitBtn,
-  EhLibVCL, GridsEh, DBAxisGridsEh;
+  EhLibVCL, GridsEh, DBAxisGridsEh, DBAccess, Uni, MemDS, sSkinProvider,
+  sSkinManager;
 
 type
   TFormSelectCompany = class(TForm)
-    QCompany: TZQuery;
-    DSCompanies: TDataSource;
-    QCompanyCM_NAME: TStringField;
-    QCompanyCM_COMMENT: TStringField;
     DBGridCompanies: TDBGridEh;
-    QCompanyCM_TRUNC_COMMENT: TStringField;
-    QCompanyCOMPANYID: TIntegerField;
     BitBtnCancel: TsBitBtn;
     Label1: TsLabel;
-    qPriceHeader: TZReadOnlyQuery;
-    qPriceHeaderPH_ID: TIntegerField;
-    QNewHeader: TZQuery;
+    QCompany: TUniQuery;
+    qPriceHeader: TUniQuery;
+    QNewHeader: TUniSQL;
+    DSCompanies: TUniDataSource;
+    QCompanyCOMPANYID: TIntegerField;
+    QCompanyCM_NAME: TStringField;
     QCompanyCM_CITY: TStringField;
+    QCompanyCM_COMMENT: TStringField;
     QCompanyMAXPH_ID: TIntegerField;
     QCompanyPH_ISFINISHED: TSmallintField;
+    QCompanyCM_TRUNC_COMMENT: TStringField;
     QCompanySISFINISHED: TStringField;
-    procedure QCompanyCalcFields(DataSet: TDataSet);
+    qPriceHeaderPH_ID: TIntegerField;
+    sSkinManager1: TsSkinManager;
+    sSkinProvider1: TsSkinProvider;
+    procedure QCompany2CalcFields(DataSet: TDataSet);
     procedure BitBtnCancelClick(Sender: TObject);
     procedure DBGridCompaniesDblClick(Sender: TObject);
     procedure DBGridCompaniesTitleClick(Column: TColumnEh);
@@ -64,7 +67,7 @@ QCompany.Open;
 DBGridCompanies.Focused;
 end;
 
-procedure TFormSelectCompany.QCompanyCalcFields(DataSet: TDataSet);
+procedure TFormSelectCompany.QCompany2CalcFields(DataSet: TDataSet);
 begin
 if VarIsNull(QCompany['COMPANYID']) then exit;
 if QCompany['PH_ISFINISHED']=1  then QCompany['SISFINISHED']:='ÄÀ';
@@ -93,11 +96,10 @@ qPriceHeader.ParamByName('COMPANYID').AsInteger:=qCompany['COMPANYID'];
 qPriceHeader.Open;
 if VarIsNull(qPriceHeader['PH_ID']) then
   begin
-  qNewHeader.Close;
   qNewHeader.ParamByName('COMPANYID').AsInteger:=qCompany['COMPANYID'];
 //  qNewHeader.ParamByName('DATE_INSERT').AsString:=DateToStr(Now(), FormMain.DateSettings);
   qNewHeader.ParamByName('DATE_INSERT').AsDate:=Now();
-  qNewHeader.ExecSQL;
+  qNewHeader.Execute;
   qPriceHeader.Close;
   qPriceHeader.ParamByName('COMPANYID').AsInteger:=qCompany['COMPANYID'];
   qPriceHeader.Open;
@@ -110,13 +112,15 @@ procedure TFormSelectCompany.DBGridCompaniesTitleClick(Column: TColumnEh);
 begin
 if F_LastSorted=Column.FieldName then
   begin
-  QCompany.SortedFields:=Column.FieldName;
-  QCompany.SortType:=stDescending;
+  //QCompany.SortedFields:=Column.FieldName;
+  //QCompany.SortType:=stDescending;
+  QCompany.IndexFieldNames:=Column.FieldName+' DESC';
   end
 else
   begin
-  QCompany.SortedFields:=Column.FieldName;
-  QCompany.SortType:=stAscending;
+  //QCompany.SortedFields:=Column.FieldName;
+  //QCompany.SortType:=stAscending;
+  QCompany.IndexFieldNames:=Column.FieldName+' ASC';
   end;
 F_LastSorted:=Column.FieldName;
 end;

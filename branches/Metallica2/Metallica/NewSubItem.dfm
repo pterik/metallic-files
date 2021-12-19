@@ -118,78 +118,98 @@ object FormNewSubItem: TFormNewSubItem
     TabOrder = 3
     Text = 'EditParent'
   end
-  object QTreeInsert: TZQuery
+  object qMaxParentPos: TUniQuery
+    Connection = FormMain.ZC
+    SQL.Strings = (
+      'SELECT MAX(pt_orderby)+1 AS maxpos FROM prices_tree pt'
+      'WHERE pt_parentid =:parentid')
+    Left = 112
+    Top = 72
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'parentid'
+        ParamType = ptInput
+        Value = nil
+      end>
+  end
+  object QTreeInsert: TUniSQL
+    Connection = FormMain.ZC
     SQL.Strings = (
       
         'insert into PRICES_TREE (PT_PARENTID, PT_VALUE, PT_ORDERBY, PT_D' +
         'ATE, PT_ISCLOSED)'
       'values (:PT_PARENTID, :PT_VALUE, :PT_ORDERBY, :PT_DATE, 0)')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'PT_PARENTID'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'PT_VALUE'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'PT_ORDERBY'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'PT_DATE'
-        ParamType = ptUnknown
-      end>
     Left = 32
-    Top = 24
+    Top = 64
     ParamData = <
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'PT_PARENTID'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end
       item
-        DataType = ftUnknown
+        DataType = ftString
         Name = 'PT_VALUE'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end
       item
-        DataType = ftUnknown
+        DataType = ftInteger
         Name = 'PT_ORDERBY'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end
       item
-        DataType = ftUnknown
+        DataType = ftDateTime
         Name = 'PT_DATE'
-        ParamType = ptUnknown
+        ParamType = ptInput
+        Value = nil
       end>
   end
-  object qMaxParentPos: TZReadOnlyQuery
-    SQL.Strings = (
-      'SELECT MAX(pt_orderby)+1 AS maxpos FROM prices_tree pt'
-      'WHERE pt_parentid =:parentid')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'parentid'
-        ParamType = ptUnknown
-      end>
-    Left = 112
-    Top = 16
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'parentid'
-        ParamType = ptUnknown
-      end>
-    object qMaxParentPosMAXPOS: TLargeintField
-      FieldName = 'MAXPOS'
-      ReadOnly = True
-    end
+  object sSkinManager1: TsSkinManager
+    ButtonsOptions.OldGlyphsMode = True
+    IsDefault = False
+    InternalSkins = <>
+    SkinDirectory = 'c:\Skins'
+    SkinName = 'AlterMetro'
+    SkinInfo = '15'
+    ThirdParty.ThirdEdits = ' '
+    ThirdParty.ThirdButtons = 'TButton'
+    ThirdParty.ThirdBitBtns = ' '
+    ThirdParty.ThirdCheckBoxes = ' '
+    ThirdParty.ThirdGroupBoxes = ' '
+    ThirdParty.ThirdListViews = ' '
+    ThirdParty.ThirdPanels = ' '
+    ThirdParty.ThirdGrids = ' '
+    ThirdParty.ThirdTreeViews = ' '
+    ThirdParty.ThirdComboBoxes = ' '
+    ThirdParty.ThirdWWEdits = ' '
+    ThirdParty.ThirdVirtualTrees = ' '
+    ThirdParty.ThirdGridEh = ' '
+    ThirdParty.ThirdPageControl = ' '
+    ThirdParty.ThirdTabControl = ' '
+    ThirdParty.ThirdToolBar = ' '
+    ThirdParty.ThirdStatusBar = ' '
+    ThirdParty.ThirdSpeedButton = ' '
+    ThirdParty.ThirdScrollControl = ' '
+    ThirdParty.ThirdUpDown = ' '
+    ThirdParty.ThirdScrollBar = ' '
+    ThirdParty.ThirdStaticText = ' '
+    ThirdParty.ThirdNativePaint = ' '
+    Left = 24
+    Top = 8
+  end
+  object sSkinProvider1: TsSkinProvider
+    AddedTitle.Font.Charset = DEFAULT_CHARSET
+    AddedTitle.Font.Color = clNone
+    AddedTitle.Font.Height = -11
+    AddedTitle.Font.Name = 'Tahoma'
+    AddedTitle.Font.Style = []
+    SkinData.SkinSection = 'FORM'
+    TitleButtons = <>
+    Left = 72
+    Top = 8
   end
 end

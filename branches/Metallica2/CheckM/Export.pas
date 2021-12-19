@@ -4,7 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
-  Dialogs, StdCtrls, Buttons, sBitBtn, sDialogs, sMemo;
+  Dialogs, StdCtrls, Buttons, sBitBtn, sDialogs, sMemo, sSkinProvider,
+  sSkinManager;
 
 type
   TFormExport = class(TForm)
@@ -14,6 +15,8 @@ type
     MemoLoad: TsMemo;
     OD: TsOpenDialog;
     StaticText1: TStaticText;
+    sSkinManager1: TsSkinManager;
+    sSkinProvider1: TsSkinProvider;
     procedure BitBtnLoadClick(Sender: TObject);
     procedure BitBtnSaveClick(Sender: TObject);
   private
@@ -103,8 +106,9 @@ Operation:='SAVE';
 AssignFile(F,GetProgDir+'\'+params_default_file);
 try
 Rewrite(F);
-Writeln(F,'// Этот файл создан программой CheckCom.exe ТОЛЬКО для переноса ');
-Writeln(F,'// настроек между компьютерами. ');
+Writeln(F,'// Этот файл создан программой CheckCom.exe ТОЛЬКО для переноса настроек между компьютерами. ');
+Writeln(F,'// Поместите файл в папку с программой, переименуйте в database.ini ');
+Writeln(F,'[Connection Parameters]');
 Writeln(F,'HOSTNAME='+HostName);
 Writeln(F,'DATABASE='+Database);
 Writeln(F,'PROTOCOL='+Protocol);

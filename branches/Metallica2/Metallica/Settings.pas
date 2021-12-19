@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
   Dialogs, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, Mask, sLabel, sEdit, sCheckBox, sMaskEdit, sComboBox, sMemo, sDialogs, sSpeedButton,
-  sBitBtn;
+  sBitBtn, sSkinProvider, sSkinManager;
 
 type
   TFormSettings = class(TForm)
@@ -15,6 +15,8 @@ type
     StaticText1: TStaticText;
     StaticText2: TStaticText;
     MECode: TsMaskEdit;
+    sSkinManager1: TsSkinManager;
+    sSkinProvider1: TsSkinProvider;
     procedure BitBtnSaveClick(Sender: TObject);
   private
   public
@@ -27,7 +29,7 @@ var
 
 implementation
 
-uses DataModule, MainForm, EnterUser;
+uses System.UITypes, DataModule, MainForm, EnterUser;
 
 {$R *.dfm}
 

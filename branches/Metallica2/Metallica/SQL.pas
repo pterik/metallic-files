@@ -7,7 +7,7 @@ uses
   Dialogs, StdCtrls, Buttons, Grids, DBGrids, DB, ZAbstractRODataset, 
   ZAbstractDataset, ZDataset, DBGridEh, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, 
   DynVarsEh, EhLibVCL, GridsEh, DBAxisGridsEh, sLabel, sEdit, sCheckBox, sMaskEdit, sComboBox, sMemo, sDialogs, sSpeedButton,
-  sButton, sBitBtn;
+  sButton, sBitBtn, DBAccess, Uni, MemDS, sSkinProvider, sSkinManager;
 
 type
   TFormSQL = class(TForm)
@@ -16,13 +16,15 @@ type
     EditName: TsEdit;
     ButtonOpenFile: TsButton;
     CBExecute: TsCheckBox;
-    DSQuery: TDataSource;
-    ZQuery: TZQuery;
     SDSQL: TsSaveDialog;
     Label1: TsLabel;
     Label2: TsLabel;
     DBGridEh1: TDBGridEh;
     BitBtnCancel: TsBitBtn;
+    ZQuery: TUniQuery;
+    DSQuery: TUniDataSource;
+    sSkinManager1: TsSkinManager;
+    sSkinProvider1: TsSkinProvider;
     procedure ButtonOpenFileClick(Sender: TObject);
     procedure BitBtnExecuteClick(Sender: TObject);
     procedure FormKeyUp(Sender: TObject; var Key: Word;

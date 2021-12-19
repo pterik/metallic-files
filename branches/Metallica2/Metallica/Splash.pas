@@ -4,16 +4,18 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
-  Dialogs, jpeg, ExtCtrls, StdCtrls;
+  Dialogs, jpeg, ExtCtrls, StdCtrls, sSkinProvider, sSkinManager;
 
 type
   TSplashForm = class(TForm)
     Image1: TImage;
+    sSkinManager1: TsSkinManager;
+    sSkinProvider1: TsSkinProvider;
     procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
-		{ Public declarations }
+	procedure Update;
   end;
 
 var
@@ -33,4 +35,9 @@ Image1.Left:=(Width-514) div 2;
 Image1.Top:=(Height-162)div 2;
 end;
 
-end.
+procedure TSplashForm.Update;
+begin
+inherited;
+end;
+
+end.

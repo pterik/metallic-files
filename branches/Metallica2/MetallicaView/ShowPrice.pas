@@ -7,7 +7,8 @@ uses
   Dialogs, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, 
   Grids, DBGrids, DBGridEh, DataModule, MdiChild, ExtCtrls, CommonUnit, 
   DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, EhLibVCL, GridsEh, DBAxisGridsEh, sTreeView,
-  sCheckBox, sButton, sBitBtn, sComboBox, sLabel, sPanel, MemDS, DBAccess, Uni;
+  sCheckBox, sButton, sBitBtn, sComboBox, sLabel, sPanel, MemDS, DBAccess, Uni,
+  Vcl.Mask, sMaskEdit, sCustomComboEdit;
 
 type
   TFormPriceShow = class(TFormMDIChild)
