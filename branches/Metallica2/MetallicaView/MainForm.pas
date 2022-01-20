@@ -16,15 +16,9 @@ type
     ApplicationEvents1: TApplicationEvents;
     mmMain: TMainMenu;
     mmWindow: TMenuItem;
-    mmiNewTree: TMenuItem;
-    mmiNewRow: TMenuItem;
-    N2: TMenuItem;
-    N3: TMenuItem;
     N4: TMenuItem;
     ile1: TMenuItem;
     N5: TMenuItem;
-    N6: TMenuItem;
-    N8: TMenuItem;
     ActionList1: TActionList;
     FileNew1: TAction;
     FileOpen1: TAction;
@@ -52,35 +46,39 @@ type
     QViewUsersU_ISCLOSED: TSmallintField;
     QViewUsersU_ISBOSS: TIntegerField;
     QViewUsersU_EDIT_PRICES: TSmallintField;
-    procedure mmiNewTreeClick(Sender: TObject);
+    N1: TMenuItem;
+    N7: TMenuItem;
+    N2: TMenuItem;
     procedure FormCreate(Sender: TObject);
-    procedure FormDestroy(Sender: TObject);
     procedure ApplicationEvents1Exception(Sender: TObject; E: Exception);
-    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure mmiNewRowClick(Sender: TObject);
     procedure N4Click(Sender: TObject);
     procedure ile1Click(Sender: TObject);
     procedure N5Click(Sender: TObject);
-    procedure N8Click(Sender: TObject);
     procedure N7Click(Sender: TObject);
-    procedure N3Click(Sender: TObject);
-    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure N1Click(Sender: TObject);
+    procedure N2Click(Sender: TObject);
   private
-    F_EnteredLogin: string;
-    F_EntereduserFullName: string;
-    F_EnteredUSerID: Integer;
+    //F_AppPassword : string;
+    F_AppUser, F_AppUserFullName, F_APPLastUser:string;
+		//F_HostName, F_Database, F_DBUser, F_DBPassword, F_ProviderName:string;
+//    F_EnteredLogin: string;
+//    F_EntereduserFullName: string;
+//    F_EnteredUSerID: Integer;
     FMainWindowClientCoordinates: TRect;
     procedure SetMainWindowClientCoordinates(const Value: TRect);
   public
+    AppUSerID: Integer;
     ConfirmClose: Boolean;
     CityCode: string;
     SearchChars: Integer;
     property MainWindowClientCoordinates: TRect
       read FMainWindowClientCoordinates write SetMainWindowClientCoordinates;
-    procedure SetMainForm(const U_ID: Integer; Login, UserFullName: string);
-    function ReadEnteredUserID: Integer;
-    function ReadEnteredLogin: string;
-    function ReadEnteredUserFullName: string;
+    procedure SetMainForm(const L_ID: Integer; L_Login, L_UserFullName: string);
+//    function ReadEnteredUserID: Integer;
+//    function ReadEnteredLogin: string;
+//    function ReadEnteredUserFullName: string;
+    function ConnectToDatabase:boolean;
   end;
 
 var
@@ -91,28 +89,30 @@ implementation
 {$R *.DFM}
 
 uses
-  About, CommonUnit, Variants, system.UITypes;
+  About, CommonUnit, Variants, System.UITypes, System.INIFiles;
 
 procedure TFormMain.FormCreate(Sender: TObject);
 begin
+	NullStrictConvert := false;
   ConfirmClose:= True;
+  Left := (Screen.Width - Width) div 2;
+  Top := (Screen.Height - Height) div 2;
+  ConfirmClose := True;
+  BorderIcons:=[biSystemMenu,biMinimize,biMaximize];
+  ConfirmClose:= True;
+	if DM=nil then Application.CreateForm(TDM, DM);
 end;
 
-function TFormMain.ReadEnteredUserID: Integer;
-begin
-  Result:= F_EnteredUserID;
-end;
-
-procedure TFormMain.SetMainForm(const U_ID: Integer; Login, UserFullname: string);
+procedure TFormMain.SetMainForm(const L_ID: Integer; L_Login, L_UserFullname: string);
 var
   S: string;
 begin
-  F_EnteredUserID:= U_ID;
-  F_EnteredLogin:= Login;
-  F_EnteredUserFullName:= UserFullName;
+  AppUserID:= L_ID;
+  F_AppUser:= L_Login;
+  F_AppUserFullName:= L_UserFullName;
   try
     QViewUsers.Close;
-    QViewUsers.ParamByName('U_ID').AsInteger:= U_ID;
+    QViewUsers.ParamByName('U_ID').AsInteger:= L_ID;
     QViewUsers.Open;
     FormMain.Caption:= 'Просмотр прайсов, сотрудник ' + QViewUsers['U_FIO'];
   except on E: Exception do
@@ -131,7 +131,6 @@ begin
   except on E: EConvertError do
       SearchChars:= 4;
   end;
-  mmiNewTree.Click;
 end;
 
 procedure TFormMain.ApplicationEvents1Exception(Sender: TObject;
@@ -143,50 +142,6 @@ begin
     mtError, [mbOK], 0);
 end;
 
-function TFormMain.ReadEnteredLogin: string;
-begin
-  Result:= F_EnteredLogin;
-end;
-
-function TFormMain.ReadEnteredUserFullName: string;
-begin
-  Result:= F_EnteredUserFullName;
-end;
-
-procedure TFormMain.FormClose(Sender: TObject; var Action: TCloseAction);
-begin
-if qViewUsers.Active then qViewUsers.Close;
-
-if ZC.Connected then ZC.Close;
-end;
-
-procedure TFormMain.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
-begin
-  if ConfirmClose then
-    if MessageDlg('Закрыть программу?', mtConfirmation, [mbYes, mbNo], 0) = mrNo then
-      CanClose:= False
-    else WriteRegisterStr(F_EnteredLogin, RegisterBranchMetallica, 'LASTDBUSER');
-end;
-
-procedure TFormMain.FormDestroy(Sender: TObject);
-var
-  I: Integer;
-begin
-  for I:= 0 to ZC.ComponentCount - 1 do
-  begin
-    ZC.Components[I].Free;
-  end; 
-if FormMain.ZC.Connected then FormMain.ZC.Disconnect;
-end;
-
-procedure TFormMain.mmiNewTreeClick(Sender: TObject);
-var
-  TreeShow: TFormTree;
-begin
-  TreeShow:= TFormTree.Create(Application);
-  TreeShow.Caption:= 'Все рубрики';
-  TreeShow.SetTree;
-end;
 
 procedure TFormMain.mmiNewRowClick(Sender: TObject);
 var
@@ -215,33 +170,15 @@ begin
     MDIChildren[I].Close;
 end;
 
-procedure TFormMain.N8Click(Sender: TObject);
-begin
-  Close;
-end;
-
 procedure TFormMain.N7Click(Sender: TObject);
+var
+  CompanyShow: TFormCompaniesShow;
 begin
-  if not DM.LoadRegister then begin
-    MessageDlg('Не могу определить установки для подключения к БД', mtError, [mbOK], 0);
-    Exit;
-  end;
-  ZC.Database:= DM.F_Database;
-  ZC.ProviderName:= DM.F_Protocol;
-  ZC.Server:= DM.F_HostName;
-  ZC.UserName:= DM.F_User;
-  ZC.Password:= DM.F_Password;
-  ZC.LoginPrompt:= False;
-  try
-    FormMain.ZC.Connect;
-  except on E: Exception do begin
-      MessageDlg('Возникла ошибка. Возможная причина - отсутствует файл.' + Chr(10) +
-        Chr(13)
-        + E.message, mtError, [mbOK], 0);
-      Exit;
-    end;
-  end;
-  MessageDlg('Подключение произошло успешно', mtConfirmation, [mbOK], 0);
+  if not ConnectToDatabase then halt(1);
+  SetMainForm(AppUserID, F_AppUser, F_AppUserFullname);
+  CompanyShow:= TFormCompaniesShow.Create(Application);
+  CompanyShow.SetCompany(-1);
+  CompanyShow.Caption:= 'Все поставщики';
 end;
 
 //procedure TFormMain.AddToolBttn(Caption:string);
@@ -263,12 +200,55 @@ begin
   FMainWindowClientCoordinates:= Value;
 end;
 
-procedure TFormMain.N3Click(Sender: TObject);
+procedure TFormMain.N1Click(Sender: TObject);
+var
+  TreeShow: TFormTree;
 begin
-  Application.CreateForm(TFormAbout, FormAbout);
-  FormAbout.SetPosition(Self.Left, Self.Top);
-  FormAbout.SetAbout;
-  FormAbout.Show;
+  if not ConnectToDatabase then halt(1);
+  SetMainForm(AppUserID, F_AppUser, F_AppUserFullname);
+  TreeShow:= TFormTree.Create(Application);
+  TreeShow.Caption:= 'Все рубрики';
+  TreeShow.SetTree;
+
+end;
+
+procedure TFormMain.N2Click(Sender: TObject);
+begin
+  Close;
+end;
+
+function TFormMain.ConnectToDatabase:boolean;
+var Ini: TIniFile;
+begin
+if FileExists(ExtractFilePath(ParamStr(0))+'\database.ini') then
+  begin
+  Ini := TIniFile.Create(ExtractFilePath(ParamStr(0))+'\database.ini');
+	ZC.Server:=Ini.ReadString( 'dbConnection', 'HOSTNAME', 'localhost' );
+	ZC.Database:=Ini.ReadString( 'dbConnection','DATABASE', 'c:\Program Files (x86)\Metallica\DATABASE.FDB');
+	ZC.UserName:=Ini.ReadString( 'dbConnection','USERNAME', 'SYSDBA');
+ 	ZC.ProviderName:=Ini.ReadString( 'dbConnection','PROTOCOL', 'interbase');
+	ZC.Password:=Ini.ReadString( 'dbConnection','PASSWORD','masterkey');
+	ZC.LoginPrompt:=false;
+  F_AppLastUser:='BOSS';
+  Result:=true;
+  end
+  else
+	begin
+  //ValidSettings:=false;
+  Result:=false;
+  exit;
+	end;
+try
+ZC.Connect;
+except on E:Exception do
+	begin
+  MessageDlg('Неожиданная ошибка при подключении к базе данных. Программа аварийно остановлена, обратитесь к разработчику.', mtError, [mbOK],0);
+  Result:=false;
+  exit;
+  end;
+end;
+F_AppUser:='BOSS';
+AppUSerID:=1;
 end;
 
 end.

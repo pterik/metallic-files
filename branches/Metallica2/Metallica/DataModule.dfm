@@ -1,14 +1,16 @@
 object DM: TDM
   OldCreateOrder = False
-  Height = 555
+  Height = 577
   Width = 482
   object QICompany: TUniSQL
     Connection = FormMain.ZC
     SQL.Strings = (
       
-        'INSERT INTO company(cm_id, cm_name, cm_city, cm_comment, cm_iscl' +
-        'osed)'
-      'VALUES(:cm_id, :cm_name, :cm_city, :cm_comment, :cm_isclosed)')
+        'INSERT INTO company(cm_id, cm_name, cm_owner, cm_trust,  cm_city' +
+        ', cm_comment, cm_isclosed, cm_hyperlink, cm_business)'
+      
+        'VALUES(:cm_id, :cm_name,:cm_owner, :cm_trust, :cm_city, :cm_comm' +
+        'ent, :cm_isclosed, :cm_hyperlink, :cm_business)')
     Left = 40
     Top = 16
     ParamData = <
@@ -22,25 +24,48 @@ object DM: TDM
         DataType = ftString
         Name = 'cm_name'
         ParamType = ptInput
+        Value = ''
+      end
+      item
+        DataType = ftInteger
+        Name = 'cm_owner'
+        ParamType = ptInput
+        Value = 0
+      end
+      item
+        DataType = ftUnknown
+        Name = 'cm_trust'
         Value = nil
       end
       item
         DataType = ftString
         Name = 'cm_city'
         ParamType = ptInput
-        Value = nil
+        Value = ''
       end
       item
         DataType = ftString
         Name = 'cm_comment'
         ParamType = ptInput
-        Value = nil
+        Value = ''
       end
       item
         DataType = ftSmallint
         Name = 'cm_isclosed'
         ParamType = ptInput
-        Value = nil
+        Value = 0
+      end
+      item
+        DataType = ftString
+        Name = 'cm_hyperlink'
+        ParamType = ptInput
+        Value = ''
+      end
+      item
+        DataType = ftString
+        Name = 'cm_business'
+        ParamType = ptInput
+        Value = ''
       end>
   end
   object QUCompany: TUniSQL
@@ -49,7 +74,10 @@ object DM: TDM
       'UPDATE company'
       'SET CM_NAME=:CM_NAME, '
       '    CM_CITY=:CM_CITY,'
-      '    CM_COMMENT=:CM_COMMENT '
+      '    CM_TRUST=:CM_TRUST,'
+      '    CM_COMMENT=:CM_COMMENT,'
+      '    CM_HYPERLINK=:CM_HYPERLINK,'
+      '    CM_BUSINESS=:CM_BUSINESS'
       'WHERE CM_ID=:CM_ID')
     Left = 104
     Top = 16
@@ -67,8 +95,26 @@ object DM: TDM
         Value = nil
       end
       item
+        DataType = ftInteger
+        Name = 'CM_TRUST'
+        ParamType = ptInput
+        Value = nil
+      end
+      item
         DataType = ftString
         Name = 'CM_COMMENT'
+        ParamType = ptInput
+        Value = nil
+      end
+      item
+        DataType = ftString
+        Name = 'CM_HYPERLINK'
+        ParamType = ptInput
+        Value = nil
+      end
+      item
+        DataType = ftString
+        Name = 'CM_BUSINESS'
         ParamType = ptInput
         Value = nil
       end
@@ -76,7 +122,7 @@ object DM: TDM
         DataType = ftInteger
         Name = 'CM_ID'
         ParamType = ptInput
-        Value = nil
+        Value = 0
       end>
   end
   object QMaxCompany: TUniQuery
@@ -85,6 +131,10 @@ object DM: TDM
       'select max(cm_id) as cntr from company')
     Left = 168
     Top = 16
+    object QMaxCompanyCNTR: TIntegerField
+      FieldName = 'CNTR'
+      ReadOnly = True
+    end
   end
   object QSCompanyNames: TUniQuery
     Connection = FormMain.ZC
@@ -100,6 +150,14 @@ object DM: TDM
         ParamType = ptInput
         Value = nil
       end>
+    object QSCompanyNamesCM_NAME: TStringField
+      FieldName = 'CM_NAME'
+      Size = 100
+    end
+    object QSCompanyNamesCM_ID: TIntegerField
+      FieldName = 'CM_ID'
+      Required = True
+    end
   end
   object QCntrPhoneCompany: TUniQuery
     Connection = FormMain.ZC
@@ -121,6 +179,10 @@ object DM: TDM
         ParamType = ptInput
         Value = nil
       end>
+    object QCntrPhoneCompanyCNTR: TIntegerField
+      FieldName = 'CNTR'
+      ReadOnly = True
+    end
   end
   object QIPhoneCompany: TUniSQL
     Connection = FormMain.ZC
@@ -209,6 +271,10 @@ object DM: TDM
         ParamType = ptInput
         Value = nil
       end>
+    object QFindComNTCNTR: TIntegerField
+      FieldName = 'CNTR'
+      ReadOnly = True
+    end
   end
   object QCntrComNT: TUniQuery
     Connection = FormMain.ZC
@@ -237,6 +303,22 @@ object DM: TDM
         ParamType = ptInput
         Value = nil
       end>
+    object QSettingsST_ID: TIntegerField
+      FieldName = 'ST_ID'
+      Required = True
+    end
+    object QSettingsST_NAME: TStringField
+      FieldName = 'ST_NAME'
+      Size = 100
+    end
+    object QSettingsST_VALUE: TStringField
+      FieldName = 'ST_VALUE'
+      Size = 100
+    end
+    object QSettingsST_COMMENT: TStringField
+      FieldName = 'ST_COMMENT'
+      Size = 255
+    end
   end
   object qHeaderDelete: TUniSQL
     Connection = FormMain.ZC
@@ -304,6 +386,31 @@ object DM: TDM
         ParamType = ptInput
         Value = nil
       end>
+    object qDisplayGS_TREEID: TIntegerField
+      FieldName = 'GS_TREEID'
+    end
+    object qDisplayGS_FIELD: TStringField
+      FieldName = 'GS_FIELD'
+      Size = 50
+    end
+    object qDisplayGS_HEADER: TStringField
+      FieldName = 'GS_HEADER'
+      Size = 50
+    end
+    object qDisplayGS_SHOW: TSmallintField
+      FieldName = 'GS_SHOW'
+      Required = True
+    end
+    object qDisplayGS_SIZE: TIntegerField
+      FieldName = 'GS_SIZE'
+      Required = True
+    end
+    object qDisplayGS_DISPLAYFORMAT: TStringField
+      FieldName = 'GS_DISPLAYFORMAT'
+    end
+    object qDisplayGS_ORDERBY: TIntegerField
+      FieldName = 'GS_ORDERBY'
+    end
   end
   object qTreeChild: TUniQuery
     Connection = FormMain.ZC
@@ -332,6 +439,33 @@ object DM: TDM
         ParamType = ptInput
         Value = nil
       end>
+    object qTreeChildPT_ID: TIntegerField
+      FieldName = 'PT_ID'
+      Required = True
+    end
+    object qTreeChildPT_VALUE: TStringField
+      FieldName = 'PT_VALUE'
+      Required = True
+      Size = 100
+    end
+    object qTreeChildPT_ORDERBY: TIntegerField
+      FieldName = 'PT_ORDERBY'
+      Required = True
+    end
+    object qTreeChildPT_PARENTID: TIntegerField
+      FieldName = 'PT_PARENTID'
+    end
+    object qTreeChildPT_DATE: TDateField
+      FieldName = 'PT_DATE'
+    end
+    object qTreeChildPT_ISCLOSED: TSmallintField
+      FieldName = 'PT_ISCLOSED'
+      Required = True
+    end
+    object qTreeChildCNTR: TIntegerField
+      FieldName = 'CNTR'
+      ReadOnly = True
+    end
   end
   object qTreeParent: TUniQuery
     Connection = FormMain.ZC
@@ -343,6 +477,26 @@ object DM: TDM
       'order by PT_ORDERBY')
     Left = 320
     Top = 392
+    object qTreeParentPT_ID: TIntegerField
+      FieldName = 'PT_ID'
+      Required = True
+    end
+    object qTreeParentPT_VALUE: TStringField
+      FieldName = 'PT_VALUE'
+      Required = True
+      Size = 100
+    end
+    object qTreeParentPT_ORDERBY: TIntegerField
+      FieldName = 'PT_ORDERBY'
+      Required = True
+    end
+    object qTreeParentPT_DATE: TDateField
+      FieldName = 'PT_DATE'
+    end
+    object qTreeParentPT_ISCLOSED: TSmallintField
+      FieldName = 'PT_ISCLOSED'
+      Required = True
+    end
   end
   object qFindParent: TUniQuery
     Connection = FormMain.ZC
@@ -365,6 +519,23 @@ object DM: TDM
         ParamType = ptInput
         Value = nil
       end>
+    object qFindParentPT_ID: TIntegerField
+      FieldName = 'PT_ID'
+      Required = True
+    end
+    object qFindParentPT_VALUE: TStringField
+      FieldName = 'PT_VALUE'
+      Required = True
+      Size = 100
+    end
+    object qFindParentPARENTID: TIntegerField
+      FieldName = 'PARENTID'
+    end
+    object qFindParentPARENTVALUE: TStringField
+      FieldName = 'PARENTVALUE'
+      ReadOnly = True
+      Size = 100
+    end
   end
   object QMaxContact: TUniQuery
     Connection = FormMain.ZC
@@ -396,7 +567,7 @@ object DM: TDM
   object QUCompanyByID: TUniSQL
     Connection = FormMain.ZC
     SQL.Strings = (
-      'update  CONTACTS'
+      'update CONTACTS'
       'set'
       'CN_OWNER=:CN_OWNER,'
       'CN_MANAGER=:CN_MANAGER,'
@@ -920,7 +1091,7 @@ object DM: TDM
       'GS_SIZE, GS_DISPLAYFORMAT, GS_ORDERBY)'
       'VALUES (:TREEID, :FIELD, :HEADER, :SHOW,'
       ':SIZE, :DISPLAYFORMAT, :ORDERBY)')
-    Left = 344
+    Left = 368
     Top = 16
     ParamData = <
       item
@@ -980,6 +1151,10 @@ object DM: TDM
         ParamType = ptInput
         Value = 1
       end>
+    object QFindPhoneCNTR: TIntegerField
+      FieldName = 'CNTR'
+      ReadOnly = True
+    end
   end
   object QDPhone: TUniSQL
     Connection = FormMain.ZC
@@ -1106,6 +1281,10 @@ object DM: TDM
         ParamType = ptInput
         Value = nil
       end>
+    object qHdrGlobExistsCNTR: TIntegerField
+      FieldName = 'CNTR'
+      ReadOnly = True
+    end
   end
   object qHdrGlobInsert: TUniSQL
     Connection = FormMain.ZC
@@ -1279,6 +1458,10 @@ object DM: TDM
         ParamType = ptInput
         Value = nil
       end>
+    object qHdrExistsCNTR: TIntegerField
+      FieldName = 'CNTR'
+      ReadOnly = True
+    end
   end
   object qHdrGlobUpdate: TUniSQL
     Connection = FormMain.ZC
@@ -1327,5 +1510,21 @@ object DM: TDM
   object UniSQLMonitor1: TUniSQLMonitor
     Left = 400
     Top = 400
+  end
+  object qDelCompanyByID: TUniSQL
+    Connection = FormMain.ZC
+    SQL.Strings = (
+      'update COMPANY'
+      'set CM_ISCLOSED=1'
+      'where CM_ID=:CM_ID')
+    Left = 32
+    Top = 520
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'CM_ID'
+        ParamType = ptInput
+        Value = 0
+      end>
   end
 end

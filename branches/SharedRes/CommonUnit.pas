@@ -311,11 +311,11 @@ var
 begin
   Str:= IntToStr(Number);
   Len:= Length(Str);
-  if Len < 9 then
-    for I:= Length(Str) + 1 to 9 do
+  if Len <10 then
+    for I:= Length(Str) + 1 to 10 do
       Str:= '0' + Str;
-  Result:= '(' + Copy(Str, 1, 2) + ') ' + Copy(Str, 3, 3) + '-'
-    + Copy(Str, 6, 2) + '-' + Copy(Str, 8, 2);
+  Result:= '(' + Copy(Str, 1, 3) + ') ' + Copy(Str, 4, 3) + '-'
+    + Copy(Str, 7, 2) + '-' + Copy(Str, 9, 2);
 end;
 
 function MondayofDate(const Day: TDate): TDate;

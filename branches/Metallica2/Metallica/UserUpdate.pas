@@ -3,8 +3,9 @@ unit UserUpdate;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
-  Dialogs, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, sBitBtn, sLabel, sEdit, sCheckBox,
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, Buttons, DB,
+  sBitBtn, sLabel, sEdit, sCheckBox,
   DBAccess, Uni, sSkinProvider, sSkinManager;
 
 type
@@ -77,7 +78,7 @@ if length(trim(EditFIO.Text))=0 then
 	MessageDlg('Ошибка, фамилия пользователя не указана',mtWarning,[mbOK],0);
 	exit;
 	end;
-if not FormMain.ReadEnteredUserIsBoss then
+if not FormMain.AppUserIsBoss then
 	begin
 	MessageDlg('Только BOSS может изменить данные по другому пользователю',mtWarning,[mbOK],0);
 	exit;

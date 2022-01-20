@@ -204,6 +204,7 @@ object FormUserInsert: TFormUserInsert
   end
   object sSkinManager1: TsSkinManager
     ButtonsOptions.OldGlyphsMode = True
+    IsDefault = False
     InternalSkins = <>
     SkinDirectory = 'c:\Skins'
     SkinName = 'AlterMetro'

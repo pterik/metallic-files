@@ -3,8 +3,7 @@ unit DataModule;
 interface
 
 uses
-  SysUtils, Classes, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, 
-  DateUtils, Controls, ComCtrls, DBGridEh, sTreeView, sBitBtn, sLabel, sEdit, sCheckBox,
+  SysUtils, Classes, DB, DateUtils, Controls, ComCtrls, DBGridEh, sTreeView, sBitBtn, sLabel, sEdit, sCheckBox,
   MemDS, DBAccess, Uni, DASQLMonitor, UniSQLMonitor;
   
 const
@@ -86,6 +85,42 @@ type
     qHdrExists: TUniQuery;
     qHdrGlobUpdate: TUniSQL;
     UniSQLMonitor1: TUniSQLMonitor;
+    qDelCompanyByID: TUniSQL;
+    qDisplayGS_TREEID: TIntegerField;
+    qDisplayGS_FIELD: TStringField;
+    qDisplayGS_HEADER: TStringField;
+    qDisplayGS_SHOW: TSmallintField;
+    qDisplayGS_SIZE: TIntegerField;
+    qDisplayGS_DISPLAYFORMAT: TStringField;
+    qDisplayGS_ORDERBY: TIntegerField;
+    qTreeChildPT_ID: TIntegerField;
+    qTreeChildPT_VALUE: TStringField;
+    qTreeChildPT_ORDERBY: TIntegerField;
+    qTreeChildPT_PARENTID: TIntegerField;
+    qTreeChildPT_DATE: TDateField;
+    qTreeChildPT_ISCLOSED: TSmallintField;
+    qTreeChildCNTR: TIntegerField;
+    QSettingsST_ID: TIntegerField;
+    QSettingsST_NAME: TStringField;
+    QSettingsST_VALUE: TStringField;
+    QSettingsST_COMMENT: TStringField;
+    QMaxCompanyCNTR: TIntegerField;
+    QCntrPhoneCompanyCNTR: TIntegerField;
+    QSCompanyNamesCM_NAME: TStringField;
+    QSCompanyNamesCM_ID: TIntegerField;
+    QFindPhoneCNTR: TIntegerField;
+    qHdrGlobExistsCNTR: TIntegerField;
+    qHdrExistsCNTR: TIntegerField;
+    QFindComNTCNTR: TIntegerField;
+    qFindParentPT_ID: TIntegerField;
+    qFindParentPT_VALUE: TStringField;
+    qFindParentPARENTID: TIntegerField;
+    qFindParentPARENTVALUE: TStringField;
+    qTreeParentPT_ID: TIntegerField;
+    qTreeParentPT_VALUE: TStringField;
+    qTreeParentPT_ORDERBY: TIntegerField;
+    qTreeParentPT_DATE: TDateField;
+    qTreeParentPT_ISCLOSED: TSmallintField;
   private
     function CompanyDeleteBadNames(S: string; NChars: Integer): string;
     function CompanyNTMaxID: Integer;
@@ -549,8 +584,8 @@ function TDM.CompanyClosebyID(CompanyID: Integer): Boolean;
 begin
   //Пометить компанию как закрытую, неактивную
   try
-    QUCompanyByID.ParamByName('CM_ID').AsInteger:= CompanyID;
-    QUCompanyByID.Execute;
+    QDelCompanyByID.ParamByName('CM_ID').AsInteger:= CompanyID;
+    QDelCompanyByID.Execute;
   except on E: Exception do begin
       Result:= False;
       Exit;

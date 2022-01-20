@@ -148,10 +148,18 @@ object FormCompaniesShow: TFormCompaniesShow
         CellButtons = <>
         DynProps = <>
         EditButtons = <>
+        FieldName = #1042#1080#1076' '#1076#1077#1103#1090#1077#1083#1100#1085#1086#1089#1090#1080
+        Footers = <>
+        Width = 100
+      end
+      item
+        CellButtons = <>
+        DynProps = <>
+        EditButtons = <>
         FieldName = 'CM_TRUNC_COMMENT'
         Footers = <>
         Title.Caption = #1040#1076#1088#1077#1089
-        Width = 188
+        Width = 118
       end
       item
         CellButtons = <>
@@ -160,7 +168,7 @@ object FormCompaniesShow: TFormCompaniesShow
         FieldName = 'TL_NAME'
         Footers = <>
         Title.Caption = #1044#1086#1074#1077#1088#1080#1077
-        Width = 102
+        Width = 85
       end
       item
         CellButtons = <>
@@ -261,8 +269,8 @@ object FormCompaniesShow: TFormCompaniesShow
     OnExit = edtCompanyExit
   end
   object edtBusiness: TsEdit
-    Left = 368
-    Top = 4
+    Left = 373
+    Top = 8
     Width = 137
     Height = 24
     Font.Charset = DEFAULT_CHARSET
@@ -298,9 +306,9 @@ object FormCompaniesShow: TFormCompaniesShow
       'and u.u_id=pc.pc_uid'
       'and pc.pc_company=:COMPANYID'
       'order by p.ph_isclosed, p.ph_id')
-    Active = True
-    Left = 536
-    Top = 192
+    OnCalcFields = QPhonesCalcFields
+    Left = 784
+    Top = 120
     ParamData = <
       item
         DataType = ftInteger
@@ -347,7 +355,9 @@ object FormCompaniesShow: TFormCompaniesShow
   object QCompany: TUniQuery
     Connection = FormMain.ZC
     SQL.Strings = (
-      'SELECT cm_id as COMPANYID, cm_name, cm_city, c.cm_comment,'
+      
+        'SELECT cm_id as COMPANYID, cm_name, cm_city, c.cm_comment, cm_bu' +
+        'siness,'
       
         'c.cm_isclosed, c.CM_HYPERLINK, c.cm_owner, tl.tl_level, tl.tl_co' +
         'lor , tl.tl_name'
@@ -368,6 +378,8 @@ object FormCompaniesShow: TFormCompaniesShow
       ' '
       ' ')
     Active = True
+    AfterScroll = QCompanyAfterScroll
+    OnCalcFields = QCompanyCalcFields
     Left = 96
     Top = 200
     ParamData = <
@@ -408,6 +420,11 @@ object FormCompaniesShow: TFormCompaniesShow
       FieldName = 'CM_COMMENT'
       Size = 255
     end
+    object QCompanyCM_BUSINESS: TStringField
+      FieldName = 'CM_BUSINESS'
+      Required = True
+      Size = 100
+    end
     object QCompanyCM_ISCLOSED: TIntegerField
       FieldName = 'CM_ISCLOSED'
     end
@@ -444,7 +461,7 @@ object FormCompaniesShow: TFormCompaniesShow
     end
     object QCompanyCM_HYPERLINK: TStringField
       FieldName = 'CM_HYPERLINK'
-      Size = 1000
+      Size = 100
     end
   end
   object DSCompanies: TUniDataSource
@@ -455,8 +472,8 @@ object FormCompaniesShow: TFormCompaniesShow
   object DSPhones: TUniDataSource
     AutoEdit = False
     DataSet = QPhones
-    Left = 624
-    Top = 192
+    Left = 824
+    Top = 224
   end
   object sSkinManager1: TsSkinManager
     ButtonsOptions.OldGlyphsMode = True

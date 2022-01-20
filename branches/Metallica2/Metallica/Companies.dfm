@@ -34,8 +34,8 @@ object FormCompanies: TFormCompanies
     Font.Style = []
   end
   object lbl2: TsLabel
-    Left = 248
-    Top = 6
+    Left = 231
+    Top = 8
     Width = 119
     Height = 16
     Caption = #1042#1080#1076' '#1076#1077#1103#1090#1077#1083#1100#1085#1086#1089#1090#1080
@@ -47,8 +47,8 @@ object FormCompanies: TFormCompanies
     Font.Style = []
   end
   object lbl3: TsLabel
-    Left = 488
-    Top = 6
+    Left = 475
+    Top = 8
     Width = 39
     Height = 16
     Caption = #1043#1086#1088#1086#1076
@@ -279,13 +279,14 @@ object FormCompanies: TFormCompanies
     Left = 9
     Top = 34
     Width = 685
-    Height = 377
+    Height = 396
     Anchors = [akLeft, akTop, akRight, akBottom]
     DataSource = DSCompanies
     DynProps = <>
     FooterParams.Color = clWindow
     IndicatorOptions = []
     Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgConfirmDelete, dgCancelOnExit]
+    ReadOnly = True
     RowLines = 3
     TabOrder = 0
     TitleParams.RowLines = 2
@@ -344,7 +345,7 @@ object FormCompanies: TFormCompanies
         EditButtons = <>
         FieldName = 'CM_BUSINESS'
         Footers = <>
-        Title.Caption = #1044#1077#1103#1090#1077#1083#1100#1085#1086#1089#1090#1100
+        Title.Caption = #1042#1080#1076' '#1076#1077#1103#1090#1077#1083#1100#1085#1086#1089#1090#1080
         Width = 100
       end
       item
@@ -377,16 +378,19 @@ object FormCompanies: TFormCompanies
   end
   object DBGridPhones: TDBGridEh
     Left = 700
-    Top = 32
+    Top = 34
     Width = 249
-    Height = 385
+    Height = 396
     Anchors = [akTop, akRight, akBottom]
+    DataSource = DSPhones
     DynProps = <>
     FooterParams.Color = clWindow
     IndicatorOptions = []
     Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgConfirmDelete, dgCancelOnExit]
+    ReadOnly = True
     TabOrder = 2
     TitleParams.RowLines = 2
+    OnDrawColumnCell = DBGridPhonesDrawColumnCell
     Columns = <
       item
         CellButtons = <>
@@ -395,7 +399,7 @@ object FormCompanies: TFormCompanies
         FieldName = 'PH_STR'
         Footers = <>
         Title.Caption = #1058#1077#1083#1077#1092#1086#1085
-        Width = 74
+        Width = 80
       end
       item
         CellButtons = <>
@@ -560,7 +564,7 @@ object FormCompanies: TFormCompanies
   object edtCompany: TsEdit
     Left = 88
     Top = 4
-    Width = 153
+    Width = 137
     Height = 24
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlack
@@ -572,7 +576,7 @@ object FormCompanies: TFormCompanies
     OnExit = edtCompanyExit
   end
   object edtBusiness: TsEdit
-    Left = 368
+    Left = 356
     Top = 4
     Width = 113
     Height = 24
@@ -586,9 +590,9 @@ object FormCompanies: TFormCompanies
     OnExit = edtBusinessExit
   end
   object edtCity: TsEdit
-    Left = 536
+    Left = 520
     Top = 4
-    Width = 137
+    Width = 113
     Height = 24
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlack
@@ -599,7 +603,18 @@ object FormCompanies: TFormCompanies
     TabOrder = 12
     OnExit = edtCityExit
   end
+  object sBitBtn1: TsBitBtn
+    Left = 639
+    Top = 8
+    Width = 26
+    Height = 20
+    Caption = 'X'
+    TabOrder = 13
+    OnClick = sBitBtn1Click
+  end
   object QCompanies: TUniQuery
+    UpdatingTable = 'COMPANY'
+    Connection = FormMain.ZC
     SQL.Strings = (
       'SELECT cm_id as COMPANYID, cm_name, cm_city, c.cm_comment,'
       'c.cm_isclosed, c.CM_HYPERLINK, CM_BUSINESS,'
@@ -607,7 +622,7 @@ object FormCompanies: TFormCompanies
       'FROM company c'
       'left join TRUSTLEVEL tl on tl.tl_id = c.cm_trust'
       'WHERE ((cm_id = :COMPANYID) or (:COMPANYID = -1) )'
-      'and cm_isclosed = :ISCLOSED'
+      'and (cm_isclosed = :ISCLOSED or :ISCLOSED=-1)'
       
         'and ((upper(cm_name COLLATE WIN1251) like '#39'%'#39'||upper(:company)||' +
         #39'%'#39') or (cast(:company as varchar(100)) ='#39#39') )'
@@ -618,7 +633,10 @@ object FormCompanies: TFormCompanies
         'and ((UPPER(cm_business COLLATE WIN1251) like '#39'%'#39'||upper(:busine' +
         'ss)||'#39'%'#39' ) or (cast(:business as varchar(100)) ='#39#39') )'
       'order by c.cm_name')
+    ReadOnly = True
     UniDirectional = True
+    AfterScroll = QCompaniesAfterScroll
+    OnCalcFields = QCompaniesCalcFields
     Left = 72
     Top = 96
     ParamData = <
@@ -652,8 +670,65 @@ object FormCompanies: TFormCompanies
         ParamType = ptInput
         Value = nil
       end>
+    object QCompaniesCOMPANYID: TIntegerField
+      FieldName = 'COMPANYID'
+      Required = True
+    end
+    object QCompaniesCM_NAME: TStringField
+      FieldName = 'CM_NAME'
+      Size = 100
+    end
+    object QCompaniesCM_CITY: TStringField
+      FieldName = 'CM_CITY'
+      Required = True
+      Size = 100
+    end
+    object QCompaniesCM_COMMENT: TStringField
+      FieldName = 'CM_COMMENT'
+      Size = 255
+    end
+    object QCompaniesCM_ISCLOSED: TIntegerField
+      FieldName = 'CM_ISCLOSED'
+    end
+    object QCompaniesCM_HYPERLINK: TStringField
+      FieldName = 'CM_HYPERLINK'
+      Size = 1000
+    end
+    object QCompaniesCM_BUSINESS: TStringField
+      FieldName = 'CM_BUSINESS'
+      Required = True
+      Size = 100
+    end
+    object QCompaniesCM_OWNER: TIntegerField
+      FieldName = 'CM_OWNER'
+      Required = True
+    end
+    object QCompaniesTL_LEVEL: TIntegerField
+      FieldName = 'TL_LEVEL'
+      ReadOnly = True
+    end
+    object QCompaniesTL_COLOR: TIntegerField
+      FieldName = 'TL_COLOR'
+      ReadOnly = True
+    end
+    object QCompaniesTL_NAME: TStringField
+      FieldName = 'TL_NAME'
+      ReadOnly = True
+      Size = 100
+    end
+    object QCompaniesSISCLOSED: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'SISCLOSED'
+      Calculated = True
+    end
+    object QCompaniesCM_TRUNC_COMMENT: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'CM_TRUNC_COMMENT'
+      Calculated = True
+    end
   end
   object QPhones: TUniQuery
+    Connection = FormMain.ZC
     SQL.Strings = (
       'select p.ph_id, p.ph_comment, p.ph_isclosed,'
       'p.ph_datebegin,u.u_login||'#39' '#39'||u.u_fio as username'
@@ -662,8 +737,9 @@ object FormCompanies: TFormCompanies
       'and u.u_id=pc.pc_uid'
       'and pc.pc_company=:COMPANYID'
       'order by p.ph_isclosed, p.ph_id')
-    Left = 184
-    Top = 96
+    OnCalcFields = QPhonesCalcFields
+    Left = 776
+    Top = 80
     ParamData = <
       item
         DataType = ftInteger
@@ -671,14 +747,51 @@ object FormCompanies: TFormCompanies
         ParamType = ptInput
         Value = nil
       end>
+    object QPhonesPH_ID: TFloatField
+      FieldName = 'PH_ID'
+      Required = True
+    end
+    object QPhonesPH_COMMENT: TStringField
+      FieldName = 'PH_COMMENT'
+      Size = 100
+    end
+    object QPhonesPH_ISCLOSED: TSmallintField
+      FieldName = 'PH_ISCLOSED'
+      Required = True
+    end
+    object QPhonesPH_DATEBEGIN: TDateField
+      FieldName = 'PH_DATEBEGIN'
+    end
+    object QPhonesUSERNAME: TStringField
+      FieldName = 'USERNAME'
+      ReadOnly = True
+      Size = 81
+    end
+    object QPhonesWHO_WHERE: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'WHO_WHERE'
+      Calculated = True
+    end
+    object QPhonesPH_STR: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'PH_STR'
+      Calculated = True
+    end
+    object QPhonesSISCLOSED: TStringField
+      FieldKind = fkCalculated
+      FieldName = 'SISCLOSED'
+      Calculated = True
+    end
   end
   object DSCompanies: TUniDataSource
+    DataSet = QCompanies
     Left = 296
     Top = 104
   end
   object DSPhones: TUniDataSource
-    Left = 392
-    Top = 104
+    DataSet = QPhones
+    Left = 776
+    Top = 176
   end
   object sSkinManager1: TsSkinManager
     ButtonsOptions.OldGlyphsMode = True

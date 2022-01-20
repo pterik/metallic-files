@@ -4,11 +4,11 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
-  Dialogs, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, 
-  Grids, DBGrids, DBGridEh, DataModule, Mask, DBCtrlsEh, DBLookupEh, sLabel, sEdit, sCheckBox, sMaskEdit, sComboBox, sMemo, sDialogs, sSpeedButton,
-  DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, EhLibVCL,
-  GridsEh, DBAxisGridsEh, sBitBtn, DBAccess, Uni, MemDS, sSkinProvider,
-  sSkinManager;
+  Dialogs, StdCtrls, Buttons, DB,   Grids, DBGrids, DBGridEh, DataModule, Mask,
+  DBCtrlsEh, DBLookupEh, sLabel, sEdit, sCheckBox, sMaskEdit, sComboBox, sMemo,
+  sDialogs, sSpeedButton,  DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls,
+  DynVarsEh, EhLibVCL, GridsEh, DBAxisGridsEh, sBitBtn, DBAccess, Uni, MemDS,
+  sSkinProvider, sSkinManager;
 
 type
   TFormPriceShow = class(TForm)
@@ -119,7 +119,7 @@ begin
   else begin
     //QData.SortedFields:= Column.FieldName;
     //QData.SortType:= stAscending;
-    QData.IndexFieldNames:= Column.FieldName+' AC';
+    QData.IndexFieldNames:= Column.FieldName+' ASC';
   end;
   F_LastSorted:= Column.FieldName;
 end;

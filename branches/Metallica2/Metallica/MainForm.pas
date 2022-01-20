@@ -4,13 +4,11 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, Buttons, ZConnection, Grids, DBGrids, DB, ZDataset, ZDbcCache,
-  ZAbstractRODataset, ZDbcMySQL, ZDbcPostgreSQL, ZSqlUpdate, ComCtrls, ZAbstractDataset, 
-  ExtCtrls, AppEvnts, Mask, DBCtrlsEh, DBGridEh, DBLookupEh, ADODB, DataModule, 
-  DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, ZAbstractConnection, 
-  EhLibVCL, GridsEh, DBAxisGridsEh, DBAccess, Uni, sBitBtn, sTreeView, sEdit,
-  sLabel, MemDS, UniProvider, InterBaseUniProvider, sSkinProvider, sSkinManager,
-  DASQLMonitor, UniSQLMonitor;
+  Dialogs, StdCtrls, Buttons, Grids, DBGrids, DB, ComCtrls, ExtCtrls,
+  AppEvnts, Mask, DBCtrlsEh, DBGridEh, DBLookupEh, ADODB, DataModule, DBGridEhGrouping,
+  ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, EhLibVCL, GridsEh, DBAxisGridsEh,
+  DBAccess, Uni, sBitBtn, sTreeView, sEdit, sLabel, MemDS, UniProvider,
+  InterBaseUniProvider, sSkinProvider, sSkinManager, DASQLMonitor, UniSQLMonitor;
 
 type
   TFormMain = class(TForm)
@@ -67,6 +65,9 @@ type
     UniSQLMonitor1: TUniSQLMonitor;
     sSkinProvider1: TsSkinProvider;
     sSkinManager1: TsSkinManager;
+    qUsers: TUniQuery;
+    sBitBtn1: TsBitBtn;
+    UniTransaction1: TUniTransaction;
     procedure BitBtnAboutClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -93,25 +94,21 @@ type
     procedure edtBusinessExit(Sender: TObject);
     procedure QViewUsersCalcFields(DataSet: TDataSet);
     procedure BitBtnCloseClick(Sender: TObject);
+    procedure sBitBtn1Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     F_Ctrl: Boolean;
-    F_IsBoss: Boolean;
-    F_EnteredLogin: string;
-    F_EntereduserFullName: string;
-    F_EnteredUSerID: Integer;
-    //  F_IsDemoLimit:boolean;
-    //  F_IsBigDemoLimit:boolean;
-    F_EditPrices: Integer;
+    //F_AppPassword : string;
+    F_AppUser, F_AppUserFullName, F_APPLastUser:string;
+		//F_HostName, F_Database, F_DBUser, F_DBPassword, F_ProviderName:string;
+	  F_EditPrices: Integer;
     F_FieldName1, F_FieldName2: string;
     F_LastSorted: string;
-    //    procedure SetDemoLimit(B:boolean);
-    //    function  GetDemoLimit:boolean;
-    //    procedure SetBigDemoLimit(B:boolean);
-    //    function  GetBigDemoLimit:boolean;
-    //    procedure ExpandLevel(Node: TTreeNode);
-    //    procedure RepaintDataGrid(Node: TTreeNode);
     procedure RefreshPrices;
+    function ConnectToDatabase: boolean;
   public
+    AppUserIsBoss: Boolean;
+    AppUSerID: Integer;
     MyNode: TNodeValue;
     SelectedCompanyID: Integer;
     SelectedPriceHeaderID: Integer;
@@ -120,14 +117,7 @@ type
     CityCode: string;
     SearchChars: Integer;
     CommonManagerID, CommonOwnerID: Integer;
-    //  property  IsDemoLimit:boolean read GetDemoLimit write SetDemoLimit;
-    //  property  IsBigDemoLimit:boolean read GetBigDemoLimit write SetBigDemoLimit;
-    procedure SetMainForm(User_ID: Integer; const User_Login, UserFullName: string; Boss: Integer);
-    procedure SetDBCredentials(F_HostName,F_Protocol, F_Database, F_User,F_Password:string);
-    function ReadEnteredUserID: Integer;
-    function ReadEnteredLogin: string;
-    function ReadEnteredUserFullName: string;
-    function ReadEnteredUserISBOSS: Boolean;
+    procedure SetMainForm(L_User_ID: Integer; const L_User_Login, L_UserFullName: string; L_Boss: boolean);
   end;
 
 var
@@ -138,9 +128,9 @@ implementation
 {$R *.dfm}
 
 uses
-  DateUtils, About, EnterUser, Users, CommonUnit,
+  DateUtils, About, Users, CommonUnit,
   Companies, SQL, ForBOSS, ShowCompany, ShowPrice,
-  SelectCompany, NewPriceList, DbUtilsEh, System.UITypes;
+  SelectCompany, NewPriceList, DbUtilsEh, System.UITypes, System.INIFiles;
 
 procedure TFormMain.BitBtnAboutClick(Sender: TObject);
 begin
@@ -172,7 +162,10 @@ begin
 Если подключение успешное, то закрываем Enteruser и не отображаем DBErrorExt
 Если пароль введен успешно, то закрываем EnterUser, не отображаем DBErrorExit и возвращаемся в MainForm
 }
+  if not ConnectToDatabase then halt(1);
+  if DM=nil then Application.CreateForm(TDM, DM);
 	NullStrictConvert := false;
+  ConfirmClose:= True;
   Left := (Screen.Width - Width) div 2;
   Top := (Screen.Height - Height) div 2;
   F_Ctrl := False;
@@ -181,59 +174,27 @@ begin
   ConfirmClose := True;
   MyNode := TNodeValue.Create;
   BorderIcons:=[biSystemMenu,biMinimize,biMaximize];
+  SetMainForm(AppUserID, F_AppUser, F_AppUserFullname, AppUserIsBoss);
+//  if FormEnterUser=nil then Application.CreateForm(TFormEnterUser, FormEnterUser);
+  //FormMain.Hide;
+//  FormEnterUser.ShowModal;
+  //FormMain.Show;
 end;
 
-function TFormMain.ReadEnteredUserID: Integer;
-begin
-  Result := F_EnteredUserID;
-end;
-
-//function TFormMain.ReadSelectedUserID: integer;
-//begin
-//Result:=F_SelectedUserID;
-//end;
-
-function TFormMain.ReadEnteredUserISBOSS: Boolean;
-begin
-  Result := F_IsBoss;
-end;
-
-procedure TFormMain.SetDBCredentials(F_HostName, F_Protocol, F_Database, F_User,
-  F_Password: string);
-begin
-ZC.Database:=F_Database;
-ZC.ProviderName:=F_Protocol;
-ZC.Server:=F_HostName;
-ZC.UserName:=F_User;
-ZC.Password:=F_Password;
-ZC.LoginPrompt:=false;
-try
-ZC.Connect;
-except on E:Exception do
-	begin
-  MessageDlg('Неожиданная ошибка при подключении к базе данных. Программа аварийно остановлена, обратитесь к разработчику.', mtError, [mbOK],0);
-  exit;
-  end;
-end;
-end;
-
-procedure TFormMain.SetMainForm(User_ID: Integer; const User_Login, UserFullname: string; Boss:Integer);
+procedure TFormMain.SetMainForm(L_User_ID: Integer; const L_User_Login, L_UserFullname: string; L_Boss:boolean);
 var
   S: string;
 begin
   F_FieldName1 := '';
   F_FieldName2 := '';
   DM.TreeFulFill(Tree, True, 0);
-  if Boss = 1 then
-    F_IsBoss := True
-  else
-    F_IsBoss := False;
-  F_EnteredUserID := User_ID;
-  F_EnteredLogin := User_Login;
-  F_EnteredUserFullName := UserFullName;
+  AppUserIsBoss := L_Boss;
+	AppUserID := L_User_ID;
+  F_AppUser := L_User_Login;
+  F_AppUserFullName := L_UserFullName;
   try
     QViewUsers.Close;
-    QViewUsers.ParamByName('U_ID').AsInteger := User_ID;
+    QViewUsers.ParamByName('U_ID').AsInteger := L_User_ID;
     QViewUsers.Open;
     EditMyname.Text := QViewUsers['U_FIO_PLUS_BOSS'];
     F_EditPrices := QViewUsers['U_EDIT_PRICES'];
@@ -243,7 +204,7 @@ begin
       //Error 1013:MainForm:QViewUsers.Open
     end;
   end;
-  if F_ISBOSS then
+  if AppUserISBOSS then
   begin
     BitBtnForBoss.Enabled := True;
     BitBtnUsers.Enabled := True;
@@ -322,7 +283,7 @@ begin
   //if IsDemoLimit  then Limit:=100  else limit:=99;
   //if IsBigDemoLimit then Limit:=1000;
 
-  if F_IsBoss then
+  if AppUserIsBoss then
   begin
     if FormCompanies = nil then
       Application.CreateForm(TFormCompanies, FormCompanies);
@@ -368,16 +329,6 @@ begin
   end; // case
 end;
 
-function TFormMain.ReadEnteredLogin: string;
-begin
-  Result := F_EnteredLogin;
-end;
-
-function TFormMain.ReadEnteredUserFullName: string;
-begin
-  Result := F_EnteredUserFullName;
-end;
-
 procedure TFormMain.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
@@ -387,7 +338,7 @@ end;
 
 procedure TFormMain.BitBtnForBossClick(Sender: TObject);
 begin
-  if not F_IsBoss then
+  if not AppUserIsBoss then
   begin
     MessageDlg('У Вас нет прав для просмотра, зайдите под логином BOSSa',
       mtError, [mbOK],
@@ -402,13 +353,19 @@ begin
   RefreshPrices;
 end;
 
+procedure TFormMain.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+if qViewUsers.Active then qViewUsers.Close;
+if ZC.Connected then ZC.Close;
+end;
+
 procedure TFormMain.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
   if ConfirmClose then
     if MessageDlg('Закрыть программу?', mtConfirmation, [mbYes, mbNo], 0) = mrNo
-      then
-      CanClose := False
-    else ;
+      then CanClose := False
+      else CanClose:=true;
+    //else
       //WriteRegisterStr(F_EnteredLogin, RegisterBranchMetallica, 'LASTDBUSER');
 end;
 
@@ -485,6 +442,13 @@ begin
 
 end;
 
+procedure TFormMain.sBitBtn1Click(Sender: TObject);
+begin
+edtCompany.Clear;
+edtBusiness.Clear;
+RefreshPrices;
+end;
+
 procedure TFormMain.BitBtnNewPriceClick(Sender: TObject);
 begin
   SelectedCompanyID := 0;
@@ -556,6 +520,54 @@ end;
 procedure TFormMain.edtBusinessExit(Sender: TObject);
 begin
   RefreshPrices;
+end;
+
+function TFormMain.ConnectToDatabase:boolean;
+var Ini: TIniFile;
+begin
+if FileExists(ExtractFilePath(ParamStr(0))+'\database.ini') then
+  begin
+  Ini := TIniFile.Create(ExtractFilePath(ParamStr(0))+'\database.ini');
+	ZC.Server:=Ini.ReadString( 'dbConnection', 'HOSTNAME', 'localhost' );
+	ZC.Database:=Ini.ReadString( 'dbConnection','DATABASE', 'c:\Program Files (x86)\Metallica\DATABASE.FDB');
+	ZC.UserName:=Ini.ReadString( 'dbConnection','USERNAME', 'SYSDBA');
+ 	ZC.ProviderName:=Ini.ReadString( 'dbConnection','PROTOCOL', 'interbase');
+	ZC.Password:=Ini.ReadString( 'dbConnection','PASSWORD','masterkey');
+	ZC.LoginPrompt:=false;
+  F_AppLastUser:='BOSS';
+  Result:=true;
+  end
+  else
+	begin
+  //ValidSettings:=false;
+  Result:=false;
+  exit;
+	end;
+try
+ZC.Connect;
+except on E:Exception do
+	begin
+  MessageDlg('Неожиданная ошибка при подключении к базе данных. Программа аварийно остановлена, обратитесь к разработчику.', mtError, [mbOK],0);
+  Result:=false;
+  exit;
+  end;
+end;
+F_AppUser:='BOSS';
+AppUserISBOSS:=true;
+AppUSerID:=1;
+//QUsers.Close;
+//QUsers.ParamByName('U_LOGIN').ASstring:=F_AppLastUser;
+//QUsers.Open;
+
+//sComboBox.Text:=QUsers['U_LOGIN'];
+//EFIO.Text:=QUsers['U_FIO'];
+//if VarIsNull(QUsers['U_PASSWORD']) then F_AppPassword:='' else F_AppPassword:=AnsiUpperCase(trim(QUsers['U_PASSWORD']));
+//while not qUsers.EOF do
+//  begin
+//    sComboBox.Items.Add(QUsers['U_LOGIN']);
+//    qUsers.next;
+//  end;
+Result:=true;
 end;
 
 end.

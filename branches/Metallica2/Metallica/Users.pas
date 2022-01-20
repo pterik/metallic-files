@@ -4,8 +4,8 @@ interface
 
 uses
   	Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
-  	Dialogs, StdCtrls, Buttons, Grids, DBGrids, DB, ZAbstractRODataset, 
-  ZAbstractDataset, ZDataset, DBGridEh, sBitBtn, sCheckBox, DBGridEhGrouping,
+  	Dialogs, StdCtrls, Buttons, Grids, DBGrids, DB,
+  DBGridEh, sBitBtn, sCheckBox, DBGridEhGrouping,
   ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, EhLibVCL, GridsEh, DBAxisGridsEh,
   DBAccess, Uni, MemDS, sSkinProvider, sSkinManager;
 
@@ -43,16 +43,27 @@ type
     QUserTitlesID: TIntegerField;
     sSkinManager1: TsSkinManager;
     sSkinProvider1: TsSkinProvider;
+    QUsersWOMeU_ID: TIntegerField;
+    QUsersWOMeU_LOGIN: TStringField;
+    QUsersWOMeU_PASSWORD: TStringField;
+    QUsersWOMeU_ISBOSS: TIntegerField;
+    QUsersWOMeU_FIO: TStringField;
+    QUsersWOMeU_COMMENT: TStringField;
+    QUsersWOMeU_EDIT_OWN_JOBS: TSmallintField;
+    QUsersWOMeU_EDIT_PRICES: TSmallintField;
+    QUsersWOMeU_ISCLOSED: TSmallintField;
 		procedure BitBtnInsertClick(Sender: TObject);
 		procedure BitBtnUpdateClick(Sender: TObject);
 		procedure BitBtnDeleteClick(Sender: TObject);
     procedure BitBtnRightsClick(Sender: TObject);
-    procedure QViewFormUsers2CalcFields(DataSet: TDataSet);
     procedure CBOnlyWorkersClick(Sender: TObject);
     procedure DBUsersDblClick(Sender: TObject);
     procedure DBUsersTitleClick(Column: TColumnEh);
     procedure FormKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure QViewFormUsersCalcFields(DataSet: TDataSet);
+    procedure DBUsersDrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
 	private
     procedure RefreshViewFormUsers;
 		{ Private declarations }
@@ -66,7 +77,7 @@ var
 
 implementation
 
-uses MainForm, UserInsert, UserUpdate, EnterUser, DataModule, System.UITypes;
+uses MainForm, UserInsert, UserUpdate, DataModule, System.UITypes;
 
 {$R *.dfm}
 procedure TFormUsers.SetPosition(L,T:integer);
@@ -88,7 +99,7 @@ procedure TFormUsers.BitBtnUpdateClick(Sender: TObject);
 begin
 if FormUserUpdate=nil then Application.CreateForm(TFormUserUpdate, FormUserUpdate);
 FormUserUpdate.SetPosition(Self.Left,Self.Top);
-if not FormMain.ReadEnteredUserISBOSS then exit;
+if not FormMain.AppUserISBOSS then exit;
 FormUserUpdate.SetUserName(QViewFormUsers['U_ID'],QViewFormUsers['U_LOGIN'],
                            QViewFormUsers['U_FIO'],QViewFormUsers['U_PASSWORD'],
 							  					 QViewFormUsers['U_COMMENT'], QViewFormUsers['U_EDIT_PRICES']
@@ -116,7 +127,7 @@ if QViewFormUsers['U_ISCLOSED']=1 then
 	MessageDlg('Пользователь уже отмечен как уволенный',mtInformation,[mbOK],0);
 	exit;
 	end;
-if not FormMain.ReadEnteredUserISBOSS then
+if not FormMain.AppUserISBOSS then
 		begin
 		MessageDlg('Вы не можете уволить пользователя, войдите в программу как BOSS',mtError,[mbOK],0);
 		exit;
@@ -146,7 +157,7 @@ if VarIsNull(QViewFormUsers['U_ID']) then
 	MessageDlg('Пожалуйста выберите пользователя из списка',mtInformation,[mbOK],0);
 	exit;
 	end;
-if not FormMain.ReadEnteredUserISBOSS then
+if not FormMain.AppUserISBOSS then
 	begin
 	MessageDlg('Вы не имеете прав BOSS и не можете выдавать права',mtInformation,[mbOK],0);
 	exit;
@@ -193,7 +204,7 @@ if QViewFormUsers['U_ISBOSS']=1
 RefreshViewFormUSers;
 end;
 
-procedure TFormUsers.QViewFormUsers2CalcFields(DataSet: TDataSet);
+procedure TFormUsers.QViewFormUsersCalcFields(DataSet: TDataSet);
 begin
 if QViewFormUsers['U_ISBOSS']=1 then QViewFormUsers['SISBOSS']:='ДА';
 if QViewFormUsers['U_ISBOSS']=0 then QViewFormUsers['SISBOSS']:='НЕТ';
@@ -202,6 +213,7 @@ if QViewFormUsers['U_ISCLOSED']=1 then QViewFormUsers['SISCLOSED']:='НЕТ';
 if QViewFormUsers['U_EDIT_PRICES']=0 then QViewFormUsers['SIS_EDIT_PRICES']:='НЕТ';
 if QViewFormUsers['U_EDIT_PRICES']=1 then QViewFormUsers['SIS_EDIT_PRICES']:='ДА';
 end;
+
 
 procedure TFormUsers.CBOnlyWorkersClick(Sender: TObject);
 begin
@@ -223,7 +235,7 @@ end;
 
 procedure TFormUsers.SetUsers;
 begin
-if FormMain.ReadEnteredUserISBOSS
+if FormMain.AppUserISBOSS
 	then
 		begin
 		BitBtnInsert.Enabled:=true;
@@ -244,6 +256,25 @@ end;
 procedure TFormUsers.DBUsersDblClick(Sender: TObject);
 begin
 BitBtnUpdate.Click;
+end;
+
+procedure TFormUsers.DBUsersDrawColumnCell(Sender: TObject; const Rect: TRect;
+  DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
+begin
+inherited;
+  if QViewFormUsers['U_ISCLOSED']=0 then
+    TDBGridEh(Sender).Canvas.Brush.Color:= clWhite
+  else
+    TDBGridEh(Sender).Canvas.Brush.Color:= clFuchsia;
+  // Восстанавливаем выделение текущей позиции курсора
+  if gdSelected in State then
+  begin
+    TDBGridEh(Sender).Canvas.Brush.Color:= clHighLight;
+    TDBGridEh(Sender).Canvas.Font.Color:= clHighLightText;
+  end;
+  // Просим GRID перерисоваться самому
+  TDBGridEh(Sender).DefaultDrawColumnCell(Rect, DataCol, Column, TGridDrawState(State));
+
 end;
 
 procedure TFormUsers.DBUsersTitleClick(Column: TColumnEh);

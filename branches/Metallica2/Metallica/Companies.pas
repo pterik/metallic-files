@@ -4,8 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
-  Dialogs, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, 
-  Grids, DBGrids, DBGridEh, Mask, DBCtrlsEh, DBLookupEh, ExtCtrls, ImgList, 
+  Dialogs, StdCtrls, Buttons, DB, Grids, DBGrids, DBGridEh, Mask, DBCtrlsEh, DBLookupEh, ExtCtrls, ImgList,
   DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, EhLibVCL, GridsEh, 
   DBAxisGridsEh, MemDS, DBAccess, Uni, sBitBtn, sLabel, sEdit, sCheckBox,
   sSkinProvider, sSkinManager;
@@ -34,15 +33,34 @@ type
     DSPhones: TUniDataSource;
     sSkinManager1: TsSkinManager;
     sSkinProvider1: TsSkinProvider;
-    procedure QCompanies2CalcFields(DataSet: TDataSet);
-    procedure QPhones2CalcFields(DataSet: TDataSet);
+    QCompaniesCOMPANYID: TIntegerField;
+    QCompaniesCM_NAME: TStringField;
+    QCompaniesCM_CITY: TStringField;
+    QCompaniesCM_COMMENT: TStringField;
+    QCompaniesCM_ISCLOSED: TIntegerField;
+    QCompaniesCM_HYPERLINK: TStringField;
+    QCompaniesCM_BUSINESS: TStringField;
+    QCompaniesCM_OWNER: TIntegerField;
+    QCompaniesTL_LEVEL: TIntegerField;
+    QCompaniesTL_COLOR: TIntegerField;
+    QCompaniesTL_NAME: TStringField;
+    QPhonesPH_ID: TFloatField;
+    QPhonesPH_COMMENT: TStringField;
+    QPhonesPH_ISCLOSED: TSmallintField;
+    QPhonesPH_DATEBEGIN: TDateField;
+    QPhonesUSERNAME: TStringField;
+    sBitBtn1: TsBitBtn;
+    QPhonesWHO_WHERE: TStringField;
+    QPhonesPH_STR: TStringField;
+    QPhonesSISCLOSED: TStringField;
+    QCompaniesSISCLOSED: TStringField;
+    QCompaniesCM_TRUNC_COMMENT: TStringField;
     procedure BitBtnInsertClick(Sender: TObject);
     procedure BitBtnDeleteClick(Sender: TObject);
     procedure CBActiveClick(Sender: TObject);
     procedure BitBtnUpdateClick(Sender: TObject);
     procedure DBUsersDblClick(Sender: TObject);
     procedure DBGridCompaniesDblClick(Sender: TObject);
-    procedure QCompanies2AfterScroll(DataSet: TDataSet);
     procedure DBGridCompaniesTitleClick(Column: TColumnEh);
     procedure FormKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
@@ -55,6 +73,12 @@ type
     procedure edtCompanyExit(Sender: TObject);
     procedure edtBusinessExit(Sender: TObject);
     procedure edtCityExit(Sender: TObject);
+    procedure sBitBtn1Click(Sender: TObject);
+    procedure QPhonesCalcFields(DataSet: TDataSet);
+    procedure QCompaniesCalcFields(DataSet: TDataSet);
+    procedure QCompaniesAfterScroll(DataSet: TDataSet);
+    procedure DBGridPhonesDrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
   private
     F_LastSorted: string;
     F_FieldName:string;
@@ -100,10 +124,8 @@ begin
     //if DM.CompanyMaxID>100 then FormMain.IsBigDemoLimit:=true;
 end;
 
-procedure TFormCompanies.QCompanies2CalcFields(DataSet: TDataSet);
+procedure TFormCompanies.QCompaniesCalcFields(DataSet: TDataSet);
 begin
-  //  if VarIsNull(DataSet['COMPANYID']) then
-  //    Exit;
   if DataSet.Fields.FindField('SISCLOSED') <> nil then
   begin
     if DataSet['CM_ISCLOSED'] = 1 then
@@ -117,7 +139,7 @@ begin
   end;
 end;
 
-procedure TFormCompanies.QPhones2CalcFields(DataSet: TDataSet);
+procedure TFormCompanies.QPhonesCalcFields(DataSet: TDataSet);
 begin
   if not VarIsNull(QPhones['PH_DATEBEGIN']) then
     QPhones['WHO_WHERE'] := DateToStr(QPhones['PH_DATEBEGIN']);
@@ -137,7 +159,6 @@ begin
     if QPhones['PH_ISCLOSED'] = 1 then
       QPhones['SISCLOSED'] := 'ДА';
   end;
-
 end;
 
 procedure TFormCompanies.RefreshPhones;
@@ -153,12 +174,21 @@ begin
   QPhones.Open;
 end;
 
+procedure TFormCompanies.sBitBtn1Click(Sender: TObject);
+begin
+edtCompany.Clear;
+edtBusiness.Clear;
+edtCity.Clear;
+RefreshCompanies;
+RefreshPhones;
+end;
+
 procedure TFormCompanies.BitBtnInsertClick(Sender: TObject);
 var
   IsChangeOwner: Boolean;
 begin
-  isChangeOwner := FormMain.ReadEnteredUserISBOSS;
-  if FormMain.ReadEnteredUserID = FormMain.CommonOwnerID then
+  isChangeOwner := FormMain.AppUserISBOSS;
+  if FormMain.AppUserID = FormMain.CommonOwnerID then
     isChangeOwner := True;
   if FormNewCompany = nil then
     Application.CreateForm(TFormNewCompany, FormNewCompany);
@@ -262,7 +292,7 @@ begin
   BitBtnUpdate.Click;
 end;
 
-procedure TFormCompanies.QCompanies2AfterScroll(DataSet: TDataSet);
+procedure TFormCompanies.QCompaniesAfterScroll(DataSet: TDataSet);
 begin
   RefreshPhones;
 end;
@@ -282,6 +312,25 @@ begin
     QCompanies.IndexFieldNames:=Column.FieldName+' ASC';
   end;
   F_LastSorted := Column.FieldName;
+end;
+
+procedure TFormCompanies.DBGridPhonesDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumnEh;
+  State: TGridDrawState);
+begin
+inherited;
+  if QPhones['PH_ISCLOSED']=0 then
+    TDBGridEh(Sender).Canvas.Brush.Color:= clWhite
+  else
+    TDBGridEh(Sender).Canvas.Brush.Color:= clFuchsia;
+  // Восстанавливаем выделение текущей позиции курсора
+  if gdSelected in State then
+  begin
+    TDBGridEh(Sender).Canvas.Brush.Color:= clHighLight;
+    TDBGridEh(Sender).Canvas.Font.Color:= clHighLightText;
+  end;
+  // Просим GRID перерисоваться самому
+  TDBGridEh(Sender).DefaultDrawColumnCell(Rect, DataCol, Column, TGridDrawState(State));
 end;
 
 procedure TFormCompanies.FormKeyUp(Sender: TObject; var Key: Word;
@@ -311,6 +360,7 @@ end;
 
 procedure TFormCompanies.BitBtnClosePhoneClick(Sender: TObject);
 begin
+
   if VarIsNull(QPhones['PH_ID']) then
   begin
     MessageDlg('Выберите телефон из списка, чтобы его удалить (пометить как неактивный)',
@@ -318,7 +368,7 @@ begin
     Exit;
   end;
   if DM.PhoneDelete(QPhones['PH_ID'], DateToStr(Now()),
-    FormMain.ReadEnteredUserID) then
+    FormMain.AppUserID) then
     MessageDlg('Телефон ' + QPhones['PH_STR'] + ' помечен как удаленный',
       mtInformation,
       [mbOK], 0)
@@ -358,8 +408,11 @@ begin
   if not VarIsNull(QCompanies['CM_HYPERLINK']) then
   begin
     link := QCompanies.Fields.FieldByName('CM_HYPERLINK').AsString;
-    ShellOpen(Application.Handle, link);
-  end;
+    if FileExists(link)
+    	then  ShellOpen(Application.Handle, link)
+	    else MessageDlg('Файл удалён, либо указанный путь недоступен:'+chr(10)+chr(13)+link, mtWarning, [mbOk],0);
+  end
+  else MessageDlg('Прайс-лист не указан', mtInformation, [mbOk],0);
 end;
 
 procedure TFormCompanies.edtCompanyExit(Sender: TObject);

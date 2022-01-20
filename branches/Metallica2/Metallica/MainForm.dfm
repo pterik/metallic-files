@@ -1,10 +1,11 @@
 object FormMain: TFormMain
   Left = 491
   Top = 226
+  VertScrollBar.Visible = False
   BorderWidth = 2
   Caption = #1055#1088#1072#1081#1089'-'#1083#1080#1089#1090#1099
-  ClientHeight = 613
-  ClientWidth = 930
+  ClientHeight = 429
+  ClientWidth = 965
   Color = clBtnFace
   Constraints.MinHeight = 460
   Constraints.MinWidth = 600
@@ -13,7 +14,6 @@ object FormMain: TFormMain
   Font.Height = -11
   Font.Name = 'Default'
   Font.Style = []
-  FormStyle = fsStayOnTop
   Icon.Data = {
     0000010001001010100000000000280100001600000028000000100000002000
     00000100040000000000C0000000000000000000000000000000000000000000
@@ -28,14 +28,15 @@ object FormMain: TFormMain
   KeyPreview = True
   OldCreateOrder = True
   Visible = True
+  OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnKeyDown = FormKeyDown
   OnKeyUp = FormKeyUp
   DesignSize = (
-    930
-    613)
+    965
+    429)
   PixelsPerInch = 96
   TextHeight = 13
   object sLabel1: TsLabel
@@ -78,8 +79,8 @@ object FormMain: TFormMain
     Font.Style = []
   end
   object BitBtnClose: TsBitBtn
-    Left = 806
-    Top = 580
+    Left = 847
+    Top = 396
     Width = 110
     Height = 25
     Anchors = [akRight, akBottom]
@@ -103,11 +104,11 @@ object FormMain: TFormMain
       0000}
     ModalResult = 8
     NumGlyphs = 2
-    TabOrder = 6
+    TabOrder = 10
     OnClick = BitBtnCloseClick
   end
   object BitBtnAbout: TsBitBtn
-    Left = 821
+    Left = 856
     Top = 2
     Width = 105
     Height = 25
@@ -115,16 +116,16 @@ object FormMain: TFormMain
     Caption = #1054' '#1087#1088#1086#1075#1088#1072#1084#1084#1077
     Kind = bkHelp
     NumGlyphs = 2
-    TabOrder = 7
+    TabOrder = 11
     TabStop = False
     OnClick = BitBtnAboutClick
   end
   object BitBtnCompanies: TsBitBtn
-    Left = 560
-    Top = 580
+    Left = 395
+    Top = 396
     Width = 110
     Height = 25
-    Anchors = [akRight, akBottom]
+    Anchors = [akLeft, akBottom]
     Caption = #1055#1086#1089#1090#1072#1074#1097#1080#1082#1080
     Glyph.Data = {
       76010000424D7601000000000000760000002800000020000000100000000100
@@ -140,15 +141,15 @@ object FormMain: TFormMain
       3333333373FF7333333333333000333333333333377733333333333333333333
       3333333333333333333333333333333333333333333333333333}
     NumGlyphs = 2
-    TabOrder = 4
+    TabOrder = 8
     OnClick = BitBtnCompaniesClick
   end
   object BitBtnUsers: TsBitBtn
-    Left = 682
-    Top = 580
+    Left = 640
+    Top = 398
     Width = 110
     Height = 25
-    Anchors = [akRight, akBottom]
+    Anchors = [akLeft, akBottom]
     Caption = #1055#1086#1083#1100#1079#1086#1074#1072#1090#1077#1083#1080
     Glyph.Data = {
       F6000000424DF600000000000000760000002800000010000000100000000100
@@ -159,7 +160,7 @@ object FormMain: TFormMain
       0F080F000F0000000F080F000F0000000F080F000F0000000F080F000F000000
       0F080F000F0000000F080F7FFFFFFFFFFF080F000F0000000F080F000F000000
       0F080F00070000000F080FFFFFFFFFFFFF080000000000000008}
-    TabOrder = 5
+    TabOrder = 9
     OnClick = BitBtnUsersClick
   end
   object EditMyName: TsEdit
@@ -179,11 +180,11 @@ object FormMain: TFormMain
     Text = 'EditMyName'
   end
   object BitBtnForBoss: TsBitBtn
-    Left = 416
-    Top = 580
+    Left = 167
+    Top = 396
     Width = 130
     Height = 25
-    Anchors = [akRight, akBottom]
+    Anchors = [akLeft, akBottom]
     Caption = #1058#1086#1083#1100#1082#1086' '#1076#1083#1103' BOSSa'
     Glyph.Data = {
       76010000424D7601000000000000760000002800000020000000100000000100
@@ -199,18 +200,18 @@ object FormMain: TFormMain
       555575F7755557F5555550BB33BBB0555555575F555557F555555507BBBB0755
       55555575FFFF7755555555570000755555555557777775555555}
     NumGlyphs = 2
-    TabOrder = 3
+    TabOrder = 7
     OnClick = BitBtnForBossClick
   end
   object Tree: TsTreeView
     Left = 8
     Top = 32
     Width = 170
-    Height = 544
+    Height = 360
     Anchors = [akLeft, akTop, akBottom]
     Indent = 19
     ReadOnly = True
-    TabOrder = 8
+    TabOrder = 4
     OnChange = TreeChange
     OnExpanding = TreeExpanding
     Items.NodeData = {
@@ -224,8 +225,8 @@ object FormMain: TFormMain
   object Grid: TDBGridEh
     Left = 184
     Top = 32
-    Width = 751
-    Height = 544
+    Width = 786
+    Height = 360
     Anchors = [akLeft, akTop, akRight, akBottom]
     DataSource = DSData
     DynProps = <>
@@ -237,9 +238,8 @@ object FormMain: TFormMain
     ReadOnly = True
     RowSizingAllowed = True
     SortLocal = True
-    TabOrder = 9
+    TabOrder = 5
     TitleParams.MultiTitle = True
-    VertScrollBar.VisibleMode = sbNeverShowEh
     OnCellClick = GridCellClick
     OnDblClick = GridDblClick
     OnDrawColumnCell = GridDrawColumnCell
@@ -260,6 +260,14 @@ object FormMain: TFormMain
         DynProps = <>
         EditButtons = <>
         FieldName = 'CM_CITY'
+        Footers = <>
+        Width = 100
+      end
+      item
+        CellButtons = <>
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'CM_BUSINESS'
         Footers = <>
         Width = 100
       end
@@ -356,7 +364,7 @@ object FormMain: TFormMain
   end
   object BitBtnNewPrice: TsBitBtn
     Left = 8
-    Top = 582
+    Top = 396
     Width = 101
     Height = 25
     Anchors = [akLeft, akBottom]
@@ -404,7 +412,7 @@ object FormMain: TFormMain
       100408090A0B0E110201282828030C0D0C040708090A0B0E0201282828280303
       0405060708090A0B020128282828280102020202020202020201282828282801
       0101010101010101010128282828282828282828282828282828}
-    TabOrder = 10
+    TabOrder = 6
     OnClick = BitBtnNewPriceClick
   end
   object edtCompany: TsEdit
@@ -435,11 +443,22 @@ object FormMain: TFormMain
     TabOrder = 2
     OnExit = edtBusinessExit
   end
+  object sBitBtn1: TsBitBtn
+    Left = 815
+    Top = 1
+    Width = 26
+    Height = 25
+    Caption = #1061
+    TabOrder = 3
+    OnClick = sBitBtn1Click
+  end
   object ZC: TUniConnection
     ProviderName = 'InterBase'
-    Database = 
-      'D:\Projects\GitHub\metallic-files\branches\Metallica2\Database\D' +
-      'ATABASE_ODS11.FDB'
+    Database = 'c:\Program Files (x86)\Metallica\DATABASE.FDB'
+    SpecificOptions.Strings = (
+      
+        'InterBase.ClientLibrary=c:\Program Files (x86)\Metallica\fbclien' +
+        't.dll')
     Username = 'SYSDBA'
     Server = 'localhost'
     Connected = True
@@ -683,11 +702,12 @@ object FormMain: TFormMain
     SkinData.SkinManager = sSkinManager1
     SkinData.SkinSection = 'FORM'
     TitleButtons = <>
-    Left = 8
-    Top = 8
+    Left = 80
+    Top = 128
   end
   object sSkinManager1: TsSkinManager
     ButtonsOptions.OldGlyphsMode = True
+    IsDefault = False
     InternalSkins = <>
     SkinDirectory = 'c:\Skins'
     SkinName = 'AlterMetro'
@@ -715,7 +735,31 @@ object FormMain: TFormMain
     ThirdParty.ThirdScrollBar = ' '
     ThirdParty.ThirdStaticText = ' '
     ThirdParty.ThirdNativePaint = ' '
-    Left = 48
-    Top = 8
+    Left = 32
+    Top = 136
+  end
+  object qUsers: TUniQuery
+    Connection = ZC
+    SQL.Strings = (
+      'SELECT * FROM USERS'
+      'WHERE U_ISCLOSED=0'
+      'AND U_LOGIN=:U_LOGIN'
+      'union all'
+      'SELECT * FROM USERS'
+      'WHERE U_ISCLOSED=0'
+      'AND U_LOGIN<> :U_LOGIN')
+    Left = 368
+    Top = 136
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'U_LOGIN'
+        Value = nil
+      end>
+  end
+  object UniTransaction1: TUniTransaction
+    DefaultConnection = ZC
+    Left = 112
+    Top = 256
   end
 end

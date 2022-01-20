@@ -3,10 +3,10 @@ unit ShowCompany;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
-  Dialogs, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, 
-  Grids, DBGrids, DBGridEh, ExtCtrls, DBGridEhGrouping, ToolCtrlsEh, 
-  DBGridEhToolCtrls, DynVarsEh, EhLibVCL, GridsEh, DBAxisGridsEh, sLabel, sEdit, sCheckBox, sMaskEdit, sComboBox, sMemo, sDialogs, sSpeedButton,
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  System.UITypes,  Dialogs, StdCtrls, Buttons, DB, Grids, DBGrids, DBGridEh, ExtCtrls, DBGridEhGrouping,
+  ToolCtrlsEh,   DBGridEhToolCtrls, DynVarsEh, EhLibVCL, GridsEh, DBAxisGridsEh,
+  sLabel, sEdit, sCheckBox,   sMaskEdit, sComboBox, sMemo, sDialogs, sSpeedButton,
   sBitBtn, DBAccess, Uni, MemDS, sSkinProvider, sSkinManager;
 
 type
@@ -48,10 +48,8 @@ type
     QPhonesSISCLOSED: TStringField;
     sSkinManager1: TsSkinManager;
     sSkinProvider1: TsSkinProvider;
-    procedure QCompany2CalcFields(DataSet: TDataSet);
-    procedure QPhones2CalcFields(DataSet: TDataSet);
+    QCompanyCM_BUSINESS: TStringField;
     procedure CBActiveClick(Sender: TObject);
-    procedure QCompany2AfterScroll(DataSet: TDataSet);
     procedure DBGridCompaniesTitleClick(Column: TColumnEh);
     procedure DBGridCompaniesDrawColumnCell(Sender: TObject;
       const Rect: TRect; DataCol: Integer; Column: TColumnEh;
@@ -60,6 +58,9 @@ type
     procedure edtCompanyExit(Sender: TObject);
     procedure edtBusinessExit(Sender: TObject);
     procedure edtCityExit(Sender: TObject);
+    procedure QCompanyCalcFields(DataSet: TDataSet);
+    procedure QPhonesCalcFields(DataSet: TDataSet);
+    procedure QCompanyAfterScroll(DataSet: TDataSet);
   private
     F_CompanyID: Integer;
     procedure RefreshPhones;
@@ -103,7 +104,7 @@ begin
   //if DM.CompanyMaxID>100 then FormMain.IsBigDemoLimit:=true;
 end;
 
-procedure TFormCompaniesShow.QCompany2CalcFields(DataSet: TDataSet);
+procedure TFormCompaniesShow.QCompanyCalcFields(DataSet: TDataSet);
 begin
   if QCompany['CM_ISCLOSED'] = 1 then
     QCompany['SISCLOSED']:= 'мер';
@@ -112,7 +113,7 @@ begin
   QCompany['CM_TRUNC_COMMENT']:= DeleteReturns(QCompany['CM_COMMENT']);
 end;
 
-procedure TFormCompaniesShow.QPhones2CalcFields(DataSet: TDataSet);
+procedure TFormCompaniesShow.QPhonesCalcFields(DataSet: TDataSet);
 begin
   if not VarIsNull(QPhones['PH_DATEBEGIN']) then
     QPhones['WHO_WHERE']:= DateToStr(QPhones['PH_DATEBEGIN']);
@@ -176,7 +177,7 @@ begin
   RefreshPhones;
 end;
 
-procedure TFormCompaniesShow.QCompany2AfterScroll(DataSet: TDataSet);
+procedure TFormCompaniesShow.QCompanyAfterScroll(DataSet: TDataSet);
 begin
   RefreshPhones;
 end;

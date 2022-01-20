@@ -8,7 +8,7 @@ uses
   Grids, DBGrids, DBGridEh, MdiChild, ShowTree, ExtCtrls, CommonUnit, 
   DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, EhLibVCL, GridsEh, DBAxisGridsEh,
   sButton, sComboBox, sLabel, sBitBtn, sCheckBox, sPanel, sTreeView, MemDS,
-  DBAccess, Uni;
+  DBAccess, Uni, Vcl.Mask, sMaskEdit, sCustomComboEdit;
 
 type
   TFormCompaniesShow = class(TFormMdiChild)
@@ -60,10 +60,8 @@ type
     QPhonesSISCLOSED: TStringField;
     QPhonesWHO_WHERE: TStringField;
     qCompanyFLRES: TStringField;
-    procedure QCompany2CalcFields(DataSet: TDataSet);
-    procedure QPhones2CalcFields(DataSet: TDataSet);
+    procedure QCompanyCalcFields(DataSet: TDataSet);
     procedure CBActiveClick(Sender: TObject);
-    procedure QCompany2AfterScroll(DataSet: TDataSet);
     procedure GridTitleClick(Column: TColumnEh);
     procedure GridDrawColumnCell(Sender: TObject;
       const Rect: TRect; DataCol: Integer; Column: TColumnEh;
@@ -78,6 +76,10 @@ type
     procedure chk2Click(Sender: TObject);
     procedure chk3Click(Sender: TObject);
     procedure chk4Click(Sender: TObject);
+    procedure QPhonesCalcFields(DataSet: TDataSet);
+    procedure QCompanyAfterScroll(DataSet: TDataSet);
+    procedure DBGridPhonesDrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumnEh; State: TGridDrawState);
   private
     F_CompanyID: Integer;
     F_CBFieldsName:string;
@@ -117,14 +119,21 @@ begin
   CBFilter.Clear;
 end;
 
-procedure TFormCompaniesShow.QCompany2CalcFields(DataSet: TDataSet);
+procedure TFormCompaniesShow.QCompanyAfterScroll(DataSet: TDataSet);
+begin
+  inherited;
+  RefreshPhones;
+end;
+
+procedure TFormCompaniesShow.QCompanyCalcFields(DataSet: TDataSet);
 begin
   if QCompany['CM_ISCLOSED'] = 1 then QCompany['SISCLOSED'] := 'НЕТ';
   if QCompany['CM_ISCLOSED'] = 0 then QCompany['SISCLOSED'] := 'ДА';
   QCompany['CM_TRUNC_COMMENT'] := DeleteReturns(QCompany['CM_COMMENT']);
 end;
 
-procedure TFormCompaniesShow.QPhones2CalcFields(DataSet: TDataSet);
+
+procedure TFormCompaniesShow.QPhonesCalcFields(DataSet: TDataSet);
 begin
   if not VarIsNull(QPhones['PH_DATEBEGIN']) then  QPhones['WHO_WHERE'] := DateToStr(QPhones['PH_DATEBEGIN']);
   if not VarIsNull(QPhones['USERNAME']) then QPhones['WHO_WHERE'] := QPhones['WHO_WHERE'] + ' ' + QPhones['USERNAME'];
@@ -156,11 +165,6 @@ end;
 procedure TFormCompaniesShow.CBActiveClick(Sender: TObject);
 begin
   RefreshQCompany;
-  RefreshPhones;
-end;
-
-procedure TFormCompaniesShow.QCompany2AfterScroll(DataSet: TDataSet);
-begin
   RefreshPhones;
 end;
 
@@ -394,6 +398,25 @@ begin
   RefreshQCompany;
   RefreshCBFields;
   CBFilter.Clear;
+end;
+
+procedure TFormCompaniesShow.DBGridPhonesDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumnEh;
+  State: TGridDrawState);
+begin
+  inherited;
+  if QPhones['PH_ISCLOSED']=0 then
+    TDBGridEh(Sender).Canvas.Brush.Color:= clWhite
+  else
+    TDBGridEh(Sender).Canvas.Brush.Color:= clFuchsia;
+  // Восстанавливаем выделение текущей позиции курсора
+  if gdSelected in State then
+  begin
+    TDBGridEh(Sender).Canvas.Brush.Color:= clHighLight;
+    TDBGridEh(Sender).Canvas.Font.Color:= clHighLightText;
+  end;
+  // Просим GRID перерисоваться самому
+  TDBGridEh(Sender).DefaultDrawColumnCell(Rect, DataCol, Column, TGridDrawState(State));
 end;
 
 procedure TFormCompaniesShow.RefreshCaptions;

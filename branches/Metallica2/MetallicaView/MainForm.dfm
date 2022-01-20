@@ -17,10 +17,7 @@ object FormMain: TFormMain
   Position = poDefault
   WindowState = wsMaximized
   WindowMenu = mmWindow
-  OnClose = FormClose
-  OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
-  OnDestroy = FormDestroy
   PixelsPerInch = 96
   TextHeight = 13
   object ApplicationEvents1: TApplicationEvents
@@ -32,21 +29,13 @@ object FormMain: TFormMain
     Images = ImageList1
     Left = 84
     Top = 52
-    object N6: TMenuItem
-      Caption = #1055#1088#1086#1075#1088#1072#1084#1084#1072
-      object mmiNewTree: TMenuItem
-        Caption = #1055#1088#1072#1081#1089'-'#1083#1080#1089#1090#1099
-        Hint = 'Create a new file'
-        OnClick = mmiNewTreeClick
-      end
-      object mmiNewRow: TMenuItem
-        Caption = #1057#1087#1080#1089#1086#1082' '#1087#1086#1089#1090#1072#1074#1097#1080#1082#1086#1074
-        OnClick = mmiNewRowClick
-      end
-      object N8: TMenuItem
-        Caption = #1042#1099#1093#1086#1076' '#1080#1079' '#1087#1088#1086#1075#1088#1072#1084#1084#1099
-        OnClick = N8Click
-      end
+    object N1: TMenuItem
+      Caption = #1055#1088#1072#1081#1089'-'#1083#1080#1089#1090#1099
+      OnClick = N1Click
+    end
+    object N7: TMenuItem
+      Caption = #1057#1087#1080#1089#1086#1082' '#1087#1086#1089#1090#1072#1074#1097#1080#1082#1086#1074
+      OnClick = N7Click
     end
     object mmWindow: TMenuItem
       Caption = #1054#1082#1085#1072
@@ -65,11 +54,8 @@ object FormMain: TFormMain
       end
     end
     object N2: TMenuItem
-      Caption = #1055#1086#1084#1086#1097#1100
-      object N3: TMenuItem
-        Caption = #1054' '#1087#1088#1086#1075#1088#1072#1084#1084#1077
-        OnClick = N3Click
-      end
+      Caption = #1042#1099#1093#1086#1076
+      OnClick = N2Click
     end
   end
   object ActionList1: TActionList
@@ -842,10 +828,8 @@ object FormMain: TFormMain
   end
   object ZC: TUniConnection
     ProviderName = 'InterBase'
-    Database = 'C:\Projects\Metallica\Database\DATABASE.FDB'
     Username = 'SYSDBA'
     Server = 'localhost'
-    Connected = True
     LoginPrompt = False
     Left = 16
     Top = 56

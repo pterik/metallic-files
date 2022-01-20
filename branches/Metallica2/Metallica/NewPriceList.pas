@@ -3,12 +3,12 @@ unit NewPriceList;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
-  Dialogs, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, 
-  Grids, DBGrids, DBGridEh, ComCtrls, Mask, DBCtrlsEh, DataModule, sLabel, sEdit, sCheckBox, sMaskEdit, sComboBox, sMemo, sDialogs, sSpeedButton,
-  DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, DynVarsEh, sButton,
-  sTreeView, EhLibVCL, GridsEh, DBAxisGridsEh, sBitBtn, DBAccess, Uni, MemDS,
-  sSkinProvider, sSkinManager;
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, Buttons, DB, Grids, DBGrids, DBGridEh, ComCtrls, Mask,
+  DBCtrlsEh, DataModule, sLabel, sEdit, sCheckBox, sMaskEdit, sComboBox, sMemo,
+  sDialogs, sSpeedButton, System.UITypes, DBGridEhGrouping, ToolCtrlsEh,
+  DBGridEhToolCtrls, DynVarsEh, sButton, sTreeView, EhLibVCL, GridsEh,
+  DBAxisGridsEh, sBitBtn, DBAccess, Uni, MemDS, sSkinProvider, sSkinManager;
 
 type
   TFormNewPriceList = class(TForm)
@@ -41,6 +41,32 @@ type
     qRowMaxOrder: TUniQuery;
     sSkinManager1: TsSkinManager;
     sSkinProvider1: TsSkinProvider;
+    qDataViewPL_ID: TIntegerField;
+    qDataViewPL_HEADERID: TIntegerField;
+    qDataViewPL_TREEID: TIntegerField;
+    qDataViewPL_PRICE: TFloatField;
+    qDataViewPL_NODE: TStringField;
+    qDataViewCM_NAME: TStringField;
+    qDataViewCM_ID: TIntegerField;
+    qDataViewCM_CITY: TStringField;
+    qDataViewPL_VALUE1: TStringField;
+    qDataViewPL_VALUE2: TStringField;
+    qDataViewPL_VALUE3: TStringField;
+    qDataViewPL_VALUE4: TStringField;
+    qDataViewPL_VALUE5: TStringField;
+    qDataViewPL_VALUE6: TStringField;
+    qDataViewPL_VALUE7: TStringField;
+    qDataViewPL_VALUE8: TStringField;
+    qDataViewPL_VALUE9: TStringField;
+    qDataViewPL_ORDERBY: TIntegerField;
+    qDataViewPL_DATE_UPDATE: TDateTimeField;
+    qDataViewPL_ISCLOSED: TSmallintField;
+    qRowExistsCNTR: TIntegerField;
+    qRowMaxOrderMAXPOS: TLargeintField;
+    QCompanyCOMPANYID: TIntegerField;
+    QCompanyCM_CITY: TStringField;
+    QCompanyCM_NAME: TStringField;
+    QCompanyCM_COMMENT: TStringField;
     procedure TreeChange(Sender: TObject; Node: TTreeNode);
     procedure TreeExpanding(Sender: TObject; Node: TTreeNode;
       var AllowExpansion: Boolean);
@@ -64,7 +90,7 @@ type
     procedure ButtonLeftClick(Sender: TObject);
     procedure ButtonRightClick(Sender: TObject);
   private
-    F_CompanyID, F_LineID, F_HeaderID:integer;
+    F_CompanyID, F_LineID, F_HeaderID, F_Max_PL_Orderby:integer;
     F_CurrentFieldNumber:integer;
     F_ShiftState:boolean;
     MyNode:TNodeValue;
@@ -86,7 +112,7 @@ var
 implementation
 
 uses MainForm, ShowCompany, CommonUnit, NewItem, NewPriceRow, SelectTree,
-  UpdateHeader, System.UITypes;
+  UpdateHeader, UpdatePriceRow;
 
 {$R *.dfm}
 
@@ -131,6 +157,12 @@ else
   begin
   DM.RepaintGrid(Grid, MyNode.ID, [Fields, FTree, FCompany]);
   end;
+NullStrictConvert := False;
+//ShowMessage('Cm_id='+IntToStr(QDataView['cm_id'])+' F_CompanyID='+IntToStr(F_CompanyID));
+//ShowMessage(' PL_TREEID = '+IntToStr(QDataView['PL_Treeid'])+' MyNode.ID='+IntToStr(MyNode.ID));
+//if VarIsNUll(QDataView['PL_HEADERID'])
+//then ShowMessage(' PL_HEADERID = null')
+//else ShowMessage(' PL_HEADERID = '+IntToStr(QDataView['PL_HEADERID']));
 end;
 
 procedure TFormNewPriceList.TreeExpanding(Sender: TObject; Node: TTreeNode;
@@ -164,11 +196,15 @@ if VarIsNull(qDataView['PL_ID']) then
   MessageDlg('Ошибка программы, сообщите разработчику',mtError, [mbOK],0);
   exit;
   end;
-if FormNewPriceRow=nil then  Application.CreateForm(TFormNewPriceRow, FormNewPriceRow);
-FormNewPriceRow.SetPosition(Self.Left,Self.Top);
+//if FormNewPriceRow=nil then  Application.CreateForm(TFormNewPriceRow, FormNewPriceRow);
+if FormUpdatePriceRow=nil then  Application.CreateForm(TFormUpdatePriceRow, FormUpdatePriceRow);
+//FormNewPriceRow.SetPosition(Self.Left,Self.Top);
+FormUpdatePriceRow.SetPosition(Self.Left,Self.Top);
 F_LIneID:=qDataView['PL_ID'];
-FormNewPriceRow.SetNewPriceRow(F_CompanyID, MyNode.ID, F_LineID);
-FormNewPriceRow.ShowModal;
+//FormNewPriceRow.SetNewPriceRow(F_CompanyID, MyNode.ID, F_LineID);
+FormUpdatePriceRow.SetUpdatePriceRow(F_CompanyID, MyNode.ID, F_LineID);
+//FormNewPriceRow.ShowModal;
+FormUpdatePriceRow.ShowModal;
 RefreshPrices;
 end;
 
@@ -248,11 +284,18 @@ end;
 
 procedure TFormNewPriceList.GridDblClick(Sender: TObject);
 begin
+NullStrictConvert := False;
+ShowMessage('Company_id='+IntToStr(QDataView['cm_id']));
+ShowMessage('PL_TREEID = '+IntToStr(QDataView['PL_Treeid']));
+if VarIsNUll(QDataView['PL_HEADERID'])
+then ShowMessage(' PL_HEADERID = null')
+else ShowMessage(' PL_HEADERID = '+IntToStr(QDataView['PL_HEADERID']));
 BitBtnUpdate.OnClick(Sender);
 end;
 
 procedure TFormNewPriceList.FormCreate(Sender: TObject);
 begin
+NullStrictConvert := False;
 MyNode:=TNodeValue.Create;
 end;
 
@@ -274,10 +317,15 @@ if MyNode.ParentID=0 then
   MessageDlg('Выберите подстроку рубрикатора, а не основную строку',mtWarning, [mbOK],0);
   exit;
   end;
-QRowInsert.ParamByName('HEADERID').AsInteger:=F_HeaderID;
-QRowInsert.ParamByName('TREEID').AsInteger:=MyNode.ID;
-QRowInsert.ParamByName('ORDERBY').AsInteger:=RowMaxOrderby(F_HeaderID, MyNode.ID);
-QRowInsert.Execute;
+if VarIsNull(qDataView['PL_ID']) then
+  begin
+  MessageDlg('Ошибка программы, сообщите разработчику',mtError, [mbOK],0);
+  exit;
+  end;
+if FormNewPriceRow=nil then  Application.CreateForm(TFormNewPriceRow, FormNewPriceRow);
+FormNewPriceRow.SetPosition(Self.Left,Self.Top);
+FormNewPriceRow.SetNewPriceRow(F_CompanyID, MyNode.ID, F_HeaderID, RowMaxOrderby(F_HeaderID, MyNode.ID));
+FormNewPriceRow.ShowModal;
 RefreshPrices;
 end;
 

@@ -4,7 +4,6 @@ uses
   Vcl.Dialogs,
   Forms,
   MainForm in 'MainForm.pas' {FormMain},
-  EnterUser in 'EnterUser.pas' {FormEnterUser},
   Users in 'Users.pas' {FormUsers},
   UserUpdate in 'UserUpdate.pas' {FormUserUpdate},
   Splash in 'Splash.pas' {SplashForm},
@@ -22,29 +21,28 @@ uses
   ShowPrice in 'ShowPrice.pas' {FormPriceShow},
   NewSubItem in 'NewSubItem.pas' {FormNewSubItem},
   SelectTree in 'SelectTree.pas' {FormSelectTree},
-  NewPriceRow in 'NewPriceRow.pas' {FormNewPriceRow},
+  UpdatePriceRow in 'UpdatePriceRow.pas' {FormUpdatePriceRow},
   UpdateTree in 'UpdateTree.pas' {FormUpdateTree},
   UpdateHeader in 'UpdateHeader.pas' {FormUpdateHeader},
   NewPriceList in 'NewPriceList.pas' {FormNewPriceList},
   NewItem in 'NewItem.pas' {FormNewItem},
   UserInsert in 'UserInsert.pas' {FormUserInsert},
-  DBErrorExit in 'DBErrorExit.pas' {FormDBErrorExit};
+  NewPriceRow in 'NewPriceRow.pas' {FormNewPriceRow};
 
 {$R *.RES}
-var R:boolean;
 begin
   Application.Initialize;
   Application.Title := 'Редактирование прайсов';
-  Application.CreateForm(TSplashForm, SplashForm);
-  SplashForm.Show;
+  //Application.CreateForm(TSplashForm, SplashForm);
+  //SplashForm.Show;
   Application.CreateForm(TFormMain, FormMain);
-  FormMain.Visible:=false;
-  Application.CreateForm(TFormDBErrorExit, FormDBErrorExit);
-  Application.CreateForm(TFormEnterUser, FormEnterUser);
-  Application.CreateForm(TDM, DM);
-  SplashForm.Update;
-  SplashForm.Hide;
-  FormDBErrorExit.Hide;
+  Application.CreateForm(TFormNewPriceRow, FormNewPriceRow);
+  //Application.CreateForm(TFormEnterUser, FormEnterUser);
+  //FormMain.Hide;
+  //FormMain.Show;
+  //Application.CreateForm(TDM, DM);
+  //SplashForm.Update;
+  //SplashForm.Hide;
   //R:=FormEnterUser.ConnectToDatabase;
   //if R
   //	then FormEnterUser.ShowModal
@@ -54,6 +52,7 @@ begin
   //    FormDBErrorExit.ShowModal;
   //    end;
   //if R then FormMain.ShowModal;
-  SplashForm.Close;
+  //SplashForm.Close;
 	Application.Run;
 end.
+

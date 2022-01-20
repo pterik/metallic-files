@@ -4,8 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
-  Dialogs, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
-  sBitBtn, DBAccess, Uni, sSkinProvider, sSkinManager;
+  Dialogs, StdCtrls, Buttons, DB, sBitBtn, DBAccess, Uni, sSkinProvider, sSkinManager;
 
 type
   Flds= record

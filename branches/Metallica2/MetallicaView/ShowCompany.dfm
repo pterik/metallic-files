@@ -46,7 +46,7 @@ object FormCompaniesShow: TFormCompaniesShow
         object CBActive: TsCheckBox
           Left = 36
           Top = 5
-          Width = 219
+          Width = 223
           Height = 20
           Caption = #1058#1086#1083#1100#1082#1086' '#1074#1099#1073#1088#1072#1085#1085#1099#1081' '#1087#1086#1089#1090#1072#1074#1097#1080#1082
           Alignment = taLeftJustify
@@ -76,8 +76,8 @@ object FormCompaniesShow: TFormCompaniesShow
         335
         503)
       object DBGridPhones: TDBGridEh
-        Left = 9
-        Top = 8
+        Left = 5
+        Top = 7
         Width = 320
         Height = 461
         Anchors = [akLeft, akTop, akRight, akBottom]
@@ -89,6 +89,7 @@ object FormCompaniesShow: TFormCompaniesShow
         Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgConfirmDelete, dgCancelOnExit]
         TabOrder = 0
         TitleParams.RowLines = 2
+        OnDrawColumnCell = DBGridPhonesDrawColumnCell
         Columns = <
           item
             CellButtons = <>
@@ -262,10 +263,9 @@ object FormCompaniesShow: TFormCompaniesShow
           Top = 4
           Width = 105
           Height = 21
-          Style = csDropDownList
-          ItemIndex = -1
           TabOrder = 0
           OnSelect = cbFieldsSelect
+          Style = csDropDownList
         end
         object btnFilterAdd: TsBitBtn
           Left = 152
@@ -281,7 +281,6 @@ object FormCompaniesShow: TFormCompaniesShow
           Top = 28
           Width = 105
           Height = 21
-          ItemIndex = -1
           TabOrder = 2
         end
         object btnFilterClear: TsButton
@@ -305,7 +304,7 @@ object FormCompaniesShow: TFormCompaniesShow
         object chk1: TsCheckBox
           Left = 0
           Top = 4
-          Width = 46
+          Width = 50
           Height = 17
           Caption = 'chk1'
           Checked = True
@@ -317,7 +316,7 @@ object FormCompaniesShow: TFormCompaniesShow
         object chk2: TsCheckBox
           Left = 140
           Top = 4
-          Width = 46
+          Width = 50
           Height = 17
           Caption = 'chk2'
           Checked = True
@@ -329,7 +328,7 @@ object FormCompaniesShow: TFormCompaniesShow
         object chk3: TsCheckBox
           Left = 280
           Top = 4
-          Width = 46
+          Width = 50
           Height = 17
           Caption = 'chk3'
           Checked = True
@@ -341,7 +340,7 @@ object FormCompaniesShow: TFormCompaniesShow
         object chk4: TsCheckBox
           Left = 420
           Top = 4
-          Width = 46
+          Width = 50
           Height = 17
           Caption = 'chk4'
           Checked = True
@@ -383,6 +382,8 @@ object FormCompaniesShow: TFormCompaniesShow
         ' and (upper(cm_business) like upper('#39'%'#39'||:BUSINESS||'#39'%'#39') or (cas' +
         't(:BUSINESS as varchar(100))  = '#39#39'))'
       'order by c.cm_name')
+    AfterScroll = QCompanyAfterScroll
+    OnCalcFields = QCompanyCalcFields
     Left = 72
     Top = 120
     ParamData = <
@@ -473,6 +474,7 @@ object FormCompaniesShow: TFormCompaniesShow
       'and u.u_id=pc.pc_uid'
       'and pc.pc_company=:COMPANYID'
       'order by p.ph_isclosed, p.ph_id')
+    OnCalcFields = QPhonesCalcFields
     Left = 528
     Top = 120
     ParamData = <

@@ -198,10 +198,9 @@ object FormTree: TFormTree
           Top = 4
           Width = 105
           Height = 21
-          ItemIndex = -1
           TabOrder = 0
-          Text = 'CBFields'
           OnSelect = CBFieldsSelect
+          Text = 'CBFields'
         end
         object BitBtnInsert: TsBitBtn
           Left = 152
@@ -217,7 +216,6 @@ object FormTree: TFormTree
           Top = 28
           Width = 105
           Height = 21
-          ItemIndex = -1
           TabOrder = 2
           Text = 'CBFilter'
         end
@@ -242,7 +240,7 @@ object FormTree: TFormTree
         object chk1: TsCheckBox
           Left = 0
           Top = 4
-          Width = 46
+          Width = 50
           Height = 17
           Caption = 'chk1'
           Checked = True
@@ -254,7 +252,7 @@ object FormTree: TFormTree
         object chk2: TsCheckBox
           Left = 140
           Top = 4
-          Width = 46
+          Width = 50
           Height = 17
           Caption = 'chk2'
           Checked = True
@@ -266,7 +264,7 @@ object FormTree: TFormTree
         object chk3: TsCheckBox
           Left = 280
           Top = 4
-          Width = 46
+          Width = 50
           Height = 17
           Caption = 'chk3'
           Checked = True
@@ -278,7 +276,7 @@ object FormTree: TFormTree
         object chk4: TsCheckBox
           Left = 420
           Top = 4
-          Width = 46
+          Width = 50
           Height = 17
           Caption = 'chk4'
           Checked = True
@@ -290,7 +288,7 @@ object FormTree: TFormTree
         object chk5: TsCheckBox
           Left = 560
           Top = 4
-          Width = 46
+          Width = 50
           Height = 17
           Caption = 'chk5'
           Checked = True
@@ -360,7 +358,6 @@ object FormTree: TFormTree
         'ess as varchar(100)) ='#39#39') )'
       'ORDER BY ph.ph_date_insert, pl_orderby'
       ' ')
-    Active = True
     Left = 235
     Top = 192
     ParamData = <
@@ -421,7 +418,6 @@ object FormTree: TFormTree
         'and (upper(cm_business) like '#39'%'#39'||:business||'#39'%'#39' or (cast(:busin' +
         'ess as varchar(100)) ='#39#39') )'
       'ORDER BY ph.ph_date_insert, pl_orderby')
-    Active = True
     Left = 451
     Top = 200
     ParamData = <

@@ -2,7 +2,7 @@ object FormNewPriceRow: TFormNewPriceRow
   Left = 215
   Top = 212
   Caption = #1053#1086#1074#1072#1103' '#1089#1090#1088#1086#1082#1072' '#1087#1088#1072#1081#1089'-'#1083#1080#1089#1090#1072
-  ClientHeight = 458
+  ClientHeight = 266
   ClientWidth = 696
   Color = clBtnFace
   Constraints.MinHeight = 250
@@ -19,7 +19,7 @@ object FormNewPriceRow: TFormNewPriceRow
   OnKeyUp = FormKeyUp
   DesignSize = (
     696
-    458)
+    266)
   PixelsPerInch = 96
   TextHeight = 13
   object LabelComp: TsLabel
@@ -43,32 +43,6 @@ object FormNewPriceRow: TFormNewPriceRow
     Height = 13
     Caption = #1057#1090#1088#1086#1082#1072
   end
-  object Label2: TsLabel
-    Left = 8
-    Top = 248
-    Width = 189
-    Height = 20
-    Caption = #1057#1090#1072#1088#1099#1077' '#1079#1085#1072#1095#1077#1085#1080#1103' '#1089#1090#1088#1086#1082#1080
-    ParentFont = False
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -16
-    Font.Name = 'MS Sans Serif'
-    Font.Style = []
-  end
-  object Label3: TsLabel
-    Left = 8
-    Top = 64
-    Width = 181
-    Height = 20
-    Caption = #1053#1086#1074#1099#1077' '#1079#1085#1072#1095#1077#1085#1080#1103' '#1089#1090#1088#1086#1082#1080
-    ParentFont = False
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -16
-    Font.Name = 'MS Sans Serif'
-    Font.Style = []
-  end
   object Label4: TsLabel
     Left = 432
     Top = 8
@@ -76,134 +50,13 @@ object FormNewPriceRow: TFormNewPriceRow
     Height = 13
     Caption = #1040#1076#1088#1077#1089
   end
-  object GridView: TDBGridEh
-    Left = 8
-    Top = 280
-    Width = 689
-    Height = 137
-    TabStop = False
-    Anchors = [akLeft, akTop, akRight]
-    Color = clCream
-    DataSource = DSData
-    DynProps = <>
-    Enabled = False
-    FooterParams.Color = clWindow
-    GridLineParams.VertEmptySpaceStyle = dessNonEh
-    Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-    OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghDblClickOptimizeColWidth, dghDialogFind, dghColumnResize, dghColumnMove]
-    ReadOnly = True
-    RowLines = 3
-    RowSizingAllowed = True
-    TabOrder = 2
-    TitleParams.MultiTitle = True
-    VertScrollBar.VisibleMode = sbNeverShowEh
-    Columns = <
-      item
-        CellButtons = <>
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'CM_NAME'
-        Footers = <>
-        Width = 100
-      end
-      item
-        CellButtons = <>
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'PL_DATE_UPDATE'
-        Footers = <>
-        Width = 80
-      end
-      item
-        CellButtons = <>
-        DisplayFormat = '#0.00'
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'PL_PRICE'
-        Footers = <>
-      end
-      item
-        CellButtons = <>
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'PL_VALUE1'
-        Footers = <>
-        Width = 100
-      end
-      item
-        CellButtons = <>
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'PL_VALUE2'
-        Footers = <>
-        Width = 100
-      end
-      item
-        CellButtons = <>
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'PL_VALUE3'
-        Footers = <>
-        Width = 100
-      end
-      item
-        CellButtons = <>
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'PL_VALUE4'
-        Footers = <>
-        Width = 100
-      end
-      item
-        CellButtons = <>
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'PL_VALUE5'
-        Footers = <>
-        Width = 100
-      end
-      item
-        CellButtons = <>
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'PL_VALUE6'
-        Footers = <>
-        Width = 100
-      end
-      item
-        CellButtons = <>
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'PL_VALUE7'
-        Footers = <>
-        Width = 100
-      end
-      item
-        CellButtons = <>
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'PL_VALUE8'
-        Footers = <>
-        Width = 100
-      end
-      item
-        CellButtons = <>
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'PL_VALUE9'
-        Footers = <>
-        Width = 100
-      end>
-    object RowDetailData: TRowDetailPanelControlEh
-    end
-  end
   object EditCompany: TsEdit
     Left = 72
     Top = 8
     Width = 209
     Height = 21
     ReadOnly = True
-    TabOrder = 3
+    TabOrder = 1
     Text = 'EditCompany'
   end
   object EditAddress: TsEdit
@@ -212,12 +65,12 @@ object FormNewPriceRow: TFormNewPriceRow
     Width = 201
     Height = 21
     ReadOnly = True
-    TabOrder = 4
+    TabOrder = 2
     Text = 'EditAddress'
   end
   object BitBtnCancel: TsBitBtn
     Left = 8
-    Top = 429
+    Top = 237
     Width = 75
     Height = 25
     Anchors = [akLeft, akBottom]
@@ -243,12 +96,13 @@ object FormNewPriceRow: TFormNewPriceRow
       0000}
     ModalResult = 2
     NumGlyphs = 2
-    TabOrder = 6
+    TabOrder = 4
     OnClick = BitBtnCancelClick
+    ExplicitTop = 428
   end
   object BitBtnSave: TsBitBtn
     Left = 586
-    Top = 429
+    Top = 237
     Width = 105
     Height = 25
     Anchors = [akRight, akBottom]
@@ -268,8 +122,9 @@ object FormNewPriceRow: TFormNewPriceRow
       0003737FFFFFFFFF7F7330099999999900333777777777777733}
     ModalResult = 1
     NumGlyphs = 2
-    TabOrder = 1
+    TabOrder = 0
     OnClick = BitBtnSaveClick
+    ExplicitTop = 428
   end
   object EditNodeValue: TsEdit
     Left = 72
@@ -277,124 +132,8 @@ object FormNewPriceRow: TFormNewPriceRow
     Width = 353
     Height = 21
     ReadOnly = True
-    TabOrder = 5
+    TabOrder = 3
     Text = 'EditNodeValue'
-  end
-  object GridTable: TDBGridEh
-    Left = 8
-    Top = 88
-    Width = 689
-    Height = 153
-    Anchors = [akLeft, akTop, akRight]
-    DataSource = DSEdit
-    DynProps = <>
-    FooterParams.Color = clWindow
-    GridLineParams.VertEmptySpaceStyle = dessNonEh
-    OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghDblClickOptimizeColWidth, dghDialogFind, dghColumnResize, dghColumnMove]
-    RowLines = 3
-    RowSizingAllowed = True
-    TabOrder = 0
-    TitleParams.MultiTitle = True
-    VertScrollBar.VisibleMode = sbNeverShowEh
-    Columns = <
-      item
-        CellButtons = <>
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'CM_NAME'
-        Footers = <>
-        Width = 100
-      end
-      item
-        CellButtons = <>
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'PL_DATE_UPDATE'
-        Footers = <>
-        Width = 80
-      end
-      item
-        CellButtons = <>
-        DisplayFormat = '#0.00'
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'PL_PRICE'
-        Footers = <>
-      end
-      item
-        CellButtons = <>
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'PL_VALUE1'
-        Footers = <>
-        Width = 100
-      end
-      item
-        CellButtons = <>
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'PL_VALUE2'
-        Footers = <>
-        Width = 100
-      end
-      item
-        CellButtons = <>
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'PL_VALUE3'
-        Footers = <>
-        Width = 100
-      end
-      item
-        CellButtons = <>
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'PL_VALUE4'
-        Footers = <>
-        Width = 100
-      end
-      item
-        CellButtons = <>
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'PL_VALUE5'
-        Footers = <>
-        Width = 100
-      end
-      item
-        CellButtons = <>
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'PL_VALUE6'
-        Footers = <>
-        Width = 100
-      end
-      item
-        CellButtons = <>
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'PL_VALUE7'
-        Footers = <>
-        Width = 100
-      end
-      item
-        CellButtons = <>
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'PL_VALUE8'
-        Footers = <>
-        Width = 100
-      end
-      item
-        CellButtons = <>
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'PL_VALUE9'
-        Footers = <>
-        Width = 100
-      end>
-    object RowDetailData: TRowDetailPanelControlEh
-    end
   end
   object EditCity: TsEdit
     Left = 328
@@ -402,8 +141,165 @@ object FormNewPriceRow: TFormNewPriceRow
     Width = 97
     Height = 21
     ReadOnly = True
-    TabOrder = 7
+    TabOrder = 5
     Text = 'EditCity'
+  end
+  object sPanel1: TsPanel
+    Left = 8
+    Top = 59
+    Width = 672
+    Height = 159
+    TabOrder = 6
+    object sLabel2: TsLabel
+      Left = 10
+      Top = 14
+      Width = 26
+      Height = 13
+      Caption = #1062#1077#1085#1072
+    end
+    object sL1: TsLabel
+      Left = 11
+      Top = 48
+      Width = 60
+      Height = 13
+      Caption = 'PL_VALUE1'
+    end
+    object sL2: TsLabel
+      Left = 11
+      Top = 83
+      Width = 60
+      Height = 13
+      Caption = 'PL_VALUE2'
+    end
+    object sL3: TsLabel
+      Left = 11
+      Top = 123
+      Width = 60
+      Height = 13
+      Caption = 'PL_VALUE3'
+    end
+    object sL4: TsLabel
+      Left = 232
+      Top = 48
+      Width = 60
+      Height = 13
+      Caption = 'PL_VALUE4'
+    end
+    object sL5: TsLabel
+      Left = 234
+      Top = 80
+      Width = 60
+      Height = 13
+      Caption = 'PL_VALUE5'
+    end
+    object sL6: TsLabel
+      Left = 234
+      Top = 122
+      Width = 60
+      Height = 13
+      Caption = 'PL_VALUE6'
+    end
+    object sL7: TsLabel
+      Left = 456
+      Top = 48
+      Width = 60
+      Height = 13
+      Caption = 'PL_VALUE7'
+    end
+    object sL8: TsLabel
+      Left = 456
+      Top = 77
+      Width = 60
+      Height = 13
+      Caption = 'PL_VALUE8'
+    end
+    object sL9: TsLabel
+      Left = 456
+      Top = 120
+      Width = 60
+      Height = 13
+      Caption = 'PL_VALUE9'
+    end
+    object sPL_PRICE: TsEdit
+      Left = 76
+      Top = 11
+      Width = 121
+      Height = 21
+      TabOrder = 0
+      Text = 'PL_PRICE'
+    end
+    object sPL_VALUE1: TsEdit
+      Left = 77
+      Top = 45
+      Width = 121
+      Height = 21
+      TabOrder = 1
+      Text = 'PL_VALUE1'
+    end
+    object sPL_VALUE2: TsEdit
+      Left = 77
+      Top = 80
+      Width = 121
+      Height = 21
+      TabOrder = 2
+      Text = 'PL_VALUE2'
+    end
+    object sPL_VALUE3: TsEdit
+      Left = 77
+      Top = 118
+      Width = 121
+      Height = 21
+      TabOrder = 3
+      Text = 'PL_VALUE3'
+    end
+    object sPL_VALUE4: TsEdit
+      Left = 298
+      Top = 45
+      Width = 121
+      Height = 21
+      TabOrder = 4
+      Text = 'PL_VALUE4'
+    end
+    object sPL_VALUE5: TsEdit
+      Left = 298
+      Top = 77
+      Width = 121
+      Height = 21
+      TabOrder = 5
+      Text = 'PL_VALUE5'
+    end
+    object sPL_VALUE6: TsEdit
+      Left = 300
+      Top = 119
+      Width = 121
+      Height = 21
+      TabOrder = 6
+      Text = 'PL_VALUE6'
+    end
+    object sPL_VALUE7: TsEdit
+      Left = 528
+      Top = 45
+      Width = 121
+      Height = 21
+      TabOrder = 7
+      Text = 'PL_VALUE7'
+    end
+    object sPL_VALUE8: TsEdit
+      Left = 528
+      Top = 77
+      Width = 121
+      Height = 21
+      TabOrder = 8
+      Text = 'PL_VALUE8'
+    end
+    object sPL_VALUE9: TsEdit
+      Left = 528
+      Top = 117
+      Width = 121
+      Height = 21
+      TabOrder = 9
+      Text = 'PL_VALUE9'
+    end
   end
   object QCompany: TUniQuery
     Connection = FormMain.ZC
@@ -412,8 +308,8 @@ object FormNewPriceRow: TFormNewPriceRow
       'FROM company c'
       'WHERE CM_ISCLOSED= 0 '
       'AND cm_id =:COMPANYID')
-    Left = 320
-    Top = 48
+    Left = 208
+    Top = 8
     ParamData = <
       item
         DataType = ftInteger
@@ -421,102 +317,26 @@ object FormNewPriceRow: TFormNewPriceRow
         ParamType = ptInput
         Value = nil
       end>
-  end
-  object qDataView: TUniQuery
-    Connection = FormMain.ZC
-    SQL.Strings = (
-      'select * from PRICE_LINES'
-      'where pl_id = :line_id')
-    Left = 272
-    Top = 352
-    ParamData = <
-      item
-        DataType = ftInteger
-        Name = 'line_id'
-        ParamType = ptInput
-        Value = nil
-      end>
-    object qDataViewPL_ID: TIntegerField
-      FieldName = 'PL_ID'
+    object QCompanyCOMPANYID: TIntegerField
+      FieldName = 'COMPANYID'
       Required = True
     end
-    object qDataViewPL_HEADERID: TIntegerField
-      FieldName = 'PL_HEADERID'
+    object QCompanyCM_CITY: TStringField
+      FieldName = 'CM_CITY'
       Required = True
+      Size = 100
     end
-    object qDataViewPL_TREEID: TIntegerField
-      FieldName = 'PL_TREEID'
+    object QCompanyCM_NAME: TStringField
+      FieldName = 'CM_NAME'
+      Size = 100
     end
-    object qDataViewPL_PRICE: TFloatField
-      FieldName = 'PL_PRICE'
-      Required = True
+    object QCompanyCM_COMMENT: TStringField
+      FieldName = 'CM_COMMENT'
+      Size = 255
     end
-    object qDataViewPL_VALUE1: TStringField
-      FieldName = 'PL_VALUE1'
-      Size = 200
-    end
-    object qDataViewPL_VALUE2: TStringField
-      FieldName = 'PL_VALUE2'
-      Size = 200
-    end
-    object qDataViewPL_VALUE3: TStringField
-      FieldName = 'PL_VALUE3'
-      Size = 200
-    end
-    object qDataViewPL_VALUE4: TStringField
-      FieldName = 'PL_VALUE4'
-      Size = 200
-    end
-    object qDataViewPL_VALUE5: TStringField
-      FieldName = 'PL_VALUE5'
-      Size = 200
-    end
-    object qDataViewPL_VALUE6: TStringField
-      FieldName = 'PL_VALUE6'
-      Size = 200
-    end
-    object qDataViewPL_VALUE7: TStringField
-      FieldName = 'PL_VALUE7'
-      Size = 200
-    end
-    object qDataViewPL_VALUE8: TStringField
-      FieldName = 'PL_VALUE8'
-      Size = 200
-    end
-    object qDataViewPL_VALUE9: TStringField
-      FieldName = 'PL_VALUE9'
-      Size = 200
-    end
-    object qDataViewPL_ORDERBY: TIntegerField
-      FieldName = 'PL_ORDERBY'
-      Required = True
-    end
-    object qDataViewPL_DATE_UPDATE: TDateTimeField
-      FieldName = 'PL_DATE_UPDATE'
-    end
-    object qDataViewPL_ISCLOSED: TSmallintField
-      FieldName = 'PL_ISCLOSED'
-      Required = True
-    end
-  end
-  object DSEdit: TUniDataSource
-    DataSet = ZTableEdit
-    Left = 136
-    Top = 216
-  end
-  object DSData: TUniDataSource
-    DataSet = qDataView
-    Left = 360
-    Top = 352
-  end
-  object ZTableEdit: TUniTable
-    Connection = FormMain.ZC
-    Left = 56
-    Top = 208
   end
   object sSkinManager1: TsSkinManager
     ButtonsOptions.OldGlyphsMode = True
-    IsDefault = False
     InternalSkins = <>
     SkinDirectory = 'c:\Skins'
     SkinName = 'AlterMetro'
@@ -544,8 +364,8 @@ object FormNewPriceRow: TFormNewPriceRow
     ThirdParty.ThirdScrollBar = ' '
     ThirdParty.ThirdStaticText = ' '
     ThirdParty.ThirdNativePaint = ' '
-    Left = 24
-    Top = 8
+    Left = 560
+    Top = 40
   end
   object sSkinProvider1: TsSkinProvider
     AddedTitle.Font.Charset = DEFAULT_CHARSET
@@ -555,7 +375,156 @@ object FormNewPriceRow: TFormNewPriceRow
     AddedTitle.Font.Style = []
     SkinData.SkinSection = 'FORM'
     TitleButtons = <>
-    Left = 80
-    Top = 16
+    Left = 488
+    Top = 48
+  end
+  object UniSQLRowInsert: TUniSQL
+    Connection = FormMain.ZC
+    SQL.Strings = (
+      'insert into price_lines (PL_HEADERID, PL_TREEID, PL_PRICE,'
+      'PL_VALUE1, PL_VALUE2, PL_VALUE3,'
+      'PL_VALUE4, PL_VALUE5, PL_VALUE6,'
+      'PL_VALUE7, PL_VALUE8, PL_VALUE9,'
+      'PL_ORDERBY, PL_DATE_UPDATE, PL_ISCLOSED)'
+      'values(:PL_HEADERID, :PL_TREEID, :PL_PRICE,'
+      ':PL_VALUE1, :PL_VALUE2, :PL_VALUE3,'
+      ':PL_VALUE4, :PL_VALUE5, :PL_VALUE6,'
+      ':PL_VALUE7, :PL_VALUE8, :PL_VALUE9,'
+      ':PL_ORDERBY, :PL_DATE_UPDATE, 0)')
+    Left = 440
+    Top = 40
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'PL_HEADERID'
+        ParamType = ptInput
+        Value = 0
+      end
+      item
+        DataType = ftInteger
+        Name = 'PL_TREEID'
+        ParamType = ptInput
+        Value = nil
+      end
+      item
+        DataType = ftFloat
+        Name = 'PL_PRICE'
+        ParamType = ptInput
+        Value = 0.000000000000000000
+      end
+      item
+        DataType = ftString
+        Name = 'PL_VALUE1'
+        ParamType = ptInput
+        Value = nil
+      end
+      item
+        DataType = ftString
+        Name = 'PL_VALUE2'
+        ParamType = ptInput
+        Value = nil
+      end
+      item
+        DataType = ftString
+        Name = 'PL_VALUE3'
+        ParamType = ptInput
+        Value = nil
+      end
+      item
+        DataType = ftString
+        Name = 'PL_VALUE4'
+        ParamType = ptInput
+        Value = nil
+      end
+      item
+        DataType = ftString
+        Name = 'PL_VALUE5'
+        ParamType = ptInput
+        Value = nil
+      end
+      item
+        DataType = ftString
+        Name = 'PL_VALUE6'
+        ParamType = ptInput
+        Value = nil
+      end
+      item
+        DataType = ftString
+        Name = 'PL_VALUE7'
+        ParamType = ptInput
+        Value = nil
+      end
+      item
+        DataType = ftString
+        Name = 'PL_VALUE8'
+        ParamType = ptInput
+        Value = nil
+      end
+      item
+        DataType = ftString
+        Name = 'PL_VALUE9'
+        ParamType = ptInput
+        Value = nil
+      end
+      item
+        DataType = ftInteger
+        Name = 'PL_ORDERBY'
+        ParamType = ptInput
+        Value = 0
+      end
+      item
+        DataType = ftDateTime
+        Name = 'PL_DATE_UPDATE'
+        ParamType = ptInput
+        Value = nil
+      end>
+  end
+  object QueryFieldNames: TUniQuery
+    Connection = FormMain.ZC
+    SQL.Strings = (
+      'SELECT gs_treeid, gs_field, gs_header, gs_show,'
+      'gs_size, gs_displayformat, gs_orderby FROM grid_show'
+      'WHERE gs_treeid IS NULL'
+      'AND gs_field NOT IN'
+      '    (SELECT gs_field FROM grid_show'
+      '    WHERE gs_treeid = :treeid)'
+      'UNION ALL'
+      'SELECT gs_treeid, gs_field, gs_header, gs_show,'
+      'gs_size, gs_displayformat, gs_orderby FROM grid_show'
+      'WHERE gs_treeid = :treeid')
+    Left = 624
+    Top = 40
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'treeid'
+        ParamType = ptInput
+        Value = 189
+      end>
+    object QueryFieldNamesGS_TREEID: TIntegerField
+      FieldName = 'GS_TREEID'
+    end
+    object QueryFieldNamesGS_FIELD: TStringField
+      FieldName = 'GS_FIELD'
+      Size = 50
+    end
+    object QueryFieldNamesGS_HEADER: TStringField
+      FieldName = 'GS_HEADER'
+      Size = 50
+    end
+    object QueryFieldNamesGS_SHOW: TSmallintField
+      FieldName = 'GS_SHOW'
+      Required = True
+    end
+    object QueryFieldNamesGS_SIZE: TIntegerField
+      FieldName = 'GS_SIZE'
+      Required = True
+    end
+    object QueryFieldNamesGS_DISPLAYFORMAT: TStringField
+      FieldName = 'GS_DISPLAYFORMAT'
+    end
+    object QueryFieldNamesGS_ORDERBY: TIntegerField
+      FieldName = 'GS_ORDERBY'
+    end
   end
 end

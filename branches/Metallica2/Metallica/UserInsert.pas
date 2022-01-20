@@ -3,10 +3,9 @@ unit UserInsert;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, sBitBtn,
-  sEdit, sLabel, Data.DB, MemDS, DBAccess, Uni, sSkinProvider, sSkinManager,
-  sCheckBox, ZAbstractRODataset, ZAbstractDataset, ZDataset;
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes,
+  Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons,
+  sBitBtn, sEdit, sLabel, Data.DB, MemDS, DBAccess, Uni, sSkinProvider, sSkinManager, sCheckBox;
 type
   TFormUserInsert = class(TForm)
     sLabel1: TsLabel;

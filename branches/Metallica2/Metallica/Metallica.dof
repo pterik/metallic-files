@@ -95,9 +95,9 @@ UnitOutputDir=
 PackageDLLOutputDir=
 PackageDCPOutputDir=
 SearchPath=G:\DELPHI DOCUMS\DELPHI COMPONENTS\Hyrix\Delphi6
-Packages=vcl;rtl;dbrtl;adortl;vcldb;vclx;bdertl;vcldbx;ibxpress;dsnap;qrpt;teeui;teedb;tee;dss;teeqr;visualclx;visualdbclx;dsnapcon;VclSmp;vclshlctrls;vclie;xmlrtl;inet;inetdbbde;inetdbxpress;inetdb;webdsnap;websnap;dbexpress;indy;dclOffice2k;dbxcds
+Packages=vcl;rtl;dbrtl;adortl;vcldb;vclx;vcldbx;ibxpress;dsnap;qrpt;teeui;teedb;tee;dss;teeqr;visualclx;visualdbclx;dsnapcon;VclSmp;vclshlctrls;vclie;xmlrtl;inet;inetdbbde;inetdbxpress;inetdb;webdsnap;websnap;dbexpress;indy;dclOffice2k;dbxcds
 Conditionals=
-DebugSourceDirs=D:\INSTALL\Delphi Components\ZEOS\src\dbc\;C:\Program Files\Borland\Delphi Components\Zeos\src\plain\;C:\Program Files\Borland\Delphi Components\Zeos\src\dbc\;C:\Program Files\Borland\Delphi Components\ZEOS\src\component\
+DebugSourceDirs=
 UsePackages=0
 [Parameters]
 RunParams=

@@ -4,7 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms, 
-  Dialogs, StdCtrls, Buttons, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, Mask, sLabel, sEdit, sCheckBox, sMaskEdit, sComboBox, sMemo, sDialogs, sSpeedButton,
+  Dialogs, StdCtrls, Buttons, DB, //ZAbstractRODataset, ZAbstractDataset, ZDataset,
+  Mask, sLabel, sEdit, sCheckBox, sMaskEdit, sComboBox, sMemo, sDialogs, sSpeedButton,
   sBitBtn, sSkinProvider, sSkinManager;
 
 type
@@ -29,7 +30,7 @@ var
 
 implementation
 
-uses System.UITypes, DataModule, MainForm, EnterUser;
+uses System.UITypes, DataModule, MainForm;
 
 {$R *.dfm}
 

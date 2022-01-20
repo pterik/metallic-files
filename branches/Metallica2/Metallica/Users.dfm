@@ -251,6 +251,7 @@ object FormUsers: TFormUsers
     Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgConfirmDelete, dgCancelOnExit]
     TabOrder = 0
     OnDblClick = DBUsersDblClick
+    OnDrawColumnCell = DBUsersDrawColumnCell
     OnTitleClick = DBUsersTitleClick
     Columns = <
       item
@@ -311,6 +312,7 @@ object FormUsers: TFormUsers
     end
   end
   object QUsersWOMe: TUniQuery
+    Connection = FormMain.ZC
     SQL.Strings = (
       'SELECT * FROM USERS'
       'WHERE U_ID<>:U_ID')
@@ -323,6 +325,41 @@ object FormUsers: TFormUsers
         ParamType = ptInput
         Value = nil
       end>
+    object QUsersWOMeU_ID: TIntegerField
+      FieldName = 'U_ID'
+      Required = True
+    end
+    object QUsersWOMeU_LOGIN: TStringField
+      FieldName = 'U_LOGIN'
+      Size = 30
+    end
+    object QUsersWOMeU_PASSWORD: TStringField
+      FieldName = 'U_PASSWORD'
+      Size = 10
+    end
+    object QUsersWOMeU_ISBOSS: TIntegerField
+      FieldName = 'U_ISBOSS'
+    end
+    object QUsersWOMeU_FIO: TStringField
+      FieldName = 'U_FIO'
+      Size = 50
+    end
+    object QUsersWOMeU_COMMENT: TStringField
+      FieldName = 'U_COMMENT'
+      Size = 50
+    end
+    object QUsersWOMeU_EDIT_OWN_JOBS: TSmallintField
+      FieldName = 'U_EDIT_OWN_JOBS'
+      Required = True
+    end
+    object QUsersWOMeU_EDIT_PRICES: TSmallintField
+      FieldName = 'U_EDIT_PRICES'
+      Required = True
+    end
+    object QUsersWOMeU_ISCLOSED: TSmallintField
+      FieldName = 'U_ISCLOSED'
+      Required = True
+    end
   end
   object DSUsers: TUniDataSource
     DataSet = QViewFormUsers
@@ -358,6 +395,7 @@ object FormUsers: TFormUsers
       'WHERE (U_ISCLOSED=:U_ISCLOSED) OR (:U_ISCLOSED=-1)'
       'ORDER BY U_ID')
     Active = True
+    OnCalcFields = QViewFormUsersCalcFields
     Left = 32
     Top = 152
     ParamData = <

@@ -3,7 +3,7 @@ object FormNewPriceList: TFormNewPriceList
   Top = 200
   Caption = #1053#1086#1074#1099#1081' '#1087#1088#1072#1081#1089'-'#1083#1080#1089#1090
   ClientHeight = 458
-  ClientWidth = 784
+  ClientWidth = 798
   Color = clBtnFace
   Constraints.MinHeight = 250
   Constraints.MinWidth = 790
@@ -19,7 +19,7 @@ object FormNewPriceList: TFormNewPriceList
   OnKeyDown = FormKeyDown
   OnKeyUp = FormKeyUp
   DesignSize = (
-    784
+    798
     458)
   PixelsPerInch = 96
   TextHeight = 13
@@ -38,8 +38,8 @@ object FormNewPriceList: TFormNewPriceList
     Caption = #1043#1086#1088#1086#1076
   end
   object BitBtnClose: TsBitBtn
-    Left = 708
-    Top = 432
+    Left = 713
+    Top = 431
     Width = 77
     Height = 25
     Anchors = [akRight, akBottom]
@@ -71,7 +71,7 @@ object FormNewPriceList: TFormNewPriceList
   object Grid: TDBGridEh
     Left = 215
     Top = 8
-    Width = 569
+    Width = 583
     Height = 417
     Anchors = [akLeft, akTop, akRight, akBottom]
     DataSource = DSData
@@ -111,6 +111,14 @@ object FormNewPriceList: TFormNewPriceList
         EditButtons = <>
         FieldName = 'PL_PRICE'
         Footers = <>
+      end
+      item
+        CellButtons = <>
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'PL_NODE'
+        Footers = <>
+        Width = 100
       end
       item
         CellButtons = <>
@@ -183,6 +191,55 @@ object FormNewPriceList: TFormNewPriceList
         FieldName = 'PL_VALUE9'
         Footers = <>
         Width = 100
+      end
+      item
+        CellButtons = <>
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'PL_ID'
+        Footers = <>
+      end
+      item
+        CellButtons = <>
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'PL_HEADERID'
+        Footers = <>
+      end
+      item
+        CellButtons = <>
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'PL_TREEID'
+        Footers = <>
+      end
+      item
+        CellButtons = <>
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'CM_ID'
+        Footers = <>
+      end
+      item
+        CellButtons = <>
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'CM_CITY'
+        Footers = <>
+      end
+      item
+        CellButtons = <>
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'PL_ORDERBY'
+        Footers = <>
+      end
+      item
+        CellButtons = <>
+        DynProps = <>
+        EditButtons = <>
+        FieldName = 'PL_ISCLOSED'
+        Footers = <>
       end>
     object RowDetailData: TRowDetailPanelControlEh
     end
@@ -532,6 +589,10 @@ object FormNewPriceList: TFormNewPriceList
         ParamType = ptInput
         Value = nil
       end>
+    object qRowExistsCNTR: TIntegerField
+      FieldName = 'CNTR'
+      ReadOnly = True
+    end
   end
   object DSData: TUniDataSource
     DataSet = qDataView
@@ -654,6 +715,89 @@ object FormNewPriceList: TFormNewPriceList
         ParamType = ptInput
         Value = nil
       end>
+    object qDataViewPL_ID: TIntegerField
+      FieldName = 'PL_ID'
+      Required = True
+    end
+    object qDataViewPL_HEADERID: TIntegerField
+      FieldName = 'PL_HEADERID'
+      Required = True
+    end
+    object qDataViewPL_TREEID: TIntegerField
+      FieldName = 'PL_TREEID'
+    end
+    object qDataViewPL_PRICE: TFloatField
+      FieldName = 'PL_PRICE'
+      Required = True
+    end
+    object qDataViewPL_NODE: TStringField
+      FieldName = 'PL_NODE'
+      ReadOnly = True
+      Size = 100
+    end
+    object qDataViewCM_NAME: TStringField
+      FieldName = 'CM_NAME'
+      ReadOnly = True
+      Size = 100
+    end
+    object qDataViewCM_ID: TIntegerField
+      FieldName = 'CM_ID'
+      ReadOnly = True
+      Required = True
+    end
+    object qDataViewCM_CITY: TStringField
+      FieldName = 'CM_CITY'
+      ReadOnly = True
+      Required = True
+      Size = 100
+    end
+    object qDataViewPL_VALUE1: TStringField
+      FieldName = 'PL_VALUE1'
+      Size = 200
+    end
+    object qDataViewPL_VALUE2: TStringField
+      FieldName = 'PL_VALUE2'
+      Size = 200
+    end
+    object qDataViewPL_VALUE3: TStringField
+      FieldName = 'PL_VALUE3'
+      Size = 200
+    end
+    object qDataViewPL_VALUE4: TStringField
+      FieldName = 'PL_VALUE4'
+      Size = 200
+    end
+    object qDataViewPL_VALUE5: TStringField
+      FieldName = 'PL_VALUE5'
+      Size = 200
+    end
+    object qDataViewPL_VALUE6: TStringField
+      FieldName = 'PL_VALUE6'
+      Size = 200
+    end
+    object qDataViewPL_VALUE7: TStringField
+      FieldName = 'PL_VALUE7'
+      Size = 200
+    end
+    object qDataViewPL_VALUE8: TStringField
+      FieldName = 'PL_VALUE8'
+      Size = 200
+    end
+    object qDataViewPL_VALUE9: TStringField
+      FieldName = 'PL_VALUE9'
+      Size = 200
+    end
+    object qDataViewPL_ORDERBY: TIntegerField
+      FieldName = 'PL_ORDERBY'
+      Required = True
+    end
+    object qDataViewPL_DATE_UPDATE: TDateTimeField
+      FieldName = 'PL_DATE_UPDATE'
+    end
+    object qDataViewPL_ISCLOSED: TSmallintField
+      FieldName = 'PL_ISCLOSED'
+      Required = True
+    end
   end
   object QCompany: TUniQuery
     Connection = FormMain.ZC
@@ -671,6 +815,23 @@ object FormNewPriceList: TFormNewPriceList
         ParamType = ptInput
         Value = nil
       end>
+    object QCompanyCOMPANYID: TIntegerField
+      FieldName = 'COMPANYID'
+      Required = True
+    end
+    object QCompanyCM_CITY: TStringField
+      FieldName = 'CM_CITY'
+      Required = True
+      Size = 100
+    end
+    object QCompanyCM_NAME: TStringField
+      FieldName = 'CM_NAME'
+      Size = 100
+    end
+    object QCompanyCM_COMMENT: TStringField
+      FieldName = 'CM_COMMENT'
+      Size = 255
+    end
   end
   object qPLisFinished: TUniSQL
     Connection = FormMain.ZC
@@ -715,6 +876,10 @@ object FormNewPriceList: TFormNewPriceList
         ParamType = ptInput
         Value = nil
       end>
+    object qRowMaxOrderMAXPOS: TLargeintField
+      FieldName = 'MAXPOS'
+      ReadOnly = True
+    end
   end
   object sSkinManager1: TsSkinManager
     ButtonsOptions.OldGlyphsMode = True

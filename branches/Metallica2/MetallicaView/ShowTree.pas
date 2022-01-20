@@ -7,7 +7,8 @@ uses
   ZAbstractRODataset, ZDataset, DataModule, StdCtrls, MDIChild, Buttons, Mask, DBCtrlsEh, 
   ExtCtrls, CommonUnit, DBGridEhGrouping, ToolCtrlsEh, DBGridEhToolCtrls, 
   DynVarsEh, EhLibVCL, GridsEh, DBAxisGridsEh, sTreeView, sCheckBox, sButton,
-  sBitBtn, sComboBox, sLabel, sPanel, MemDS, DBAccess, Uni;
+  sBitBtn, sComboBox, sLabel, sPanel, MemDS, DBAccess, Uni, sMaskEdit,
+  sCustomComboEdit;
 
 type
   TFormTree = class(TFormMDIChild)

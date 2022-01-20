@@ -38,7 +38,7 @@ var
 
 implementation
 
-uses DataModule, CommonUnit, MainForm, EnterUser;
+uses DataModule, CommonUnit, MainForm;
 
 {$R *.dfm}
 procedure TFormNewPhone.SetPosition(L,T:integer);
@@ -86,7 +86,7 @@ then Res:=DM.PhoneInsert(Phone,EditContacter.Text,DateToStr(DT.Date))
 else
 		if EditContacter.Text='' then Res:=DM.PhoneUpdateDate(Phone,DateToStr(DT.Date))
 		else Res:=DM.PhoneUpdateDateComment(Phone,EditContacter.Text, DateToStr(DT.Date));
-Res:=Res and DM.PhoneCompanyInsertorUpdate(Phone, FormMain.ReadEnteredUserID, F_CompanyID, DateToStr(DT.Date));
+Res:=Res and DM.PhoneCompanyInsertorUpdate(Phone, FormMain.AppUserID, F_CompanyID, DateToStr(DT.Date));
 if not Res
 then
   begin
