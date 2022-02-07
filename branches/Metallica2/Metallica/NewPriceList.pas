@@ -90,7 +90,7 @@ type
     procedure ButtonLeftClick(Sender: TObject);
     procedure ButtonRightClick(Sender: TObject);
   private
-    F_CompanyID, F_LineID, F_HeaderID, F_Max_PL_Orderby:integer;
+    F_CompanyID, F_HeaderID:integer;
     F_CurrentFieldNumber:integer;
     F_ShiftState:boolean;
     MyNode:TNodeValue;
@@ -134,8 +134,8 @@ qCompany.Open;
 EditCompany.Text:=QCompany['CM_NAME'];
 EditCity.Text:=QCompany['CM_CITY'];
 F_HeaderID:=HeaderID;
-DM.TreeFulFill(Tree, false, F_HeaderID);
-QPLisFinished.ParamByName('HEADERID').AsInteger:=F_HeaderID;
+DM.TreeFulFill(Tree, false, HeaderID);
+QPLisFinished.ParamByName('HEADERID').AsInteger:=HeaderID;
 QPLisFinished.ParamByName('FINISHED').AsInteger:=0;
 QPLIsFinished.Execute;
 RefreshPrices;
@@ -158,11 +158,6 @@ else
   DM.RepaintGrid(Grid, MyNode.ID, [Fields, FTree, FCompany]);
   end;
 NullStrictConvert := False;
-//ShowMessage('Cm_id='+IntToStr(QDataView['cm_id'])+' F_CompanyID='+IntToStr(F_CompanyID));
-//ShowMessage(' PL_TREEID = '+IntToStr(QDataView['PL_Treeid'])+' MyNode.ID='+IntToStr(MyNode.ID));
-//if VarIsNUll(QDataView['PL_HEADERID'])
-//then ShowMessage(' PL_HEADERID = null')
-//else ShowMessage(' PL_HEADERID = '+IntToStr(QDataView['PL_HEADERID']));
 end;
 
 procedure TFormNewPriceList.TreeExpanding(Sender: TObject; Node: TTreeNode;
@@ -179,6 +174,7 @@ RefreshPrices;
 end;
 
 procedure TFormNewPriceList.BitBtnUpdateClick(Sender: TObject);
+var F_PL_ID:integer;
 begin
 if Tree.SelectionCount=0 then
   begin
@@ -188,7 +184,7 @@ if Tree.SelectionCount=0 then
   end;
 if MyNode.ParentID=0 then
   begin
-  MessageDlg('Выберите подстроку рбрикатора, а не основную строку',mtWarning, [mbOK],0);
+  MessageDlg('Выберите подстроку рубрикатора, а не основную строку',mtWarning, [mbOK],0);
   exit;
   end;
 if VarIsNull(qDataView['PL_ID']) then
@@ -196,14 +192,10 @@ if VarIsNull(qDataView['PL_ID']) then
   MessageDlg('Ошибка программы, сообщите разработчику',mtError, [mbOK],0);
   exit;
   end;
-//if FormNewPriceRow=nil then  Application.CreateForm(TFormNewPriceRow, FormNewPriceRow);
 if FormUpdatePriceRow=nil then  Application.CreateForm(TFormUpdatePriceRow, FormUpdatePriceRow);
-//FormNewPriceRow.SetPosition(Self.Left,Self.Top);
 FormUpdatePriceRow.SetPosition(Self.Left,Self.Top);
-F_LIneID:=qDataView['PL_ID'];
-//FormNewPriceRow.SetNewPriceRow(F_CompanyID, MyNode.ID, F_LineID);
-FormUpdatePriceRow.SetUpdatePriceRow(F_CompanyID, MyNode.ID, F_LineID);
-//FormNewPriceRow.ShowModal;
+F_PL_ID:=qDataView['PL_ID'];
+FormUpdatePriceRow.SetUpdatePriceRow(F_CompanyID, MyNode.ID, F_PL_ID);
 FormUpdatePriceRow.ShowModal;
 RefreshPrices;
 end;
@@ -285,11 +277,6 @@ end;
 procedure TFormNewPriceList.GridDblClick(Sender: TObject);
 begin
 NullStrictConvert := False;
-ShowMessage('Company_id='+IntToStr(QDataView['cm_id']));
-ShowMessage('PL_TREEID = '+IntToStr(QDataView['PL_Treeid']));
-if VarIsNUll(QDataView['PL_HEADERID'])
-then ShowMessage(' PL_HEADERID = null')
-else ShowMessage(' PL_HEADERID = '+IntToStr(QDataView['PL_HEADERID']));
 BitBtnUpdate.OnClick(Sender);
 end;
 

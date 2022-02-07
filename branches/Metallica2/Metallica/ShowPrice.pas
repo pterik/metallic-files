@@ -74,7 +74,7 @@ begin
   else
     qData.ParamByName('NODE').Value:= MyNode.ParentValue;
   qData.Open;
-  DM.RepaintGrid(Grid, MyNode.Id, [Fields, FTree, FCompany]);
+//  DM.RepaintGrid(Grid, MyNode.Id, [Fields, FTree, FCompany]);
 end;
 
 procedure TFormPriceShow.GridCellClick(Column: TColumnEh);
