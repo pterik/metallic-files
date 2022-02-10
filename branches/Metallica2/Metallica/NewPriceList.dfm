@@ -283,12 +283,13 @@ object FormNewPriceList: TFormNewPriceList
     Text = 'EditCity'
   end
   object DBPrice: TDBEditEh
-    Left = 408
-    Top = 432
+    Left = 409
+    Top = 431
     Width = 65
     Height = 21
     Anchors = [akLeft, akBottom]
-    DataField = 'PL_PRICE'
+    DataField = 'PL_ROUNDPRICE'
+    DataSource = DSData
     DynProps = <>
     EditButtons = <>
     Font.Charset = DEFAULT_CHARSET
@@ -700,6 +701,7 @@ object FormNewPriceList: TFormNewPriceList
       'and ph.ph_isclosed = 0'
       'and pl.pl_isclosed = 0'
       'order by ph.ph_date_insert, pl_orderby')
+    OnCalcFields = qDataViewCalcFields
     Left = 408
     Top = 64
     ParamData = <
@@ -797,6 +799,11 @@ object FormNewPriceList: TFormNewPriceList
     object qDataViewPL_ISCLOSED: TSmallintField
       FieldName = 'PL_ISCLOSED'
       Required = True
+    end
+    object qDataViewPL_ROUNDPRICE: TFloatField
+      FieldKind = fkCalculated
+      FieldName = 'PL_ROUNDPRICE'
+      Calculated = True
     end
   end
   object QCompany: TUniQuery

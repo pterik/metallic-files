@@ -67,6 +67,7 @@ type
     QCompanyCM_CITY: TStringField;
     QCompanyCM_NAME: TStringField;
     QCompanyCM_COMMENT: TStringField;
+    qDataViewPL_ROUNDPRICE: TFloatField;
     procedure TreeChange(Sender: TObject; Node: TTreeNode);
     procedure TreeExpanding(Sender: TObject; Node: TTreeNode;
       var AllowExpansion: Boolean);
@@ -89,6 +90,7 @@ type
     procedure GridCellClick(Column: TColumnEh);
     procedure ButtonLeftClick(Sender: TObject);
     procedure ButtonRightClick(Sender: TObject);
+    procedure qDataViewCalcFields(DataSet: TDataSet);
   private
     F_CompanyID, F_HeaderID:integer;
     F_CurrentFieldNumber:integer;
@@ -272,6 +274,11 @@ qRowExists.Open;
 if varIsNull(qRowExists['CNTR'])
 then Result:=false
 else Result:=(qRowExists['CNTR']>0);
+end;
+
+procedure TFormNewPriceList.qDataViewCalcFields(DataSet: TDataSet);
+begin
+QDataView['PL_ROUNDPRICE']:=Round(QDataView['PL_PRICE']*10000)/10000;
 end;
 
 procedure TFormNewPriceList.GridDblClick(Sender: TObject);

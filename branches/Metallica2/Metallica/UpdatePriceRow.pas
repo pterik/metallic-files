@@ -13,7 +13,6 @@ uses
 
 type
   TFormUpdatePriceRow = class(TForm)
-    GridView: TDBGridEh;
     EditCompany: TsEdit;
     LabelComp: TsLabel;
     LabelCity: TsLabel;
@@ -79,7 +78,6 @@ type
     sTextValue7: TsLabel;
     sTextValue8: TsLabel;
     sTextValue9: TsLabel;
-    sPL_PRICE: TsEdit;
     sPL_VALUE1: TsEdit;
     sPL_VALUE2: TsEdit;
     sPL_VALUE3: TsEdit;
@@ -89,29 +87,15 @@ type
     sPL_VALUE7: TsEdit;
     sPL_VALUE8: TsEdit;
     sPL_VALUE9: TsEdit;
-    GridTable: TDBGridEh;
     sPL_OLDPRICE: TsEdit;
-    sTextOldPrice: TsLabel;
-    sLabel3: TsLabel;
-    sLabel4: TsLabel;
-    sLabel5: TsLabel;
     sPL_OLDVALUE1: TsEdit;
     sPL_OLDVALUE2: TsEdit;
     sPL_OLDVALUE3: TsEdit;
-    sOldTextValue2: TsLabel;
-    sOldTextValue3: TsLabel;
-    sOldTextValue1: TsLabel;
     sPL_OLDVALUE7: TsEdit;
-    sOldTextValue7: TsLabel;
-    sOldTextValue8: TsLabel;
     sPL_OLDVALUE8: TsEdit;
-    sOldTextValue9: TsLabel;
     sPL_OLDVALUE9: TsEdit;
     sPL_OLDVALUE4: TsEdit;
-    sOldTextValue4: TsLabel;
-    sOldTextValue5: TsLabel;
     sPL_OLDVALUE5: TsEdit;
-    sOldTextValue6: TsLabel;
     sPL_OLDVALUE6: TsEdit;
     qDisplay: TUniQuery;
     qDisplayGS_TREEID: TIntegerField;
@@ -121,12 +105,15 @@ type
     qDisplayGS_SIZE: TIntegerField;
     qDisplayGS_DISPLAYFORMAT: TStringField;
     qDisplayGS_ORDERBY: TIntegerField;
+    sPL_PRICE: TsEdit;
+    qDataViewPL_ROUNDPRICE: TFloatField;
     procedure FormKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure BitBtnSaveClick(Sender: TObject);
     procedure BitBtnCancelClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
+    procedure qDataViewCalcFields(DataSet: TDataSet);
   private
     MyNode:TNodeValue;
     F_CompanyID:integer;
@@ -144,7 +131,7 @@ var
 
 implementation
 
-uses MainForm, CommonUnit;
+uses MainForm, CommonUnit, System.Math;
 
 {$R *.dfm}
 
@@ -177,7 +164,7 @@ begin
 qDataView.Close;
 qDataView.ParamByName('pl_id').AsInteger:=F_PL_ID;
 qDataView.Open;
-sPL_PRICE.Text:=qDataView['PL_PRICE'];
+sPL_PRICE.Text:=qDataView['PL_ROUNDPRICE'];
 sPL_VALUE1.Text:=qDataView['PL_VALUE1'];
 sPL_VALUE2.Text:=qDataView['PL_VALUE2'];
 sPL_VALUE3.Text:=qDataView['PL_VALUE3'];
@@ -187,7 +174,7 @@ sPL_VALUE6.Text:=qDataView['PL_VALUE6'];
 sPL_VALUE7.Text:=qDataView['PL_VALUE7'];
 sPL_VALUE8.Text:=qDataView['PL_VALUE8'];
 sPL_VALUE9.Text:=qDataView['PL_VALUE9'];
-sPL_OLDPRICE.Text:=qDataView['PL_PRICE'];
+sPL_OLDPRICE.Text:=qDataView['PL_ROUNDPRICE'];
 sPL_OLDVALUE1.Text:=qDataView['PL_VALUE1'];
 sPL_OLDVALUE2.Text:=qDataView['PL_VALUE2'];
 sPL_OLDVALUE3.Text:=qDataView['PL_VALUE3'];
@@ -226,13 +213,27 @@ end;    // case
 
 end;
 
+procedure TFormUpdatePriceRow.qDataViewCalcFields(DataSet: TDataSet);
+begin
+QDataView['PL_ROUNDPRICE']:=Round(QDataView['PL_PRICE']*10000)/10000;
+end;
+
 procedure TFormUpdatePriceRow.BitBtnSaveClick(Sender: TObject);
+var Price:real;
 begin
 //Доделать маску при сохранении значений и при вводе данных
 // Исправить текст для старых значений
 // на форме прайса - при переходе на следующую строку обновлять цену
+try
+Price:=RoundTo(StrToFloat(sPL_PRICE.Text),-4);
+except on E:Exception do
+  begin
+    ShowMessage('Неверно введена цена, исправьте и обратите внимание на запятую.');
+    exit;
+  end;
+end;
 QPriceLinesUpdate.ParamByName('PL_ID').Value:=F_PL_ID;
-QPriceLinesUpdate.ParamByName('PL_PRICE').Value:=StrToFloat(sPL_PRICE.Text);
+QPriceLinesUpdate.ParamByName('PL_PRICE').Value:=Price;
 QPriceLinesUpdate.ParamByName('PL_VALUE1').Value:=sPL_VALUE1.Text;
 QPriceLinesUpdate.ParamByName('PL_VALUE2').Value:=sPL_VALUE2.Text;
 QPriceLinesUpdate.ParamByName('PL_VALUE3').Value:=sPL_VALUE3.Text;
@@ -274,6 +275,15 @@ begin
   // Для этого нужно отсылать ParentID а не ID
   qDisplay.ParamByName('TREEID').AsInteger:= TreeID;
   qDisplay.Open;
+  sTextValue1.Caption:='';
+  sTextValue2.Caption:='';
+  sTextValue3.Caption:='';
+  sTextValue4.Caption:='';
+  sTextValue5.Caption:='';
+  sTextValue6.Caption:='';
+  sTextValue7.Caption:='';
+  sTextValue8.Caption:='';
+  sTextValue9.Caption:='';
   while not QDisplay.Eof do
   	begin
     if qDisplay['GS_FIELD']='PL_VALUE1' then
@@ -284,7 +294,6 @@ begin
       sPL_VALUE1.Visible:=isVisible;
       sTextValue1.Visible:=isVisible;
       sPL_OLDVALUE1.Visible:=isVisible;
-      sOldTextValue1.Visible:=isVisible;
       if not VarIsNull(QDisplay['GS_DISPLAYFORMAT']) then
 	      if Length(Trim(QDisplay['GS_DISPLAYFORMAT'])) > 0
         	then RowMaskEdit1:= QDisplay['GS_DISPLAYFORMAT']
@@ -295,10 +304,9 @@ begin
 	    sTextValue2.Caption:=qDisplay['GS_HEADER'];
       sPL_VALUE2.Width:= QDisplay['GS_SIZE'];
       isVisible:=(QDisplay['GS_SHOW'] = 1);
-      sPL_VALUE1.Visible:=isVisible;
-      sTextValue1.Visible:=isVisible;
-      sPL_OLDVALUE1.Visible:=isVisible;
-      sOldTextValue1.Visible:=isVisible;
+      sPL_VALUE2.Visible:=isVisible;
+      sTextValue2.Visible:=isVisible;
+      sPL_OLDVALUE2.Visible:=isVisible;
       if not VarIsNull(QDisplay['GS_DISPLAYFORMAT']) then
 	      if Length(Trim(QDisplay['GS_DISPLAYFORMAT'])) > 0
         	then RowMaskEdit2:= QDisplay['GS_DISPLAYFORMAT']
@@ -312,7 +320,6 @@ begin
       sPL_VALUE3.Visible:=isVisible;
       sTextValue3.Visible:=isVisible;
       sPL_OLDVALUE3.Visible:=isVisible;
-      sOldTextValue3.Visible:=isVisible;
       if not VarIsNull(QDisplay['GS_DISPLAYFORMAT']) then
 	      if Length(Trim(QDisplay['GS_DISPLAYFORMAT'])) > 0
         	then RowMaskEdit3:= QDisplay['GS_DISPLAYFORMAT']
@@ -326,7 +333,6 @@ begin
       sPL_VALUE4.Visible:=isVisible;
       sTextValue4.Visible:=isVisible;
       sPL_OLDVALUE4.Visible:=isVisible;
-      sOldTextValue4.Visible:=isVisible;
       if not VarIsNull(QDisplay['GS_DISPLAYFORMAT']) then
 	      if Length(Trim(QDisplay['GS_DISPLAYFORMAT'])) > 0
         	then RowMaskEdit4:= QDisplay['GS_DISPLAYFORMAT']
@@ -340,7 +346,6 @@ begin
       sPL_VALUE5.Visible:=isVisible;
       sTextValue5.Visible:=isVisible;
       sPL_OLDVALUE5.Visible:=isVisible;
-      sOldTextValue5.Visible:=isVisible;
       if not VarIsNull(QDisplay['GS_DISPLAYFORMAT']) then
 	      if Length(Trim(QDisplay['GS_DISPLAYFORMAT'])) > 0
         	then RowMaskEdit5:= QDisplay['GS_DISPLAYFORMAT']
@@ -354,7 +359,6 @@ begin
       sPL_VALUE6.Visible:=isVisible;
       sTextValue6.Visible:=isVisible;
       sPL_OLDVALUE6.Visible:=isVisible;
-      sOldTextValue6.Visible:=isVisible;
       if not VarIsNull(QDisplay['GS_DISPLAYFORMAT']) then
 	      if Length(Trim(QDisplay['GS_DISPLAYFORMAT'])) > 0
         	then RowMaskEdit6:= QDisplay['GS_DISPLAYFORMAT']
@@ -368,7 +372,6 @@ begin
       sPL_VALUE7.Visible:=isVisible;
       sTextValue7.Visible:=isVisible;
       sPL_OLDVALUE7.Visible:=isVisible;
-      sOldTextValue7.Visible:=isVisible;
       if not VarIsNull(QDisplay['GS_DISPLAYFORMAT']) then
 	      if Length(Trim(QDisplay['GS_DISPLAYFORMAT'])) > 0
         	then RowMaskEdit7:= QDisplay['GS_DISPLAYFORMAT']
@@ -382,7 +385,6 @@ begin
       sPL_VALUE8.Visible:=isVisible;
       sTextValue8.Visible:=isVisible;
       sPL_OLDVALUE8.Visible:=isVisible;
-      sOldTextValue8.Visible:=isVisible;
       if not VarIsNull(QDisplay['GS_DISPLAYFORMAT']) then
 	      if Length(Trim(QDisplay['GS_DISPLAYFORMAT'])) > 0
         	then RowMaskEdit8:= QDisplay['GS_DISPLAYFORMAT']
@@ -396,7 +398,6 @@ begin
       sPL_VALUE9.Visible:=isVisible;
       sTextValue9.Visible:=isVisible;
       sPL_OLDVALUE9.Visible:=isVisible;
-      sOldTextValue9.Visible:=isVisible;
       if not VarIsNull(QDisplay['GS_DISPLAYFORMAT']) then
 	      if Length(Trim(QDisplay['GS_DISPLAYFORMAT'])) > 0
         	then RowMaskEdit9:= QDisplay['GS_DISPLAYFORMAT']

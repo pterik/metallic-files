@@ -2,7 +2,7 @@ object FormUpdatePriceRow: TFormUpdatePriceRow
   Left = 215
   Top = 212
   Caption = #1048#1079#1084#1077#1085#1077#1085#1080#1077' '#1089#1090#1088#1086#1082#1080' '#1087#1088#1072#1081#1089'-'#1083#1080#1089#1090#1072
-  ClientHeight = 440
+  ClientHeight = 475
   ClientWidth = 696
   Color = clBtnFace
   Constraints.MinHeight = 250
@@ -19,7 +19,7 @@ object FormUpdatePriceRow: TFormUpdatePriceRow
   OnKeyUp = FormKeyUp
   DesignSize = (
     696
-    440)
+    475)
   PixelsPerInch = 96
   TextHeight = 13
   object LabelComp: TsLabel
@@ -50,155 +50,13 @@ object FormUpdatePriceRow: TFormUpdatePriceRow
     Height = 13
     Caption = #1040#1076#1088#1077#1089
   end
-  object sLabel3: TsLabel
-    Left = 18
-    Top = 56
-    Width = 60
-    Height = 13
-    Caption = 'PL_VALUE1'
-  end
-  object sLabel4: TsLabel
-    Left = 238
-    Top = 56
-    Width = 60
-    Height = 13
-    Caption = 'PL_VALUE2'
-  end
-  object sLabel5: TsLabel
-    Left = 458
-    Top = 56
-    Width = 60
-    Height = 13
-    Caption = 'PL_VALUE3'
-  end
-  object GridView: TDBGridEh
-    Left = -1
-    Top = 76
-    Width = 689
-    Height = 89
-    TabStop = False
-    Anchors = [akLeft, akTop, akRight]
-    Color = clCream
-    DataSource = DSData
-    DynProps = <>
-    Enabled = False
-    FooterParams.Color = clWindow
-    GridLineParams.VertEmptySpaceStyle = dessNonEh
-    Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-    OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghDblClickOptimizeColWidth, dghDialogFind, dghColumnResize, dghColumnMove]
-    ReadOnly = True
-    RowLines = 3
-    RowSizingAllowed = True
-    TabOrder = 1
-    TitleParams.MultiTitle = True
-    VertScrollBar.VisibleMode = sbNeverShowEh
-    Columns = <
-      item
-        CellButtons = <>
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'CM_NAME'
-        Footers = <>
-        Width = 100
-      end
-      item
-        CellButtons = <>
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'PL_DATE_UPDATE'
-        Footers = <>
-        Width = 80
-      end
-      item
-        CellButtons = <>
-        DisplayFormat = '#0.00'
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'PL_PRICE'
-        Footers = <>
-      end
-      item
-        CellButtons = <>
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'PL_VALUE1'
-        Footers = <>
-        Width = 100
-      end
-      item
-        CellButtons = <>
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'PL_VALUE2'
-        Footers = <>
-        Width = 100
-      end
-      item
-        CellButtons = <>
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'PL_VALUE3'
-        Footers = <>
-        Width = 100
-      end
-      item
-        CellButtons = <>
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'PL_VALUE4'
-        Footers = <>
-        Width = 100
-      end
-      item
-        CellButtons = <>
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'PL_VALUE5'
-        Footers = <>
-        Width = 100
-      end
-      item
-        CellButtons = <>
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'PL_VALUE6'
-        Footers = <>
-        Width = 100
-      end
-      item
-        CellButtons = <>
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'PL_VALUE7'
-        Footers = <>
-        Width = 100
-      end
-      item
-        CellButtons = <>
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'PL_VALUE8'
-        Footers = <>
-        Width = 100
-      end
-      item
-        CellButtons = <>
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'PL_VALUE9'
-        Footers = <>
-        Width = 100
-      end>
-    object RowDetailData: TRowDetailPanelControlEh
-    end
-  end
   object EditCompany: TsEdit
     Left = 72
     Top = 8
     Width = 209
     Height = 21
     ReadOnly = True
-    TabOrder = 2
+    TabOrder = 1
     Text = 'EditCompany'
   end
   object EditAddress: TsEdit
@@ -207,12 +65,12 @@ object FormUpdatePriceRow: TFormUpdatePriceRow
     Width = 201
     Height = 21
     ReadOnly = True
-    TabOrder = 3
+    TabOrder = 2
     Text = 'EditAddress'
   end
   object BitBtnCancel: TsBitBtn
     Left = 8
-    Top = 411
+    Top = 446
     Width = 75
     Height = 25
     Anchors = [akLeft, akBottom]
@@ -238,13 +96,13 @@ object FormUpdatePriceRow: TFormUpdatePriceRow
       0000}
     ModalResult = 2
     NumGlyphs = 2
-    TabOrder = 5
+    TabOrder = 4
     OnClick = BitBtnCancelClick
-    ExplicitTop = 429
+    ExplicitTop = 411
   end
   object BitBtnSave: TsBitBtn
-    Left = 586
-    Top = 411
+    Left = 583
+    Top = 442
     Width = 105
     Height = 25
     Anchors = [akRight, akBottom]
@@ -266,7 +124,6 @@ object FormUpdatePriceRow: TFormUpdatePriceRow
     NumGlyphs = 2
     TabOrder = 0
     OnClick = BitBtnSaveClick
-    ExplicitTop = 429
   end
   object EditNodeValue: TsEdit
     Left = 72
@@ -274,7 +131,7 @@ object FormUpdatePriceRow: TFormUpdatePriceRow
     Width = 353
     Height = 21
     ReadOnly = True
-    TabOrder = 4
+    TabOrder = 3
     Text = 'EditNodeValue'
   end
   object EditCity: TsEdit
@@ -283,455 +140,264 @@ object FormUpdatePriceRow: TFormUpdatePriceRow
     Width = 97
     Height = 21
     ReadOnly = True
-    TabOrder = 6
+    TabOrder = 5
     Text = 'EditCity'
   end
   object sPanel1: TsPanel
     Left = 8
-    Top = 171
+    Top = 59
     Width = 680
-    Height = 222
-    TabOrder = 7
+    Height = 374
+    TabOrder = 6
     object sTextPrice: TsLabel
-      Left = 10
+      Left = 24
       Top = 14
       Width = 26
       Height = 13
       Caption = #1062#1077#1085#1072
     end
     object sTextValue1: TsLabel
-      Left = 14
-      Top = 45
+      Left = 24
+      Top = 49
       Width = 60
       Height = 13
       Caption = 'PL_VALUE1'
     end
     object sTextValue2: TsLabel
-      Left = 220
-      Top = 45
+      Left = 24
+      Top = 84
       Width = 60
       Height = 13
       Caption = 'PL_VALUE2'
     end
     object sTextValue3: TsLabel
-      Left = 450
-      Top = 45
+      Left = 24
+      Top = 120
       Width = 60
       Height = 13
       Caption = 'PL_VALUE3'
     end
     object sTextValue4: TsLabel
-      Left = 10
-      Top = 105
+      Left = 24
+      Top = 155
       Width = 60
       Height = 13
       Caption = 'PL_VALUE4'
     end
     object sTextValue5: TsLabel
-      Left = 220
-      Top = 105
+      Left = 24
+      Top = 191
       Width = 60
       Height = 13
       Caption = 'PL_VALUE5'
     end
     object sTextValue6: TsLabel
-      Left = 450
-      Top = 105
+      Left = 24
+      Top = 226
       Width = 60
       Height = 13
       Caption = 'PL_VALUE6'
     end
     object sTextValue7: TsLabel
-      Left = 10
-      Top = 165
+      Left = 24
+      Top = 262
       Width = 60
       Height = 13
       Caption = 'PL_VALUE7'
     end
     object sTextValue8: TsLabel
-      Left = 220
-      Top = 165
+      Left = 24
+      Top = 297
       Width = 60
       Height = 13
       Caption = 'PL_VALUE8'
     end
     object sTextValue9: TsLabel
-      Left = 450
-      Top = 165
+      Left = 24
+      Top = 333
       Width = 60
       Height = 13
       Caption = 'PL_VALUE9'
     end
-    object sTextOldPrice: TsLabel
-      Left = 300
-      Top = 13
-      Width = 63
-      Height = 13
-      Caption = #1057#1090#1072#1088#1072#1103' '#1094#1077#1085#1072
-    end
-    object sOldTextValue2: TsLabel
-      Left = 220
-      Top = 75
-      Width = 60
-      Height = 13
-      Caption = 'PL_VALUE2'
-    end
-    object sOldTextValue3: TsLabel
-      Left = 450
-      Top = 75
-      Width = 60
-      Height = 13
-      Caption = 'PL_VALUE3'
-    end
-    object sOldTextValue1: TsLabel
-      Left = 10
-      Top = 75
-      Width = 60
-      Height = 13
-      Caption = 'PL_VALUE1'
-    end
-    object sOldTextValue7: TsLabel
-      Left = 10
-      Top = 195
-      Width = 60
-      Height = 13
-      Caption = 'PL_VALUE7'
-    end
-    object sOldTextValue8: TsLabel
-      Left = 220
-      Top = 195
-      Width = 60
-      Height = 13
-      Caption = 'PL_VALUE8'
-    end
-    object sOldTextValue9: TsLabel
-      Left = 450
-      Top = 195
-      Width = 60
-      Height = 13
-      Caption = 'PL_VALUE9'
-    end
-    object sOldTextValue4: TsLabel
-      Left = 10
-      Top = 135
-      Width = 60
-      Height = 13
-      Caption = 'PL_VALUE4'
-    end
-    object sOldTextValue5: TsLabel
-      Left = 220
-      Top = 135
-      Width = 60
-      Height = 16
-      Caption = 'PL_VALUE5'
-    end
-    object sOldTextValue6: TsLabel
-      Left = 450
-      Top = 135
-      Width = 60
-      Height = 13
-      Caption = 'PL_VALUE6'
-    end
-    object sPL_PRICE: TsEdit
-      Left = 80
-      Top = 10
+    object sPL_VALUE1: TsEdit
+      Left = 128
+      Top = 49
       Width = 121
       Height = 21
       TabOrder = 0
-      Text = 'PL_PRICE'
-    end
-    object sPL_VALUE1: TsEdit
-      Left = 80
-      Top = 40
-      Width = 121
-      Height = 21
-      TabOrder = 1
       Text = 'PL_VALUE1'
     end
     object sPL_VALUE2: TsEdit
-      Left = 300
-      Top = 40
+      Left = 128
+      Top = 84
       Width = 121
       Height = 21
-      TabOrder = 2
+      TabOrder = 1
       Text = 'PL_VALUE2'
     end
     object sPL_VALUE3: TsEdit
-      Left = 520
-      Top = 40
+      Left = 128
+      Top = 119
       Width = 121
       Height = 21
-      TabOrder = 3
+      TabOrder = 2
       Text = 'PL_VALUE3'
     end
     object sPL_VALUE4: TsEdit
-      Left = 80
-      Top = 100
+      Left = 128
+      Top = 154
       Width = 121
       Height = 21
-      TabOrder = 4
+      TabOrder = 3
       Text = 'PL_VALUE4'
     end
     object sPL_VALUE5: TsEdit
-      Left = 300
-      Top = 100
+      Left = 128
+      Top = 189
       Width = 121
       Height = 21
-      TabOrder = 5
+      TabOrder = 4
       Text = 'PL_VALUE5'
     end
     object sPL_VALUE6: TsEdit
-      Left = 520
-      Top = 100
+      Left = 128
+      Top = 224
       Width = 121
       Height = 21
-      TabOrder = 6
+      TabOrder = 5
       Text = 'PL_VALUE6'
     end
     object sPL_VALUE7: TsEdit
-      Left = 80
-      Top = 160
+      Left = 128
+      Top = 259
       Width = 121
       Height = 21
-      TabOrder = 7
+      TabOrder = 6
       Text = 'PL_VALUE7'
     end
     object sPL_VALUE8: TsEdit
-      Left = 300
-      Top = 160
+      Left = 128
+      Top = 294
       Width = 121
       Height = 21
-      TabOrder = 8
+      TabOrder = 7
       Text = 'PL_VALUE8'
     end
     object sPL_VALUE9: TsEdit
-      Left = 520
-      Top = 160
+      Left = 128
+      Top = 329
       Width = 121
       Height = 21
-      TabOrder = 9
+      TabOrder = 8
       Text = 'PL_VALUE9'
     end
     object sPL_OLDPRICE: TsEdit
-      Left = 366
-      Top = 9
+      Left = 334
+      Top = 14
+      Width = 121
+      Height = 21
+      Enabled = False
+      ReadOnly = True
+      TabOrder = 9
+      Text = 'PL_PRICE'
+    end
+    object sPL_OLDVALUE1: TsEdit
+      Left = 334
+      Top = 48
       Width = 121
       Height = 21
       Enabled = False
       ReadOnly = True
       TabOrder = 10
-      Text = 'PL_PRICE'
+      Text = 'PL_VALUE1'
     end
-    object sPL_OLDVALUE1: TsEdit
-      Left = 80
-      Top = 70
+    object sPL_OLDVALUE2: TsEdit
+      Left = 334
+      Top = 83
       Width = 121
       Height = 21
       Enabled = False
       ReadOnly = True
       TabOrder = 11
-      Text = 'PL_VALUE1'
+      Text = 'sPL_OLDVALUE2'
     end
-    object sPL_OLDVALUE2: TsEdit
-      Left = 300
-      Top = 70
+    object sPL_OLDVALUE3: TsEdit
+      Left = 334
+      Top = 117
       Width = 121
       Height = 21
       Enabled = False
       ReadOnly = True
       TabOrder = 12
-      Text = 'PL_VALUE1'
+      Text = 'PL_VALUE3'
     end
-    object sPL_OLDVALUE3: TsEdit
-      Left = 520
-      Top = 70
+    object sPL_OLDVALUE7: TsEdit
+      Left = 334
+      Top = 255
       Width = 121
       Height = 21
       Enabled = False
       ReadOnly = True
       TabOrder = 13
-      Text = 'PL_VALUE3'
+      Text = 'PL_VALUE7'
     end
-    object sPL_OLDVALUE7: TsEdit
-      Left = 80
-      Top = 190
+    object sPL_OLDVALUE8: TsEdit
+      Left = 334
+      Top = 290
       Width = 121
       Height = 21
       Enabled = False
       ReadOnly = True
       TabOrder = 14
-      Text = 'PL_VALUE7'
+      Text = 'PL_VALUE8'
     end
-    object sPL_OLDVALUE8: TsEdit
-      Left = 300
-      Top = 190
+    object sPL_OLDVALUE9: TsEdit
+      Left = 334
+      Top = 325
       Width = 121
       Height = 21
       Enabled = False
       ReadOnly = True
       TabOrder = 15
-      Text = 'PL_VALUE8'
+      Text = 'PL_VALUE9'
     end
-    object sPL_OLDVALUE9: TsEdit
-      Left = 520
-      Top = 190
+    object sPL_OLDVALUE4: TsEdit
+      Left = 334
+      Top = 152
       Width = 121
       Height = 21
       Enabled = False
       ReadOnly = True
       TabOrder = 16
-      Text = 'PL_VALUE9'
+      Text = 'PL_VALUE4'
     end
-    object sPL_OLDVALUE4: TsEdit
-      Left = 80
-      Top = 133
+    object sPL_OLDVALUE5: TsEdit
+      Left = 334
+      Top = 186
       Width = 121
       Height = 21
       Enabled = False
       ReadOnly = True
       TabOrder = 17
-      Text = 'PL_VALUE4'
+      Text = 'PL_VALUE5'
     end
-    object sPL_OLDVALUE5: TsEdit
-      Left = 300
-      Top = 130
+    object sPL_OLDVALUE6: TsEdit
+      Left = 334
+      Top = 221
       Width = 121
       Height = 21
       Enabled = False
       ReadOnly = True
       TabOrder = 18
-      Text = 'PL_VALUE5'
-    end
-    object sPL_OLDVALUE6: TsEdit
-      Left = 520
-      Top = 130
-      Width = 121
-      Height = 21
-      Enabled = False
-      ReadOnly = True
-      TabOrder = 19
       Text = 'PL_VALUE6'
     end
-  end
-  object GridTable: TDBGridEh
-    Left = 8
-    Top = 27
-    Width = 689
-    Height = 89
-    TabStop = False
-    Anchors = [akLeft, akTop, akRight]
-    Color = clCream
-    DataSource = DSData
-    DynProps = <>
-    Enabled = False
-    FooterParams.Color = clWindow
-    GridLineParams.VertEmptySpaceStyle = dessNonEh
-    Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-    OptionsEh = [dghFixed3D, dghHighlightFocus, dghClearSelection, dghDblClickOptimizeColWidth, dghDialogFind, dghColumnResize, dghColumnMove]
-    ReadOnly = True
-    RowLines = 3
-    RowSizingAllowed = True
-    TabOrder = 8
-    TitleParams.MultiTitle = True
-    VertScrollBar.VisibleMode = sbNeverShowEh
-    Columns = <
-      item
-        CellButtons = <>
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'CM_NAME'
-        Footers = <>
-        Width = 100
-      end
-      item
-        CellButtons = <>
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'PL_DATE_UPDATE'
-        Footers = <>
-        Width = 80
-      end
-      item
-        CellButtons = <>
-        DisplayFormat = '#0.00'
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'PL_PRICE'
-        Footers = <>
-      end
-      item
-        CellButtons = <>
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'PL_VALUE1'
-        Footers = <>
-        Width = 100
-      end
-      item
-        CellButtons = <>
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'PL_VALUE2'
-        Footers = <>
-        Width = 100
-      end
-      item
-        CellButtons = <>
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'PL_VALUE3'
-        Footers = <>
-        Width = 100
-      end
-      item
-        CellButtons = <>
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'PL_VALUE4'
-        Footers = <>
-        Width = 100
-      end
-      item
-        CellButtons = <>
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'PL_VALUE5'
-        Footers = <>
-        Width = 100
-      end
-      item
-        CellButtons = <>
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'PL_VALUE6'
-        Footers = <>
-        Width = 100
-      end
-      item
-        CellButtons = <>
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'PL_VALUE7'
-        Footers = <>
-        Width = 100
-      end
-      item
-        CellButtons = <>
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'PL_VALUE8'
-        Footers = <>
-        Width = 100
-      end
-      item
-        CellButtons = <>
-        DynProps = <>
-        EditButtons = <>
-        FieldName = 'PL_VALUE9'
-        Footers = <>
-        Width = 100
-      end>
-    object RowDetailData: TRowDetailPanelControlEh
+    object sPL_PRICE: TsEdit
+      Left = 128
+      Top = 11
+      Width = 121
+      Height = 21
+      TabOrder = 19
+      Text = 'sPL_PRICE'
     end
   end
   object QCompany: TUniQuery
@@ -741,8 +407,7 @@ object FormUpdatePriceRow: TFormUpdatePriceRow
       'FROM company c'
       'WHERE CM_ISCLOSED= 0 '
       'AND cm_id =:COMPANYID')
-    Left = 320
-    Top = 48
+    Left = 136
     ParamData = <
       item
         DataType = ftInteger
@@ -780,8 +445,9 @@ object FormUpdatePriceRow: TFormUpdatePriceRow
       'FROM PRICE_LINES PL'
       'WHERE PL_ID =:PL_ID'
       'AND PL_ISCLOSED=0')
-    Left = 504
-    Top = 32
+    OnCalcFields = qDataViewCalcFields
+    Left = 408
+    Top = 8
     ParamData = <
       item
         DataType = ftInteger
@@ -851,19 +517,25 @@ object FormUpdatePriceRow: TFormUpdatePriceRow
       FieldName = 'PL_ISCLOSED'
       Required = True
     end
+    object qDataViewPL_ROUNDPRICE: TFloatField
+      FieldKind = fkCalculated
+      FieldName = 'PL_ROUNDPRICE'
+      Calculated = True
+    end
   end
   object DSEdit: TUniDataSource
     DataSet = QPriceLinesEdit
-    Left = 424
-    Top = 40
+    Left = 264
+    Top = 8
   end
   object DSData: TUniDataSource
     DataSet = qDataView
-    Left = 456
-    Top = 40
+    Left = 360
+    Top = 8
   end
   object sSkinManager1: TsSkinManager
     ButtonsOptions.OldGlyphsMode = True
+    IsDefault = False
     InternalSkins = <>
     SkinDirectory = 'c:\Skins'
     SkinName = 'AlterMetro'
@@ -891,8 +563,8 @@ object FormUpdatePriceRow: TFormUpdatePriceRow
     ThirdParty.ThirdScrollBar = ' '
     ThirdParty.ThirdStaticText = ' '
     ThirdParty.ThirdNativePaint = ' '
-    Left = 32
-    Top = 48
+    Left = 640
+    Top = 8
   end
   object sSkinProvider1: TsSkinProvider
     AddedTitle.Font.Charset = DEFAULT_CHARSET
@@ -902,8 +574,8 @@ object FormUpdatePriceRow: TFormUpdatePriceRow
     AddedTitle.Font.Style = []
     SkinData.SkinSection = 'FORM'
     TitleButtons = <>
-    Left = 88
-    Top = 64
+    Left = 568
+    Top = 8
   end
   object QPriceLinesEdit: TUniQuery
     Connection = FormMain.ZC
@@ -917,8 +589,8 @@ object FormUpdatePriceRow: TFormUpdatePriceRow
       'FROM PRICE_LINES PL'
       'WHERE PL_ID =:PL_ID'
       'AND PL_ISCLOSED=0')
-    Left = 576
-    Top = 40
+    Left = 448
+    Top = 8
     ParamData = <
       item
         DataType = ftInteger
@@ -1006,8 +678,7 @@ object FormUpdatePriceRow: TFormUpdatePriceRow
       'PL_VALUE9 = :PL_VALUE9,'
       'PL_DATE_UPDATE = :PL_DATE_UPDATE'
       'WHERE PL_ID =:PL_ID')
-    Left = 200
-    Top = 56
+    Left = 512
     ParamData = <
       item
         DataType = ftFloat
@@ -1094,8 +765,8 @@ object FormUpdatePriceRow: TFormUpdatePriceRow
       'SELECT gs_treeid, gs_field, gs_header, gs_show,'
       'gs_size, gs_displayformat, gs_orderby FROM grid_show'
       'WHERE gs_treeid = :treeid')
-    Left = 376
-    Top = 58
+    Left = 192
+    Top = 10
     ParamData = <
       item
         DataType = ftInteger

@@ -461,7 +461,6 @@ object FormMain: TFormMain
         't.dll')
     Username = 'SYSDBA'
     Server = 'localhost'
-    Connected = True
     LoginPrompt = False
     Left = 48
     Top = 256
@@ -707,7 +706,6 @@ object FormMain: TFormMain
   end
   object sSkinManager1: TsSkinManager
     ButtonsOptions.OldGlyphsMode = True
-    IsDefault = False
     InternalSkins = <>
     SkinDirectory = 'c:\Skins'
     SkinName = 'AlterMetro'
